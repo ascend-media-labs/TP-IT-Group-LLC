@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { PageHeading, Contact } from '@/components/corporate/sections';
+import { Contact } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
 
 export const Route = createFileRoute('/contact')({
@@ -12,16 +12,5 @@ export const Route = createFileRoute('/contact')({
 });
 
 function Page() {
-  return (
-    <>
-      <PageHeading
-        eyebrow={'GET IN TOUCH'}
-        title={'Start a Conversation.'}
-        description={
-          'Ready to accelerate your digital transformation? TP IT GROUP LLC provides world-class technology, enterprise software, and workforce solutions globally.'
-        }
-      />
-      <Contact />
-    </>
-  );
+  return <Contact />;
 }
