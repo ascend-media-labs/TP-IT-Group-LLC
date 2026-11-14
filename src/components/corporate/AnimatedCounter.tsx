@@ -61,3 +61,4 @@ export function AnimatedCounter({ value, label }: AnimatedCounterProps) {
     </div>
   );
 }
+

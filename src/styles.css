@@ -172,8 +172,14 @@ html {
 }
 
 .section {
-  padding-block: 90px;
+  padding-block: 44px;
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-block: 54px;
+  }
 }
 
 .section-title {
@@ -196,7 +202,7 @@ html {
 }
 
 .page-heading {
-  padding-block: 85px 65px;
+  padding-block: 54px 40px;
   background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 209, 255, 0.18), transparent 70%), #030712;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
@@ -224,7 +230,7 @@ html {
 .footer {
   background: #02050e;
   color: #f1f5f9;
-  padding-top: 80px;
+  padding-top: 50px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
 }

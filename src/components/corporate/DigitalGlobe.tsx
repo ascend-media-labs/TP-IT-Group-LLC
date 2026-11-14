@@ -25,7 +25,7 @@ const CONNECTIONS: [number, number][] = [
   [3, 4], // Pune -> Sydney
 ];
 
-export function DigitalGlobe({ className = 'w-full h-[480px] sm:h-[560px] md:h-[620px]' }: { className?: string }) {
+export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[500px]' }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [activeHub, setActiveHub] = useState<string | null>(null);
 
@@ -341,3 +341,4 @@ export function DigitalGlobe({ className = 'w-full h-[480px] sm:h-[560px] md:h-[
     </div>
   );
 }
+

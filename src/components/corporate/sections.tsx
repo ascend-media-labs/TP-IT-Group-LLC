@@ -174,7 +174,7 @@ const capabilityTags = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-12 pb-20 md:py-24 bg-[#030712] text-white">
+    <section className="relative overflow-hidden pt-6 pb-8 md:py-10 bg-[#030712] text-white">
       {/* Background Gradients & Sci-Fi Ambient Glow */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_-100px,rgba(0,209,255,0.18),transparent)]" />
       <div className="pointer-events-none absolute -left-40 top-1/4 size-96 rounded-full bg-blue-600/10 blur-[130px]" />
@@ -182,7 +182,7 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
       <div className="site-container relative z-10">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8 items-center">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-8 items-center">
           {/* Left Hero Content with Staggered Motion */}
           <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
             {/* Pulsing Pill Badge */}
@@ -201,7 +201,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mt-6 text-3xl sm:text-5xl md:text-6xl lg:text-[62px] font-extrabold tracking-tight text-white leading-[1.12]"
+              className="mt-5 text-3xl sm:text-5xl md:text-6xl lg:text-[60px] font-extrabold tracking-tight text-white leading-[1.12]"
             >
               Transforming Business with{' '}
               <span className="bg-gradient-to-r from-[#00D1FF] via-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">
@@ -218,7 +218,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-6 max-w-2xl text-sm sm:text-base md:text-lg font-normal leading-relaxed text-zinc-300"
+              className="mt-4 max-w-2xl text-sm sm:text-base md:text-lg font-normal leading-relaxed text-zinc-300"
             >
               A global technology powerhouse delivering next-gen IT services, deep-tech engineering, and strategic
               workforce solutions across USA, India, UK, Australia, and Canada.
@@ -229,7 +229,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-7 flex flex-wrap justify-center lg:justify-start gap-2"
+              className="mt-5 flex flex-wrap justify-center lg:justify-start gap-2"
             >
               {capabilityTags.map((tag) => (
                 <span
@@ -246,7 +246,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-9 flex flex-wrap justify-center lg:justify-start gap-4"
+              className="mt-6 flex flex-wrap justify-center lg:justify-start gap-4"
             >
               <Button
                 asChild
@@ -283,9 +283,9 @@ export function Hero() {
 
 export function StatsSection() {
   return (
-    <section className="relative border-y border-white/10 bg-[#02050f] py-14">
+    <section className="relative border-y border-white/10 bg-[#02050f] py-7 sm:py-8">
       <div className="site-container">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           {stats.map((item) => (
             <AnimatedCounter key={item.label} value={item.value} label={item.label} />
           ))}
@@ -298,8 +298,8 @@ export function StatsSection() {
 export function About({ detailed = false }: { detailed?: boolean }) {
   return (
     <section className="section bg-[#030712] text-white">
-      <div className="site-container space-y-16">
-        <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
+      <div className="site-container space-y-8 sm:space-y-10">
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -307,11 +307,11 @@ export function About({ detailed = false }: { detailed?: boolean }) {
             transition={{ duration: 0.6 }}
           >
             <p className="eyebrow">YOUR TRUSTED TECHNOLOGY PARTNER</p>
-            <h2 className="section-title mt-3">
+            <h2 className="section-title mt-2">
               Building the Future of <br className="hidden sm:inline" />
               Enterprise Technology.
             </h2>
-            <div className="mt-6 space-y-4 text-sm leading-relaxed text-zinc-300 sm:text-base">
+            <div className="mt-4 space-y-3 text-sm leading-relaxed text-zinc-300 sm:text-base">
               <p>
                 At <strong className="text-white">TP IT Group LLC</strong>, we believe in the power of digital to
                 transform businesses for the better. Since 2005, our global technology firm has combined creativity and
@@ -338,7 +338,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
               )}
             </div>
 
-            <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {[
                 'Innovation-driven solutions',
                 'Client-focused approach',
@@ -355,7 +355,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
             {!detailed && (
               <Button
                 asChild
-                className="mt-8 h-12 rounded-xl bg-white/10 px-6 text-xs font-bold text-white border border-white/15 backdrop-blur-md hover:bg-white/15 hover:border-[#00D1FF]/40 transition-all"
+                className="mt-6 h-11 rounded-xl bg-white/10 px-6 text-xs font-bold text-white border border-white/15 backdrop-blur-md hover:bg-white/15 hover:border-[#00D1FF]/40 transition-all"
               >
                 <Link to="/about">
                   Learn More About Us <ArrowRight className="size-4 ml-2" />
@@ -372,7 +372,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
           >
             <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/[0.02] shadow-2xl backdrop-blur-xl group">
               <img
-                className="about-photo h-[340px] sm:h-[440px] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="about-photo h-[320px] sm:h-[400px] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 src={headquarters}
                 alt="TP iT GROUP LLC Corporate Headquarters"
                 width={1536}
@@ -380,7 +380,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/40 to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
+              <div className="absolute bottom-5 left-5 right-5 text-white space-y-1">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-[#00D1FF]">
                   GLOBAL HEADQUARTERS
                 </p>
@@ -393,17 +393,17 @@ export function About({ detailed = false }: { detailed?: boolean }) {
 
         {/* Detailed View Sections */}
         {detailed && (
-          <div className="space-y-20 pt-8 border-t border-white/10">
+          <div className="space-y-10 pt-6 border-t border-white/10">
             {/* Core Values */}
             <div>
               <div className="text-center">
                 <p className="eyebrow mx-auto justify-center">CORE VALUES</p>
                 <h2 className="section-title mt-2">What Drives Our Work</h2>
-                <p className="section-copy mx-auto mt-3 max-w-xl">
+                <p className="section-copy mx-auto mt-2 max-w-xl">
                   Our values shape every interaction, decision, and solution we deliver to global clients.
                 </p>
               </div>
-              <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 {coreValues.map((val, i) => (
                   <motion.article
                     key={val.title}
@@ -413,10 +413,10 @@ export function About({ detailed = false }: { detailed?: boolean }) {
                     transition={{ delay: i * 0.1 }}
                     className="glass-card p-6"
                   >
-                    <div className="flex size-11 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
+                    <div className="flex size-10 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
                       <Sparkles className="size-5" />
                     </div>
-                    <h3 className="mt-5 text-base font-bold text-white">{val.title}</h3>
+                    <h3 className="mt-4 text-base font-bold text-white">{val.title}</h3>
                     <p className="mt-2 text-xs leading-relaxed text-zinc-400">{val.desc}</p>
                   </motion.article>
                 ))}
@@ -428,11 +428,11 @@ export function About({ detailed = false }: { detailed?: boolean }) {
               <div className="text-center">
                 <p className="eyebrow mx-auto justify-center">OUR JOURNEY</p>
                 <h2 className="section-title mt-2">Milestones of Progress</h2>
-                <p className="section-copy mx-auto mt-3 max-w-xl">
+                <p className="section-copy mx-auto mt-2 max-w-xl">
                   A legacy of continuous growth, technological innovation, and client partnerships since 2005.
                 </p>
               </div>
-              <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 {milestones.map((m, i) => (
                   <motion.div
                     key={m.title}
@@ -445,8 +445,8 @@ export function About({ detailed = false }: { detailed?: boolean }) {
                     <span className="inline-block rounded-full bg-cyan-500/15 border border-cyan-500/30 px-3.5 py-1 text-xs font-bold text-[#00D1FF]">
                       {m.year}
                     </span>
-                    <h3 className="mt-4 text-base font-bold text-white">{m.title}</h3>
-                    <p className="mt-2 text-xs leading-relaxed text-zinc-400">{m.desc}</p>
+                    <h3 className="mt-3 text-base font-bold text-white">{m.title}</h3>
+                    <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">{m.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -470,11 +470,11 @@ export function Services({ full = false }: { full?: boolean }) {
   return (
     <section className="section bg-[#02050e] text-white">
       <div className="site-container">
-        <div className="mb-14 flex flex-wrap items-end justify-between gap-6">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
             <p className="eyebrow">OUR CAPABILITIES</p>
             <h2 className="section-title mt-2">Comprehensive IT Solutions for Global Enterprises.</h2>
-            <p className="section-copy mt-3">
+            <p className="section-copy mt-2.5">
               From cloud infrastructure to custom development, we provide end-to-end technology solutions that power
               business growth across 5 continents.
             </p>
@@ -510,8 +510,8 @@ export function Services({ full = false }: { full?: boolean }) {
 
         {/* Detailed Services Page View */}
         {full && (
-          <div className="space-y-16">
-            <div className="grid gap-8 lg:grid-cols-2">
+          <div className="space-y-8 sm:space-y-10">
+            <div className="grid gap-6 lg:grid-cols-2">
               {services.map((service, i) => (
                 <ServiceCard3D
                   key={service.id}
@@ -528,7 +528,7 @@ export function Services({ full = false }: { full?: boolean }) {
             </div>
 
             {/* Enterprise Commitments */}
-            <div className="glass-card p-8 md:p-12">
+            <div className="glass-card p-6 md:p-8">
               <div className="max-w-2xl">
                 <p className="eyebrow">ENTERPRISE COMMITMENTS</p>
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-2">
@@ -539,11 +539,11 @@ export function Services({ full = false }: { full?: boolean }) {
                   designed for enterprise scalability and governance.
                 </p>
               </div>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-wrap gap-2.5">
                 {enterpriseDeliverables.map((item) => (
                   <span
                     key={item}
-                    className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-white shadow-xs"
+                    className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white shadow-xs"
                   >
                     <CheckCircle2 className="size-4 text-[#00D1FF]" />
                     {item}
@@ -574,12 +574,12 @@ export function IndustriesSection() {
         <div className="text-center">
           <p className="eyebrow mx-auto justify-center">INDUSTRIES WE SERVE</p>
           <h2 className="section-title mt-2">Trusted Across Global Sectors.</h2>
-          <p className="section-copy mx-auto mt-3 max-w-xl">
+          <p className="section-copy mx-auto mt-2 max-w-xl">
             Our expertise spans across diverse sectors, delivering tailored solutions that address unique enterprise
             challenges.
           </p>
         </div>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {industries.map((ind, i) => (
             <motion.div
               key={ind.name}
@@ -587,12 +587,12 @@ export function IndustriesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="glass-card p-7"
+              className="glass-card p-6"
             >
-              <div className="flex size-11 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
+              <div className="flex size-10 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
                 {industryIcons[i % industryIcons.length]}
               </div>
-              <h3 className="mt-5 text-base font-bold text-white">{ind.name}</h3>
+              <h3 className="mt-4 text-base font-bold text-white">{ind.name}</h3>
               <p className="mt-2 text-xs leading-relaxed text-zinc-400">{ind.desc}</p>
             </motion.div>
           ))}
@@ -609,11 +609,11 @@ export function ProvenApproachSection() {
         <div className="text-center">
           <p className="eyebrow mx-auto justify-center">OUR METHODOLOGY</p>
           <h2 className="section-title mt-2">A Proven Approach to Delivering Excellence.</h2>
-          <p className="section-copy mx-auto mt-3 max-w-xl">
+          <p className="section-copy mx-auto mt-2 max-w-xl">
             Our structured methodology ensures consistent, high-quality outcomes for every project we undertake.
           </p>
         </div>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {provenApproach.map((step, i) => (
             <motion.div
               key={step.number}
@@ -621,11 +621,11 @@ export function ProvenApproachSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="glass-card p-7"
+              className="glass-card p-6"
             >
-              <span className="font-mono text-3xl font-black text-[#00D1FF]">{step.number}</span>
-              <h3 className="mt-4 text-base font-bold text-white">{step.title}</h3>
-              <p className="mt-2 text-xs leading-relaxed text-zinc-400">{step.desc}</p>
+              <span className="font-mono text-2xl font-black text-[#00D1FF]">{step.number}</span>
+              <h3 className="mt-3 text-base font-bold text-white">{step.title}</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">{step.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -637,22 +637,22 @@ export function ProvenApproachSection() {
 export function WhyChooseUsSection() {
   return (
     <section className="section bg-[#030712] text-white">
-      <div className="site-container grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="site-container grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
         <div>
           <p className="eyebrow">WHY CHOOSE US</p>
           <h2 className="section-title mt-2">
             We don’t just deliver services — <br />
             We build enduring partnerships.
           </h2>
-          <p className="section-copy mt-4">
+          <p className="section-copy mt-3">
             Our solutions are engineered for long-term profitability and reliability. We focus on optimizing operational
             efficiency while reducing technical debt, ensuring your digital evolution translates into measurable growth.
           </p>
-          <div className="mt-8 space-y-4">
+          <div className="mt-5 space-y-3">
             {whyChooseUs.map((item) => (
-              <div key={item.title} className="flex gap-4 items-start">
-                <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-[#00D1FF] mt-0.5">
-                  <Check className="size-4" />
+              <div key={item.title} className="flex gap-3.5 items-start">
+                <div className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-[#00D1FF] mt-0.5">
+                  <Check className="size-3.5" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-white">{item.title}</h3>
@@ -664,16 +664,16 @@ export function WhyChooseUsSection() {
         </div>
 
         <div>
-          <div className="glass-card p-8 sm:p-10 border-cyan-500/30 shadow-[0_0_40px_rgba(0,209,255,0.12)]">
+          <div className="glass-card p-6 sm:p-8 border-cyan-500/30 shadow-[0_0_40px_rgba(0,209,255,0.12)]">
             <span className="inline-block rounded-full bg-cyan-500/20 px-3 py-1 text-[11px] font-bold text-[#00D1FF]">
               GLOBAL EXCELLENCE
             </span>
-            <h3 className="mt-4 text-2xl font-bold text-white">Empowering 10,000+ Global Partners</h3>
-            <p className="mt-3 text-xs leading-relaxed text-zinc-300">
+            <h3 className="mt-3 text-2xl font-bold text-white">Empowering 10,000+ Global Partners</h3>
+            <p className="mt-2.5 text-xs leading-relaxed text-zinc-300">
               Trusted by Fortune 500 organizations, government institutions, and innovative enterprises across the USA,
               India, Canada, the UK, and Australia.
             </p>
-            <div className="mt-8 grid grid-cols-2 gap-4 border-t border-white/10 pt-6">
+            <div className="mt-6 grid grid-cols-2 gap-4 border-t border-white/10 pt-5">
               <div>
                 <div className="text-2xl font-black text-[#00D1FF]">2005</div>
                 <div className="text-[11px] text-zinc-400">Founded in USA</div>
@@ -693,7 +693,7 @@ export function WhyChooseUsSection() {
             </div>
             <Button
               asChild
-              className="mt-8 h-12 w-full rounded-xl bg-gradient-to-r from-[#00D1FF] to-[#05a2c9] text-black font-bold text-xs shadow-lg shadow-cyan-500/20"
+              className="mt-6 h-11 w-full rounded-xl bg-gradient-to-r from-[#00D1FF] to-[#05a2c9] text-black font-bold text-xs shadow-lg shadow-cyan-500/20"
             >
               <Link to="/contact">Discuss Your Project</Link>
             </Button>
@@ -708,11 +708,11 @@ export function Clients({ full = false }: { full?: boolean }) {
   return (
     <section className="section bg-[#02050f] text-white">
       <div className="site-container">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
             <p className="eyebrow">CLIENT SUCCESS &amp; EXCELLENCE</p>
             <h2 className="section-title mt-2">Trusted by Fortune 500 &amp; Industry Leaders.</h2>
-            <p className="section-copy mt-3">
+            <p className="section-copy mt-2.5">
               Partnering with world-class organizations to deliver cutting-edge IT excellence, digital engineering, and
               workforce solutions.
             </p>
@@ -730,12 +730,12 @@ export function Clients({ full = false }: { full?: boolean }) {
         <ClientMarquee />
 
         {/* 4 Pillars Section */}
-        <div className="mt-14 border-t border-white/10 pt-12">
-          <div className="text-center max-w-xl mx-auto mb-10">
+        <div className="mt-8 border-t border-white/10 pt-7">
+          <div className="text-center max-w-xl mx-auto mb-6">
             <p className="eyebrow justify-center mx-auto">FOUR CORE PILLARS</p>
-            <h3 className="text-2xl font-bold text-white mt-2">Our Relationship with Every Client</h3>
+            <h3 className="text-2xl font-bold text-white mt-1.5">Our Relationship with Every Client</h3>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {clientPillars.map((pillar, i) => (
               <motion.div
                 key={pillar.title}
@@ -743,13 +743,13 @@ export function Clients({ full = false }: { full?: boolean }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="glass-card p-6"
+                className="glass-card p-5"
               >
-                <div className="flex size-11 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
+                <div className="flex size-10 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
                   <ShieldCheck className="size-5" />
                 </div>
-                <h4 className="mt-4 text-base font-bold text-white">{pillar.title}</h4>
-                <p className="mt-2 text-xs leading-relaxed text-zinc-400">{pillar.desc}</p>
+                <h4 className="mt-3 text-base font-bold text-white">{pillar.title}</h4>
+                <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">{pillar.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -776,12 +776,12 @@ export function Careers({ full = false }: { full?: boolean }) {
 
   return (
     <section className="section bg-[#030712] text-white">
-      <div className="site-container space-y-16">
+      <div className="site-container space-y-8 sm:space-y-10">
         {/* Intro */}
-        <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
           <div className="relative overflow-hidden rounded-3xl border border-white/15 shadow-2xl group">
             <img
-              className="editorial-image h-[320px] sm:h-[420px] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              className="editorial-image h-[300px] sm:h-[380px] w-full object-cover transition-transform duration-700 group-hover:scale-105"
               src={team}
               alt="TP iT GROUP LLC global engineering team"
               width={1536}
@@ -797,16 +797,16 @@ export function Careers({ full = false }: { full?: boolean }) {
               Build Your Future with a <br className="hidden sm:inline" />
               Global Technology Leader.
             </h2>
-            <p className="section-copy mt-5">
+            <p className="section-copy mt-3.5">
               Join TP IT Group LLC and work on cutting-edge projects with world-class clients across 5 continents. We
               foster an environment where curiosity is rewarded, continuous learning is in our DNA, and leadership is
               nurtured.
             </p>
-            <div className="mt-6 space-y-3.5">
+            <div className="mt-5 space-y-2.5">
               {careersBenefits.map((b) => (
-                <div key={b.title} className="flex items-start gap-3">
-                  <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-[#00D1FF] mt-0.5">
-                    <Check className="size-4" />
+                <div key={b.title} className="flex items-start gap-2.5">
+                  <div className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-[#00D1FF] mt-0.5">
+                    <Check className="size-3.5" />
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-white">{b.title}</h4>
@@ -818,7 +818,7 @@ export function Careers({ full = false }: { full?: boolean }) {
             {!full && (
               <Button
                 asChild
-                className="mt-8 h-12 rounded-xl bg-white/10 px-6 text-xs font-bold text-white border border-white/15 backdrop-blur-md hover:bg-white/15 hover:border-[#00D1FF]/40 transition-all"
+                className="mt-6 h-11 rounded-xl bg-white/10 px-6 text-xs font-bold text-white border border-white/15 backdrop-blur-md hover:bg-white/15 hover:border-[#00D1FF]/40 transition-all"
               >
                 <Link to="/careers">
                   View Open Positions ({careersJobs.length}) <ArrowRight className="size-4 ml-2" />
@@ -830,11 +830,11 @@ export function Careers({ full = false }: { full?: boolean }) {
 
         {/* Detailed Careers View */}
         {full && (
-          <div className="space-y-10 border-t border-white/10 pt-12">
+          <div className="space-y-7 border-t border-white/10 pt-7">
             <div>
               <p className="eyebrow">OPEN POSITIONS</p>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-2">Find Your Next Challenge</h3>
-              <p className="text-xs sm:text-sm text-zinc-400 mt-2">
+              <p className="text-xs sm:text-sm text-zinc-400 mt-1.5">
                 Explore current engineering, consulting, and management roles across USA, India, and Canada.
               </p>
             </div>
@@ -857,11 +857,11 @@ export function Careers({ full = false }: { full?: boolean }) {
             </div>
 
             {/* Job Openings Grid */}
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-5 md:grid-cols-2">
               {filteredJobs.map((job) => (
                 <article
                   key={job.title}
-                  className="glass-card flex flex-col justify-between p-7"
+                  className="glass-card flex flex-col justify-between p-6"
                 >
                   <div>
                     <div className="flex flex-wrap items-center justify-between gap-2">
@@ -874,9 +874,9 @@ export function Careers({ full = false }: { full?: boolean }) {
                     <p className="mt-1 flex items-center gap-1.5 text-xs text-zinc-400">
                       <MapPin className="size-3.5 text-[#00D1FF]" /> {job.location}
                     </p>
-                    <p className="mt-3 text-xs leading-relaxed text-zinc-300">{job.desc}</p>
+                    <p className="mt-2.5 text-xs leading-relaxed text-zinc-300">{job.desc}</p>
                   </div>
-                  <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+                  <div className="mt-5 pt-3.5 border-t border-white/10 flex items-center justify-between">
                     <Button
                       asChild
                       size="sm"
@@ -895,14 +895,14 @@ export function Careers({ full = false }: { full?: boolean }) {
             </div>
 
             {/* General Application Banner */}
-            <div className="glass-card p-8 sm:p-12 text-center border-cyan-500/20">
+            <div className="glass-card p-6 sm:p-10 text-center border-cyan-500/20">
               <h4 className="text-2xl font-bold text-white">Don’t see the right fit?</h4>
               <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm text-zinc-300">
                 Send us your resume anyway and we will keep you in mind for future roles across our global teams.
               </p>
               <Button
                 asChild
-                className="mt-6 h-12 rounded-xl bg-white text-black font-bold text-xs hover:bg-zinc-100"
+                className="mt-5 h-11 rounded-xl bg-white text-black font-bold text-xs hover:bg-zinc-100"
               >
                 <a href={`mailto:${companyInfo.email}?subject=General%20Application%20-%20TP%20IT%20Group%20LLC`}>
                   Send General Application <Mail className="size-4 ml-2" />
@@ -920,7 +920,7 @@ export function Blogs({ full = false }: { full?: boolean }) {
   return (
     <section className="section bg-[#02050f] text-white border-t border-white/10">
       <div className="site-container">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-5">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-5">
           <div>
             <p className="eyebrow">INSIGHTS &amp; PERSPECTIVES</p>
             <h2 className="section-title mt-2">Industry Insights &amp; Innovation.</h2>
@@ -939,7 +939,7 @@ export function Blogs({ full = false }: { full?: boolean }) {
               <div>
                 <Link to="/blogs/$slug" params={{ slug: article.slug }}>
                   <img
-                    className="editorial-image h-48 w-full object-cover"
+                    className="editorial-image h-44 w-full object-cover"
                     src={article.image}
                     alt={article.title}
                     width={1536}
@@ -947,11 +947,11 @@ export function Blogs({ full = false }: { full?: boolean }) {
                     loading="lazy"
                   />
                 </Link>
-                <div className="p-6">
+                <div className="p-5">
                   <p className="text-[10px] font-bold tracking-wider text-[#00D1FF] uppercase">
                     {article.category}
                   </p>
-                  <h3 className="mt-3 text-base font-bold text-white leading-snug">
+                  <h3 className="mt-2 text-base font-bold text-white leading-snug">
                     <Link to="/blogs/$slug" params={{ slug: article.slug }}>
                       {article.title}
                     </Link>
@@ -961,7 +961,7 @@ export function Blogs({ full = false }: { full?: boolean }) {
                   </p>
                 </div>
               </div>
-              <div className="p-6 pt-0">
+              <div className="p-5 pt-0">
                 <Button asChild variant="link" className="h-auto p-0 text-xs font-bold text-[#00D1FF] hover:text-white">
                   <Link to="/blogs/$slug" params={{ slug: article.slug }}>
                     Read Article <ArrowUpRight className="size-3.5 ml-1" />
@@ -992,8 +992,8 @@ export function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-5">
-      <div className="grid gap-5 sm:grid-cols-2">
+    <form onSubmit={handleSubmit} className="grid gap-4">
+      <div className="grid gap-4 sm:grid-cols-2">
         <label className="text-xs font-semibold text-zinc-300">
           Full Name *
           <input
@@ -1003,7 +1003,7 @@ export function ContactForm() {
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="John Doe"
-            className="contact-field mt-2"
+            className="contact-field mt-1.5"
           />
         </label>
         <label className="text-xs font-semibold text-zinc-300">
@@ -1016,12 +1016,12 @@ export function ContactForm() {
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="john@company.com"
-            className="contact-field mt-2"
+            className="contact-field mt-1.5"
           />
         </label>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2">
         <label className="text-xs font-semibold text-zinc-300">
           Phone Number
           <input
@@ -1031,7 +1031,7 @@ export function ContactForm() {
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder="+1 (814) 844-1361"
-            className="contact-field mt-2"
+            className="contact-field mt-1.5"
           />
         </label>
         <label className="text-xs font-semibold text-zinc-300">
@@ -1040,7 +1040,7 @@ export function ContactForm() {
             name="service"
             value={formData.service}
             onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-            className="contact-field mt-2 bg-[#0a1020]"
+            className="contact-field mt-1.5 bg-[#0a1020]"
           >
             <option value="Cloud Migration & Infrastructure">Cloud Computing &amp; Infrastructure</option>
             <option value="ERP & SAP Solutions">ERP &amp; SAP Solutions</option>
@@ -1057,23 +1057,23 @@ export function ContactForm() {
         <textarea
           required
           name="message"
-          rows={5}
+          rows={4}
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           placeholder="Please describe your digital goals, timeline, and technical scope..."
-          className="contact-field mt-2 resize-y"
+          className="contact-field mt-1.5 resize-y"
         />
       </label>
 
       <Button
         type="submit"
-        className="h-12 w-fit rounded-xl bg-gradient-to-r from-[#00D1FF] to-[#05a2c9] px-8 text-xs font-bold text-black shadow-lg shadow-cyan-500/20"
+        className="h-11 w-fit rounded-xl bg-gradient-to-r from-[#00D1FF] to-[#05a2c9] px-7 text-xs font-bold text-black shadow-lg shadow-cyan-500/20"
       >
         Submit Request <ArrowUpRight className="size-4 ml-1" />
       </Button>
 
       {notice && (
-        <div role="status" className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-xs text-emerald-300">
+        <div role="status" className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-xs text-emerald-300">
           <strong>Thank you!</strong> Your enquiry has been received. A TP iT GROUP LLC enterprise consultant will reach
           out to <strong>{formData.email || 'you'}</strong> shortly.
         </div>
@@ -1085,18 +1085,18 @@ export function ContactForm() {
 export function Contact() {
   return (
     <section className="section bg-[#030712] text-white">
-      <div className="site-container grid gap-14 lg:grid-cols-2 items-start">
+      <div className="site-container grid gap-8 lg:grid-cols-2 items-start">
         <div>
           <p className="eyebrow">START A CONVERSATION</p>
           <h2 className="section-title mt-2">Let’s connect.</h2>
-          <p className="section-copy mt-4 max-w-lg">
+          <p className="section-copy mt-3 max-w-lg">
             Ready to accelerate your digital transformation? TP IT GROUP LLC provides world-class technology and
             enterprise IT solutions globally.
           </p>
 
-          <div className="mt-10 space-y-6">
-            <div className="glass-card flex gap-4 p-5">
-              <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
+          <div className="mt-6 space-y-4">
+            <div className="glass-card flex gap-4 p-4 sm:p-5">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
                 <MapPin className="size-5" />
               </div>
               <div>
@@ -1108,8 +1108,8 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="glass-card flex gap-4 p-5">
-              <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
+            <div className="glass-card flex gap-4 p-4 sm:p-5">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
                 <Mail className="size-5" />
               </div>
               <div>
@@ -1123,8 +1123,8 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="glass-card flex gap-4 p-5">
-              <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
+            <div className="glass-card flex gap-4 p-4 sm:p-5">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
                 <Phone className="size-5" />
               </div>
               <div>
@@ -1138,8 +1138,8 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="glass-card flex gap-4 p-5">
-              <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
+            <div className="glass-card flex gap-4 p-4 sm:p-5">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-[#00D1FF]">
                 <Clock className="size-5" />
               </div>
               <div>
@@ -1150,7 +1150,7 @@ export function Contact() {
           </div>
         </div>
 
-        <div className="glass-card p-8 md:p-10 border-cyan-500/20">
+        <div className="glass-card p-6 sm:p-8 border-cyan-500/20">
           <ContactForm />
         </div>
       </div>
@@ -1160,22 +1160,22 @@ export function Contact() {
 
 export function ContactBanner() {
   return (
-    <section className="relative overflow-hidden border-y border-white/10 bg-[#02050f] py-16 text-white">
+    <section className="relative overflow-hidden border-y border-white/10 bg-[#02050f] py-10 sm:py-12 text-white">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(0,209,255,0.1),transparent)]" />
       <div className="site-container relative z-10 flex flex-wrap items-center justify-between gap-6">
         <div className="max-w-xl">
           <p className="eyebrow">READY TO PARTNER WITH TP IT GROUP?</p>
-          <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+          <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
             Let’s explore what’s possible.
           </h2>
-          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400">
+          <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-zinc-400">
             Schedule a confidential discovery session with our senior digital architects and workforce strategists.
           </p>
         </div>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-3.5">
           <Button
             asChild
-            className="h-12 rounded-xl bg-gradient-to-r from-[#00D1FF] to-[#05a2c9] px-7 text-xs font-bold text-black shadow-lg shadow-cyan-500/20"
+            className="h-11 rounded-xl bg-gradient-to-r from-[#00D1FF] to-[#05a2c9] px-6 text-xs font-bold text-black shadow-lg shadow-cyan-500/20"
           >
             <Link to="/contact">
               Get in Touch <ArrowUpRight className="size-4 ml-1" />
@@ -1184,7 +1184,7 @@ export function ContactBanner() {
           <Button
             asChild
             variant="outline"
-            className="h-12 rounded-xl border-white/15 bg-white/5 px-7 text-xs font-bold text-white hover:bg-white/10"
+            className="h-11 rounded-xl border-white/15 bg-white/5 px-6 text-xs font-bold text-white hover:bg-white/10"
           >
             <Link to="/services">Explore Capabilities</Link>
           </Button>
@@ -1208,7 +1208,7 @@ export function PageHeading({
       <div className="site-container">
         <p className="eyebrow">{eyebrow}</p>
         <h1 className="mt-2 text-3xl sm:text-5xl font-extrabold tracking-tight text-white">{title}</h1>
-        <p className="section-copy mt-4 max-w-2xl text-zinc-300">{description}</p>
+        <p className="section-copy mt-3 max-w-2xl text-zinc-300">{description}</p>
       </div>
     </section>
   );
@@ -1218,16 +1218,16 @@ export function Footer() {
   return (
     <footer className="footer">
       <div className="site-container">
-        <div className="grid gap-10 pb-14 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.5fr]">
+        <div className="grid gap-8 pb-10 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.5fr]">
           <div>
             <Link to="/" className="brand-name inline-flex items-center" aria-label="TP iT GROUP LLC Home">
               <TPITLogo className="h-7 sm:h-8 md:h-9 max-w-[260px] sm:max-w-none w-auto" inverted />
             </Link>
-            <p className="mt-5 max-w-sm text-xs leading-6 text-zinc-400">
+            <p className="mt-4 max-w-sm text-xs leading-relaxed text-zinc-400">
               {companyInfo.tagline}. Delivering excellence in digital engineering, cloud architecture, SAP solutions,
               and strategic workforce solutions since {companyInfo.establishedYear}.
             </p>
-            <div className="mt-6 flex gap-2">
+            <div className="mt-5 flex gap-2">
               <Button
                 asChild
                 variant="outline"
@@ -1245,7 +1245,7 @@ export function Footer() {
 
           <div>
             <h3 className="text-xs font-bold uppercase tracking-wider text-white">Quick Links</h3>
-            <div className="mt-5 flex flex-col gap-3 text-xs text-zinc-400">
+            <div className="mt-4 flex flex-col gap-2.5 text-xs text-zinc-400">
               <Link to="/" className="hover:text-white transition">Home</Link>
               <Link to="/about" className="hover:text-white transition">About us</Link>
               <Link to="/services" className="hover:text-white transition">Services</Link>
@@ -1257,7 +1257,7 @@ export function Footer() {
 
           <div>
             <h3 className="text-xs font-bold uppercase tracking-wider text-white">Our Services</h3>
-            <div className="mt-5 flex flex-col gap-3 text-xs text-zinc-400">
+            <div className="mt-4 flex flex-col gap-2.5 text-xs text-zinc-400">
               {services.map((s) => (
                 <Link key={s.id} to="/services" className="hover:text-white transition">
                   {s.shortTitle}
@@ -1268,7 +1268,7 @@ export function Footer() {
 
           <div>
             <h3 className="text-xs font-bold uppercase tracking-wider text-white">Global Headquarters</h3>
-            <div className="mt-5 space-y-3 text-xs text-zinc-400">
+            <div className="mt-4 space-y-2.5 text-xs text-zinc-400">
               <p className="flex items-start gap-2">
                 <MapPin className="size-4 shrink-0 text-[#00D1FF] mt-0.5" />
                 <span>{companyInfo.headOffice.fullAddress}</span>
@@ -1292,7 +1292,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-between gap-5 border-t border-white/10 py-6 text-[11px] text-zinc-500">
+        <div className="flex flex-wrap justify-between gap-4 border-t border-white/10 py-5 text-[11px] text-zinc-500">
           <span>© 2026 TP IT GROUP LLC. All rights reserved.</span>
           <div className="flex gap-6">
             <Link to="/privacy" className="hover:text-white transition">Privacy Policy</Link>

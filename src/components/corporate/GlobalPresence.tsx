@@ -103,7 +103,7 @@ export function GlobalPresence() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-24 sm:py-32 bg-[#030712] text-white border-y border-white/10">
+    <section className="relative overflow-hidden py-12 sm:py-16 bg-[#030712] text-white border-y border-white/10">
       {/* Ambient background glow & grid */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,209,255,0.12),rgba(255,255,255,0))]" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
@@ -114,20 +114,20 @@ export function GlobalPresence() {
             <Globe2 className="size-3.5" />
             Global Presence &amp; Operations
           </div>
-          <h2 className="mt-5 max-w-3xl text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
+          <h2 className="mt-3 max-w-3xl text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
             A Follow-the-Sun Infrastructure Across{' '}
             <span className="bg-gradient-to-r from-[#00D1FF] to-[#38bdf8] bg-clip-text text-transparent">
               5 Continents
             </span>
           </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">
             TP iT GROUP LLC operates high-performing technical engineering hubs and client engagement centers worldwide,
             ensuring continuous 24/7 delivery and global domain compliance.
           </p>
         </div>
 
         {/* Hub Selector Navigation */}
-        <div className="mt-12 flex flex-wrap justify-center gap-2 sm:gap-3">
+        <div className="mt-7 flex flex-wrap justify-center gap-2 sm:gap-3">
           {GLOBAL_HUBS.map((hub) => (
             <button
               key={hub.id}
@@ -156,7 +156,7 @@ export function GlobalPresence() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mt-10 overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-white/[0.08] to-white/[0.02] p-8 backdrop-blur-xl shadow-2xl md:p-12"
+          className="mt-7 overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-white/[0.08] to-white/[0.02] p-6 md:p-8 backdrop-blur-xl shadow-2xl"
         >
           <div className="grid gap-10 lg:grid-cols-12 items-center">
             <div className="lg:col-span-7 space-y-6">
@@ -262,3 +262,4 @@ export function GlobalPresence() {
     </section>
   );
 }
+

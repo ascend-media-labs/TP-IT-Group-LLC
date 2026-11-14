@@ -5,7 +5,7 @@ export function ClientMarquee() {
   const logos = [...clientLogos, ...clientLogos];
 
   return (
-    <div className="relative w-full overflow-hidden py-10">
+    <div className="relative w-full overflow-hidden py-3 sm:py-4">
       {/* Edge gradient masks */}
       <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-r from-[#030712] to-transparent sm:w-40" />
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-l from-[#030712] to-transparent sm:w-40" />
@@ -28,3 +28,4 @@ export function ClientMarquee() {
     </div>
   );
 }
+
