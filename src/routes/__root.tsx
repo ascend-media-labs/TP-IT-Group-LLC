@@ -78,11 +78,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "TP IT GROUPS" },
-      { name: "description", content: "TP IT Groups. Moving forward, together." },
-      { name: "author", content: "TP IT GROUPS" },
-      { property: "og:title", content: "TP IT GROUPS" },
-      { property: "og:description", content: "TP IT Groups. Moving forward, together." },
+      { title: "TP iT GROUP LLC | Premier Global IT Solutions & Digital Engineering" },
+      {
+        name: "description",
+        content:
+          "TP IT Group LLC provides industry-leading Cloud Engineering, SAP Solutions, ERP Planning, and Custom Software Development. Specialized global workforce solutions across USA, India, UK, and Canada.",
+      },
+      { name: "author", content: "TP iT GROUP LLC" },
+      { property: "og:site_name", content: "TP iT GROUP LLC" },
+      { property: "og:title", content: "TP iT GROUP LLC | Global Technology & Enterprise Solutions" },
+      {
+        property: "og:description",
+        content:
+          "Accelerate your digital evolution with our next-gen IT services and global strategic workforce solutions.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
