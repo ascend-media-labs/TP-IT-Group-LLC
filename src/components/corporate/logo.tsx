@@ -17,8 +17,8 @@ export function TPITLogo({
       src={inverted ? logoLight : logoDark}
       alt={alt}
       className={`${className} object-contain block`}
-      width={814}
-      height={61}
+      width={818}
+      height={68}
       loading="eager"
     />
   );
