@@ -4,6 +4,7 @@ import {
   StatsSection,
   About,
   Services,
+  GlobalPresence,
   IndustriesSection,
   ProvenApproachSection,
   WhyChooseUsSection,
@@ -30,6 +31,7 @@ function Index() {
       <StatsSection />
       <About />
       <Services />
+      <GlobalPresence />
       <IndustriesSection />
       <ProvenApproachSection />
       <WhyChooseUsSection />

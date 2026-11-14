@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { PageHeading, StatsSection, About, ContactBanner } from '@/components/corporate/sections';
+import { PageHeading, StatsSection, About, GlobalPresence, ContactBanner } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
 
 export const Route = createFileRoute('/about')({
@@ -23,6 +23,7 @@ function Page() {
       />
       <StatsSection />
       <About detailed />
+      <GlobalPresence />
       <ContactBanner />
     </>
   );

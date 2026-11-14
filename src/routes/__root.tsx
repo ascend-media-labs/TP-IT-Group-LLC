@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { Navbar, Footer } from '@/components/corporate/sections';
+import { LenisProvider } from '@/components/corporate/LenisProvider';
 
 function NotFoundComponent() {
   return (
@@ -114,11 +115,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="bg-[#030712] text-slate-100 antialiased selection:bg-[#00D1FF]/30 selection:text-white">
         {children}
         <Scripts />
       </body>
@@ -131,10 +132,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Navbar />
-      <main><Outlet /></main>
-      <Footer />
+      <LenisProvider>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Navbar />
+        <main className="min-h-screen bg-[#030712]"><Outlet /></main>
+        <Footer />
+      </LenisProvider>
     </QueryClientProvider>
   );
 }
