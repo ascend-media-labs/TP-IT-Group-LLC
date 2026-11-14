@@ -396,14 +396,14 @@ export function About({ detailed = false }: { detailed?: boolean }) {
           <div className="space-y-10 pt-6 border-t border-white/10">
             {/* Core Values */}
             <div>
-              <div className="text-center">
-                <p className="eyebrow mx-auto justify-center">CORE VALUES</p>
+              <div className="max-w-xl text-left mb-6">
+                <p className="eyebrow">CORE VALUES</p>
                 <h2 className="section-title mt-2">What Drives Our Work</h2>
-                <p className="section-copy mx-auto mt-2 max-w-xl">
+                <p className="section-copy mt-2">
                   Our values shape every interaction, decision, and solution we deliver to global clients.
                 </p>
               </div>
-              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 {coreValues.map((val, i) => (
                   <motion.article
                     key={val.title}
@@ -425,14 +425,14 @@ export function About({ detailed = false }: { detailed?: boolean }) {
 
             {/* Milestones / Journey */}
             <div>
-              <div className="text-center">
-                <p className="eyebrow mx-auto justify-center">OUR JOURNEY</p>
+              <div className="max-w-xl text-left mb-6">
+                <p className="eyebrow">OUR JOURNEY</p>
                 <h2 className="section-title mt-2">Milestones of Progress</h2>
-                <p className="section-copy mx-auto mt-2 max-w-xl">
+                <p className="section-copy mt-2">
                   A legacy of continuous growth, technological innovation, and client partnerships since 2005.
                 </p>
               </div>
-              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 {milestones.map((m, i) => (
                   <motion.div
                     key={m.title}
@@ -571,15 +571,15 @@ export function IndustriesSection() {
   return (
     <section className="section bg-[#030712] text-white">
       <div className="site-container">
-        <div className="text-center">
-          <p className="eyebrow mx-auto justify-center">INDUSTRIES WE SERVE</p>
+        <div className="mb-6 max-w-2xl text-left">
+          <p className="eyebrow">INDUSTRIES WE SERVE</p>
           <h2 className="section-title mt-2">Trusted Across Global Sectors.</h2>
-          <p className="section-copy mx-auto mt-2 max-w-xl">
+          <p className="section-copy mt-2">
             Our expertise spans across diverse sectors, delivering tailored solutions that address unique enterprise
             challenges.
           </p>
         </div>
-        <div className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {industries.map((ind, i) => (
             <motion.div
               key={ind.name}
@@ -606,14 +606,14 @@ export function ProvenApproachSection() {
   return (
     <section className="section bg-[#02050f] text-white border-y border-white/10">
       <div className="site-container">
-        <div className="text-center">
-          <p className="eyebrow mx-auto justify-center">OUR METHODOLOGY</p>
+        <div className="mb-6 max-w-2xl text-left">
+          <p className="eyebrow">OUR METHODOLOGY</p>
           <h2 className="section-title mt-2">A Proven Approach to Delivering Excellence.</h2>
-          <p className="section-copy mx-auto mt-2 max-w-xl">
+          <p className="section-copy mt-2">
             Our structured methodology ensures consistent, high-quality outcomes for every project we undertake.
           </p>
         </div>
-        <div className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {provenApproach.map((step, i) => (
             <motion.div
               key={step.number}
@@ -731,9 +731,12 @@ export function Clients({ full = false }: { full?: boolean }) {
 
         {/* 4 Pillars Section */}
         <div className="mt-8 border-t border-white/10 pt-7">
-          <div className="text-center max-w-xl mx-auto mb-6">
-            <p className="eyebrow justify-center mx-auto">FOUR CORE PILLARS</p>
-            <h3 className="text-2xl font-bold text-white mt-1.5">Our Relationship with Every Client</h3>
+          <div className="max-w-xl text-left mb-6">
+            <p className="eyebrow">FOUR CORE PILLARS</p>
+            <h3 className="text-xl sm:text-2xl font-bold text-white mt-1.5">Our Relationship with Every Client</h3>
+            <p className="text-xs text-zinc-400 mt-1">
+              Every enterprise engagement is anchored by our unwavering commitment to client value.
+            </p>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {clientPillars.map((pillar, i) => (

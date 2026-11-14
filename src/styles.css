@@ -183,15 +183,22 @@ html {
 }
 
 .section-title {
-  font-size: 38px;
+  font-size: 26px;
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 1.25;
   color: #ffffff;
+  letter-spacing: -0.02em;
 }
 
 @media (min-width: 768px) {
   .section-title {
-    font-size: 48px;
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-title {
+    font-size: 34px;
   }
 }
 

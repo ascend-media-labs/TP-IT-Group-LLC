@@ -109,25 +109,25 @@ export function GlobalPresence() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
       <div className="site-container relative z-10">
-        <div className="flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#00D1FF] backdrop-blur-md">
+        <div className="max-w-3xl text-left">
+          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-[#00D1FF] backdrop-blur-md">
             <Globe2 className="size-3.5" />
             Global Presence &amp; Operations
           </div>
-          <h2 className="mt-3 max-w-3xl text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
+          <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-white sm:text-3xl lg:text-4xl">
             A Follow-the-Sun Infrastructure Across{' '}
             <span className="bg-gradient-to-r from-[#00D1FF] to-[#38bdf8] bg-clip-text text-transparent">
               5 Continents
             </span>
           </h2>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">
+          <p className="mt-2 max-w-2xl text-xs sm:text-sm leading-relaxed text-zinc-400">
             TP iT GROUP LLC operates high-performing technical engineering hubs and client engagement centers worldwide,
             ensuring continuous 24/7 delivery and global domain compliance.
           </p>
         </div>
 
         {/* Hub Selector Navigation */}
-        <div className="mt-7 flex flex-wrap justify-center gap-2 sm:gap-3">
+        <div className="mt-6 flex flex-wrap justify-start gap-2 sm:gap-3">
           {GLOBAL_HUBS.map((hub) => (
             <button
               key={hub.id}
