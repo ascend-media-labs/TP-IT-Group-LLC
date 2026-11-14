@@ -52,10 +52,10 @@ export function AnimatedCounter({ value, label }: AnimatedCounterProps) {
 
   return (
     <div ref={ref} className="text-center group">
-      <div className="font-mono text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white group-hover:text-[#00D1FF] transition-colors tabular-nums">
+      <div className="font-mono text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900 group-hover:text-sky-600 transition-colors tabular-nums">
         {displayValue}
       </div>
-      <div className="mt-2 text-[11px] sm:text-xs font-bold uppercase tracking-widest text-zinc-400">
+      <div className="mt-2 text-[11px] sm:text-xs font-bold uppercase tracking-widest text-slate-500">
         {label}
       </div>
     </div>

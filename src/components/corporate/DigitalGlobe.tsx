@@ -156,16 +156,16 @@ export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[
 
       // Draw Atmospheric Glow
       const glowGrad = ctx.createRadialGradient(cx, cy, currentRadius * 0.7, cx, cy, currentRadius * 1.35);
-      glowGrad.addColorStop(0, 'rgba(0, 209, 255, 0.16)');
-      glowGrad.addColorStop(0.5, 'rgba(5, 162, 201, 0.06)');
-      glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      glowGrad.addColorStop(0, 'rgba(2, 132, 199, 0.12)');
+      glowGrad.addColorStop(0.5, 'rgba(14, 165, 233, 0.05)');
+      glowGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
       ctx.fillStyle = glowGrad;
       ctx.beginPath();
       ctx.arc(cx, cy, currentRadius * 1.35, 0, Math.PI * 2);
       ctx.fill();
 
       // Outer Ring
-      ctx.strokeStyle = 'rgba(0, 209, 255, 0.18)';
+      ctx.strokeStyle = 'rgba(2, 132, 199, 0.22)';
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.arc(cx, cy, currentRadius, 0, Math.PI * 2);
@@ -197,7 +197,7 @@ export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[
       }
 
       // Draw Lat/Lon Guide Rings
-      ctx.strokeStyle = 'rgba(0, 209, 255, 0.05)';
+      ctx.strokeStyle = 'rgba(2, 132, 199, 0.08)';
       ctx.lineWidth = 0.8;
       for (let lat = -60; lat <= 60; lat += 30) {
         ctx.beginPath();
@@ -228,14 +228,14 @@ export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[
         });
 
         // Depth cue
-        const alpha = Math.max(0.04, (pr.z + currentRadius) / (currentRadius * 2));
+        const alpha = Math.max(0.06, (pr.z + currentRadius) / (currentRadius * 2));
         if (pr.z > 0) {
-          ctx.fillStyle = `rgba(0, 209, 255, ${alpha * 0.85})`;
+          ctx.fillStyle = `rgba(2, 132, 199, ${alpha * 0.95})`;
           ctx.beginPath();
           ctx.arc(pr.px, pr.py, 1.4 * pr.scale, 0, Math.PI * 2);
           ctx.fill();
         } else {
-          ctx.fillStyle = `rgba(100, 160, 220, ${alpha * 0.15})`;
+          ctx.fillStyle = `rgba(148, 163, 184, ${alpha * 0.35})`;
           ctx.beginPath();
           ctx.arc(pr.px, pr.py, 0.9 * pr.scale, 0, Math.PI * 2);
           ctx.fill();
@@ -260,8 +260,8 @@ export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[
           const midX = (h1.px + h2.px) / 2;
           const midY = (h1.py + h2.py) / 2 - currentRadius * 0.18;
 
-          ctx.strokeStyle = 'rgba(0, 209, 255, 0.35)';
-          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = 'rgba(2, 132, 199, 0.5)';
+          ctx.lineWidth = 1.3;
           ctx.beginPath();
           ctx.moveTo(h1.px, h1.py);
           ctx.quadraticCurveTo(midX, midY, h2.px, h2.py);
@@ -272,9 +272,9 @@ export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[
           const px = (1 - t) * (1 - t) * h1.px + 2 * (1 - t) * t * midX + t * t * h2.px;
           const py = (1 - t) * (1 - t) * h1.py + 2 * (1 - t) * t * midY + t * t * h2.py;
 
-          ctx.fillStyle = '#ffffff';
-          ctx.shadowColor = '#00D1FF';
-          ctx.shadowBlur = 10;
+          ctx.fillStyle = '#0284c7';
+          ctx.shadowColor = 'rgba(2, 132, 199, 0.8)';
+          ctx.shadowBlur = 8;
           ctx.beginPath();
           ctx.arc(px, py, 2.5, 0, Math.PI * 2);
           ctx.fill();
@@ -290,16 +290,16 @@ export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[
 
           // Pulse ring
           const ringSize = size + (Math.sin(pulseTime * 3) + 1) * 3;
-          ctx.strokeStyle = isHq ? 'rgba(215, 25, 42, 0.7)' : 'rgba(0, 209, 255, 0.7)';
+          ctx.strokeStyle = isHq ? 'rgba(215, 25, 42, 0.8)' : 'rgba(2, 132, 199, 0.8)';
           ctx.lineWidth = 1.5;
           ctx.beginPath();
           ctx.arc(hub.px, hub.py, ringSize, 0, Math.PI * 2);
           ctx.stroke();
 
           // Hub dot
-          ctx.fillStyle = isHq ? '#d7192a' : '#00D1FF';
-          ctx.shadowColor = isHq ? '#d7192a' : '#00D1FF';
-          ctx.shadowBlur = 12;
+          ctx.fillStyle = isHq ? '#d7192a' : '#0284c7';
+          ctx.shadowColor = isHq ? '#d7192a' : '#0284c7';
+          ctx.shadowBlur = 10;
           ctx.beginPath();
           ctx.arc(hub.px, hub.py, size, 0, Math.PI * 2);
           ctx.fill();
@@ -307,8 +307,8 @@ export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[
 
           // Label
           if (hub.z > currentRadius * 0.1) {
-            ctx.font = '600 10px Manrope, sans-serif';
-            ctx.fillStyle = isHq ? '#ff8080' : '#d0f0ff';
+            ctx.font = '700 10.5px Manrope, sans-serif';
+            ctx.fillStyle = isHq ? '#b91c1c' : '#0f172a';
             ctx.fillText(hub.name, hub.px + size + 6, hub.py + 3);
           }
         }
