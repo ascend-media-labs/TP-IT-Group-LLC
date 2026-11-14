@@ -5,10 +5,88 @@ import { Button } from '@/components/ui/button';
 import { headquarters, team, infrastructure, articles } from './content';
 import { TPITLogo } from './logo';
 
-const nav = [{ label: 'Home', to: '/' }, { label: 'Careers', to: '/careers' }, { label: 'Services', to: '/services' }, { label: 'Blogs', to: '/blogs' }] as const;
+const nav = [
+  { label: 'Home', to: '/' },
+  { label: 'About us', to: '/about' },
+  { label: 'Services', to: '/services' },
+  { label: 'Clients', to: '/clients' },
+  { label: 'Careers', to: '/careers' },
+  { label: 'Contact Us', to: '/contact' },
+] as const;
+
 export function Navbar() {
- const [open, setOpen] = useState(false);
- return <header className="site-header"><div className="site-container flex h-full items-center justify-between"><Link to="/" className="brand-name flex items-center" onClick={() => setOpen(false)} aria-label="TP iT GROUP LLC Home"><TPITLogo className="h-6 sm:h-7 md:h-8 max-w-[210px] sm:max-w-[260px] md:max-w-none w-auto" /></Link><nav aria-label="Main navigation" className="hidden items-center gap-9 md:flex">{nav.map(item => <Link key={item.to} to={item.to} className="nav-link" activeProps={{ className: 'nav-link active' }} activeOptions={{ exact: true }}>{item.label}</Link>)}<Button asChild className="ml-2 h-11 rounded-none px-6 text-[10px] tracking-[1px]"><Link to="/contact">CONTACT US <ArrowUpRight /></Link></Button></nav><Button variant="ghost" size="icon" className="md:hidden" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button></div>{open && <nav aria-label="Mobile navigation" className="absolute left-0 top-full flex w-full flex-col border-b border-border bg-background px-6 py-6 shadow-lg md:hidden">{nav.map(item => <Link key={item.to} to={item.to} className="nav-link" onClick={() => setOpen(false)}>{item.label}</Link>)}<Button asChild className="mt-4"><Link to="/contact" onClick={() => setOpen(false)}>Contact us <ArrowUpRight /></Link></Button></nav>}</header>;
+  const [open, setOpen] = useState(false);
+  return (
+    <header className="site-header">
+      <div className="site-container flex h-full items-center justify-between">
+        <Link to="/" className="brand-name flex items-center" onClick={() => setOpen(false)} aria-label="TP iT GROUP LLC Home">
+          <TPITLogo className="h-6 sm:h-7 md:h-8 max-w-[200px] sm:max-w-[240px] md:max-w-none w-auto" />
+        </Link>
+        <nav aria-label="Main navigation" className="hidden items-center gap-6 lg:gap-8 md:flex">
+          {nav.map((item) => {
+            if (item.label === 'Contact Us') {
+              return (
+                <Button asChild key={item.to} className="ml-2 h-10 rounded-xl px-5 text-xs font-semibold">
+                  <Link to={item.to}>
+                    {item.label} <ArrowUpRight className="size-3.5" />
+                  </Link>
+                </Button>
+              );
+            }
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="nav-link"
+                activeProps={{ className: 'nav-link active' }}
+                activeOptions={{ exact: item.to === '/' }}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden"
+          aria-label={open ? 'Close navigation' : 'Open navigation'}
+          aria-expanded={open}
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X /> : <Menu />}
+        </Button>
+      </div>
+      {open && (
+        <nav
+          aria-label="Mobile navigation"
+          className="absolute left-0 top-full flex w-full flex-col border-b border-border bg-background px-6 py-6 shadow-lg md:hidden"
+        >
+          {nav.map((item) => {
+            if (item.label === 'Contact Us') {
+              return (
+                <Button asChild key={item.to} className="mt-4 h-11 w-full rounded-xl text-xs font-semibold">
+                  <Link to={item.to} onClick={() => setOpen(false)}>
+                    {item.label} <ArrowUpRight className="size-3.5" />
+                  </Link>
+                </Button>
+              );
+            }
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="nav-link py-2"
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+      )}
+    </header>
+  );
 }
 const slides = [headquarters, infrastructure, team];
 const capabilityTags = ['Cloud', 'ERP', 'SAP', 'Custom Applications', 'Enterprise Solutions', 'Workforce Solutions'] as const;
@@ -151,10 +229,90 @@ export function Hero() {
 export function About({ detailed = false }: { detailed?: boolean }) { return <section className="section"><div className="site-container grid items-center gap-12 md:grid-cols-2 md:gap-20"><div><p className="eyebrow text-muted-foreground">GET TO KNOW US</p><h2 className="section-title">One group.<br />A shared sense of purpose.</h2><p className="section-copy mt-6">Welcome to TP IT Groups. A place for fresh perspectives, meaningful connections and the possibilities ahead.</p><p className="section-copy mt-4">Our story starts with a simple idea: progress is better when we move forward together.</p>{!detailed && <Button asChild variant="link" className="mt-5 px-0 text-xs"><Link to="/about">Discover TP IT Groups <ArrowRight /></Link></Button>}{detailed && <div className="mt-8 grid gap-6"><div><Compass className="mb-3 size-6" /><h3 className="font-semibold">Our Vision</h3><p className="section-copy mt-2">A future shaped by thoughtful ideas and shared possibilities.</p></div><div><Target className="mb-3 size-6" /><h3 className="font-semibold">Our Mission</h3><p className="section-copy mt-2">To move forward with purpose, openness and a commitment to meaningful progress.</p></div></div>}</div><div><img className="about-photo" src={team} alt="A team exchanging ideas around a meeting table" width={1536} height={1024} loading="lazy" /><div className="mt-4 flex items-center justify-between text-[10px] uppercase tracking-[1px] text-muted-foreground"><span>People at the heart of possibility</span><ArrowUpRight className="size-4" /></div></div></div></section>; }
 const services = [{ icon: Building2, title: 'Service Area 01' }, { icon: Layers3, title: 'Service Area 02' }, { icon: Lightbulb, title: 'Service Area 03' }];
 export function Services({ full = false }: { full?: boolean }) { return <section className="section bg-muted"><div className="site-container"><div className="mb-10 flex flex-wrap items-end justify-between gap-6"><div><p className="eyebrow text-muted-foreground">OUR SERVICES</p><h2 className="section-title">Possibilities across every perspective.</h2></div>{!full && <Button asChild variant="link" className="px-0 text-xs"><Link to="/services">Explore all services <ArrowRight /></Link></Button>}</div><div className="grid gap-6 md:grid-cols-3">{services.map((service, i) => <article className="service-card" key={service.title}><div className="flex items-center justify-between"><service.icon className="size-8 stroke-[1.2]" /><span className="text-xs text-muted-foreground">0{i + 1}</span></div><h3 className="mt-8 text-lg font-semibold">{service.title}</h3><p className="section-copy mt-3">Service details to be announced. Please contact us for confirmed information.</p><Button asChild variant="link" className="mt-4 h-auto px-0 text-xs"><Link to="/contact">Enquire <ArrowUpRight /></Link></Button></article>)}</div></div></section>; }
+const clientIndustries = [
+  {
+    title: 'Financial Services & Banking',
+    desc: 'Core banking modernization, algorithmic risk management, and regulatory compliance infrastructure.',
+    metric: '99.99%',
+    metricLabel: 'Uptime SLA Delivered',
+  },
+  {
+    title: 'Healthcare & Life Sciences',
+    desc: 'HIPAA-compliant data pipelines, telehealth platforms, and clinical workflow automation.',
+    metric: '4.2M+',
+    metricLabel: 'Patient Records Secured',
+  },
+  {
+    title: 'Manufacturing & Industry 4.0',
+    desc: 'Smart factory IoT integration, predictive maintenance, and enterprise ERP implementation.',
+    metric: '38%',
+    metricLabel: 'Efficiency Improvement',
+  },
+  {
+    title: 'Telecom & Cloud Networks',
+    desc: 'Next-generation network orchestration, edge computing nodes, and distributed microservices.',
+    metric: '500TB+',
+    metricLabel: 'Daily Data Stream Throughput',
+  },
+  {
+    title: 'Retail & Global E-Commerce',
+    desc: 'Omnichannel commerce platforms, dynamic pricing engines, and real-time inventory systems.',
+    metric: '2.5x',
+    metricLabel: 'Peak Transaction Handling',
+  },
+  {
+    title: 'Enterprise Workforce & Staffing',
+    desc: 'Specialized deep-tech talent engineering across North America, EMEA, and APAC regions.',
+    metric: '5 Countries',
+    metricLabel: 'Global Delivery Presence',
+  },
+];
+
+export function Clients({ full = false }: { full?: boolean }) {
+  return (
+    <section className="section bg-muted">
+      <div className="site-container">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p className="eyebrow text-muted-foreground">CLIENTS &amp; PARTNERSHIPS</p>
+            <h2 className="section-title">Trusted by industry leaders.</h2>
+          </div>
+          {!full && (
+            <Button asChild variant="link" className="px-0 text-xs">
+              <Link to="/clients">
+                View all partnerships <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+          )}
+        </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          {clientIndustries.map((client) => (
+            <article className="service-card" key={client.title}>
+              <div className="flex items-center justify-between">
+                <span className="text-xl font-bold text-primary">{client.metric}</span>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  {client.metricLabel}
+                </span>
+              </div>
+              <h3 className="mt-6 text-lg font-semibold">{client.title}</h3>
+              <p className="section-copy mt-3 text-xs leading-relaxed">{client.desc}</p>
+              <Button asChild variant="link" className="mt-4 h-auto px-0 text-xs">
+                <Link to="/contact">
+                  Partner with Us <ArrowUpRight className="size-3.5" />
+                </Link>
+              </Button>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function Careers({ full = false }: { full?: boolean }) { return <section className="section"><div className="site-container grid items-center gap-12 md:grid-cols-2 md:gap-20"><img className="editorial-image" src={team} alt="Colleagues working together in a light-filled office" width={1536} height={1024} loading="lazy" /><div><p className="eyebrow text-muted-foreground">GROW WITH US</p><h2 className="section-title">Your next chapter.<br />Our shared future.</h2><p className="section-copy mt-5">Bring your curiosity, your perspective and your ambition. Explore the possibility of building your next chapter with TP IT Groups.</p><Button asChild className="mt-7 h-12 rounded-none px-6 text-xs"><Link to={full ? '/contact' : '/careers'}>{full ? 'Career Enquiries' : 'Explore Careers'} <ArrowUpRight /></Link></Button>{full && <p className="mt-6 text-sm text-muted-foreground">Current opportunities will be listed here when available. No vacancies have been confirmed.</p>}</div></div></section>; }
 export function Blogs({ full = false }: { full?: boolean }) { return <section className="section bg-muted"><div className="site-container"><div className="mb-10 flex flex-wrap items-end justify-between gap-5"><div><p className="eyebrow text-muted-foreground">PERSPECTIVES & IDEAS</p><h2 className="section-title">A fresh perspective.</h2></div>{!full && <Button asChild variant="link" className="px-0 text-xs"><Link to="/blogs">View all articles <ArrowRight /></Link></Button>}</div><div className="grid gap-6 md:grid-cols-3">{articles.map(article => <article className="blog-card bg-background" key={article.slug}><Link to="/blogs/$slug" params={{ slug: article.slug }}><img className="editorial-image" src={article.image} alt={article.title} width={1536} height={1024} loading="lazy" /></Link><div className="p-6"><p className="text-[9px] font-semibold tracking-[1px] text-muted-foreground">{article.category} <span className="float-right font-normal">Date to be added</span></p><h3 className="mt-4 text-lg font-medium leading-relaxed"><Link to="/blogs/$slug" params={{ slug: article.slug }}>{article.title}</Link></h3><p className="section-copy mt-3 text-xs">{article.summary}</p><Button asChild variant="link" className="mt-5 h-auto px-0 text-xs"><Link to="/blogs/$slug" params={{ slug: article.slug }}>Read More <ArrowUpRight /></Link></Button></div></article>)}</div></div></section>; }
 export function ContactForm() { const [notice, setNotice] = useState(false); return <form onSubmit={event => { event.preventDefault(); setNotice(true); }} className="grid gap-5"><div className="grid gap-5 sm:grid-cols-2"><label className="text-xs font-medium">Name<input required name="name" autoComplete="name" placeholder="Your full name" className="contact-field mt-2" /></label><label className="text-xs font-medium">Email<input required name="email" type="email" autoComplete="email" placeholder="Your email address" className="contact-field mt-2" /></label></div><label className="text-xs font-medium">Phone<input name="phone" type="tel" autoComplete="tel" placeholder="Your phone number" className="contact-field mt-2" /></label><label className="text-xs font-medium">Message<textarea required name="message" rows={5} placeholder="What would you like to discuss?" className="contact-field mt-2 resize-y" /></label><p className="text-xs leading-relaxed text-muted-foreground">This form is a preview only. Messages are not sent or stored.</p><Button type="submit" className="h-12 w-fit rounded-none px-7 text-xs">Submit <ArrowUpRight /></Button>{notice && <p role="status" className="border-l-2 border-primary pl-4 text-sm">This is a preview form. Your message has not been sent or stored.</p>}</form>; }
 export function Contact() { return <section className="section"><div className="site-container grid gap-14 md:grid-cols-2"><div><p className="eyebrow text-muted-foreground">START A CONVERSATION</p><h2 className="section-title">Let’s connect.</h2><p className="section-copy mt-5 max-w-sm">For business enquiries, career conversations or more information about TP IT Groups.</p><div className="mt-9 space-y-7">{[{ icon: Mail, title: 'Email', detail: 'Official email to be added' }, { icon: Phone, title: 'Phone', detail: 'Official phone number to be added' }, { icon: MapPin, title: 'Visit us', detail: 'Office address to be added' }].map(item => <div key={item.title} className="flex gap-4"><item.icon className="mt-1 size-5" /><div><h3 className="text-sm font-semibold">{item.title}</h3><p className="section-copy mt-1">{item.detail}</p></div></div>)}</div></div><ContactForm /></div></section>; }
 export function ContactBanner() { return <section className="border-y border-border py-14"><div className="site-container flex flex-wrap items-center justify-between gap-6"><div><p className="eyebrow text-muted-foreground">THE NEXT STEP STARTS HERE</p><h2 className="mt-3 text-3xl font-medium">Let’s explore what’s possible.</h2></div><Button asChild className="h-12 rounded-none px-7 text-xs"><Link to="/contact">Get in Touch <ArrowUpRight /></Link></Button></div></section>; }
 export function PageHeading({ eyebrow, title, description }: { eyebrow: string; title: string; description: string }) { return <section className="page-heading"><div className="site-container"><p className="eyebrow text-muted-foreground">{eyebrow}</p><h1>{title}</h1><p className="section-copy mt-4 max-w-xl">{description}</p></div></section>; }
-export function Footer() { const [social, setSocial] = useState(''); return <footer className="footer"><div className="site-container"><div className="grid gap-10 pb-14 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.5fr]"><div><Link to="/" className="brand-name inline-flex items-center" aria-label="TP iT GROUP LLC Home"><TPITLogo className="h-7 md:h-8 max-w-[260px] md:max-w-none w-auto" inverted /></Link><p className="mt-5 max-w-xs text-xs leading-7 opacity-60">A shared sense of purpose.<br />A world of possibilities.</p><div className="mt-5 flex gap-1">{[{ icon: Linkedin, name: 'LinkedIn' }, { icon: Instagram, name: 'Instagram' }, { icon: Facebook, name: 'Facebook' }].map(s => <Button key={s.name} variant="heroOutline" size="icon" title={s.name} aria-label={s.name} onClick={() => setSocial(`${s.name} profile to be added.`)}><s.icon /></Button>)}</div>{social && <p role="status" className="mt-3 text-xs opacity-70">{social}</p>}</div><div><h3 className="text-xs font-semibold">Quick Links</h3><div className="mt-5 flex flex-col gap-3 text-xs opacity-60"><Link to="/about">About Us</Link><Link to="/careers">Careers</Link><Link to="/blogs">Blogs</Link><Link to="/contact">Contact Us</Link></div></div><div><h3 className="text-xs font-semibold">Our Services</h3><div className="mt-5 flex flex-col gap-3 text-xs opacity-60">{services.map(s => <Link key={s.title} to="/services">{s.title}</Link>)}</div></div><div><h3 className="text-xs font-semibold">Get in Touch</h3><div className="mt-5 space-y-4 text-xs opacity-60"><p>Official email to be added</p><p>Official phone number to be added</p><p>Office address to be added</p></div></div></div><div className="flex flex-wrap justify-between gap-5 border-t border-primary-foreground/15 py-6 text-[10px] text-primary-foreground/50"><span>© 2026 TP iT GROUP LLC. All rights reserved.</span><div className="flex gap-6"><Link to="/privacy">Privacy Policy</Link><Link to="/terms">Terms & Conditions</Link></div></div></div></footer>; }
+export function Footer() { const [social, setSocial] = useState(''); return <footer className="footer"><div className="site-container"><div className="grid gap-10 pb-14 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.5fr]"><div><Link to="/" className="brand-name inline-flex items-center" aria-label="TP iT GROUP LLC Home"><TPITLogo className="h-7 md:h-8 max-w-[260px] md:max-w-none w-auto" inverted /></Link><p className="mt-5 max-w-xs text-xs leading-7 opacity-60">A shared sense of purpose.<br />A world of possibilities.</p><div className="mt-5 flex gap-1">{[{ icon: Linkedin, name: 'LinkedIn' }, { icon: Instagram, name: 'Instagram' }, { icon: Facebook, name: 'Facebook' }].map(s => <Button key={s.name} variant="heroOutline" size="icon" title={s.name} aria-label={s.name} onClick={() => setSocial(`${s.name} profile to be added.`)}><s.icon /></Button>)}</div>{social && <p role="status" className="mt-3 text-xs opacity-70">{social}</p>}</div><div><h3 className="text-xs font-semibold">Quick Links</h3><div className="mt-5 flex flex-col gap-3 text-xs opacity-60"><Link to="/about">About us</Link><Link to="/services">Services</Link><Link to="/clients">Clients</Link><Link to="/careers">Careers</Link><Link to="/contact">Contact Us</Link></div></div><div><h3 className="text-xs font-semibold">Our Services</h3><div className="mt-5 flex flex-col gap-3 text-xs opacity-60">{services.map(s => <Link key={s.title} to="/services">{s.title}</Link>)}</div></div><div><h3 className="text-xs font-semibold">Get in Touch</h3><div className="mt-5 space-y-4 text-xs opacity-60"><p>Official email to be added</p><p>Official phone number to be added</p><p>Office address to be added</p></div></div></div><div className="flex flex-wrap justify-between gap-5 border-t border-primary-foreground/15 py-6 text-[10px] text-primary-foreground/50"><span>© 2026 TP iT GROUP LLC. All rights reserved.</span><div className="flex gap-6"><Link to="/privacy">Privacy Policy</Link><Link to="/terms">Terms & Conditions</Link></div></div></div></footer>; }
