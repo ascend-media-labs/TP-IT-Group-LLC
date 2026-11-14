@@ -1150,6 +1150,10 @@ export function Contact() {
                 <p className="text-xs text-zinc-300 mt-1">{companyInfo.workingHours}</p>
               </div>
             </div>
+
+            <div className="pt-2">
+              <OfficialSocialChannels />
+            </div>
           </div>
         </div>
 
@@ -1217,6 +1221,100 @@ export function PageHeading({
   );
 }
 
+export const socialChannels = [
+  {
+    name: 'Facebook',
+    href: companyInfo.social.facebook,
+    bg: 'bg-[#1877F2]',
+    shadow: 'hover:shadow-[0_0_20px_rgba(24,119,242,0.6)]',
+    icon: (
+      <svg className="size-5 fill-white" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'Instagram',
+    href: companyInfo.social.instagram,
+    bg: 'bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]',
+    shadow: 'hover:shadow-[0_0_20px_rgba(220,39,67,0.6)]',
+    icon: (
+      <svg className="size-5 fill-white" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'YouTube',
+    href: companyInfo.social.youtube,
+    bg: 'bg-[#FF0000]',
+    shadow: 'hover:shadow-[0_0_20px_rgba(255,0,0,0.6)]',
+    icon: (
+      <svg className="size-5 fill-white" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'LinkedIn',
+    href: companyInfo.social.linkedin,
+    bg: 'bg-[#0A66C2]',
+    shadow: 'hover:shadow-[0_0_20px_rgba(10,102,194,0.6)]',
+    icon: (
+      <svg className="size-4.5 fill-white" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'X (formerly Twitter)',
+    href: companyInfo.social.x,
+    bg: 'bg-[#000000] border border-white/20',
+    shadow: 'hover:shadow-[0_0_20px_rgba(255,255,255,0.35)]',
+    icon: (
+      <svg className="size-4 fill-white" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'WhatsApp',
+    href: companyInfo.social.whatsapp,
+    bg: 'bg-[#25D366]',
+    shadow: 'hover:shadow-[0_0_20px_rgba(37,211,102,0.6)]',
+    icon: (
+      <svg className="size-5 fill-white" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.45 0-2.87-.38-4.12-1.1l-.3-.17-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.44c0-4.54 3.7-8.24 8.24-8.24m4.52 11.58c-.19-.09-1.12-.55-1.29-.62-.17-.06-.3-.09-.43.09-.13.19-.49.62-.6.75-.11.13-.22.14-.41.05-.19-.09-.8-.3-1.53-.95-.57-.51-.95-1.14-1.06-1.33-.11-.19-.01-.29.08-.38.08-.08.19-.22.28-.33.1-.11.13-.19.19-.31.06-.13.03-.24-.02-.33-.05-.09-.43-1.03-.59-1.41-.15-.37-.31-.32-.43-.33h-.37c-.13 0-.33.05-.5.24s-.67.65-.67 1.59.69 1.84.78 1.97c.1.13 1.35 2.06 3.27 2.89.46.2.82.32 1.1.41.46.15.88.13 1.21.08.37-.06 1.12-.46 1.28-.9.16-.44.16-.82.11-.9-.04-.08-.17-.13-.36-.22" />
+      </svg>
+    ),
+  },
+];
+
+export function OfficialSocialChannels({ className = '' }: { className?: string }) {
+  return (
+    <div className={`space-y-2.5 ${className}`}>
+      <p className="text-[11px] font-bold uppercase tracking-wider text-[#00D1FF]">
+        Official Social Channels
+      </p>
+      <div className="flex flex-wrap items-center gap-2.5">
+        {socialChannels.map((item) => (
+          <a
+            key={item.name}
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={item.name}
+            aria-label={item.name}
+            className={`size-10 rounded-full flex items-center justify-center text-white shadow-md transition-all duration-300 hover:scale-110 active:scale-95 ${item.bg} ${item.shadow}`}
+          >
+            {item.icon}
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function Footer() {
   return (
     <footer className="footer">
@@ -1230,19 +1328,8 @@ export function Footer() {
               {companyInfo.tagline}. Delivering excellence in digital engineering, cloud architecture, SAP solutions,
               and strategic workforce solutions since {companyInfo.establishedYear}.
             </p>
-            <div className="mt-5 flex gap-2">
-              <Button
-                asChild
-                variant="outline"
-                size="icon"
-                title="LinkedIn"
-                aria-label="LinkedIn"
-                className="size-9 rounded-xl border-white/15 bg-white/5 text-white hover:border-[#00D1FF] hover:bg-white/10"
-              >
-                <a href={companyInfo.social.linkedin} target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="size-4" />
-                </a>
-              </Button>
+            <div className="mt-6">
+              <OfficialSocialChannels />
             </div>
           </div>
 
