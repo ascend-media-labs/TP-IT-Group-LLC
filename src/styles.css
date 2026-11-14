@@ -138,6 +138,14 @@ html {
   align-items: center;
   gap: 10px;
   color: #00d1ff;
+  text-align: left;
+}
+
+p,
+.section-copy {
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
 }
 
 .eyebrow::before {
@@ -206,6 +214,9 @@ html {
   font-size: 15px;
   line-height: 1.8;
   color: #94a3b8;
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
 }
 
 .page-heading {
