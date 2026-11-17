@@ -73,11 +73,14 @@ import { AnimatedCounter } from './AnimatedCounter';
 
 const nav = [
   { label: 'Home', to: '/' },
-  { label: 'About us', to: '/about' },
+  { label: 'About', to: '/about' },
   { label: 'Services', to: '/services' },
+  { label: 'Consulting', to: '/services' },
+  { label: 'Talent', to: '/careers' },
+  { label: 'Our Team', to: '/about' },
   { label: 'Clients', to: '/clients' },
   { label: 'Careers', to: '/careers' },
-  { label: 'Contact Us', to: '/contact' },
+  { label: 'Contact', to: '/contact' },
 ] as const;
 
 export function Navbar() {
@@ -85,56 +88,49 @@ export function Navbar() {
 
   return (
     <header className="site-header">
-      <div className="site-container flex h-full items-center justify-between">
+      <div className="site-container flex h-full items-center justify-between gap-4">
         <Link
           to="/"
-          className="brand-name flex items-center transition-opacity hover:opacity-90"
+          className="brand-name flex items-center transition-opacity hover:opacity-90 shrink-0"
           onClick={() => setOpen(false)}
           aria-label="TP iT GROUP LLC Home"
         >
-          <TPITLogo className="h-7 sm:h-8 md:h-9 max-w-[220px] sm:max-w-none w-auto" />
+          <TPITLogo className="h-7 sm:h-8 md:h-9 max-w-[200px] sm:max-w-none w-auto" />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav aria-label="Main navigation" className="hidden items-center gap-1.5 lg:gap-3 md:flex">
-          {nav.map((item) => {
-            if (item.label === 'Contact Us') {
-              return (
-                <Button
-                  asChild
-                  key={item.to}
-                  className="ml-3 h-10 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-600 px-5 text-xs font-bold text-white shadow-md shadow-sky-500/20 transition-all hover:opacity-95 hover:shadow-lg"
-                >
-                  <Link to={item.to}>
-                    {item.label} <ArrowUpRight className="size-3.5 ml-1" />
-                  </Link>
-                </Button>
-              );
-            }
-            return (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="nav-link"
-                activeProps={{ className: 'nav-link active' }}
-                activeOptions={{ exact: item.to === '/' }}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+        <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:gap-2 lg:flex">
+          {nav.map((item) => (
+            <Link
+              key={`${item.label}-${item.to}`}
+              to={item.to}
+              className="nav-link"
+              activeProps={{ className: 'nav-link active' }}
+              activeOptions={{ exact: true }}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Button
+            asChild
+            className="ml-2 h-10 rounded-full bg-[#d7192a] hover:bg-[#b91c1c] px-5 text-xs sm:text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 inline-flex items-center gap-1.5"
+          >
+            <Link to="/contact">
+              Let’s talk <ArrowUpRight className="size-4" />
+            </Link>
+          </Button>
         </nav>
 
         {/* Mobile Menu Toggle */}
         <Button
           variant="ghost"
           size="icon"
-          className="md:hidden text-slate-800 hover:bg-slate-100"
+          className="lg:hidden text-slate-800 hover:bg-slate-100"
           aria-label={open ? 'Close navigation' : 'Open navigation'}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
         >
-          {open ? <X className="size-6 text-sky-600" /> : <Menu className="size-6" />}
+          {open ? <X className="size-6 text-[#d7192a]" /> : <Menu className="size-6" />}
         </Button>
       </div>
 
@@ -147,34 +143,28 @@ export function Navbar() {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25 }}
             aria-label="Mobile navigation"
-            className="absolute left-0 top-full flex w-full flex-col border-b border-slate-200 bg-white/95 px-6 py-6 shadow-2xl backdrop-blur-2xl md:hidden"
+            className="absolute left-0 top-full flex w-full flex-col border-b border-slate-200 bg-white/95 px-6 py-6 shadow-2xl backdrop-blur-2xl lg:hidden"
           >
-            {nav.map((item) => {
-              if (item.label === 'Contact Us') {
-                return (
-                  <Button
-                    asChild
-                    key={item.to}
-                    className="mt-4 h-12 w-full rounded-xl bg-gradient-to-r from-sky-600 to-cyan-600 text-xs font-bold text-white shadow-md shadow-sky-500/20"
-                  >
-                    <Link to={item.to} onClick={() => setOpen(false)}>
-                      {item.label} <ArrowUpRight className="size-4 ml-1" />
-                    </Link>
-                  </Button>
-                );
-              }
-              return (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className="rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-sky-600"
-                  activeProps={{ className: 'rounded-lg bg-sky-50 px-3 py-2.5 text-sm font-bold text-sky-600' }}
-                  onClick={() => setOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+            {nav.map((item) => (
+              <Link
+                key={`mobile-${item.label}-${item.to}`}
+                to={item.to}
+                className="rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 hover:bg-red-50 hover:text-[#d7192a]"
+                activeProps={{ className: 'rounded-lg bg-red-50 px-3 py-2.5 text-sm font-bold text-[#d7192a]' }}
+                activeOptions={{ exact: true }}
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Button
+              asChild
+              className="mt-4 h-11 w-full rounded-full bg-[#d7192a] hover:bg-[#b91c1c] text-xs font-bold text-white shadow-md shadow-red-500/20"
+            >
+              <Link to="/contact" onClick={() => setOpen(false)}>
+                Let’s talk <ArrowUpRight className="size-4 ml-1" />
+              </Link>
+            </Button>
           </motion.nav>
         )}
       </AnimatePresence>

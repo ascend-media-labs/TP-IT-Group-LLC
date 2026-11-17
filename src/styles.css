@@ -113,20 +113,22 @@ html {
   font-size: 13px;
   font-weight: 600;
   position: relative;
-  padding: 10px 14px;
+  padding: 8px 14px;
   color: #475569;
   border-radius: 9999px;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
-  color: #0f172a;
-  background: rgba(15, 23, 42, 0.04);
+  color: #d7192a;
+  background: rgba(215, 25, 42, 0.04);
 }
 
 .nav-link.active {
-  color: #0284c7;
-  background: rgba(2, 132, 199, 0.08);
+  color: #d7192a;
+  background: rgba(215, 25, 42, 0.08);
+  font-weight: 700;
 }
 
 .eyebrow {
