@@ -101,14 +101,15 @@ html {
 
 .site-header {
   height: 76px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.75);
   position: sticky;
   top: 0;
   z-index: 50;
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 24px -4px rgba(15, 23, 42, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .brand-name {
@@ -121,21 +122,24 @@ html {
   font-size: 13px;
   font-weight: 600;
   position: relative;
-  padding: 6px 11px;
+  padding: 6px 12px;
   color: #475569;
   border-radius: 9999px;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
 }
 
 .nav-link:hover {
   color: #d7192a;
-  background: rgba(215, 25, 42, 0.04);
+  background: rgba(215, 25, 42, 0.06);
+  box-shadow: 0 0 12px rgba(215, 25, 42, 0.12);
+  transform: translateY(-1px);
 }
 
 .nav-link.active {
   color: #d7192a;
-  background: rgba(215, 25, 42, 0.08);
+  background: rgba(215, 25, 42, 0.09);
+  box-shadow: 0 0 16px rgba(215, 25, 42, 0.16), inset 0 1px 1px rgba(255, 255, 255, 0.8);
   font-weight: 700;
 }
 
@@ -166,28 +170,170 @@ p,
   border-radius: 9999px;
 }
 
-/* Glassmorphism helpers for Light Mode */
+/* ==========================================================================
+   PREMIUM GLASSMORPHISM, GLOW & TRANSITION ANIMATIONS DESIGN SYSTEM
+   ========================================================================== */
+
+/* 1. Base Glass Surface */
 .glass {
   background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.95);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* 2. Universal Premium Glass Card */
 .glass-card {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid rgba(226, 232, 240, 0.88);
   border-radius: 1.5rem;
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 
+    0 4px 20px -2px rgba(15, 23, 42, 0.04),
+    0 2px 6px -1px rgba(15, 23, 42, 0.02),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.95);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .glass-card:hover {
-  border-color: rgba(2, 132, 199, 0.4);
-  box-shadow: 0 16px 36px -4px rgba(2, 132, 199, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
-  transform: translateY(-3px);
+  border-color: rgba(215, 25, 42, 0.38) !important;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 20px 42px -10px rgba(215, 25, 42, 0.16),
+    0 0 25px -2px rgba(215, 25, 42, 0.12),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-5px);
+}
+
+/* 3. Global Auto-Enhancement for All Rounded Cards Across the Website */
+.rounded-3xl.border,
+.rounded-2xl.border {
+  background-color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-color: rgba(226, 232, 240, 0.85);
+  box-shadow: 
+    0 4px 20px -2px rgba(15, 23, 42, 0.04),
+    0 2px 6px -1px rgba(15, 23, 42, 0.02),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.95);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.rounded-3xl.border:hover,
+.rounded-2xl.border:hover {
+  transform: translateY(-4px);
+  border-color: rgba(215, 25, 42, 0.35) !important;
+  background-color: rgba(255, 255, 255, 0.96);
+  box-shadow: 
+    0 20px 40px -10px rgba(215, 25, 42, 0.15),
+    0 0 24px -2px rgba(215, 25, 42, 0.10),
+    inset 0 1px 2px 0 #ffffff;
+}
+
+/* 4. Interactive Icon Glow & Tilt Inside Cards */
+.rounded-3xl.border:hover .bg-red-50,
+.rounded-2xl.border:hover .bg-red-50,
+.glass-card:hover .bg-red-50 {
+  background-color: rgba(254, 226, 226, 0.85) !important;
+  border-color: rgba(215, 25, 42, 0.3) !important;
+  box-shadow: 0 0 18px rgba(215, 25, 42, 0.22);
+  transform: scale(1.08) rotate(3deg);
+}
+
+.bg-red-50 {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 5. Glowing Brand Badges & Pills */
+.badge-glow,
+span.rounded-full.bg-red-50,
+span.rounded-full.bg-red-50\/80,
+span.rounded-full.bg-red-50\/90 {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 14px rgba(215, 25, 42, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.badge-glow:hover,
+span.rounded-full.bg-red-50:hover,
+span.rounded-full.bg-red-50\/80:hover,
+span.rounded-full.bg-red-50\/90:hover {
+  border-color: rgba(215, 25, 42, 0.45) !important;
+  box-shadow: 0 0 22px rgba(215, 25, 42, 0.24);
+  transform: translateY(-1px);
+}
+
+/* 6. Glowing Primary Action Buttons */
+button.bg-\[\#d7192a\],
+a.bg-\[\#d7192a\],
+.btn-glow {
+  box-shadow: 0 4px 20px -2px rgba(215, 25, 42, 0.38), inset 0 1px 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+button.bg-\[\#d7192a\]:hover,
+a.bg-\[\#d7192a\]:hover,
+.btn-glow:hover {
+  box-shadow: 0 8px 30px -4px rgba(215, 25, 42, 0.55), 0 0 20px rgba(215, 25, 42, 0.32), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px) scale(1.02);
+}
+
+button.bg-\[\#d7192a\]:active,
+a.bg-\[\#d7192a\]:active,
+.btn-glow:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 10px -2px rgba(215, 25, 42, 0.3);
+}
+
+/* 7. Secondary Glass Buttons */
+button.variant-outline,
+.btn-glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+button.variant-outline:hover,
+.btn-glass:hover {
+  border-color: rgba(215, 25, 42, 0.35);
+  box-shadow: 0 6px 22px -4px rgba(215, 25, 42, 0.16), 0 0 14px rgba(215, 25, 42, 0.1);
+  transform: translateY(-2px);
+}
+
+/* 8. Ambient Glow Orbs for Sections */
+.glow-orb-red {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(215, 25, 42, 0.12) 0%, rgba(215, 25, 42, 0.02) 50%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 9. Card Image Hover Zoom Transition */
+article.rounded-3xl img,
+.group.rounded-3xl img,
+.glass-card img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+article.rounded-3xl:hover img,
+.group.rounded-3xl:hover img,
+.glass-card:hover img {
+  transform: scale(1.05);
 }
 
 /* Transparent Background Textures */

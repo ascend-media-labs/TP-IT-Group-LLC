@@ -14,12 +14,12 @@ export function FloatingActions() {
         href={`tel:${cleanPhone}`}
         title={`Call Us (${companyInfo.phone})`}
         aria-label={`Call Us (${companyInfo.phone})`}
-        className="group relative flex size-12 sm:size-13 items-center justify-center rounded-full bg-[#d7192a] text-white shadow-xl shadow-red-600/35 transition-all duration-300 hover:scale-110 hover:bg-[#b91c1c] active:scale-95 focus:outline-none focus:ring-4 focus:ring-red-400/30"
+        className="group relative flex size-12 sm:size-13 items-center justify-center rounded-full bg-[#d7192a] text-white shadow-[0_8px_25px_rgba(215,25,42,0.45),0_0_15px_rgba(215,25,42,0.25)] transition-all duration-300 hover:scale-110 hover:bg-[#b91c1c] hover:shadow-[0_12px_35px_rgba(215,25,42,0.65),0_0_25px_rgba(215,25,42,0.45)] active:scale-95 focus:outline-none focus:ring-4 focus:ring-red-400/30"
       >
         <Phone className="size-5 sm:size-5.5 transition-transform duration-300 group-hover:rotate-12" />
         
         {/* Tooltip on hover */}
-        <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-lg bg-slate-900/95 backdrop-blur-xs px-2.5 py-1 text-xs font-semibold text-white shadow-md opacity-0 transition-opacity duration-200 group-hover:opacity-100 hidden sm:inline-block">
+        <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-lg bg-slate-900/95 backdrop-blur-md border border-white/10 px-2.5 py-1 text-xs font-semibold text-white shadow-xl opacity-0 transition-opacity duration-200 group-hover:opacity-100 hidden sm:inline-block">
           Call {companyInfo.phone}
         </span>
       </a>
@@ -31,7 +31,7 @@ export function FloatingActions() {
         rel="noopener noreferrer"
         title="Chat on WhatsApp"
         aria-label="Chat on WhatsApp"
-        className="group relative flex size-12 sm:size-13 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl shadow-emerald-500/35 transition-all duration-300 hover:scale-110 hover:bg-[#20bd5a] active:scale-95 focus:outline-none focus:ring-4 focus:ring-emerald-400/30"
+        className="group relative flex size-12 sm:size-13 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_25px_rgba(37,211,102,0.45),0_0_15px_rgba(37,211,102,0.25)] transition-all duration-300 hover:scale-110 hover:bg-[#20bd5a] hover:shadow-[0_12px_35px_rgba(37,211,102,0.65),0_0_25px_rgba(37,211,102,0.45)] active:scale-95 focus:outline-none focus:ring-4 focus:ring-emerald-400/30"
       >
         <svg
           className="size-6 sm:size-7 fill-white transition-transform duration-300 group-hover:scale-105"
@@ -42,7 +42,7 @@ export function FloatingActions() {
         </svg>
 
         {/* Tooltip on hover */}
-        <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-lg bg-slate-900/95 backdrop-blur-xs px-2.5 py-1 text-xs font-semibold text-white shadow-md opacity-0 transition-opacity duration-200 group-hover:opacity-100 hidden sm:inline-block">
+        <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-lg bg-slate-900/95 backdrop-blur-md border border-white/10 px-2.5 py-1 text-xs font-semibold text-white shadow-xl opacity-0 transition-opacity duration-200 group-hover:opacity-100 hidden sm:inline-block">
           WhatsApp Us
         </span>
       </a>
