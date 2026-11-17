@@ -184,14 +184,14 @@ const capabilityTags = [
 
 export function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden pt-6 pb-8 md:pt-10 md:pb-10 bg-white text-slate-900 bg-dot-pattern">
+    <section id="home" className="relative overflow-hidden pt-2 pb-6 sm:pt-3 sm:pb-8 md:pt-4 md:pb-8 bg-white text-slate-900 bg-dot-pattern">
       {/* Background Gradients & Transparent Grid Texture */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_-100px,rgba(215,25,42,0.04),transparent)]" />
       <div className="pointer-events-none absolute -left-40 top-1/4 size-96 rounded-full bg-red-500/5 blur-[130px]" />
       <div className="pointer-events-none absolute -right-40 bottom-1/4 size-96 rounded-full bg-red-500/5 blur-[130px]" />
 
       <div className="site-container relative z-10">
-        <div className="grid gap-8 lg:grid-cols-12 lg:gap-8 items-center">
+        <div className="grid gap-6 lg:grid-cols-12 lg:gap-8 items-center">
           {/* Left Hero Content with Staggered Motion */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             {/* Top Red Eyebrow */}
@@ -209,7 +209,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-[62px] font-extrabold tracking-tight text-slate-900 leading-[1.12]"
+              className="mt-3 sm:mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-[62px] font-extrabold tracking-tight text-slate-900 leading-[1.12]"
             >
               One partner.
               <br />
@@ -221,7 +221,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-4 max-w-2xl text-sm sm:text-base md:text-lg font-normal leading-relaxed text-slate-600"
+              className="mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base md:text-lg font-normal leading-relaxed text-slate-600"
             >
               Build smarter systems. Bring the right expertise. Move your business forward with connected technology,
               consulting and workforce solutions.
@@ -232,11 +232,11 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-6 flex flex-wrap justify-center lg:justify-start gap-3.5 items-center"
+              className="mt-5 sm:mt-6 flex flex-wrap justify-center lg:justify-start gap-3.5 items-center"
             >
               <Button
                 asChild
-                className="h-12 rounded-full bg-[#d7192a] hover:bg-[#b91c1c] px-7 text-xs sm:text-sm font-bold text-white shadow-md shadow-red-500/20 transition-all hover:scale-[1.02]"
+                className="h-11 sm:h-12 rounded-full bg-[#d7192a] hover:bg-[#b91c1c] px-6 sm:px-7 text-xs sm:text-sm font-bold text-white shadow-md shadow-red-500/20 transition-all hover:scale-[1.02]"
               >
                 <Link to="/contact" className="inline-flex items-center gap-2">
                   Let’s solve your next challenge <ArrowRight className="size-4" />
@@ -245,7 +245,7 @@ export function Hero() {
               <Button
                 asChild
                 variant="outline"
-                className="h-12 rounded-full border border-slate-300 bg-white px-7 text-xs sm:text-sm font-bold text-slate-800 shadow-xs backdrop-blur-md transition-all hover:bg-slate-50 hover:border-slate-400"
+                className="h-11 sm:h-12 rounded-full border border-slate-300 bg-white px-6 sm:px-7 text-xs sm:text-sm font-bold text-slate-800 shadow-xs backdrop-blur-md transition-all hover:bg-slate-50 hover:border-slate-400"
               >
                 <Link to="/services">Explore solutions</Link>
               </Button>
@@ -256,7 +256,7 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-4 text-xs sm:text-sm font-semibold text-[#d7192a]"
+              className="mt-3 sm:mt-4 text-xs sm:text-sm font-semibold text-[#d7192a]"
             >
               We deliver what you expect. We keep our promises.
             </motion.p>
@@ -269,7 +269,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-5 flex items-center justify-center relative"
           >
-            <DigitalGlobe />
+            <DigitalGlobe className="w-full h-[320px] sm:h-[380px] md:h-[420px] lg:h-[440px]" />
           </motion.div>
         </div>
       </div>
