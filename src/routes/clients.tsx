@@ -61,13 +61,13 @@ function Page() {
         </div>
 
         <div className="site-container relative z-10 text-left max-w-4xl">
-          <span className="inline-block rounded-full bg-red-50/90 border border-red-200 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
-            CLIENT SUCCESS &amp; EXCELLENCE
-          </span>
-          <h1 className="mt-3 text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+            TP IT GROUP / CLIENT SUCCESS &amp; EXCELLENCE
+          </p>
+          <h1 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
             Our Promise, <span className="text-[#d7192a]">Your Progress</span>
           </h1>
-          <p className="mt-4 text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed max-w-2xl">
+          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
             We don’t just complete projects; we build enduring partnerships. TP IT Group LLC is committed to
             delivering professional excellence and measurable business outcomes for every client.
           </p>

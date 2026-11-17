@@ -89,14 +89,14 @@ function Page() {
           <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             TP IT GROUP / IT &amp; NON-IT TALENT
           </p>
-          <h1 className="mt-3 text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+          <h1 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
             The expertise your next move needs.
           </h1>
-          <p className="mt-4 text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed max-w-2xl">
+          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
             Technology only moves forward when the right people are behind it. TP IT Group connects your project and
             operational priorities with IT and non-IT workforce solutions.
           </p>
-          <div className="mt-6 flex flex-wrap gap-4">
+          <div className="mt-5 flex flex-wrap gap-4">
             <Button
               asChild
               className="rounded-full bg-[#d7192a] hover:bg-[#b91c1c] text-white px-7 py-3 text-xs sm:text-sm font-bold shadow-md shadow-red-500/20 transition hover:scale-105"
