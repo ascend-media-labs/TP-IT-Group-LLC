@@ -61,6 +61,7 @@ import {
   careersJobs,
   careersBenefits,
   enterpriseDeliverables,
+  clientLogos,
 } from './content';
 import { TPITLogo } from './logo';
 import { DigitalGlobe } from './DigitalGlobe';
@@ -837,6 +838,35 @@ export function Clients({ full = false }: { full?: boolean }) {
 
         {/* Infinite Logo Marquee */}
         <ClientMarquee />
+
+        {full && (
+          <div className="mt-12 pt-8 border-t border-slate-200/90 text-left">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+              ENTERPRISE CLIENT NETWORK
+            </p>
+            <h3 className="mt-2 text-xl sm:text-2xl font-extrabold text-slate-900">
+              Featured Client Partners
+            </h3>
+            <p className="mt-1 text-xs sm:text-sm text-slate-600">
+              Delivering high-impact technology and workforce support to world-class enterprises.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-6">
+              {clientLogos.map((client) => (
+                <div
+                  key={client.name}
+                  className="flex h-24 items-center justify-center rounded-2xl border border-slate-200/90 bg-white p-4 shadow-xs transition hover:border-red-300 hover:shadow-md"
+                >
+                  <img
+                    src={client.src}
+                    alt={client.name}
+                    className="max-h-12 max-w-[85%] object-contain contrast-125"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

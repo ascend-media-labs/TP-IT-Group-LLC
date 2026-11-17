@@ -1,29 +1,21 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { PageHeading, Clients, WhyChooseUsSection, ContactBanner } from '@/components/corporate/sections';
+import { Clients, ContactBanner } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
 
 export const Route = createFileRoute('/clients')({
   head: () =>
     metadata(
-      'Client Success & Enterprise Partnerships',
-      'Discover how TP iT GROUP LLC collaborates with Fortune 500 organizations across USA, India, UK, Australia, and Canada.',
+      'Client Success & Enterprise Partnerships | TP IT Group LLC',
+      'Discover how TP IT Group LLC collaborates with Fortune 500 organizations and industry leaders across USA, Canada, and India.',
     ),
   component: Page,
 });
 
 function Page() {
   return (
-    <>
-      <PageHeading
-        eyebrow={'CLIENT SUCCESS & EXCELLENCE'}
-        title={'Empowering Global Enterprises.'}
-        description={
-          'We don’t just complete projects; we build enduring partnerships. TP IT Group LLC is committed to delivering professional excellence and measurable business outcomes for every client.'
-        }
-      />
+    <div className="bg-white text-slate-900 min-h-[70vh]">
       <Clients full />
-      <WhyChooseUsSection />
       <ContactBanner />
-    </>
+    </div>
   );
 }
