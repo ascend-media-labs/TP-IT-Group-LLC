@@ -5,14 +5,11 @@ import {
   ConnectedCapabilitiesSection,
   Services,
   About,
-  GlobalPresence,
   IndustriesSection,
   WhyChooseUsSection,
   WorkWithSection,
   ProvenApproachSection,
   Clients,
-  Careers,
-  Blogs,
   ContactBanner,
 } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
@@ -36,12 +33,9 @@ function Index() {
       <About />
       <IndustriesSection />
       <WhyChooseUsSection />
-      <GlobalPresence />
       <WorkWithSection />
       <ProvenApproachSection />
       <Clients />
-      <Careers />
-      <Blogs />
       <ContactBanner />
     </>
   );

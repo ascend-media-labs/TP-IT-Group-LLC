@@ -840,35 +840,6 @@ export function Clients({ full = false }: { full?: boolean }) {
 
         {/* Infinite Logo Marquee */}
         <ClientMarquee />
-
-        {/* 4 Pillars Section */}
-        <div className="mt-8 border-t border-slate-200/90 pt-7">
-          <div className="max-w-xl text-left mb-6">
-            <p className="eyebrow">FOUR CORE PILLARS</p>
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1.5">Our Relationship with Every Client</h3>
-            <p className="text-xs text-slate-600 mt-1">
-              Every enterprise engagement is anchored by our unwavering commitment to client value.
-            </p>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {clientPillars.map((pillar, i) => (
-              <motion.div
-                key={pillar.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="glass-card p-5 bg-white/95 border-slate-200/90 hover:border-sky-400 hover:shadow-xl transition-all"
-              >
-                <div className="flex size-10 items-center justify-center rounded-xl border border-sky-200 bg-sky-50 text-sky-600">
-                  <ShieldCheck className="size-5" />
-                </div>
-                <h4 className="mt-3 text-base font-bold text-slate-900">{pillar.title}</h4>
-                <p className="mt-1.5 text-xs leading-relaxed text-slate-600">{pillar.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
