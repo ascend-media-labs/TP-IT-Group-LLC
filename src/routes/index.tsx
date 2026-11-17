@@ -2,12 +2,14 @@ import { createFileRoute } from '@tanstack/react-router';
 import {
   Hero,
   StatsSection,
-  About,
+  ConnectedCapabilitiesSection,
   Services,
+  About,
   GlobalPresence,
   IndustriesSection,
-  ProvenApproachSection,
   WhyChooseUsSection,
+  WorkWithSection,
+  ProvenApproachSection,
   Clients,
   Careers,
   Blogs,
@@ -18,8 +20,8 @@ import { metadata } from '@/components/corporate/content';
 export const Route = createFileRoute('/')({
   head: () =>
     metadata(
-      'Premier Global IT Solutions & Digital Engineering',
-      'TP IT Group LLC provides industry-leading Cloud Engineering, SAP Solutions, ERP Planning, and Custom Software Development. Specialized global workforce solutions across USA, India, UK, Australia, and Canada.',
+      'One Partner. Your Next Possibility. | TP IT Group LLC',
+      'TP IT Group LLC provides industry-leading technology solutions, consulting services, and specialized IT & non-IT talent across USA, Canada, and India.',
     ),
   component: Index,
 });
@@ -29,12 +31,14 @@ function Index() {
     <>
       <Hero />
       <StatsSection />
-      <About />
+      <ConnectedCapabilitiesSection />
       <Services />
+      <About />
       <GlobalPresence />
       <IndustriesSection />
-      <ProvenApproachSection />
       <WhyChooseUsSection />
+      <WorkWithSection />
+      <ProvenApproachSection />
       <Clients />
       <Careers />
       <Blogs />

@@ -32,22 +32,102 @@ export const companyInfo = {
 };
 
 export const stats = [
-  { label: 'Global Markets', value: 'Multiple' },
-  { label: 'Projects Delivered', value: '10,000+' },
-  { label: 'Global Workforce', value: '10,000+' },
-  { label: 'Founded', value: '2005' },
+  { label: 'Industry experience', value: '20+ years' },
+  { label: 'Connected operations', value: 'US USA  CA Canada  IN India', isCountries: true },
+  { label: 'End-to-end partnership', value: 'Strategy to delivery' },
+  { label: 'Technology and people', value: 'IT & non-IT' },
+];
+
+export const connectedCapabilities = [
+  {
+    number: '01',
+    title: 'Technology Solutions',
+    desc: 'Connect AI, cloud, enterprise applications and secure infrastructure with the way your organization works.',
+    items: [
+      'AI automation & agents',
+      'Cloud migration & modernization',
+      'ERP & SAP transformation',
+      'Custom software & digital experiences',
+    ],
+    linkText: 'Explore technology',
+    href: '/services',
+  },
+  {
+    number: '02',
+    title: 'Consulting Services',
+    desc: 'Bring clarity to technology decisions, process improvement and transformation delivery—from the first assessment to implementation.',
+    items: [
+      'Technology strategy & roadmaps',
+      'Business process improvement',
+      'Transformation & delivery advisory',
+      'Workforce planning',
+    ],
+    linkText: 'Explore consulting',
+    href: '/services',
+  },
+  {
+    number: '03',
+    title: 'IT & Non-IT Talent',
+    desc: 'Align your skills requirements, team structure and hiring priorities across technical and business operations roles.',
+    items: [
+      'IT specialists & project teams',
+      'Business & operational talent',
+      'Contract & permanent hiring needs',
+      'Skills planning & team augmentation',
+    ],
+    linkText: 'Explore talent solutions',
+    href: '/careers',
+  },
+];
+
+export const engagementModels = [
+  {
+    number: '01',
+    title: 'Consult & Plan',
+    desc: 'An assessment and roadmap for a defined business or technology challenge.',
+  },
+  {
+    number: '02',
+    title: 'Build & Deliver',
+    desc: 'A scoped project with agreed milestones, acceptance criteria and handover.',
+  },
+  {
+    number: '03',
+    title: 'Extend Your Team',
+    desc: 'Specialist capacity matched to the skills and duration your team needs.',
+  },
+  {
+    number: '04',
+    title: 'Support & Improve',
+    desc: 'Ongoing service priorities, review cycles and improvements agreed with you.',
+  },
 ];
 
 export const services = [
   {
-    id: 'cloud-computing',
-    title: 'Cloud Computing & Infrastructure',
-    shortTitle: 'Cloud Computing',
-    summary: 'Advanced cloud infrastructure migration and management across AWS, Azure, and Google Cloud.',
-    desc: 'Transform your IT infrastructure with scalable, secure, and cost-effective cloud solutions tailored to your business needs.',
+    id: 'ai-automation',
+    title: 'AI Automation & Agents',
+    shortTitle: 'AI Automation & Agents',
+    summary: 'Bring AI into your business with workflow automation, custom AI agents, and end-to-end project setup.',
+    desc: 'Bring AI into your business with workflow automation, custom AI agents, and end-to-end project setup.',
     offers: [
-      'Cloud migration strategy & execution',
-      'Secure and scalable environments',
+      'Workflow automation & autonomous agents',
+      'Custom enterprise AI agents',
+      'End-to-end project setup & deployment',
+      'Machine learning model integration',
+      'Intelligent process automation (IPA)',
+      'Enterprise LLM and knowledge bases',
+    ],
+  },
+  {
+    id: 'cloud-migration',
+    title: 'Cloud Migration',
+    shortTitle: 'Cloud Migration',
+    summary: 'Plan and migrate your infrastructure to AWS, Microsoft Azure, Google Cloud, or Oracle Cloud with a focus on continuity and security.',
+    desc: 'Plan and migrate your infrastructure to AWS, Microsoft Azure, Google Cloud, or Oracle Cloud with a focus on continuity and security.',
+    offers: [
+      'AWS, Azure, Google Cloud & Oracle migration',
+      'Zero-downtime infrastructure transition',
       'Disaster recovery & business continuity',
       'Multi-cloud & hybrid cloud architecture',
       'Performance optimization & monitoring',
@@ -55,63 +135,63 @@ export const services = [
     ],
   },
   {
+    id: 'it-development',
+    title: 'IT Development',
+    shortTitle: 'IT Development',
+    summary: 'Turn business requirements into custom software and applications, from initial concept through development, testing, and deployment.',
+    desc: 'Turn business requirements into custom software and applications, from initial concept through development, testing, and deployment.',
+    offers: [
+      'Custom web & mobile application engineering',
+      'Enterprise software solutions & portals',
+      'UI/UX design & digital experiences',
+      'API architecture & modern microservices',
+      'Automated testing & quality assurance',
+      'Agile delivery and ongoing sprint support',
+    ],
+  },
+  {
     id: 'erp-sap',
     title: 'ERP & SAP Solutions',
     shortTitle: 'ERP & SAP Solutions',
-    summary: 'End-to-end software solutions including ERP, SAP, and custom enterprise applications tailored for scale.',
-    desc: 'Streamline your business processes with comprehensive ERP and SAP solutions that drive efficiency and provide actionable insights.',
+    summary: 'Connect your enterprise operations with SAP implementation, ERP integration, migration, and ongoing application support.',
+    desc: 'Connect your enterprise operations with SAP implementation, ERP integration, migration, and ongoing application support.',
     offers: [
       'SAP implementation & customization',
-      'ERP planning & strategy',
-      'Integration with existing systems',
-      'SAP S/4HANA migration',
+      'ERP planning, integration & advisory',
+      'SAP S/4HANA migration & upgrades',
       'Business process automation',
-      'Training & change management',
+      'Supply chain & financial management',
+      'Training, change management & support',
     ],
   },
   {
-    id: 'custom-dev',
-    title: 'Custom Application Development',
-    shortTitle: 'Custom Development',
-    summary: 'Creating powerful, scalable applications designed specifically for your business requirements.',
-    desc: 'Create powerful, scalable applications designed specifically for your business requirements and growth objectives.',
+    id: 'web-design',
+    title: 'Web Design & Development',
+    shortTitle: 'Web Design & Development',
+    summary: 'Create modern, responsive websites that reflect your brand, engage your audience, and support your business goals.',
+    desc: 'Create modern, responsive websites that reflect your brand, engage your audience, and support your business goals.',
     offers: [
-      'Web application development',
-      'Enterprise software solutions',
-      'UI/UX design & development',
-      'Mobile app development (iOS & Android)',
-      'API development & integration',
-      'Quality assurance & testing',
+      'Modern, highly responsive responsive websites',
+      'Brand identity & visual communication',
+      'Interactive design & animations',
+      'SEO & performance optimization',
+      'Content management system (CMS) integration',
+      'Conversion-focused architecture',
     ],
   },
   {
-    id: 'app-maintenance',
-    title: 'Application Maintenance & Support',
-    shortTitle: 'App Maintenance',
-    summary: 'Comprehensive maintenance and support services available around the clock to ensure stability.',
-    desc: 'Ensure your applications run smoothly with our comprehensive maintenance and support services available around the clock.',
+    id: 'networking-security',
+    title: 'Networking & Security',
+    shortTitle: 'Networking & Security',
+    summary: 'Build reliable enterprise networks and strengthen cybersecurity to protect your systems, users, and digital assets.',
+    desc: 'Build reliable enterprise networks and strengthen cybersecurity to protect your systems, users, and digital assets.',
     offers: [
-      '24/7 monitoring & support',
-      'Performance optimization',
-      'Feature enhancements',
-      'Bug fixes & issue resolution',
-      'Security updates & patches',
-      'Technical documentation',
-    ],
-  },
-  {
-    id: 'workforce-solutions',
-    title: 'Workforce Solutions',
-    shortTitle: 'Workforce Solutions',
-    summary: 'Connecting world-class talent with leading companies across North America, Europe, and Asia.',
-    desc: 'Specialized global workforce solutions providing premier deep-tech engineering and IT staffing across USA, India, UK, and Canada.',
-    offers: [
-      'Contract & permanent technical staffing',
-      'Dedicated development teams',
-      'Executive & niche skill search',
-      'Global workforce compliance',
-      'Onsite & offshore talent models',
-      'Rapid talent onboarding',
+      'Enterprise network architecture & setup',
+      'Cybersecurity & threat defense audits',
+      'Zero-trust security implementation',
+      'Firewall, VPN & secure remote access',
+      '24/7 security monitoring & incident response',
+      'Compliance & data protection protocols',
     ],
   },
 ];
@@ -161,27 +241,27 @@ export const clientPillars = [
 export const industries = [
   {
     name: 'Financial Services',
-    desc: 'Modern digital banking & fintech solutions with regulatory compliance.',
+    desc: 'MODERN DIGITAL BANKING & FINTECH',
   },
   {
     name: 'IT Companies',
-    desc: 'Enterprise technology solutions, cloud infrastructure & DevOps.',
+    desc: 'ENTERPRISE TECHNOLOGY SOLUTIONS',
   },
   {
     name: 'Pharma & Healthcare',
-    desc: 'Compliant healthcare systems, HIPAA-compliant patient pipelines.',
+    desc: 'COMPLIANT HEALTHCARE SYSTEMS',
   },
   {
     name: 'Manufacturing',
-    desc: 'Industrial automation, IoT sensor integration & smart factory systems.',
+    desc: 'INDUSTRIAL AUTOMATION & IOT',
   },
   {
     name: 'Enterprises & Startups',
-    desc: 'Scalable growth architecture from MVP to enterprise scale.',
+    desc: 'SCALABLE GROWTH SOLUTIONS',
   },
   {
     name: 'Engineering & Field Services',
-    desc: 'Technical workforce support, project engineering & global staffing.',
+    desc: 'TECHNICAL WORKFORCE SUPPORT',
   },
 ];
 
@@ -199,31 +279,31 @@ export const provenApproach = [
   {
     number: '03',
     title: 'Implement with Precision',
-    desc: 'We execute with meticulous attention to detail, following agile methodologies to ensure quality delivery within timeline.',
+    desc: 'We execute with meticulous attention to detail, reviewing working increments against agreed scope, quality criteria and timelines.',
   },
   {
     number: '04',
     title: 'Ongoing Support & Optimization',
-    desc: 'Our partnership continues post-launch with 24/7 support, monitoring, and continuous optimization for peak performance.',
+    desc: 'Our partnership continues after launch with ongoing support, monitoring, and optimization to keep your technology aligned with your goals.',
   },
 ];
 
 export const whyChooseUs = [
   {
-    title: 'End-to-End IT Solutions',
-    desc: 'Complete technology solutions from planning to execution and beyond.',
+    title: 'One Connected Service Partner',
+    desc: 'Technology, consulting and workforce needs brought together from planning through delivery.',
   },
   {
     title: 'Global Technology Experience',
-    desc: 'Expertise across 5 continents with diverse industry knowledge.',
+    desc: 'US USA, CA Canada and IN India operations connecting business context with technical and workforce needs.',
   },
   {
     title: 'Skilled Professional Team',
-    desc: 'Certified experts in cloud, SAP, and advanced software development.',
+    desc: 'Technical expertise across AI automation, cloud, SAP, and custom software development.',
   },
   {
     title: 'Reliable Long-Term Support',
-    desc: '24/7 monitoring and dedicated support for continuous operations.',
+    desc: 'Maintenance, monitoring, and improvements tailored to your operational needs.',
   },
   {
     title: 'Cost-Effective & Scalable Services',
@@ -233,20 +313,20 @@ export const whyChooseUs = [
 
 export const coreValues = [
   {
-    title: 'Mission-Driven Excellence',
-    desc: 'We are committed to delivering solutions that create measurable impact for your business. Every project is approached with the goal of driving real growth and transformation.',
+    title: 'Mission-Driven',
+    desc: 'Deliver smart solutions that drive real business growth and digital transformation.',
   },
   {
-    title: 'Client-Centric Partnership',
-    desc: 'We believe in building long-term relationships, not just completing projects. Your success is our success, and we work alongside you as true partners.',
+    title: 'Client-Centric',
+    desc: 'Building long-term partnerships through reliable service and dedicated support.',
   },
   {
     title: 'Innovation First',
-    desc: 'Technology evolves rapidly, and so do we. We stay at the forefront of innovation to bring you the latest solutions that give you a competitive edge.',
+    desc: 'Leveraging cutting-edge technologies to solve complex business challenges.',
   },
   {
-    title: 'Reliability & Trust',
-    desc: 'With 24/7 support and proven methodologies, we ensure your systems run smoothly. Our commitment to quality and security is unwavering.',
+    title: 'Scalable Growth',
+    desc: 'Solutions designed to grow with your business from startup to enterprise.',
   },
 ];
 

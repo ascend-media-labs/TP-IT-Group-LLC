@@ -25,6 +25,22 @@ import {
   Layers,
   Activity,
   Briefcase,
+  Bot,
+  Database,
+  Globe,
+  Target,
+  Users,
+  Lightbulb,
+  TrendingUp,
+  Monitor,
+  Pill,
+  Factory,
+  Rocket,
+  HardHat,
+  Handshake,
+  Compass,
+  MessageSquare,
+  RefreshCw,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -34,6 +50,8 @@ import {
   companyInfo,
   stats,
   services,
+  connectedCapabilities,
+  engagementModels,
   clientPillars,
   industries,
   provenApproach,
@@ -175,43 +193,36 @@ const capabilityTags = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-6 pb-8 md:py-10 bg-white text-slate-900">
+    <section className="relative overflow-hidden pt-8 pb-10 md:py-14 bg-white text-slate-900 bg-dot-pattern">
       {/* Background Gradients & Transparent Grid Texture */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_-100px,rgba(2,132,199,0.08),transparent)]" />
-      <div className="pointer-events-none absolute -left-40 top-1/4 size-96 rounded-full bg-sky-400/10 blur-[130px]" />
-      <div className="pointer-events-none absolute -right-40 bottom-1/4 size-96 rounded-full bg-blue-500/5 blur-[130px]" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.04)_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_-100px,rgba(215,25,42,0.04),transparent)]" />
+      <div className="pointer-events-none absolute -left-40 top-1/4 size-96 rounded-full bg-red-500/5 blur-[130px]" />
+      <div className="pointer-events-none absolute -right-40 bottom-1/4 size-96 rounded-full bg-sky-500/5 blur-[130px]" />
 
       <div className="site-container relative z-10">
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-8 items-center">
           {/* Left Hero Content with Staggered Motion */}
           <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
-            {/* Pulsing Pill Badge */}
-            <motion.div
+            {/* Top Red Eyebrow */}
+            <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-1.5 text-[11px] font-bold tracking-widest text-sky-700 backdrop-blur-md shadow-xs"
+              className="text-xs sm:text-sm font-bold tracking-wider text-[#d7192a] uppercase"
             >
-              <span className="size-2 rounded-full bg-sky-500 animate-pulse" />
-              GLOBAL IT SOLUTIONS PARTNER
-            </motion.div>
+              TECHNOLOGY · CONSULTING · IT &amp; NON-IT TALENT
+            </motion.p>
 
             {/* Main Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mt-5 text-3xl sm:text-5xl md:text-6xl lg:text-[60px] font-extrabold tracking-tight text-slate-900 leading-[1.12]"
+              className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-[62px] font-extrabold tracking-tight text-slate-900 leading-[1.12]"
             >
-              Transforming Business with{' '}
-              <span className="bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-700 bg-clip-text text-transparent">
-                Digital Engineering
-              </span>{' '}
-              <span className="text-slate-400">&amp;</span>{' '}
-              <span className="bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-600 bg-clip-text text-transparent">
-                Enterprise Strategy
-              </span>
+              One partner.
+              <br />
+              <span className="text-[#d7192a]">Your next possibility.</span>
             </motion.h1>
 
             {/* Subheadline / Copy */}
@@ -221,50 +232,43 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mt-4 max-w-2xl text-sm sm:text-base md:text-lg font-normal leading-relaxed text-slate-600"
             >
-              A global technology powerhouse delivering next-gen IT services, deep-tech engineering, and strategic
-              workforce solutions across USA, India, UK, Australia, and Canada.
+              Build smarter systems. Bring the right expertise. Move your business forward with connected technology,
+              consulting and workforce solutions.
             </motion.p>
-
-            {/* Capability Pills */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-5 flex flex-wrap justify-center lg:justify-start gap-2"
-            >
-              {capabilityTags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-xl border border-slate-200/90 bg-slate-50/80 px-3.5 py-1.5 text-xs font-semibold text-slate-700 shadow-xs backdrop-blur-md transition-all duration-300 hover:border-sky-400 hover:bg-sky-50/60 hover:text-sky-700"
-                >
-                  {tag}
-                </span>
-              ))}
-            </motion.div>
 
             {/* Action Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-6 flex flex-wrap justify-center lg:justify-start gap-4"
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-6 flex flex-wrap justify-center lg:justify-start gap-3.5 items-center"
             >
               <Button
                 asChild
-                className="h-12 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-600 px-7 text-xs sm:text-sm font-bold text-white shadow-md shadow-sky-500/25 transition-all hover:opacity-95 hover:shadow-lg hover:shadow-sky-500/35 hover:scale-[1.02]"
+                className="h-12 rounded-full bg-[#d7192a] hover:bg-[#b91c1c] px-7 text-xs sm:text-sm font-bold text-white shadow-md shadow-red-500/20 transition-all hover:scale-[1.02]"
               >
-                <Link to="/services" className="inline-flex items-center gap-2">
-                  Explore Our Services <ArrowRight className="size-4" />
+                <Link to="/contact" className="inline-flex items-center gap-2">
+                  Let’s solve your next challenge <ArrowRight className="size-4" />
                 </Link>
               </Button>
               <Button
                 asChild
                 variant="outline"
-                className="h-12 rounded-xl border border-slate-300 bg-white px-7 text-xs sm:text-sm font-bold text-slate-800 shadow-xs backdrop-blur-md transition-all hover:bg-slate-50 hover:border-slate-400"
+                className="h-12 rounded-full border border-slate-300 bg-white px-7 text-xs sm:text-sm font-bold text-slate-800 shadow-xs backdrop-blur-md transition-all hover:bg-slate-50 hover:border-slate-400"
               >
-                <Link to="/contact">Get in Touch</Link>
+                <Link to="/services">Explore solutions</Link>
               </Button>
             </motion.div>
+
+            {/* Promise line */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-4 text-xs sm:text-sm font-semibold text-[#d7192a]"
+            >
+              We deliver what you expect. We keep our promises.
+            </motion.p>
           </div>
 
           {/* Right 3D Interactive Digital Globe Canvas */}
@@ -284,12 +288,112 @@ export function Hero() {
 
 export function StatsSection() {
   return (
-    <section className="relative border-y border-slate-200/80 bg-slate-50/80 py-7 sm:py-8 overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(15,23,42,0.05)_1px,transparent_1px)] bg-[size:24px_24px]" />
+    <section className="relative border-y border-slate-200/80 bg-slate-50/80 py-7 sm:py-8 overflow-hidden bg-grid-pattern">
       <div className="site-container relative z-10">
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-          {stats.map((item) => (
-            <AnimatedCounter key={item.label} value={item.value} label={item.label} />
+        <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 items-center">
+          {/* 1. 20+ years */}
+          <div className="text-center sm:text-left">
+            <div className="font-mono text-2xl sm:text-3xl font-extrabold text-slate-900">20+ years</div>
+            <div className="mt-1 text-xs text-slate-500 font-medium">Industry experience</div>
+          </div>
+
+          {/* 2. US USA CA Canada IN India */}
+          <div className="text-center sm:text-left">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm font-bold text-slate-900">
+              <span className="inline-flex items-center gap-1">
+                <span className="rounded bg-slate-200/80 px-1 py-0.5 text-[10px] font-bold text-slate-700">US</span> USA
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <span className="rounded bg-slate-200/80 px-1 py-0.5 text-[10px] font-bold text-slate-700">CA</span> Canada
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <span className="rounded bg-slate-200/80 px-1 py-0.5 text-[10px] font-bold text-slate-700">IN</span> India
+              </span>
+            </div>
+            <div className="mt-1 text-xs text-slate-500 font-medium">Connected operations</div>
+          </div>
+
+          {/* 3. Strategy to delivery */}
+          <div className="text-center sm:text-left">
+            <div className="text-base sm:text-lg font-bold text-slate-900">Strategy to delivery</div>
+            <div className="mt-1 text-xs text-slate-500 font-medium">End-to-end partnership</div>
+          </div>
+
+          {/* 4. IT & non-IT */}
+          <div className="text-center sm:text-left">
+            <div className="text-base sm:text-lg font-bold text-slate-900">IT &amp; non-IT</div>
+            <div className="mt-1 text-xs text-slate-500 font-medium">Technology and people</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ConnectedCapabilitiesSection() {
+  const capIcons = [
+    <Cpu key="cpu" className="size-6 text-[#d7192a]" />,
+    <Compass key="compass" className="size-6 text-[#d7192a]" />,
+    <Briefcase key="briefcase" className="size-6 text-[#d7192a]" />,
+  ];
+
+  return (
+    <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
+      <div className="site-container relative z-10">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
+          <div className="max-w-2xl">
+            <p className="eyebrow text-[#d7192a]">ONE PARTNER. CONNECTED CAPABILITIES.</p>
+            <h2 className="section-title mt-2">
+              Technology. Consulting. Talent.
+              <br />
+              <span className="text-[#d7192a]">Built around your business.</span>
+            </h2>
+          </div>
+          <p className="max-w-md text-xs sm:text-sm text-slate-600">
+            From defining the challenge to delivering the solution, bring your technology and people priorities together.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {connectedCapabilities.map((cap, i) => (
+            <motion.div
+              key={cap.number}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="glass-card flex flex-col justify-between p-6 sm:p-7 bg-white/95 border-slate-200/90 hover:border-[#d7192a]/50 hover:shadow-xl transition-all"
+            >
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex size-11 items-center justify-center rounded-xl bg-red-50 border border-red-100">
+                    {capIcons[i % capIcons.length]}
+                  </div>
+                  <span className="font-mono text-xs font-bold text-slate-400">{cap.number}</span>
+                </div>
+
+                <h3 className="mt-5 text-xl font-bold text-slate-900">{cap.title}</h3>
+                <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-slate-600">{cap.desc}</p>
+
+                <ul className="mt-5 space-y-2 border-t border-slate-100 pt-4">
+                  {cap.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
+                      <Check className="size-3.5 mt-0.5 shrink-0 text-[#d7192a]" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-slate-100">
+                <Link
+                  to={cap.href}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
+                >
+                  {cap.linkText} <ArrowRight className="size-3.5 ml-1" />
+                </Link>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -298,66 +402,69 @@ export function StatsSection() {
 }
 
 export function About({ detailed = false }: { detailed?: boolean }) {
+  const aboutCards = [
+    {
+      icon: <Target className="size-5 text-[#d7192a]" />,
+      title: 'Mission-Driven',
+      desc: 'Deliver smart solutions that drive real business growth and digital transformation.',
+    },
+    {
+      icon: <Users className="size-5 text-[#d7192a]" />,
+      title: 'Client-Centric',
+      desc: 'Building long-term partnerships through reliable service and dedicated support.',
+    },
+    {
+      icon: <Lightbulb className="size-5 text-[#d7192a]" />,
+      title: 'Innovation First',
+      desc: 'Leveraging cutting-edge technologies to solve complex business challenges.',
+    },
+    {
+      icon: <TrendingUp className="size-5 text-[#d7192a]" />,
+      title: 'Scalable Growth',
+      desc: 'Solutions designed to grow with your business from startup to enterprise.',
+    },
+  ];
+
   return (
-    <section className="section bg-white text-slate-900">
+    <section className="section bg-white text-slate-900 bg-dot-pattern">
       <div className="site-container space-y-8 sm:space-y-10">
-        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+          {/* Left Text */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6 }}
           >
-            <p className="eyebrow">YOUR TRUSTED TECHNOLOGY PARTNER</p>
-            <h2 className="section-title mt-2">
-              Building the Future of <br className="hidden sm:inline" />
-              Enterprise Technology.
+            <span className="inline-block rounded-full bg-red-50 border border-red-200 px-3.5 py-1 text-xs font-bold text-[#d7192a]">
+              ABOUT US
+            </span>
+            <h2 className="section-title mt-3">
+              Your Trusted Technology <br />
+              Partner for <span className="text-[#d7192a]">Global Growth</span>
             </h2>
-            <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+            <div className="mt-4 space-y-3 text-xs sm:text-sm leading-relaxed text-slate-600">
               <p>
-                At <strong className="text-slate-900">TP IT Group LLC</strong>, we believe in the power of digital to
-                transform businesses for the better. Since 2005, our global technology firm has combined creativity and
-                innovative engineering to deliver industry-leading digital solutions.
+                TP IT Group helps businesses navigate digital transformation with practical, reliable technology solutions.
+                Our <span className="rounded bg-slate-100 px-1.5 py-0.5 text-xs font-bold text-slate-800">US</span> USA head office and{' '}
+                <span className="rounded bg-slate-100 px-1.5 py-0.5 text-xs font-bold text-slate-800">CA</span> Canada and{' '}
+                <span className="rounded bg-slate-100 px-1.5 py-0.5 text-xs font-bold text-slate-800">IN</span> India operations connect
+                business needs with technology, consulting and workforce expertise.
               </p>
               <p>
-                TP IT Group&apos;s progressive technologies and optimization strategies span end-to-end Artificial
-                Intelligence, Consulting, Digital, Cloud &amp; DevOps, Data, and Software Engineering, servicing an array
-                of noteworthy financial services and technology firms.
+                We bring together AI automation, cloud migration, custom development, ERP and SAP, web design, and
+                networking to support your business from planning through ongoing improvement.
               </p>
-              {detailed && (
-                <>
-                  <p>
-                    Through research and development initiatives in our <strong className="text-sky-600">FinLabs</strong>,
-                    we develop solutions for modernization—from Artificial Intelligence and Blockchain to Data Science
-                    models, Digital Underwriting, and mobile-first applications.
-                  </p>
-                  <p>
-                    Over the last 20+ years, our company has been honored with multiple employer awards, recognizing our
-                    commitment to our talented teams. With top clients across 5 continents, TP IT Group has a global
-                    workforce of 10,000+ and offices in key global markets.
-                  </p>
-                </>
-              )}
-            </div>
-
-            <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-              {[
-                'Innovation-driven solutions',
-                'Client-focused approach',
-                'Global expertise, local execution',
-                '24/7 dedicated support',
-              ].map((point) => (
-                <div key={point} className="flex items-center gap-2.5 text-xs font-semibold text-slate-700">
-                  <CheckCircle2 className="size-4 shrink-0 text-sky-600" />
-                  <span>{point}</span>
-                </div>
-              ))}
+              <p className="mt-4 font-semibold italic text-[#d7192a]">
+                We deliver what you expect and keep our promises — with clear communication, agreed priorities and
+                dependable support.
+              </p>
             </div>
 
             {!detailed && (
               <Button
                 asChild
-                className="mt-6 h-11 rounded-xl bg-slate-100 px-6 text-xs font-bold text-slate-800 border border-slate-200/90 shadow-xs hover:bg-slate-200/80 hover:border-sky-300 transition-all"
+                className="mt-6 h-11 rounded-xl bg-slate-100 px-6 text-xs font-bold text-slate-800 border border-slate-200/90 shadow-xs hover:bg-slate-200/80 hover:border-red-300 transition-all"
               >
                 <Link to="/about">
                   Learn More About Us <ArrowRight className="size-4 ml-2" />
@@ -366,40 +473,34 @@ export function About({ detailed = false }: { detailed?: boolean }) {
             )}
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="relative overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-2xl group">
-              <img
-                className="about-photo h-[320px] sm:h-[400px] w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                src={headquarters}
-                alt="TP iT GROUP LLC Corporate Headquarters"
-                width={1536}
-                height={1024}
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent" />
-              <div className="absolute bottom-5 left-5 right-5 text-white space-y-1">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#00D1FF]">
-                  GLOBAL HEADQUARTERS
-                </p>
-                <p className="text-base font-bold">{companyInfo.headOffice.fullAddress}</p>
-                <p className="text-xs text-zinc-300">Branch Hubs: {companyInfo.branchOffices}</p>
-              </div>
-            </div>
-          </motion.div>
+          {/* Right 4 Cards (2x2 Grid) */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {aboutCards.map((card, i) => (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="glass-card p-5 sm:p-6 bg-white/95 border-slate-200/90 hover:border-[#d7192a]/50 hover:shadow-lg transition-all"
+              >
+                <div className="flex size-10 items-center justify-center rounded-full bg-red-50 border border-red-100">
+                  {card.icon}
+                </div>
+                <h3 className="mt-4 text-base font-bold text-slate-900">{card.title}</h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-slate-600">{card.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
-        {/* Detailed View Sections */}
+        {/* Detailed View Sections (for /about) */}
         {detailed && (
           <div className="space-y-10 pt-6 border-t border-slate-200">
             {/* Core Values */}
             <div>
               <div className="max-w-xl text-left mb-6">
-                <p className="eyebrow">CORE VALUES</p>
+                <p className="eyebrow text-[#d7192a]">CORE VALUES</p>
                 <h2 className="section-title mt-2">What Drives Our Work</h2>
                 <p className="section-copy mt-2">
                   Our values shape every interaction, decision, and solution we deliver to global clients.
@@ -415,7 +516,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
                     transition={{ delay: i * 0.1 }}
                     className="glass-card p-6"
                   >
-                    <div className="flex size-10 items-center justify-center rounded-xl border border-sky-200 bg-sky-50 text-sky-600">
+                    <div className="flex size-10 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
                       <Sparkles className="size-5" />
                     </div>
                     <h3 className="mt-4 text-base font-bold text-slate-900">{val.title}</h3>
@@ -428,7 +529,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
             {/* Milestones / Journey */}
             <div>
               <div className="max-w-xl text-left mb-6">
-                <p className="eyebrow">OUR JOURNEY</p>
+                <p className="eyebrow text-[#d7192a]">OUR JOURNEY</p>
                 <h2 className="section-title mt-2">Milestones of Progress</h2>
                 <p className="section-copy mt-2">
                   A legacy of continuous growth, technological innovation, and client partnerships since 2005.
@@ -444,7 +545,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
                     transition={{ delay: i * 0.1 }}
                     className="glass-card p-6"
                   >
-                    <span className="inline-block rounded-full bg-sky-50 border border-sky-200 px-3.5 py-1 text-xs font-bold text-sky-700">
+                    <span className="inline-block rounded-full bg-red-50 border border-red-200 px-3.5 py-1 text-xs font-bold text-[#d7192a]">
                       {m.year}
                     </span>
                     <h3 className="mt-3 text-base font-bold text-slate-900">{m.title}</h3>
@@ -462,102 +563,73 @@ export function About({ detailed = false }: { detailed?: boolean }) {
 
 export function Services({ full = false }: { full?: boolean }) {
   const serviceIcons = [
-    <Cloud key="cloud" className="size-7" />,
-    <Server key="server" className="size-7" />,
-    <Code2 key="code" className="size-7" />,
-    <Headphones key="headphones" className="size-7" />,
-    <Building2 key="building" className="size-7" />,
+    <Bot key="bot" className="size-6 text-[#d7192a]" />,
+    <Cloud key="cloud" className="size-6 text-[#d7192a]" />,
+    <Code2 key="code" className="size-6 text-[#d7192a]" />,
+    <Database key="db" className="size-6 text-[#d7192a]" />,
+    <Globe key="globe" className="size-6 text-[#d7192a]" />,
+    <ShieldCheck key="shield" className="size-6 text-[#d7192a]" />,
   ];
 
   return (
     <section className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
-      {/* Subtle ambient gradient overlay */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(2,132,199,0.08),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(215,25,42,0.03),transparent_70%)]" />
 
       <div className="site-container relative z-10">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <p className="eyebrow">OUR CAPABILITIES</p>
-            <h2 className="section-title mt-2">Comprehensive IT Solutions for Global Enterprises.</h2>
-            <p className="section-copy mt-2.5">
-              From cloud infrastructure to custom development, we provide end-to-end technology solutions that power
-              business growth across 5 continents.
-            </p>
+            <p className="eyebrow text-[#d7192a]">TECHNOLOGY THAT WORKS FOR YOU</p>
+            <h2 className="section-title mt-2">
+              Modernize. Connect. <span className="text-[#d7192a]">Move forward.</span>
+            </h2>
           </div>
-          {!full && (
-            <Button
-              asChild
-              variant="link"
-              className="px-0 text-xs font-bold text-sky-600 hover:text-sky-800"
-            >
-              <Link to="/services">
-                Explore all services <ArrowRight className="size-4 ml-1" />
-              </Link>
-            </Button>
-          )}
+          <p className="max-w-md text-xs sm:text-sm text-slate-600">
+            Practical expertise across the platforms and applications your business depends on.
+          </p>
         </div>
 
-        {/* Home Overview Grid (5 services) */}
-        {!full && (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, i) => (
-              <ServiceCard3D
-                key={service.id}
-                id={service.id}
-                index={i}
-                title={service.title}
-                summary={service.summary}
-                icon={serviceIcons[i % serviceIcons.length]}
-              />
-            ))}
-          </div>
-        )}
-
-        {/* Detailed Services Page View */}
-        {full && (
-          <div className="space-y-8 sm:space-y-10">
-            <div className="grid gap-6 lg:grid-cols-2">
-              {services.map((service, i) => (
-                <ServiceCard3D
-                  key={service.id}
-                  id={service.id}
-                  index={i}
-                  title={service.title}
-                  summary={service.summary}
-                  desc={service.desc}
-                  offers={service.offers}
-                  isDetailed
-                  icon={serviceIcons[i % serviceIcons.length]}
-                />
-              ))}
-            </div>
-
-            {/* Enterprise Commitments */}
-            <div className="glass-card p-6 md:p-8 bg-white/95 border-slate-200/90 shadow-sm">
-              <div className="max-w-2xl">
-                <p className="eyebrow">ENTERPRISE COMMITMENTS</p>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
-                  Quality &amp; Delivery Standards
-                </h3>
+        {/* 6 Services Grid */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service, i) => (
+            <motion.div
+              key={service.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className="glass-card flex flex-col justify-between p-6 sm:p-7 bg-white/95 border-slate-200/90 hover:border-[#d7192a]/50 hover:shadow-xl transition-all"
+            >
+              <div>
+                <div className="flex size-11 items-center justify-center rounded-xl bg-red-50 border border-red-100">
+                  {serviceIcons[i % serviceIcons.length]}
+                </div>
+                <h3 className="mt-5 text-lg font-bold text-slate-900">{service.title}</h3>
                 <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">
-                  Every engagement with TP iT GROUP LLC includes a comprehensive suite of professional deliverables
-                  designed for enterprise scalability and governance.
+                  {full && service.desc ? service.desc : service.summary}
                 </p>
+
+                {full && service.offers && (
+                  <ul className="mt-4 space-y-1.5 border-t border-slate-100 pt-3">
+                    {service.offers.map((offer) => (
+                      <li key={offer} className="flex items-start gap-2 text-xs text-slate-600">
+                        <Check className="size-3.5 mt-0.5 shrink-0 text-[#d7192a]" />
+                        <span>{offer}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
-              <div className="mt-6 flex flex-wrap gap-2.5">
-                {enterpriseDeliverables.map((item) => (
-                  <span
-                    key={item}
-                    className="inline-flex items-center gap-2 rounded-xl border border-slate-200/90 bg-slate-50/90 px-3.5 py-1.5 text-xs font-medium text-slate-700 shadow-xs hover:border-sky-300"
-                  >
-                    <CheckCircle2 className="size-4 text-sky-600" />
-                    {item}
-                  </span>
-                ))}
+              <div className="mt-6 pt-4 border-t border-slate-100">
+                <Link
+                  to="/services"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
+                >
+                  Explore {service.title} <ArrowRight className="size-3.5 ml-1" />
+                </Link>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -565,23 +637,27 @@ export function Services({ full = false }: { full?: boolean }) {
 
 export function IndustriesSection() {
   const industryIcons = [
-    <Activity key="fin" className="size-5" />,
-    <Cpu key="it" className="size-5" />,
-    <ShieldCheck key="health" className="size-5" />,
-    <Layers key="manu" className="size-5" />,
-    <Sparkles key="start" className="size-5" />,
-    <Briefcase key="eng" className="size-5" />,
+    <Briefcase key="fin" className="size-5 text-[#d7192a]" />,
+    <Monitor key="it" className="size-5 text-[#d7192a]" />,
+    <Pill key="health" className="size-5 text-[#d7192a]" />,
+    <Factory key="manu" className="size-5 text-[#d7192a]" />,
+    <Rocket key="start" className="size-5 text-[#d7192a]" />,
+    <HardHat key="eng" className="size-5 text-[#d7192a]" />,
   ];
 
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(2,132,199,0.05),transparent_60%)]" />
       <div className="site-container relative z-10">
-        <div className="mb-6 max-w-2xl text-left">
-          <p className="eyebrow">INDUSTRIES WE SERVE</p>
-          <h2 className="section-title mt-2">Trusted Across Global Sectors.</h2>
-          <p className="section-copy mt-2">
-            Our expertise spans across diverse sectors, delivering tailored solutions that address unique enterprise
+        <div className="mx-auto mb-8 max-w-2xl text-center">
+          <span className="inline-block rounded-full bg-red-50 border border-red-200 px-3.5 py-1 text-xs font-bold text-[#d7192a]">
+            INDUSTRIES WE SERVE
+          </span>
+          <h2 className="section-title mt-3 text-center">
+            Solutions for the Needs of <br />
+            <span className="text-[#d7192a]">Multiple Industries</span>
+          </h2>
+          <p className="section-copy mt-2.5 text-center">
+            Our expertise spans across diverse sectors, delivering tailored solutions that address unique industry
             challenges.
           </p>
         </div>
@@ -593,46 +669,13 @@ export function IndustriesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="glass-card p-6 bg-white/95 border-slate-200/90 hover:border-sky-400 hover:shadow-xl transition-all"
+              className="glass-card p-6 bg-white/95 border-slate-200/90 hover:border-[#d7192a]/50 hover:shadow-xl transition-all"
             >
-              <div className="flex size-10 items-center justify-center rounded-xl border border-sky-200 bg-sky-50 text-sky-600">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-red-50 border border-red-100">
                 {industryIcons[i % industryIcons.length]}
               </div>
               <h3 className="mt-4 text-base font-bold text-slate-900">{ind.name}</h3>
-              <p className="mt-2 text-xs leading-relaxed text-slate-600">{ind.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function ProvenApproachSection() {
-  return (
-    <section className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(2,132,199,0.06),transparent_60%)]" />
-      <div className="site-container relative z-10">
-        <div className="mb-6 max-w-2xl text-left">
-          <p className="eyebrow">OUR METHODOLOGY</p>
-          <h2 className="section-title mt-2">A Proven Approach to Delivering Excellence.</h2>
-          <p className="section-copy mt-2">
-            Our structured methodology ensures consistent, high-quality outcomes for every project we undertake.
-          </p>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {provenApproach.map((step, i) => (
-            <motion.div
-              key={step.number}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="glass-card p-6 bg-white/95 border-slate-200/90 hover:border-sky-400 hover:shadow-xl transition-all"
-            >
-              <span className="font-mono text-2xl font-black text-sky-600">{step.number}</span>
-              <h3 className="mt-3 text-base font-bold text-slate-900">{step.title}</h3>
-              <p className="mt-1.5 text-xs leading-relaxed text-slate-600">{step.desc}</p>
+              <p className="mt-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">{ind.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -644,68 +687,131 @@ export function ProvenApproachSection() {
 export function WhyChooseUsSection() {
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(2,132,199,0.05),transparent_60%)]" />
-      <div className="site-container relative z-10 grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-        <div>
-          <p className="eyebrow">WHY CHOOSE US</p>
-          <h2 className="section-title mt-2">
-            We don’t just deliver services — <br />
-            We build enduring partnerships.
+      <div className="site-container relative z-10">
+        <div className="mx-auto mb-8 max-w-2xl text-center">
+          <span className="inline-block rounded-full bg-red-50 border border-red-200 px-3.5 py-1 text-xs font-bold text-[#d7192a]">
+            WHY CHOOSE US
+          </span>
+          <h2 className="section-title mt-3 text-center">
+            Your Success is Our <span className="text-[#d7192a]">Priority</span>
           </h2>
-          <p className="section-copy mt-3">
-            Our solutions are engineered for long-term profitability and reliability. We focus on optimizing operational
-            efficiency while reducing technical debt, ensuring your digital evolution translates into measurable growth.
-          </p>
-          <div className="mt-5 space-y-3">
+        </div>
+
+        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+          {/* Left Handshake Card */}
+          <div className="glass-card p-8 sm:p-10 bg-white/95 border-slate-200/90 shadow-xl shadow-red-500/5 flex flex-col justify-between h-full">
+            <div>
+              <div className="flex size-14 items-center justify-center rounded-2xl bg-red-50 border border-red-100">
+                <Handshake className="size-8 text-[#d7192a]" />
+              </div>
+              <h3 className="mt-6 text-2xl sm:text-3xl font-extrabold text-slate-900 leading-snug">
+                We don’t just deliver services — <br />
+                We build partnerships.
+              </h3>
+            </div>
+            <div className="mt-8 pt-6 border-t border-slate-100">
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
+              >
+                Get in Touch <ArrowUpRight className="size-4 ml-0.5" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Right 5 items */}
+          <div className="space-y-4">
             {whyChooseUs.map((item) => (
               <div key={item.title} className="flex gap-3.5 items-start">
-                <div className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-sky-50 border border-sky-200 text-sky-600 mt-0.5">
+                <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-red-50 border border-red-200 text-[#d7192a] mt-0.5">
                   <Check className="size-3.5" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-slate-900">{item.title}</h3>
-                  <p className="text-xs text-slate-600 mt-0.5">{item.desc}</p>
+                  <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
 
-        <div>
-          <div className="glass-card p-6 sm:p-8 bg-white/95 border-slate-200/90 shadow-xl shadow-slate-900/5 hover:border-sky-400 transition-all">
-            <span className="inline-block rounded-full bg-sky-50 border border-sky-200 px-3 py-1 text-[11px] font-bold text-sky-700">
-              GLOBAL EXCELLENCE
-            </span>
-            <h3 className="mt-3 text-2xl font-bold text-slate-900">Empowering 10,000+ Global Partners</h3>
-            <p className="mt-2.5 text-xs leading-relaxed text-slate-600">
-              Trusted by Fortune 500 organizations, government institutions, and innovative enterprises across the USA,
-              India, Canada, the UK, and Australia.
-            </p>
-            <div className="mt-6 grid grid-cols-2 gap-4 border-t border-slate-200/90 pt-5">
-              <div>
-                <div className="text-2xl font-black text-sky-600">2005</div>
-                <div className="text-[11px] text-slate-500">Founded in USA</div>
-              </div>
-              <div>
-                <div className="text-2xl font-black text-sky-600">10,000+</div>
-                <div className="text-[11px] text-slate-500">Global Workforce</div>
-              </div>
-              <div>
-                <div className="text-2xl font-black text-sky-600">100%</div>
-                <div className="text-[11px] text-slate-500">Client IP Ownership</div>
-              </div>
-              <div>
-                <div className="text-2xl font-black text-sky-600">24/7</div>
-                <div className="text-[11px] text-slate-500">Global Support SLA</div>
-              </div>
-            </div>
-            <Button
-              asChild
-              className="mt-6 h-11 w-full rounded-xl bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-500 hover:to-cyan-500 text-white font-bold text-xs shadow-md shadow-sky-500/20"
+export function WorkWithSection() {
+  return (
+    <section className="section relative overflow-hidden bg-white text-slate-900 border-t border-slate-200/80 bg-dot-pattern">
+      <div className="site-container relative z-10">
+        <div className="mb-6 max-w-2xl text-left">
+          <p className="eyebrow text-[#d7192a]">WORK WITH TP IT GROUP</p>
+          <h2 className="section-title mt-2">The right engagement for your next move.</h2>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {engagementModels.map((item, i) => (
+            <motion.div
+              key={item.number}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="border-t-2 border-[#d7192a] pt-4"
             >
-              <Link to="/contact">Discuss Your Project</Link>
-            </Button>
-          </div>
+              <span className="font-mono text-xs font-bold text-slate-400">{item.number}</span>
+              <h3 className="mt-2 text-base font-bold text-slate-900">{item.title}</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-slate-600">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ProvenApproachSection() {
+  const processIcons = [
+    <MessageSquare key="chat" className="size-5 text-[#d7192a]" />,
+    <Lightbulb key="light" className="size-5 text-[#d7192a]" />,
+    <Rocket key="rocket" className="size-5 text-[#d7192a]" />,
+    <RefreshCw key="refresh" className="size-5 text-[#d7192a]" />,
+  ];
+
+  return (
+    <section className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
+      <div className="site-container relative z-10">
+        <div className="mx-auto mb-8 max-w-2xl text-center">
+          <span className="inline-block rounded-full bg-red-50 border border-red-200 px-3.5 py-1 text-xs font-bold text-[#d7192a]">
+            OUR WORK PROCESS
+          </span>
+          <h2 className="section-title mt-3 text-center">
+            A Clear Approach to <span className="text-[#d7192a]">Delivering Excellence</span>
+          </h2>
+          <p className="section-copy mt-2.5 text-center">
+            Agree on the priorities, review progress together and validate what is delivered against your business needs.
+          </p>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {provenApproach.map((step, i) => (
+            <motion.div
+              key={step.number}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="glass-card p-6 bg-white/95 border-slate-200/90 hover:border-[#d7192a]/50 hover:shadow-xl transition-all relative"
+            >
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center justify-center rounded-lg bg-slate-900 text-white font-mono text-xs font-bold px-2.5 py-1">
+                  {step.number}
+                </span>
+                <div className="flex size-9 items-center justify-center rounded-xl bg-red-50 border border-red-100">
+                  {processIcons[i % processIcons.length]}
+                </div>
+              </div>
+              <h3 className="mt-4 text-base font-bold text-slate-900">{step.title}</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">{step.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
@@ -1179,33 +1285,22 @@ export function Contact() {
 
 export function ContactBanner() {
   return (
-    <section className="relative overflow-hidden border-y border-slate-800 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 py-10 sm:py-12 text-white">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(2,132,199,0.15),transparent)]" />
-      <div className="site-container relative z-10 flex flex-wrap items-center justify-between gap-6">
-        <div className="max-w-xl">
-          <p className="text-xs font-bold uppercase tracking-widest text-sky-400">READY TO PARTNER WITH TP IT GROUP?</p>
-          <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-            Let’s explore what’s possible.
-          </h2>
-          <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-300">
-            Schedule a confidential discovery session with our senior digital architects and workforce strategists.
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-3.5">
+    <section className="relative overflow-hidden border-t border-slate-200/80 bg-white py-14 sm:py-16 text-slate-900 bg-dot-pattern">
+      <div className="site-container relative z-10 flex flex-col items-center text-center">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+          Ready to Transform <span className="text-[#d7192a]">Your Business</span>?
+        </h2>
+        <p className="mt-3 max-w-xl text-xs sm:text-sm leading-relaxed text-slate-600">
+          Let’s connect your business goals with the technology, advice and people to move them forward.
+        </p>
+        <div className="mt-7">
           <Button
             asChild
-            className="h-11 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-400 hover:to-cyan-300 px-6 text-xs font-bold text-slate-950 shadow-lg shadow-sky-500/25"
+            className="h-12 rounded-full bg-slate-900 hover:bg-slate-800 text-white px-8 text-xs sm:text-sm font-bold shadow-lg shadow-slate-900/10 transition-all hover:scale-105"
           >
-            <Link to="/contact">
-              Get in Touch <ArrowUpRight className="size-4 ml-1" />
+            <Link to="/contact" className="inline-flex items-center gap-2">
+              Get in Touch <ArrowUpRight className="size-4" />
             </Link>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            className="h-11 rounded-xl border-white/20 bg-white/10 px-6 text-xs font-bold text-white hover:bg-white/20"
-          >
-            <Link to="/services">Explore Capabilities</Link>
           </Button>
         </div>
       </div>
