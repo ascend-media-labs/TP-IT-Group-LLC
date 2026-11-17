@@ -34,9 +34,9 @@ function Index() {
       <ConnectedCapabilitiesSection />
       <Services />
       <About />
-      <GlobalPresence />
       <IndustriesSection />
       <WhyChooseUsSection />
+      <GlobalPresence />
       <WorkWithSection />
       <ProvenApproachSection />
       <Clients />

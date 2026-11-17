@@ -627,45 +627,45 @@ export function Services({ full = false }: { full?: boolean }) {
 
 export function IndustriesSection() {
   const industryIcons = [
-    <Briefcase key="fin" className="size-5 text-[#d7192a]" />,
-    <Monitor key="it" className="size-5 text-[#d7192a]" />,
-    <Pill key="health" className="size-5 text-[#d7192a]" />,
-    <Factory key="manu" className="size-5 text-[#d7192a]" />,
-    <Rocket key="start" className="size-5 text-[#d7192a]" />,
-    <HardHat key="eng" className="size-5 text-[#d7192a]" />,
+    <Briefcase key="fin" className="size-6 text-[#d7192a]" />,
+    <Monitor key="it" className="size-6 text-[#d7192a]" />,
+    <Pill key="health" className="size-6 text-[#d7192a]" />,
+    <Factory key="manu" className="size-6 text-[#d7192a]" />,
+    <Rocket key="start" className="size-6 text-[#d7192a]" />,
+    <HardHat key="eng" className="size-6 text-[#d7192a]" />,
   ];
 
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
       <div className="site-container relative z-10">
-        <div className="mx-auto mb-8 max-w-2xl text-center">
-          <span className="inline-block rounded-full bg-red-50 border border-red-200 px-3.5 py-1 text-xs font-bold text-[#d7192a]">
+        <div className="mx-auto mb-10 max-w-2xl text-center">
+          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
             INDUSTRIES WE SERVE
           </span>
-          <h2 className="section-title mt-3 text-center">
+          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-slate-900 leading-tight">
             Solutions for the Needs of <br />
             <span className="text-[#d7192a]">Multiple Industries</span>
           </h2>
-          <p className="section-copy mt-2.5 text-center">
+          <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
             Our expertise spans across diverse sectors, delivering tailored solutions that address unique industry
             challenges.
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
           {industries.map((ind, i) => (
             <motion.div
               key={ind.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="glass-card p-6 bg-white/95 border-slate-200/90 hover:border-[#d7192a]/50 hover:shadow-xl transition-all"
+              transition={{ delay: i * 0.08 }}
+              className="rounded-3xl bg-white p-8 sm:p-9 border border-slate-100 shadow-[0_2px_14px_rgba(0,0,0,0.03)] hover:border-[#d7192a]/30 hover:shadow-lg transition-all"
             >
-              <div className="flex size-10 items-center justify-center rounded-xl bg-red-50 border border-red-100">
+              <div className="flex size-12 items-center justify-center rounded-2xl bg-[#fef2f2] text-[#d7192a]">
                 {industryIcons[i % industryIcons.length]}
               </div>
-              <h3 className="mt-4 text-base font-bold text-slate-900">{ind.name}</h3>
-              <p className="mt-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">{ind.desc}</p>
+              <h3 className="mt-6 text-lg sm:text-xl font-bold text-slate-900">{ind.name}</h3>
+              <p className="mt-2 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400">{ind.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -678,23 +678,21 @@ export function WhyChooseUsSection() {
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
       <div className="site-container relative z-10">
-        <div className="mx-auto mb-8 max-w-2xl text-center">
-          <span className="inline-block rounded-full bg-red-50 border border-red-200 px-3.5 py-1 text-xs font-bold text-[#d7192a]">
+        <div className="mx-auto mb-10 max-w-2xl text-center">
+          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
             WHY CHOOSE US
           </span>
-          <h2 className="section-title mt-3 text-center">
+          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-slate-900 leading-tight">
             Your Success is Our <span className="text-[#d7192a]">Priority</span>
           </h2>
         </div>
 
-        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+        <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12 max-w-6xl mx-auto">
           {/* Left Handshake Card */}
-          <div className="glass-card p-8 sm:p-10 bg-white/95 border-slate-200/90 shadow-xl shadow-red-500/5 flex flex-col justify-between h-full">
+          <div className="lg:col-span-6 rounded-3xl border border-red-100/90 bg-white p-8 sm:p-12 shadow-[0_4px_24px_rgba(215,25,42,0.03)] flex flex-col justify-between min-h-[360px] h-full">
             <div>
-              <div className="flex size-14 items-center justify-center rounded-2xl bg-red-50 border border-red-100">
-                <Handshake className="size-8 text-[#d7192a]" />
-              </div>
-              <h3 className="mt-6 text-2xl sm:text-3xl font-extrabold text-slate-900 leading-snug">
+              <Handshake className="size-16 sm:size-20 text-[#d7192a] stroke-[1.8]" />
+              <h3 className="mt-8 text-2xl sm:text-3xl lg:text-[32px] font-bold text-[#d7192a] leading-snug">
                 We don’t just deliver services — <br />
                 We build partnerships.
               </h3>
@@ -702,7 +700,7 @@ export function WhyChooseUsSection() {
             <div className="mt-8 pt-6 border-t border-slate-100">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#d7192a] hover:underline"
               >
                 Get in Touch <ArrowUpRight className="size-4 ml-0.5" />
               </Link>
@@ -710,15 +708,24 @@ export function WhyChooseUsSection() {
           </div>
 
           {/* Right 5 items */}
-          <div className="space-y-4">
+          <div className="lg:col-span-6 space-y-6 sm:space-y-7">
             {whyChooseUs.map((item) => (
-              <div key={item.title} className="flex gap-3.5 items-start">
-                <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-red-50 border border-red-200 text-[#d7192a] mt-0.5">
-                  <Check className="size-3.5" />
+              <div key={item.title} className="flex gap-4 items-start">
+                <div className="flex size-7 sm:size-8 shrink-0 items-center justify-center rounded-full bg-red-50/80 border border-red-200 text-[#d7192a] mt-0.5">
+                  <Check className="size-4 stroke-[2.5]" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">{item.title}</h3>
-                  <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">{item.desc}</p>
+                  <h3 className="text-base font-bold text-slate-900">{item.title}</h3>
+                  {item.title === 'Global Technology Experience' ? (
+                    <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+                      <span className="text-[10px] font-bold uppercase text-slate-400">us</span> USA,{' '}
+                      <span className="text-[10px] font-bold uppercase text-slate-400">ca</span> Canada and{' '}
+                      <span className="text-[10px] font-bold uppercase text-slate-400">in</span> India operations connecting
+                      business context with technical and workforce needs.
+                    </p>
+                  ) : (
+                    <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">{item.desc}</p>
+                  )}
                 </div>
               </div>
             ))}
