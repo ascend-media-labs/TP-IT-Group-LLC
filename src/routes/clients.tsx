@@ -60,7 +60,7 @@ function Page() {
           <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/70" />
         </div>
 
-        <div className="site-container relative z-10 text-left max-w-4xl">
+        <div className="site-container relative z-10 text-left">
           <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             TP IT GROUP / CLIENT SUCCESS &amp; EXCELLENCE
           </p>

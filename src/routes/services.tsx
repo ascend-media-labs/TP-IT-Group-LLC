@@ -211,7 +211,7 @@ function Page() {
           <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/90 to-white" />
         </div>
 
-        <div className="site-container relative z-10 text-left max-w-4xl">
+        <div className="site-container relative z-10 text-left">
           <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             TP IT GROUP / OUR SERVICES
           </p>
@@ -410,7 +410,7 @@ function Page() {
 
       {/* 4. INDUSTRIES WE SERVE SECTION (Screenshot 9) */}
       <section className="section bg-white text-slate-900 bg-dot-pattern">
-        <div className="site-container relative z-10 text-left max-w-6xl">
+        <div className="site-container relative z-10 text-left">
           <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             INDUSTRIES WE SERVE
           </p>

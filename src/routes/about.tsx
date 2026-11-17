@@ -38,7 +38,7 @@ function Page() {
           <div className="absolute inset-0 bg-gradient-to-b from-white/75 via-white/90 to-white" />
         </div>
 
-        <div className="site-container relative z-10 text-left max-w-4xl">
+        <div className="site-container relative z-10 text-left">
           <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             TP IT GROUP / ABOUT TP IT GROUP
           </p>
@@ -166,14 +166,14 @@ function Page() {
 
       {/* 3. OUR CORE VALUES SECTION (Screenshots 3 & 4) */}
       <section className="section bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
-        <div className="site-container text-center max-w-5xl mx-auto">
-          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
+        <div className="site-container text-left">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             OUR CORE VALUES
-          </span>
-          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
+          </p>
+          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
             The Principles That <span className="text-[#d7192a]">Guide Us</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-xl mx-auto">
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-xl">
             Our values shape every interaction, decision, and solution we deliver.
           </p>
 
@@ -251,11 +251,11 @@ function Page() {
 
       {/* 4. OUR APPROACH SECTION (Screenshot 5) */}
       <section className="section bg-white text-slate-900 bg-dot-pattern">
-        <div className="site-container text-center max-w-4xl mx-auto">
-          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
+        <div className="site-container text-left">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             OUR APPROACH
-          </span>
-          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
+          </p>
+          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
             From Ideas to <span className="text-[#d7192a]">Lasting Value</span>
           </h2>
 
@@ -351,7 +351,7 @@ function Page() {
 
       {/* 5. THE PEOPLE BEHIND TP IT GROUP (Screenshot 6) */}
       <section className="section bg-white text-slate-900 border-t border-slate-200/80">
-        <div className="site-container max-w-4xl text-left">
+        <div className="site-container text-left">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
             The People Behind TP IT Group
           </h2>
