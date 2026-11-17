@@ -192,7 +192,7 @@ export function Hero() {
       <div className="site-container relative z-10">
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-8 items-center">
           {/* Left Hero Content with Staggered Motion */}
-          <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+          <div className="lg:col-span-7 flex flex-col items-start text-left">
             {/* Top Red Eyebrow */}
             <motion.p
               initial={{ opacity: 0, y: 15 }}
@@ -330,16 +330,12 @@ export function ConnectedCapabilitiesSection() {
   return (
     <section id="consulting" className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
       <div className="site-container relative z-10">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-2xl">
-            <p className="eyebrow text-[#d7192a]">ONE PARTNER. CONNECTED CAPABILITIES.</p>
-            <h2 className="section-title mt-2">
-              Technology. Consulting. Talent.
-              <br />
-              <span className="text-[#d7192a]">Built around your business.</span>
-            </h2>
-          </div>
-          <p className="max-w-md text-xs sm:text-sm text-slate-600">
+        <div className="mb-8 text-left">
+          <p className="eyebrow text-[#d7192a]">ONE PARTNER. CONNECTED CAPABILITIES.</p>
+          <h2 className="section-title mt-2">
+            Technology. Consulting. Talent. <span className="text-[#d7192a]">Built around your business.</span>
+          </h2>
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
             From defining the challenge to delivering the solution, bring your technology and people priorities together.
           </p>
         </div>
@@ -566,14 +562,12 @@ export function Services({ full = false }: { full?: boolean }) {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(215,25,42,0.03),transparent_70%)]" />
 
       <div className="site-container relative z-10">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-2xl">
-            <p className="eyebrow text-[#d7192a]">TECHNOLOGY THAT WORKS FOR YOU</p>
-            <h2 className="section-title mt-2">
-              Modernize. Connect. <span className="text-[#d7192a]">Move forward.</span>
-            </h2>
-          </div>
-          <p className="max-w-md text-xs sm:text-sm text-slate-600">
+        <div className="mb-8 text-left">
+          <p className="eyebrow text-[#d7192a]">TECHNOLOGY THAT WORKS FOR YOU</p>
+          <h2 className="section-title mt-2">
+            Modernize. Connect. <span className="text-[#d7192a]">Move forward.</span>
+          </h2>
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
             Practical expertise across the platforms and applications your business depends on.
           </p>
         </div>
@@ -638,20 +632,18 @@ export function IndustriesSection() {
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
       <div className="site-container relative z-10">
-        <div className="mx-auto mb-10 max-w-2xl text-center">
+        <div className="mb-8 text-left">
           <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
             INDUSTRIES WE SERVE
           </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-slate-900 leading-tight">
-            Solutions for the Needs of <br />
-            <span className="text-[#d7192a]">Multiple Industries</span>
+          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
+            Solutions for the Needs of <span className="text-[#d7192a]">Multiple Industries</span>
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            Our expertise spans across diverse sectors, delivering tailored solutions that address unique industry
-            challenges.
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
+            Our expertise spans across diverse sectors, delivering tailored solutions that address unique industry challenges.
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl">
           {industries.map((ind, i) => (
             <motion.div
               key={ind.name}
@@ -678,16 +670,19 @@ export function WhyChooseUsSection() {
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
       <div className="site-container relative z-10">
-        <div className="mx-auto mb-10 max-w-2xl text-center">
+        <div className="mb-8 text-left">
           <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
             WHY CHOOSE US
           </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-slate-900 leading-tight">
+          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
             Your Success is Our <span className="text-[#d7192a]">Priority</span>
           </h2>
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
+            Dedicated partnership, proven global delivery models, and dependable support engineered around your growth.
+          </p>
         </div>
 
-        <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12 max-w-6xl mx-auto">
+        <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12 max-w-6xl">
           {/* Left Handshake Card */}
           <div className="lg:col-span-6 rounded-3xl border border-red-100/90 bg-white p-8 sm:p-12 shadow-[0_4px_24px_rgba(215,25,42,0.03)] flex flex-col justify-between min-h-[360px] h-full">
             <div>
@@ -740,9 +735,12 @@ export function WorkWithSection() {
   return (
     <section id="talent" className="section relative overflow-hidden bg-white text-slate-900 border-t border-slate-200/80 bg-dot-pattern">
       <div className="site-container relative z-10">
-        <div className="mb-6 max-w-2xl text-left">
+        <div className="mb-8 text-left">
           <p className="eyebrow text-[#d7192a]">WORK WITH TP IT GROUP</p>
           <h2 className="section-title mt-2">The right engagement for your next move.</h2>
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
+            Flexible collaboration structures built to adapt to your enterprise milestones and talent demands.
+          </p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {engagementModels.map((item, i) => (
@@ -776,14 +774,14 @@ export function ProvenApproachSection() {
   return (
     <section className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
       <div className="site-container relative z-10">
-        <div className="mx-auto mb-8 max-w-2xl text-center">
-          <span className="inline-block rounded-full bg-red-50 border border-red-200 px-3.5 py-1 text-xs font-bold text-[#d7192a]">
+        <div className="mb-8 text-left">
+          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
             OUR WORK PROCESS
           </span>
-          <h2 className="section-title mt-3 text-center">
+          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
             A Clear Approach to <span className="text-[#d7192a]">Delivering Excellence</span>
           </h2>
-          <p className="section-copy mt-2.5 text-center">
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
             Agree on the priorities, review progress together and validate what is delivered against your business needs.
           </p>
         </div>
@@ -820,17 +818,16 @@ export function Clients({ full = false }: { full?: boolean }) {
     <section id="clients" className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_50%_0%,rgba(2,132,199,0.06),transparent_60%)]" />
       <div className="site-container relative z-10">
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-2xl">
-            <p className="eyebrow">CLIENT SUCCESS &amp; EXCELLENCE</p>
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
+          <div className="max-w-3xl text-left">
+            <p className="eyebrow text-[#d7192a]">CLIENT SUCCESS &amp; EXCELLENCE</p>
             <h2 className="section-title mt-2">Trusted by Fortune 500 &amp; Industry Leaders.</h2>
-            <p className="section-copy mt-2.5">
-              Partnering with world-class organizations to deliver cutting-edge IT excellence, digital engineering, and
-              workforce solutions.
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
+              Partnering with world-class organizations to deliver cutting-edge IT excellence, digital engineering, and workforce solutions.
             </p>
           </div>
           {!full && (
-            <Button asChild variant="link" className="px-0 text-xs font-bold text-sky-600 hover:text-sky-800">
+            <Button asChild variant="link" className="px-0 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c]">
               <Link to="/clients">
                 View all 20+ partners <ArrowRight className="size-4 ml-1" />
               </Link>
@@ -1253,20 +1250,25 @@ export function Contact() {
 
 export function ContactBanner() {
   return (
-    <section id="contact" className="relative overflow-hidden border-t border-slate-200/80 bg-white py-14 sm:py-16 text-slate-900 bg-dot-pattern">
-      <div className="site-container relative z-10 flex flex-col items-center text-center">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-          Ready to Transform <span className="text-[#d7192a]">Your Business</span>?
-        </h2>
-        <p className="mt-3 max-w-xl text-xs sm:text-sm leading-relaxed text-slate-600">
-          Let’s connect your business goals with the technology, advice and people to move them forward.
-        </p>
-        <div className="mt-7">
+    <section id="contact" className="relative overflow-hidden border-t border-slate-200/80 bg-white py-12 sm:py-14 text-slate-900 bg-dot-pattern">
+      <div className="site-container relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-left">
+        <div>
+          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
+            GET IN TOUCH
+          </span>
+          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
+            Ready to Transform <span className="text-[#d7192a]">Your Business</span>?
+          </h2>
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-2xl">
+            Let’s connect your business goals with the technology, advice and people to move them forward.
+          </p>
+        </div>
+        <div className="shrink-0">
           <Button
             asChild
-            className="h-12 rounded-full bg-slate-900 hover:bg-slate-800 text-white px-8 text-xs sm:text-sm font-bold shadow-lg shadow-slate-900/10 transition-all hover:scale-105"
+            className="h-11 rounded-full bg-slate-900 hover:bg-slate-800 text-white px-7 text-xs sm:text-sm font-bold shadow-md transition-all hover:scale-105 inline-flex items-center gap-2"
           >
-            <Link to="/contact" className="inline-flex items-center gap-2">
+            <Link to="/contact">
               Get in Touch <ArrowUpRight className="size-4" />
             </Link>
           </Button>
