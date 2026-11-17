@@ -92,7 +92,7 @@ html {
 }
 
 .site-header {
-  height: 90px;
+  height: 76px;
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -113,7 +113,7 @@ html {
   font-size: 13px;
   font-weight: 600;
   position: relative;
-  padding: 8px 14px;
+  padding: 6px 11px;
   color: #475569;
   border-radius: 9999px;
   transition: all 0.2s ease;

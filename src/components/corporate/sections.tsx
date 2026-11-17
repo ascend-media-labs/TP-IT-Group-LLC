@@ -88,24 +88,24 @@ export function Navbar() {
 
   return (
     <header className="site-header">
-      <div className="site-container flex h-full items-center justify-between gap-4">
+      <div className="mx-auto flex h-full w-full max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8 gap-3">
         <Link
           to="/"
           className="brand-name flex items-center transition-opacity hover:opacity-90 shrink-0"
           onClick={() => setOpen(false)}
           aria-label="TP iT GROUP LLC Home"
         >
-          <TPITLogo className="h-7 sm:h-8 md:h-9 max-w-[200px] sm:max-w-none w-auto" />
+          <TPITLogo className="h-5 sm:h-6 md:h-6.5 max-w-[150px] sm:max-w-[170px] w-auto shrink-0" />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:gap-2 lg:flex">
+        <nav aria-label="Main navigation" className="hidden items-center gap-0.5 xl:gap-1.5 lg:flex shrink-0">
           {nav.map((item) => (
             <Link
               key={`${item.label}-${item.to}`}
               to={item.to}
-              className="nav-link"
-              activeProps={{ className: 'nav-link active' }}
+              className="nav-link text-xs xl:text-[13px] px-2.5 xl:px-3 py-1.5"
+              activeProps={{ className: 'nav-link active text-xs xl:text-[13px] px-2.5 xl:px-3 py-1.5' }}
               activeOptions={{ exact: true }}
             >
               {item.label}
@@ -113,10 +113,10 @@ export function Navbar() {
           ))}
           <Button
             asChild
-            className="ml-2 h-10 rounded-full bg-[#d7192a] hover:bg-[#b91c1c] px-5 text-xs sm:text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 inline-flex items-center gap-1.5"
+            className="ml-2 h-9 xl:h-10 rounded-full bg-[#d7192a] hover:bg-[#b91c1c] px-4 xl:px-5 text-xs xl:text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap"
           >
             <Link to="/contact">
-              Let’s talk <ArrowUpRight className="size-4" />
+              Let’s talk <ArrowUpRight className="size-3.5 xl:size-4" />
             </Link>
           </Button>
         </nav>
@@ -125,7 +125,7 @@ export function Navbar() {
         <Button
           variant="ghost"
           size="icon"
-          className="lg:hidden text-slate-800 hover:bg-slate-100"
+          className="lg:hidden text-slate-800 hover:bg-slate-100 shrink-0"
           aria-label={open ? 'Close navigation' : 'Open navigation'}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
