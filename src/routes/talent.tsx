@@ -1,15 +1,16 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { ContactBanner } from '@/components/corporate/sections';
-import { metadata, team } from '@/components/corporate/content';
+import { metadata } from '@/components/corporate/content';
+import { team } from '@/components/corporate/content';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Check } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const Route = createFileRoute('/talent')({
   head: () =>
     metadata(
-      'The expertise your next move needs. | IT & Non-IT Talent | TP IT Group LLC',
-      'Technology only moves forward when the right people are behind it. TP IT Group connects your project and operational priorities with IT and non-IT workforce solutions.',
+      'IT & Non-IT Talent Solutions | TP IT Group LLC',
+      'TP IT Group connects your project and operational priorities with specialized IT and non-IT workforce solutions across technology, business, and operations.',
     ),
   component: Page,
 });
@@ -18,7 +19,7 @@ const talentCapabilities = [
   {
     title: 'Technology & Digital',
     desc: 'Specialist expertise for modernization, enterprise platforms and digital delivery.',
-    items: [
+    skills: [
       'Cloud, DevOps & infrastructure',
       'SAP, ERP & enterprise applications',
       'AI, data engineering & analytics',
@@ -28,7 +29,7 @@ const talentCapabilities = [
   {
     title: 'Business & Professional',
     desc: 'People who connect business priorities with day-to-day execution.',
-    items: [
+    skills: [
       'Finance & accounting',
       'Human resources & administration',
       'Project coordination & operations',
@@ -38,7 +39,7 @@ const talentCapabilities = [
   {
     title: 'Engineering & Operations',
     desc: 'Role-specific workforce planning for technical and non-IT operational requirements.',
-    items: [
+    skills: [
       'Engineering & field services',
       'Manufacturing & production',
       'Supply chain & logistics',
@@ -47,41 +48,41 @@ const talentCapabilities = [
   },
 ];
 
-const engagementModels = [
+const engagementSteps = [
   {
-    number: '01',
+    num: '01',
     title: 'Consult & Plan',
-    desc: 'An assessment and roadmap for a defined business or technology challenge.',
+    desc: 'Define the technology roadmap, team structure and skills needed to deliver your objectives.',
   },
   {
-    number: '02',
+    num: '02',
     title: 'Build & Deliver',
-    desc: 'A scoped project with agreed milestones, acceptance criteria and handover.',
+    desc: 'Deploy dedicated teams or individual specialists to execute projects on time and to standard.',
   },
   {
-    number: '03',
+    num: '03',
     title: 'Extend Your Team',
-    desc: 'Specialist capacity matched to the skills and duration your team needs.',
+    desc: 'Scale your existing capability with contract, contract-to-hire or direct hire professionals.',
   },
   {
-    number: '04',
+    num: '04',
     title: 'Support & Improve',
-    desc: 'Ongoing service priorities, review cycles and improvements agreed with you.',
+    desc: 'Ensure ongoing operational stability, continuous improvement and responsive technical support.',
   },
 ];
 
 function Page() {
   return (
     <div className="bg-white text-slate-900">
-      {/* 1. HERO SECTION (Screenshot 1) */}
-      <section className="relative overflow-hidden pt-12 pb-10 sm:pt-16 sm:pb-14 bg-white border-b border-slate-200/80">
+      {/* 1. HERO BANNER (Image 1) */}
+      <section className="relative overflow-hidden pt-12 pb-12 sm:pt-16 sm:pb-16 bg-white border-b border-slate-200/80">
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
             src={team}
-            alt="TP IT Group Talent & Workforce"
+            alt="TP IT Group Talent Team"
             className="h-full w-full object-cover object-center opacity-15"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/90 to-white" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/70" />
         </div>
 
         <div className="site-container relative z-10 text-left max-w-4xl">
@@ -92,12 +93,13 @@ function Page() {
             The expertise your next move needs.
           </h1>
           <p className="mt-4 text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed max-w-2xl">
-            Technology only moves forward when the right people are behind it. TP IT Group connects your project and operational priorities with IT and non-IT workforce solutions.
+            Technology only moves forward when the right people are behind it. TP IT Group connects your project and
+            operational priorities with IT and non-IT workforce solutions.
           </p>
-          <div className="mt-6">
+          <div className="mt-6 flex flex-wrap gap-4">
             <Button
               asChild
-              className="rounded-full bg-[#d7192a] hover:bg-[#b91c1c] text-white px-7 py-2.5 text-xs sm:text-sm font-bold shadow-md shadow-red-500/20 transition hover:scale-105"
+              className="rounded-full bg-[#d7192a] hover:bg-[#b91c1c] text-white px-7 py-3 text-xs sm:text-sm font-bold shadow-md shadow-red-500/20 transition hover:scale-105"
             >
               <Link to="/contact">
                 Discuss your talent needs <ArrowRight className="size-4 ml-1.5" />
@@ -107,7 +109,7 @@ function Page() {
         </div>
       </section>
 
-      {/* 2. IT & NON-IT TALENT CAPABILITIES (Screenshot 2) */}
+      {/* 2. IT & NON-IT TALENT CAPABILITIES (Image 2) */}
       <section className="section bg-white text-slate-900 bg-dot-pattern">
         <div className="site-container">
           <div className="text-left mb-8">
@@ -119,26 +121,25 @@ function Page() {
             </h2>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2">
-            {talentCapabilities.map((cap) => (
+          <div className="grid gap-6 md:grid-cols-2">
+            {talentCapabilities.map((cap, idx) => (
               <motion.div
                 key={cap.title}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
-                className="rounded-3xl border border-slate-200/90 bg-white p-7 sm:p-9 shadow-sm hover:border-red-200 hover:shadow-md transition-all text-left"
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                className={`rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-sm hover:shadow-md transition-all ${
+                  idx === 2 ? 'md:col-span-1' : ''
+                }`}
               >
-                <h3 className="text-xl font-bold text-slate-900">{cap.title}</h3>
-                <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-slate-600">
-                  {cap.desc}
-                </p>
-
-                <ul className="mt-6 space-y-2.5 border-t border-slate-100 pt-5">
-                  {cap.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                      <Check className="size-4 mt-0.5 shrink-0 text-[#d7192a]" />
-                      <span>{item}</span>
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900">{cap.title}</h3>
+                <p className="mt-2 text-xs sm:text-[13px] text-slate-600 leading-relaxed">{cap.desc}</p>
+                <ul className="mt-5 space-y-2.5">
+                  {cap.skills.map((skill) => (
+                    <li key={skill} className="flex items-center gap-2.5 text-xs sm:text-[13px] text-slate-700">
+                      <Check className="size-4 text-[#d7192a] shrink-0" />
+                      <span>{skill}</span>
                     </li>
                   ))}
                 </ul>
@@ -148,8 +149,8 @@ function Page() {
         </div>
       </section>
 
-      {/* 3. WORK WITH TP IT GROUP (Screenshot 3 - Top half) */}
-      <section className="section bg-white text-slate-900 border-t border-slate-200/80 bg-dot-pattern">
+      {/* 3. WORK WITH TP IT GROUP (Image 3 - Top half) */}
+      <section className="section bg-slate-50/60 text-slate-900 border-y border-slate-200/80">
         <div className="site-container">
           <div className="text-left mb-8">
             <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
@@ -161,54 +162,55 @@ function Page() {
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {engagementModels.map((item, i) => (
-              <motion.div
-                key={item.number}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="border-t-2 border-[#d7192a] pt-4 text-left"
+            {engagementSteps.map((step) => (
+              <div
+                key={step.num}
+                className="relative border-t-2 border-[#d7192a] pt-4 flex flex-col justify-between"
               >
-                <span className="font-mono text-xs font-bold text-slate-400">{item.number}</span>
-                <h3 className="mt-2 text-base font-bold text-slate-900">{item.title}</h3>
-                <p className="mt-1.5 text-xs text-slate-600 leading-relaxed">{item.desc}</p>
-              </motion.div>
+                <div>
+                  <span className="font-mono text-xs font-bold text-[#d7192a]">{step.num}</span>
+                  <h3 className="mt-2 text-base font-bold text-slate-900">{step.title}</h3>
+                  <p className="mt-2 text-xs text-slate-600 leading-relaxed">{step.desc}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4. START A CONVERSATION CALLOUT (Screenshot 3 - Bottom half) */}
-      <section className="section bg-slate-50/70 border-t border-slate-200/80 bg-grid-pattern">
-        <div className="site-container max-w-4xl text-left">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
-            START A CONVERSATION
-          </p>
-          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
-            Tell us who your team needs.
-          </h2>
-          <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
-            Share the role, required skills, location and timeline. We’ll discuss the right approach and confirm availability for your specific requirements.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3.5 items-center">
-            <Button
-              asChild
-              className="rounded-full bg-[#d7192a] hover:bg-[#b91c1c] text-white px-7 py-2.5 text-xs sm:text-sm font-bold shadow-md shadow-red-500/20 transition hover:scale-105"
-            >
-              <Link to="/contact">
-                Discuss your talent needs <ArrowRight className="size-4 ml-1.5" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="rounded-full border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 px-6 py-2.5 text-xs sm:text-sm font-bold shadow-xs transition hover:scale-105"
-            >
-              <Link to="/careers">
-                For job seekers <ArrowRight className="size-4 ml-1.5" />
-              </Link>
-            </Button>
+      {/* 4. START A CONVERSATION CALLOUT (Image 3 - Bottom half) */}
+      <section className="section bg-white text-slate-900">
+        <div className="site-container">
+          <div className="rounded-3xl border border-slate-200/90 bg-gradient-to-br from-red-50/30 via-white to-slate-50 p-8 sm:p-12 shadow-sm text-left">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+              START A CONVERSATION
+            </p>
+            <h2 className="mt-2 text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+              Tell us who your team needs.
+            </h2>
+            <p className="mt-3 text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed max-w-2xl">
+              Share the role, required skills, location and timeline. We’ll discuss the right approach and confirm
+              availability for your specific requirements.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3.5">
+              <Button
+                asChild
+                className="rounded-full bg-[#d7192a] hover:bg-[#b91c1c] text-white px-6 py-2.5 text-xs sm:text-sm font-bold shadow-md shadow-red-500/20 transition hover:scale-105"
+              >
+                <Link to="/contact">
+                  Discuss your talent needs <ArrowRight className="size-4 ml-1.5" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="rounded-full border-slate-300 bg-white hover:bg-slate-100 text-slate-800 px-6 py-2.5 text-xs sm:text-sm font-bold transition"
+              >
+                <Link to="/careers">
+                  For job seekers <ArrowRight className="size-4 ml-1.5" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

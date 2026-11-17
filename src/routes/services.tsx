@@ -211,15 +211,15 @@ function Page() {
           <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/90 to-white" />
         </div>
 
-        <div className="site-container relative z-10 text-center max-w-4xl mx-auto">
-          <span className="inline-block rounded-full bg-red-50/90 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
-            OUR SERVICES
-          </span>
-          <h1 className="mt-4 text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+        <div className="site-container relative z-10 text-left max-w-5xl">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+            TP IT GROUP / OUR SERVICES
+          </p>
+          <h1 className="mt-2 text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
             Connected Solutions for<br />
-            <span className="text-[#d7192a]">Your Next Business Move</span>
+            <span className="text-[#d7192a]">Your Next Business Move.</span>
           </h1>
-          <p className="mt-4 text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed max-w-3xl mx-auto">
+          <p className="mt-3.5 text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed max-w-3xl">
             Technology, consulting and IT and non-IT talent—one partner to connect your strategy, systems and people.
           </p>
         </div>
@@ -410,14 +410,14 @@ function Page() {
 
       {/* 4. INDUSTRIES WE SERVE SECTION (Screenshot 9) */}
       <section className="section bg-white text-slate-900 bg-dot-pattern">
-        <div className="site-container relative z-10 text-center max-w-6xl mx-auto">
-          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
+        <div className="site-container relative z-10 text-left max-w-6xl">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             INDUSTRIES WE SERVE
-          </span>
-          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
+          </p>
+          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
             Solutions for the Needs of <span className="text-[#d7192a]">Multiple Industries</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-3xl mx-auto">
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-3xl">
             Our expertise spans across diverse sectors, delivering tailored solutions that address unique industry challenges.
           </p>
 

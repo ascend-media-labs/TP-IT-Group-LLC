@@ -119,7 +119,7 @@ function RootShell({ children }: { children: ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="bg-[#030712] text-slate-100 antialiased selection:bg-[#00D1FF]/30 selection:text-white">
+      <body className="bg-white text-slate-900 antialiased selection:bg-[#d7192a]/15 selection:text-[#d7192a]">
         {children}
         <Scripts />
       </body>
@@ -135,7 +135,7 @@ function RootComponent() {
       <LenisProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Navbar />
-        <main className="min-h-screen bg-[#030712]"><Outlet /></main>
+        <main className="min-h-screen bg-white"><Outlet /></main>
         <Footer />
       </LenisProvider>
     </QueryClientProvider>
