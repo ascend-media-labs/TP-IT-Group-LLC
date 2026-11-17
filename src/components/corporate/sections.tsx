@@ -183,7 +183,7 @@ const capabilityTags = [
 
 export function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden pt-8 pb-10 md:py-14 bg-white text-slate-900 bg-dot-pattern">
+    <section id="home" className="relative overflow-hidden pt-6 pb-8 md:pt-10 md:pb-10 bg-white text-slate-900 bg-dot-pattern">
       {/* Background Gradients & Transparent Grid Texture */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_-100px,rgba(215,25,42,0.04),transparent)]" />
       <div className="pointer-events-none absolute -left-40 top-1/4 size-96 rounded-full bg-red-500/5 blur-[130px]" />
@@ -278,7 +278,7 @@ export function Hero() {
 
 export function StatsSection() {
   return (
-    <section className="relative border-y border-slate-200/80 bg-slate-50/80 py-7 sm:py-8 overflow-hidden bg-grid-pattern">
+    <section className="relative border-y border-slate-200/80 bg-slate-50/80 py-4 sm:py-5 overflow-hidden bg-grid-pattern">
       <div className="site-container relative z-10">
         <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 items-center">
           {/* 1. 20+ years */}
@@ -412,7 +412,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
   ];
 
   return (
-    <section id="about" className="section bg-white text-slate-900 bg-dot-pattern">
+    <section id="about" className="section bg-white text-slate-900 bg-dot-pattern pb-2 sm:pb-3">
       <div className="site-container space-y-8 sm:space-y-10">
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Left Text */}
@@ -630,9 +630,9 @@ export function IndustriesSection() {
   ];
 
   return (
-    <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
+    <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern pt-2 sm:pt-3 pb-2 sm:pb-3">
       <div className="site-container relative z-10">
-        <div className="mb-8 text-left">
+        <div className="mb-5 sm:mb-6 text-left">
           <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
             INDUSTRIES WE SERVE
           </span>
@@ -668,9 +668,9 @@ export function IndustriesSection() {
 
 export function WhyChooseUsSection() {
   return (
-    <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
+    <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern pt-2 sm:pt-3">
       <div className="site-container relative z-10">
-        <div className="mb-8 text-left">
+        <div className="mb-5 sm:mb-6 text-left">
           <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
             WHY CHOOSE US
           </span>
@@ -1250,7 +1250,7 @@ export function Contact() {
 
 export function ContactBanner() {
   return (
-    <section id="contact" className="relative overflow-hidden border-t border-slate-200/80 bg-white py-12 sm:py-14 text-slate-900 bg-dot-pattern">
+    <section id="contact" className="relative overflow-hidden border-t border-slate-200/80 bg-white py-8 sm:py-10 text-slate-900 bg-dot-pattern">
       <div className="site-container relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-left">
         <div>
           <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">

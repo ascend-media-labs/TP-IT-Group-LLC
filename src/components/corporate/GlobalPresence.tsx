@@ -103,7 +103,7 @@ export function GlobalPresence() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-12 sm:py-16 bg-slate-50/70 text-slate-900 border-y border-slate-200/80">
+    <section className="relative overflow-hidden py-8 sm:py-10 bg-slate-50/70 text-slate-900 border-y border-slate-200/80">
       {/* Ambient background glow & transparent grid texture */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(215,25,42,0.05),transparent_70%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.04)_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
