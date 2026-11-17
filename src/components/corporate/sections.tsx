@@ -1392,72 +1392,108 @@ export function OfficialSocialChannels({ className = '' }: { className?: string 
 
 export function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer bg-white border-t border-slate-200/90 pt-12 pb-6">
       <div className="site-container">
-        <div className="grid gap-8 pb-10 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.5fr]">
-          <div>
+        <div className="grid gap-10 pb-12 sm:grid-cols-2 lg:grid-cols-12">
+          {/* Column 1: Brand & Motto */}
+          <div className="lg:col-span-3">
             <Link to="/" className="brand-name inline-flex items-center" aria-label="TP iT GROUP LLC Home">
-              <TPITLogo className="h-7 sm:h-8 md:h-9 max-w-[260px] sm:max-w-none w-auto" />
+              <TPITLogo className="h-6 sm:h-7 w-auto" />
             </Link>
-            <p className="mt-4 max-w-sm text-xs leading-relaxed text-slate-600">
-              {companyInfo.tagline}. Delivering excellence in digital engineering, cloud architecture, SAP solutions,
-              and strategic workforce solutions since {companyInfo.establishedYear}.
+            <p className="mt-4 max-w-sm text-xs sm:text-[13px] leading-relaxed text-slate-600">
+              One connected partner for technology, consulting and IT and non-IT talent. TP IT Group brings your business priorities, systems and people together.
+            </p>
+            <p className="mt-4 text-xs sm:text-[13px] font-semibold text-[#d7192a]">
+              We deliver what you expect. We keep our promises.
             </p>
             <div className="mt-6">
               <OfficialSocialChannels />
             </div>
           </div>
 
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">Quick Links</h3>
-            <div className="mt-4 flex flex-col gap-2.5 text-xs text-slate-600">
-              <Link to="/" className="hover:text-slate-900 transition">Home</Link>
-              <Link to="/about" className="hover:text-slate-900 transition">About us</Link>
-              <Link to="/services" className="hover:text-slate-900 transition">Services</Link>
-              <Link to="/clients" className="hover:text-slate-900 transition">Clients</Link>
-              <Link to="/careers" className="hover:text-slate-900 transition">Careers</Link>
-              <Link to="/contact" className="hover:text-slate-900 transition">Contact Us</Link>
+          {/* Column 2: Solutions */}
+          <div className="lg:col-span-2">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">SOLUTIONS</h3>
+            <div className="mt-4 flex flex-col gap-2.5 text-xs sm:text-[13px] text-slate-600">
+              <Link to="/services" className="hover:text-[#d7192a] transition-colors">AI Automation &amp; Agents</Link>
+              <Link to="/services" className="hover:text-[#d7192a] transition-colors">Cloud Migration</Link>
+              <Link to="/services" className="hover:text-[#d7192a] transition-colors">IT Development</Link>
+              <Link to="/services" className="hover:text-[#d7192a] transition-colors">ERP &amp; SAP Solutions</Link>
+              <Link to="/services" className="hover:text-[#d7192a] transition-colors">Web Design &amp; Development</Link>
+              <Link to="/services" className="hover:text-[#d7192a] transition-colors">Networking &amp; Security</Link>
             </div>
           </div>
 
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">Our Services</h3>
-            <div className="mt-4 flex flex-col gap-2.5 text-xs text-slate-600">
-              {services.map((s) => (
-                <Link key={s.id} to="/services" className="hover:text-slate-900 transition">
-                  {s.shortTitle}
-                </Link>
-              ))}
+          {/* Column 3: Quick Links */}
+          <div className="lg:col-span-2">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">QUICK LINKS</h3>
+            <div className="mt-4 flex flex-col gap-2.5 text-xs sm:text-[13px] text-slate-600">
+              <Link to="/about" className="hover:text-[#d7192a] transition-colors">About Us</Link>
+              <Link to="/services" className="hover:text-[#d7192a] transition-colors">Our Services</Link>
+              <Link to="/services" className="hover:text-[#d7192a] transition-colors">Consulting</Link>
+              <Link to="/careers" className="hover:text-[#d7192a] transition-colors">IT &amp; Non-IT Talent</Link>
+              <Link to="/about" className="hover:text-[#d7192a] transition-colors">Our Team</Link>
+              <Link to="/careers" className="hover:text-[#d7192a] transition-colors">Careers</Link>
+              <Link to="/clients" className="hover:text-[#d7192a] transition-colors">Clients</Link>
+              <Link to="/contact" className="hover:text-[#d7192a] transition-colors">Contact Us</Link>
             </div>
           </div>
 
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">Global Headquarters</h3>
-            <div className="mt-4 space-y-2.5 text-xs text-slate-600">
-              <p className="flex items-start gap-2">
-                <MapPin className="size-4 shrink-0 text-sky-600 mt-0.5" />
-                <span>{companyInfo.headOffice.fullAddress}</span>
+          {/* Column 4: Our Offices */}
+          <div className="lg:col-span-5 space-y-5">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">OUR OFFICES</h3>
+
+            <div>
+              <p className="text-xs sm:text-[13px] text-slate-900">
+                <span className="text-[10px] font-bold uppercase text-slate-400 mr-1.5">us</span>
+                <span className="font-bold">USA (Head Office) — TP IT Group LLC</span>
               </p>
-              <p className="text-[11px] text-sky-600 font-medium pl-6">
-                Branch Hubs: {companyInfo.branchOffices}
+              <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+                1000 N. West Street, Suite 1200, Wilmington, Delaware, 19801, United States of America
               </p>
-              <p className="flex items-center gap-2">
-                <Mail className="size-4 shrink-0 text-sky-600" />
-                <a href={`mailto:${companyInfo.email}`} className="hover:text-slate-900 transition font-mono">
-                  {companyInfo.email}
-                </a>
+              <a
+                href="tel:+18148441362"
+                className="mt-1 inline-block text-xs sm:text-[13px] font-bold text-[#d7192a] hover:underline"
+              >
+                +1 (814) 844-1362
+              </a>
+            </div>
+
+            <div>
+              <p className="text-xs sm:text-[13px] text-slate-900">
+                <span className="text-[10px] font-bold uppercase text-slate-400 mr-1.5">ca</span>
+                <span className="font-bold">Canada — TP IT Group</span>
               </p>
-              <p className="flex items-center gap-2">
-                <Phone className="size-4 shrink-0 text-sky-600" />
-                <a href={`tel:${companyInfo.phone.replace(/[^0-9+]/g, '')}`} className="hover:text-slate-900 transition font-mono">
-                  {companyInfo.phone}
-                </a>
+              <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+                Ontario, Canada
               </p>
+              <a
+                href="tel:+18148441362"
+                className="mt-1 inline-block text-xs sm:text-[13px] font-bold text-[#d7192a] hover:underline"
+              >
+                +1 (814) 844-1362
+              </a>
+            </div>
+
+            <div>
+              <p className="text-xs sm:text-[13px] text-slate-900">
+                <span className="text-[10px] font-bold uppercase text-slate-400 mr-1.5">in</span>
+                <span className="font-bold">India — TP IT GROUP PVT LTD</span>
+              </p>
+              <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+                13th Floor, Manjeera Trinity Corporate, Unit No. 12A04, next to Lulu Mall, Kukatpally Housing Board Colony, K P H B Phase 3, Kukatpally, Hyderabad, Telangana 500072
+              </p>
+              <a
+                href="tel:+919963435256"
+                className="mt-1 inline-block text-xs sm:text-[13px] font-bold text-[#d7192a] hover:underline"
+              >
+                +91-9963435256
+              </a>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-between gap-4 border-t border-slate-200/90 py-5 text-[11px] text-slate-500">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-slate-200/90 pt-6 text-[11px] text-slate-500">
           <span>© 2026 TP IT GROUP LLC. All rights reserved.</span>
           <div className="flex gap-6">
             <Link to="/privacy" className="hover:text-slate-900 transition">Privacy Policy</Link>
