@@ -75,9 +75,9 @@ const nav = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Services', to: '/services' },
-  { label: 'Consulting', to: '/services' },
-  { label: 'Talent', to: '/careers' },
-  { label: 'Our Team', to: '/about' },
+  { label: 'Consulting', to: '/consulting' },
+  { label: 'Talent', to: '/talent' },
+  { label: 'Our Team', to: '/team' },
   { label: 'Clients', to: '/clients' },
   { label: 'Careers', to: '/careers' },
   { label: 'Contact', to: '/contact' },
@@ -1421,9 +1421,9 @@ export function Footer() {
             <div className="mt-4 flex flex-col gap-2.5 text-xs sm:text-[13px] text-slate-600">
               <Link to="/about" className="hover:text-[#d7192a] transition-colors">About Us</Link>
               <Link to="/services" className="hover:text-[#d7192a] transition-colors">Our Services</Link>
-              <Link to="/services" className="hover:text-[#d7192a] transition-colors">Consulting</Link>
-              <Link to="/careers" className="hover:text-[#d7192a] transition-colors">IT &amp; Non-IT Talent</Link>
-              <Link to="/about" className="hover:text-[#d7192a] transition-colors">Our Team</Link>
+              <Link to="/consulting" className="hover:text-[#d7192a] transition-colors">Consulting</Link>
+              <Link to="/talent" className="hover:text-[#d7192a] transition-colors">IT &amp; Non-IT Talent</Link>
+              <Link to="/team" className="hover:text-[#d7192a] transition-colors">Our Team</Link>
               <Link to="/careers" className="hover:text-[#d7192a] transition-colors">Careers</Link>
               <Link to="/clients" className="hover:text-[#d7192a] transition-colors">Clients</Link>
               <Link to="/contact" className="hover:text-[#d7192a] transition-colors">Contact Us</Link>

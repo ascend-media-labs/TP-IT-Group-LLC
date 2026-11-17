@@ -14,9 +14,12 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as BlogsRouteImport } from './routes/blogs'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as ClientsRouteImport } from './routes/clients'
+import { Route as ConsultingRouteImport } from './routes/consulting'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as TalentRouteImport } from './routes/talent'
+import { Route as TeamRouteImport } from './routes/team'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as BlogsSlugRouteImport } from './routes/blogs.$slug'
 
@@ -45,6 +48,11 @@ const ClientsRoute = ClientsRouteImport.update({
   path: '/clients',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConsultingRoute = ConsultingRouteImport.update({
+  id: '/consulting',
+  path: '/consulting',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -58,6 +66,16 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalentRoute = TalentRouteImport.update({
+  id: '/talent',
+  path: '/talent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -77,9 +95,12 @@ export interface FileRoutesByFullPath {
   '/blogs': typeof BlogsRouteWithChildren
   '/careers': typeof CareersRoute
   '/clients': typeof ClientsRoute
+  '/consulting': typeof ConsultingRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
+  '/talent': typeof TalentRoute
+  '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/blogs/$slug': typeof BlogsSlugRoute
 }
@@ -89,9 +110,12 @@ export interface FileRoutesByTo {
   '/blogs': typeof BlogsRouteWithChildren
   '/careers': typeof CareersRoute
   '/clients': typeof ClientsRoute
+  '/consulting': typeof ConsultingRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
+  '/talent': typeof TalentRoute
+  '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/blogs/$slug': typeof BlogsSlugRoute
 }
@@ -102,9 +126,12 @@ export interface FileRoutesById {
   '/blogs': typeof BlogsRouteWithChildren
   '/careers': typeof CareersRoute
   '/clients': typeof ClientsRoute
+  '/consulting': typeof ConsultingRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
+  '/talent': typeof TalentRoute
+  '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/blogs/$slug': typeof BlogsSlugRoute
 }
@@ -116,9 +143,12 @@ export interface FileRouteTypes {
     | '/blogs'
     | '/careers'
     | '/clients'
+    | '/consulting'
     | '/contact'
     | '/privacy'
     | '/services'
+    | '/talent'
+    | '/team'
     | '/terms'
     | '/blogs/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -128,9 +158,12 @@ export interface FileRouteTypes {
     | '/blogs'
     | '/careers'
     | '/clients'
+    | '/consulting'
     | '/contact'
     | '/privacy'
     | '/services'
+    | '/talent'
+    | '/team'
     | '/terms'
     | '/blogs/$slug'
   id:
@@ -140,9 +173,12 @@ export interface FileRouteTypes {
     | '/blogs'
     | '/careers'
     | '/clients'
+    | '/consulting'
     | '/contact'
     | '/privacy'
     | '/services'
+    | '/talent'
+    | '/team'
     | '/terms'
     | '/blogs/$slug'
   fileRoutesById: FileRoutesById
@@ -153,9 +189,12 @@ export interface RootRouteChildren {
   BlogsRoute: typeof BlogsRouteWithChildren
   CareersRoute: typeof CareersRoute
   ClientsRoute: typeof ClientsRoute
+  ConsultingRoute: typeof ConsultingRoute
   ContactRoute: typeof ContactRoute
   PrivacyRoute: typeof PrivacyRoute
   ServicesRoute: typeof ServicesRoute
+  TalentRoute: typeof TalentRoute
+  TeamRoute: typeof TeamRoute
   TermsRoute: typeof TermsRoute
 }
 
@@ -196,6 +235,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClientsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/consulting': {
+      id: '/consulting'
+      path: '/consulting'
+      fullPath: '/consulting'
+      preLoaderRoute: typeof ConsultingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -215,6 +261,20 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talent': {
+      id: '/talent'
+      path: '/talent'
+      fullPath: '/talent'
+      preLoaderRoute: typeof TalentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -250,9 +310,12 @@ const rootRouteChildren: RootRouteChildren = {
   BlogsRoute: BlogsRouteWithChildren,
   CareersRoute: CareersRoute,
   ClientsRoute: ClientsRoute,
+  ConsultingRoute: ConsultingRoute,
   ContactRoute: ContactRoute,
   PrivacyRoute: PrivacyRoute,
   ServicesRoute: ServicesRoute,
+  TalentRoute: TalentRoute,
+  TeamRoute: TeamRoute,
   TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
