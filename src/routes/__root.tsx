@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { Navbar, Footer } from '@/components/corporate/sections';
+import { FloatingActions } from '@/components/corporate/FloatingActions';
 import { LenisProvider } from '@/components/corporate/LenisProvider';
 
 function NotFoundComponent() {
@@ -137,6 +138,7 @@ function RootComponent() {
         <Navbar />
         <main className="min-h-screen bg-white"><Outlet /></main>
         <Footer />
+        <FloatingActions />
       </LenisProvider>
     </QueryClientProvider>
   );
