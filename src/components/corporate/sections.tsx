@@ -75,9 +75,9 @@ const nav = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Services', to: '/services' },
-  { label: 'Consulting', to: '/consulting' },
-  { label: 'Talent', to: '/talent' },
-  { label: 'Our Team', to: '/team' },
+  { label: 'Consulting', to: '/services' },
+  { label: 'Talent', to: '/careers' },
+  { label: 'Our Team', to: '/about' },
   { label: 'Clients', to: '/clients' },
   { label: 'Careers', to: '/careers' },
   { label: 'Contact', to: '/contact' },
@@ -187,7 +187,7 @@ export function Hero() {
       {/* Background Gradients & Transparent Grid Texture */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_-100px,rgba(215,25,42,0.04),transparent)]" />
       <div className="pointer-events-none absolute -left-40 top-1/4 size-96 rounded-full bg-red-500/5 blur-[130px]" />
-      <div className="pointer-events-none absolute -right-40 bottom-1/4 size-96 rounded-full bg-sky-500/5 blur-[130px]" />
+      <div className="pointer-events-none absolute -right-40 bottom-1/4 size-96 rounded-full bg-red-500/5 blur-[130px]" />
 
       <div className="site-container relative z-10">
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-8 items-center">
@@ -816,7 +816,7 @@ export function ProvenApproachSection() {
 export function Clients({ full = false }: { full?: boolean }) {
   return (
     <section id="clients" className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_50%_0%,rgba(2,132,199,0.06),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_50%_0%,rgba(215,25,42,0.04),transparent_60%)]" />
       <div className="site-container relative z-10">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-3xl text-left">
@@ -859,7 +859,7 @@ export function Careers({ full = false }: { full?: boolean }) {
 
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(2,132,199,0.05),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(215,25,42,0.04),transparent_60%)]" />
       <div className="site-container relative z-10 space-y-8 sm:space-y-10">
         {/* Intro */}
         <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
@@ -889,7 +889,7 @@ export function Careers({ full = false }: { full?: boolean }) {
             <div className="mt-5 space-y-2.5">
               {careersBenefits.map((b) => (
                 <div key={b.title} className="flex items-start gap-2.5">
-                  <div className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-sky-50 border border-sky-200 text-sky-600 mt-0.5">
+                  <div className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-red-50 border border-red-200 text-[#d7192a] mt-0.5">
                     <Check className="size-3.5" />
                   </div>
                   <div>
@@ -902,7 +902,7 @@ export function Careers({ full = false }: { full?: boolean }) {
             {!full && (
               <Button
                 asChild
-                className="mt-6 h-11 rounded-xl bg-slate-100 border border-slate-200 px-6 text-xs font-bold text-slate-900 hover:bg-slate-200 hover:border-sky-400 transition-all"
+                className="mt-6 h-11 rounded-xl bg-slate-100 border border-slate-200 px-6 text-xs font-bold text-slate-900 hover:bg-slate-200 hover:border-red-400 transition-all"
               >
                 <Link to="/careers">
                   View Open Positions ({careersJobs.length}) <ArrowRight className="size-4 ml-2" />
@@ -931,8 +931,8 @@ export function Careers({ full = false }: { full?: boolean }) {
                   onClick={() => setSelectedDept(dept)}
                   className={`rounded-xl px-4 py-2 text-xs font-semibold transition ${
                     selectedDept === dept
-                      ? 'border border-sky-500 bg-sky-50 text-sky-700 shadow-sm'
-                      : 'border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900'
+                      ? 'border border-[#d7192a] bg-[#d7192a] text-white shadow-sm'
+                      : 'border border-slate-200/90 bg-white text-slate-600 hover:border-red-200 hover:text-[#d7192a]'
                   }`}
                 >
                   {dept}
@@ -945,18 +945,18 @@ export function Careers({ full = false }: { full?: boolean }) {
               {filteredJobs.map((job) => (
                 <article
                   key={job.title}
-                  className="glass-card flex flex-col justify-between p-6 bg-white/95 border-slate-200/90 hover:border-sky-400 hover:shadow-xl transition-all"
+                  className="glass-card flex flex-col justify-between p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl transition-all"
                 >
                   <div>
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span className="rounded-md border border-sky-200 bg-sky-50 px-2.5 py-1 text-[11px] font-bold text-sky-700">
+                      <span className="rounded-md border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] font-bold text-[#d7192a]">
                         {job.dept}
                       </span>
                       <span className="text-xs font-medium text-slate-500">{job.type}</span>
                     </div>
                     <h4 className="mt-3 text-lg font-bold text-slate-900">{job.title}</h4>
                     <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
-                      <MapPin className="size-3.5 text-sky-600" /> {job.location}
+                      <MapPin className="size-3.5 text-[#d7192a]" /> {job.location}
                     </p>
                     <p className="mt-2.5 text-xs leading-relaxed text-slate-600">{job.desc}</p>
                   </div>
@@ -964,7 +964,7 @@ export function Careers({ full = false }: { full?: boolean }) {
                     <Button
                       asChild
                       size="sm"
-                      className="rounded-xl bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-500 hover:to-cyan-500 text-white font-bold text-xs shadow-md shadow-sky-500/20"
+                      className="rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs shadow-md shadow-red-500/20"
                     >
                       <a
                         href={`mailto:${companyInfo.email}?subject=Application for ${encodeURIComponent(job.title)} (${encodeURIComponent(job.location)})`}
@@ -979,7 +979,7 @@ export function Careers({ full = false }: { full?: boolean }) {
             </div>
 
             {/* General Application Banner */}
-            <div className="glass-card p-6 sm:p-10 text-center border-slate-200/90 bg-gradient-to-b from-sky-50/50 to-white shadow-lg">
+            <div className="glass-card p-6 sm:p-10 text-center border-slate-200/90 bg-gradient-to-b from-red-50/30 to-white shadow-lg">
               <h4 className="text-2xl font-bold text-slate-900">Don’t see the right fit?</h4>
               <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm text-slate-600">
                 Send us your resume anyway and we will keep you in mind for future roles across our global teams.
@@ -1003,7 +1003,7 @@ export function Careers({ full = false }: { full?: boolean }) {
 export function Blogs({ full = false }: { full?: boolean }) {
   return (
     <section className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-t border-slate-200/80 bg-grid-pattern">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_50%_0%,rgba(2,132,199,0.06),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_50%_0%,rgba(215,25,42,0.04),transparent_60%)]" />
       <div className="site-container relative z-10">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-5">
           <div>
@@ -1011,7 +1011,7 @@ export function Blogs({ full = false }: { full?: boolean }) {
             <h2 className="section-title mt-2">Industry Insights &amp; Innovation.</h2>
           </div>
           {!full && (
-            <Button asChild variant="link" className="px-0 text-xs font-bold text-sky-600 hover:text-sky-800">
+            <Button asChild variant="link" className="px-0 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c]">
               <Link to="/blogs">
                 View all articles <ArrowRight className="size-4 ml-1" />
               </Link>
@@ -1020,7 +1020,7 @@ export function Blogs({ full = false }: { full?: boolean }) {
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {articles.map((article) => (
-            <article className="glass-card overflow-hidden flex flex-col justify-between bg-white/95 border-slate-200/90 hover:border-sky-400 hover:shadow-xl transition-all" key={article.slug}>
+            <article className="glass-card overflow-hidden flex flex-col justify-between bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl transition-all" key={article.slug}>
               <div>
                 <Link to="/blogs/$slug" params={{ slug: article.slug }}>
                   <img
@@ -1033,10 +1033,10 @@ export function Blogs({ full = false }: { full?: boolean }) {
                   />
                 </Link>
                 <div className="p-5">
-                  <p className="text-[10px] font-bold tracking-wider text-sky-600 uppercase">
+                  <p className="text-[10px] font-bold tracking-wider text-[#d7192a] uppercase">
                     {article.category}
                   </p>
-                  <h3 className="mt-2 text-base font-bold text-slate-900 leading-snug hover:text-sky-600 transition">
+                  <h3 className="mt-2 text-base font-bold text-slate-900 leading-snug hover:text-[#d7192a] transition">
                     <Link to="/blogs/$slug" params={{ slug: article.slug }}>
                       {article.title}
                     </Link>
@@ -1047,7 +1047,7 @@ export function Blogs({ full = false }: { full?: boolean }) {
                 </div>
               </div>
               <div className="p-5 pt-0">
-                <Button asChild variant="link" className="h-auto p-0 text-xs font-bold text-sky-600 hover:text-sky-800">
+                <Button asChild variant="link" className="h-auto p-0 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c]">
                   <Link to="/blogs/$slug" params={{ slug: article.slug }}>
                     Read Article <ArrowUpRight className="size-3.5 ml-1" />
                   </Link>
@@ -1152,7 +1152,7 @@ export function ContactForm() {
 
       <Button
         type="submit"
-        className="h-11 w-fit rounded-xl bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-500 hover:to-cyan-500 px-7 text-xs font-bold text-white shadow-md shadow-sky-500/20"
+        className="h-11 w-fit rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] px-7 text-xs font-bold text-white shadow-md shadow-red-500/20"
       >
         Submit Request <ArrowUpRight className="size-4 ml-1" />
       </Button>
@@ -1170,7 +1170,7 @@ export function ContactForm() {
 export function Contact() {
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_20%_20%,rgba(2,132,199,0.06),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_20%_20%,rgba(215,25,42,0.04),transparent_60%)]" />
       <div className="site-container relative z-10 grid gap-8 lg:grid-cols-2 items-start">
         <div>
           <p className="eyebrow">START A CONVERSATION</p>
@@ -1181,51 +1181,51 @@ export function Contact() {
           </p>
 
           <div className="mt-6 space-y-4">
-            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-sky-400 hover:shadow-md transition-all">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-sky-200 bg-sky-50 text-sky-600">
+            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
                 <MapPin className="size-5" />
               </div>
               <div>
                 <h3 className="text-sm font-bold text-slate-900">USA Head Office</h3>
                 <p className="text-xs text-slate-600 mt-1">{companyInfo.headOffice.fullAddress}</p>
-                <p className="text-[11px] font-semibold text-sky-600 mt-1 uppercase tracking-wider">
+                <p className="text-[11px] font-semibold text-[#d7192a] mt-1 uppercase tracking-wider">
                   Branch Hubs: {companyInfo.branchOffices}
                 </p>
               </div>
             </div>
 
-            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-sky-400 hover:shadow-md transition-all">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-sky-200 bg-sky-50 text-sky-600">
+            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
                 <Mail className="size-5" />
               </div>
               <div>
                 <h3 className="text-sm font-bold text-slate-900">Corporate Email</h3>
                 <a
                   href={`mailto:${companyInfo.email}`}
-                  className="text-xs text-slate-700 hover:text-sky-600 transition mt-1 block font-mono"
+                  className="text-xs text-slate-700 hover:text-[#d7192a] transition mt-1 block font-mono"
                 >
                   {companyInfo.email}
                 </a>
               </div>
             </div>
 
-            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-sky-400 hover:shadow-md transition-all">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-sky-200 bg-sky-50 text-sky-600">
+            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
                 <Phone className="size-5" />
               </div>
               <div>
                 <h3 className="text-sm font-bold text-slate-900">Phone Support</h3>
                 <a
                   href={`tel:${companyInfo.phone.replace(/[^0-9+]/g, '')}`}
-                  className="text-xs text-slate-700 hover:text-sky-600 transition mt-1 block font-mono"
+                  className="text-xs text-slate-700 hover:text-[#d7192a] transition mt-1 block font-mono"
                 >
                   {companyInfo.phone}
                 </a>
               </div>
             </div>
 
-            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-sky-400 hover:shadow-md transition-all">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-sky-200 bg-sky-50 text-sky-600">
+            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
                 <Clock className="size-5" />
               </div>
               <div>
@@ -1359,7 +1359,7 @@ export const socialChannels = [
 export function OfficialSocialChannels({ className = '' }: { className?: string }) {
   return (
     <div className={`space-y-2.5 ${className}`}>
-      <p className="text-[11px] font-bold uppercase tracking-wider text-sky-600">
+      <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
         Official Social Channels
       </p>
       <div className="flex flex-wrap items-center gap-2.5">
@@ -1421,9 +1421,9 @@ export function Footer() {
             <div className="mt-4 flex flex-col gap-2.5 text-xs sm:text-[13px] text-slate-600">
               <Link to="/about" className="hover:text-[#d7192a] transition-colors">About Us</Link>
               <Link to="/services" className="hover:text-[#d7192a] transition-colors">Our Services</Link>
-              <Link to="/consulting" className="hover:text-[#d7192a] transition-colors">Consulting</Link>
-              <Link to="/talent" className="hover:text-[#d7192a] transition-colors">IT &amp; Non-IT Talent</Link>
-              <Link to="/team" className="hover:text-[#d7192a] transition-colors">Our Team</Link>
+              <Link to="/services" className="hover:text-[#d7192a] transition-colors">Consulting</Link>
+              <Link to="/careers" className="hover:text-[#d7192a] transition-colors">IT &amp; Non-IT Talent</Link>
+              <Link to="/about" className="hover:text-[#d7192a] transition-colors">Our Team</Link>
               <Link to="/careers" className="hover:text-[#d7192a] transition-colors">Careers</Link>
               <Link to="/clients" className="hover:text-[#d7192a] transition-colors">Clients</Link>
               <Link to="/contact" className="hover:text-[#d7192a] transition-colors">Contact Us</Link>

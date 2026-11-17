@@ -139,7 +139,7 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #0284c7;
+  color: #d7192a;
   text-align: left;
 }
 
@@ -261,8 +261,8 @@ section[id] {
 
 .contact-field:focus {
   outline: none;
-  border-color: #0284c7;
-  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+  border-color: #d7192a;
+  box-shadow: 0 0 0 3px rgba(215, 25, 42, 0.15);
   background: #ffffff;
 }
 

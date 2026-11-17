@@ -272,8 +272,8 @@ export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[
           const px = (1 - t) * (1 - t) * h1.px + 2 * (1 - t) * t * midX + t * t * h2.px;
           const py = (1 - t) * (1 - t) * h1.py + 2 * (1 - t) * t * midY + t * t * h2.py;
 
-          ctx.fillStyle = '#0284c7';
-          ctx.shadowColor = 'rgba(2, 132, 199, 0.8)';
+          ctx.fillStyle = '#d7192a';
+          ctx.shadowColor = 'rgba(215, 25, 42, 0.8)';
           ctx.shadowBlur = 8;
           ctx.beginPath();
           ctx.arc(px, py, 2.5, 0, Math.PI * 2);
@@ -290,15 +290,15 @@ export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[
 
           // Pulse ring
           const ringSize = size + (Math.sin(pulseTime * 3) + 1) * 3;
-          ctx.strokeStyle = isHq ? 'rgba(215, 25, 42, 0.8)' : 'rgba(2, 132, 199, 0.8)';
+          ctx.strokeStyle = isHq ? 'rgba(215, 25, 42, 0.9)' : 'rgba(215, 25, 42, 0.5)';
           ctx.lineWidth = 1.5;
           ctx.beginPath();
           ctx.arc(hub.px, hub.py, ringSize, 0, Math.PI * 2);
           ctx.stroke();
 
           // Hub dot
-          ctx.fillStyle = isHq ? '#d7192a' : '#0284c7';
-          ctx.shadowColor = isHq ? '#d7192a' : '#0284c7';
+          ctx.fillStyle = isHq ? '#d7192a' : '#ef4444';
+          ctx.shadowColor = isHq ? '#d7192a' : '#ef4444';
           ctx.shadowBlur = 10;
           ctx.beginPath();
           ctx.arc(hub.px, hub.py, size, 0, Math.PI * 2);
@@ -334,8 +334,8 @@ export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[
   return (
     <div className={`relative flex items-center justify-center select-none ${className}`}>
       <canvas ref={canvasRef} className="cursor-grab active:cursor-grabbing w-full h-full block" />
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full border border-cyan-500/30 bg-[#040916]/80 px-3.5 py-1 text-[10px] font-semibold text-cyan-300 backdrop-blur-md shadow-lg pointer-events-none">
-        <span className="size-1.5 rounded-full bg-cyan-400 animate-pulse" />
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full border border-red-500/30 bg-[#0b0c10]/80 px-3.5 py-1 text-[10px] font-semibold text-red-200 backdrop-blur-md shadow-lg pointer-events-none">
+        <span className="size-1.5 rounded-full bg-red-400 animate-pulse" />
         Interactive 3D Network • Drag to Rotate
       </div>
     </div>

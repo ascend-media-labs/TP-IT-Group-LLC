@@ -66,17 +66,17 @@ export function ServiceCard3D({
           transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
           transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.5s ease-out',
         }}
-        className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white/95 p-8 shadow-sm backdrop-blur-xl transition-all duration-500 hover:border-sky-400 hover:shadow-xl hover:shadow-sky-500/10"
+        className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white/95 p-8 shadow-sm backdrop-blur-xl transition-all duration-500 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/5"
       >
         {/* Glow ambient highlight */}
         <div
-          className="pointer-events-none absolute -right-20 -top-20 size-48 rounded-full bg-sky-500/10 blur-3xl transition-opacity duration-500 group-hover:opacity-100 opacity-30"
+          className="pointer-events-none absolute -right-20 -top-20 size-48 rounded-full bg-red-500/5 blur-3xl transition-opacity duration-500 group-hover:opacity-100 opacity-30"
         />
 
         <div>
           {/* Card Top: Icon & Number */}
           <div className="flex items-center justify-between">
-            <div className="flex size-14 items-center justify-center rounded-2xl border border-sky-200 bg-sky-50 text-sky-600 transition-all duration-300 group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-sky-500 group-hover:to-cyan-500 group-hover:text-white group-hover:border-transparent shadow-xs">
+            <div className="flex size-14 items-center justify-center rounded-2xl border border-red-200 bg-red-50 text-[#d7192a] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-transparent shadow-xs">
               {icon}
             </div>
             <span className="font-mono text-xs font-bold text-slate-400 tracking-wider">
@@ -85,7 +85,7 @@ export function ServiceCard3D({
           </div>
 
           {/* Title & Description */}
-          <h3 className="mt-6 text-xl font-extrabold text-slate-900 group-hover:text-sky-600 transition-colors">
+          <h3 className="mt-6 text-xl font-extrabold text-slate-900 group-hover:text-[#d7192a] transition-colors">
             {title}
           </h3>
           <p className="mt-3 text-xs sm:text-sm leading-relaxed text-slate-600">
@@ -101,7 +101,7 @@ export function ServiceCard3D({
               <ul className="grid gap-2 sm:grid-cols-2 mt-2">
                 {offers.map((offer) => (
                   <li key={offer} className="flex items-start gap-2 text-xs text-slate-600">
-                    <Check className="size-3.5 mt-0.5 shrink-0 text-sky-600" />
+                    <Check className="size-3.5 mt-0.5 shrink-0 text-[#d7192a]" />
                     <span>{offer}</span>
                   </li>
                 ))}
@@ -114,7 +114,7 @@ export function ServiceCard3D({
         <div className="mt-8 pt-5 border-t border-slate-100 flex items-center justify-between">
           <Link
             to={isDetailed ? '/contact' : '/services'}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-sky-600 hover:text-sky-800 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
           >
             {isDetailed ? 'Request Consultation' : 'Explore Capabilities'}
             <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

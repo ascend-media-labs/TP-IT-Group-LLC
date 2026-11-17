@@ -14,7 +14,7 @@ export function ClientMarquee() {
         {logos.map((client, idx) => (
           <div
             key={`${client.name}-${idx}`}
-            className="group flex h-20 w-44 shrink-0 items-center justify-center rounded-2xl border border-slate-200/90 bg-white p-4 shadow-xs backdrop-blur-md transition-all duration-300 hover:border-sky-400 hover:shadow-lg hover:shadow-sky-500/10"
+            className="group flex h-20 w-44 shrink-0 items-center justify-center rounded-2xl border border-slate-200/90 bg-white p-4 shadow-xs backdrop-blur-md transition-all duration-300 hover:border-red-300 hover:shadow-lg hover:shadow-red-500/5"
           >
             <img
               src={client.src}

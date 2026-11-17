@@ -105,18 +105,18 @@ export function GlobalPresence() {
   return (
     <section className="relative overflow-hidden py-12 sm:py-16 bg-slate-50/70 text-slate-900 border-y border-slate-200/80">
       {/* Ambient background glow & transparent grid texture */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(2,132,199,0.08),transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(215,25,42,0.05),transparent_70%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.04)_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
 
       <div className="site-container relative z-10">
         <div className="max-w-3xl text-left">
-          <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-sky-700 shadow-xs backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-[#d7192a] shadow-xs backdrop-blur-md">
             <Globe2 className="size-3.5" />
             Global Presence &amp; Operations
           </div>
           <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
             A Follow-the-Sun Infrastructure Across{' '}
-            <span className="bg-gradient-to-r from-sky-600 to-cyan-600 bg-clip-text text-transparent">
+            <span className="text-[#d7192a]">
               5 Continents
             </span>
           </h2>
@@ -134,14 +134,14 @@ export function GlobalPresence() {
               onClick={() => setSelectedHub(hub)}
               className={`relative rounded-xl px-4 py-2.5 text-xs font-semibold transition-all duration-300 backdrop-blur-md ${
                 selectedHub.id === hub.id
-                  ? 'border border-sky-500 bg-sky-50 text-sky-700 shadow-sm shadow-sky-500/15 font-bold'
-                  : 'border border-slate-200/90 bg-white/90 text-slate-600 hover:border-slate-300 hover:text-slate-900'
+                  ? 'border border-[#d7192a] bg-[#d7192a] text-white shadow-sm shadow-red-500/15 font-bold'
+                  : 'border border-slate-200/90 bg-white/90 text-slate-600 hover:border-red-200 hover:text-[#d7192a]'
               }`}
             >
               <div className="flex items-center gap-2">
                 <span
                   className={`size-2 rounded-full ${
-                    selectedHub.id === hub.id ? 'bg-sky-500 animate-pulse' : 'bg-emerald-500'
+                    selectedHub.id === hub.id ? 'bg-white animate-pulse' : 'bg-emerald-500'
                   }`}
                 />
                 <span>{hub.country}</span>
@@ -161,7 +161,7 @@ export function GlobalPresence() {
           <div className="grid gap-10 lg:grid-cols-12 items-center">
             <div className="lg:col-span-7 space-y-6">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="rounded-full bg-sky-50 border border-sky-200 px-3.5 py-1 text-xs font-bold text-sky-700">
+                <span className="rounded-full bg-red-50 border border-red-200 px-3.5 py-1 text-xs font-bold text-[#d7192a]">
                   {selectedHub.country}
                 </span>
                 <span className="text-xs font-semibold text-slate-500">
@@ -174,7 +174,7 @@ export function GlobalPresence() {
                   {selectedHub.city}
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 flex items-center gap-2">
-                  <MapPin className="size-4 shrink-0 text-sky-600" />
+                  <MapPin className="size-4 shrink-0 text-[#d7192a]" />
                   {selectedHub.address}
                 </p>
               </div>
@@ -182,7 +182,7 @@ export function GlobalPresence() {
               <div className="grid grid-cols-2 gap-4 border-y border-slate-100 py-5">
                 <div>
                   <div className="flex items-center gap-2 text-xs font-medium text-slate-500">
-                    <Clock className="size-3.5 text-sky-600" /> Local Hub Time
+                    <Clock className="size-3.5 text-[#d7192a]" /> Local Hub Time
                   </div>
                   <div className="mt-1 font-mono text-xl font-bold text-slate-900 tabular-nums">
                     {times[selectedHub.id] || '24/7 Active'}
@@ -215,11 +215,11 @@ export function GlobalPresence() {
 
             {/* Quick Stat Visual / Network Node Visual */}
             <div className="lg:col-span-5">
-              <div className="relative overflow-hidden rounded-2xl border border-cyan-500/20 bg-gradient-to-tr from-[#020b1e] via-[#051433] to-[#040f28] p-8 shadow-inner">
-                <div className="absolute top-0 right-0 -mr-12 -mt-12 size-40 rounded-full bg-cyan-500/15 blur-3xl" />
+              <div className="relative overflow-hidden rounded-2xl border border-red-500/20 bg-gradient-to-tr from-[#0b0c10] via-[#16181d] to-[#0f1117] p-8 shadow-inner">
+                <div className="absolute top-0 right-0 -mr-12 -mt-12 size-40 rounded-full bg-red-500/15 blur-3xl" />
                 <div className="relative z-10 space-y-5">
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#00D1FF]">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
                       GLOBAL NETWORK
                     </span>
                     <span className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-400">
@@ -239,7 +239,7 @@ export function GlobalPresence() {
                     </div>
                     <div className="flex items-center justify-between text-xs border-b border-white/10 pb-2">
                       <span className="text-zinc-400">SLA Availability</span>
-                      <span className="font-bold text-[#00D1FF]">99.99% Continuous</span>
+                      <span className="font-bold text-red-400">99.99% Continuous</span>
                     </div>
                     <div className="flex items-center justify-between text-xs pb-1">
                       <span className="text-zinc-400">IP Transfer</span>
@@ -249,7 +249,7 @@ export function GlobalPresence() {
 
                   <a
                     href={`mailto:${companyInfo.email}?subject=Inquiry for ${selectedHub.country} Operations`}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#00D1FF] to-[#05a2c9] px-4 py-3 text-xs font-bold text-black shadow-lg shadow-cyan-500/20 transition hover:opacity-95"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] px-4 py-3 text-xs font-bold text-white shadow-lg shadow-red-500/20 transition hover:opacity-95"
                   >
                     Contact {selectedHub.country} Center <ArrowUpRight className="size-4" />
                   </a>
