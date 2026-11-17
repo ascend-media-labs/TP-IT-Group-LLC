@@ -200,6 +200,10 @@ p,
   position: relative;
 }
 
+section[id] {
+  scroll-margin-top: 86px;
+}
+
 @media (min-width: 768px) {
   .section {
     padding-block: 54px;

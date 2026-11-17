@@ -26,16 +26,27 @@ export const Route = createFileRoute('/')({
 function Index() {
   return (
     <>
+      {/* 1. Home */}
       <Hero />
       <StatsSection />
-      <ConnectedCapabilitiesSection />
-      <Services />
+
+      {/* 2. About */}
       <About />
       <IndustriesSection />
       <WhyChooseUsSection />
+
+      {/* 3. Services */}
+      <Services />
+
+      {/* 4. Consulting & 5. Talent */}
+      <ConnectedCapabilitiesSection />
       <WorkWithSection />
       <ProvenApproachSection />
+
+      {/* 6. Clients */}
       <Clients />
+
+      {/* 7. Contact */}
       <ContactBanner />
     </>
   );

@@ -183,7 +183,7 @@ const capabilityTags = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-8 pb-10 md:py-14 bg-white text-slate-900 bg-dot-pattern">
+    <section id="home" className="relative overflow-hidden pt-8 pb-10 md:py-14 bg-white text-slate-900 bg-dot-pattern">
       {/* Background Gradients & Transparent Grid Texture */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_-100px,rgba(215,25,42,0.04),transparent)]" />
       <div className="pointer-events-none absolute -left-40 top-1/4 size-96 rounded-full bg-red-500/5 blur-[130px]" />
@@ -328,7 +328,7 @@ export function ConnectedCapabilitiesSection() {
   ];
 
   return (
-    <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
+    <section id="consulting" className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
       <div className="site-container relative z-10">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
@@ -416,7 +416,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
   ];
 
   return (
-    <section className="section bg-white text-slate-900 bg-dot-pattern">
+    <section id="about" className="section bg-white text-slate-900 bg-dot-pattern">
       <div className="site-container space-y-8 sm:space-y-10">
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Left Text */}
@@ -562,7 +562,7 @@ export function Services({ full = false }: { full?: boolean }) {
   ];
 
   return (
-    <section className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
+    <section id="services" className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(215,25,42,0.03),transparent_70%)]" />
 
       <div className="site-container relative z-10">
@@ -738,7 +738,7 @@ export function WhyChooseUsSection() {
 
 export function WorkWithSection() {
   return (
-    <section className="section relative overflow-hidden bg-white text-slate-900 border-t border-slate-200/80 bg-dot-pattern">
+    <section id="talent" className="section relative overflow-hidden bg-white text-slate-900 border-t border-slate-200/80 bg-dot-pattern">
       <div className="site-container relative z-10">
         <div className="mb-6 max-w-2xl text-left">
           <p className="eyebrow text-[#d7192a]">WORK WITH TP IT GROUP</p>
@@ -817,7 +817,7 @@ export function ProvenApproachSection() {
 
 export function Clients({ full = false }: { full?: boolean }) {
   return (
-    <section className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
+    <section id="clients" className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_50%_0%,rgba(2,132,199,0.06),transparent_60%)]" />
       <div className="site-container relative z-10">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-6">
@@ -1253,7 +1253,7 @@ export function Contact() {
 
 export function ContactBanner() {
   return (
-    <section className="relative overflow-hidden border-t border-slate-200/80 bg-white py-14 sm:py-16 text-slate-900 bg-dot-pattern">
+    <section id="contact" className="relative overflow-hidden border-t border-slate-200/80 bg-white py-14 sm:py-16 text-slate-900 bg-dot-pattern">
       <div className="site-container relative z-10 flex flex-col items-center text-center">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
           Ready to Transform <span className="text-[#d7192a]">Your Business</span>?
