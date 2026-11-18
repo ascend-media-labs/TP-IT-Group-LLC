@@ -207,7 +207,7 @@ export function Hero() {
     <section
       id="home"
       aria-label="TP IT Group Hero"
-      className="relative overflow-hidden pt-2 pb-6 sm:pt-4 sm:pb-8 md:pt-4 md:pb-10 bg-white text-slate-900 bg-dot-pattern"
+      className="relative overflow-hidden pt-1 pb-4 sm:pt-2 sm:pb-5 md:pt-2 md:pb-6 bg-white text-slate-900 bg-dot-pattern"
     >
       {/* Executive Hero Banner Background */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
@@ -219,7 +219,7 @@ export function Hero() {
         />
         {/* Soft readability vignette for text side */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 via-white/55 to-white/20 sm:from-white/95 sm:via-white/85 sm:to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent" />
       </div>
 
       {/* Background Gradients & Ambient Glows */}
@@ -228,7 +228,7 @@ export function Hero() {
       <div className="pointer-events-none absolute -right-40 bottom-1/4 size-96 rounded-full bg-red-500/5 blur-[130px]" />
 
       <div className="site-container relative z-10">
-        <div className="grid gap-6 lg:grid-cols-12 lg:gap-8 items-center min-h-[460px] sm:min-h-[490px] md:min-h-[520px]">
+        <div className="grid gap-6 lg:grid-cols-12 lg:gap-8 items-center pt-1 pb-2 sm:pt-2 sm:pb-3">
           {/* Left Column: Text & CTA */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             <motion.p
@@ -244,7 +244,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mt-3 sm:mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-[60px] font-extrabold tracking-tight text-slate-900 leading-[1.12]"
+              className="mt-2.5 sm:mt-3 text-4xl sm:text-5xl md:text-6xl lg:text-[58px] font-extrabold tracking-tight text-slate-900 leading-[1.12]"
             >
               One partner.
               <br />
@@ -255,7 +255,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base md:text-lg font-normal leading-relaxed text-slate-600"
+              className="mt-2.5 sm:mt-3 max-w-2xl text-sm sm:text-base md:text-lg font-normal leading-relaxed text-slate-600"
             >
               Build smarter systems. Bring the right expertise. Move your business forward with connected technology,
               consulting and workforce solutions.
@@ -265,7 +265,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-5 sm:mt-6 flex flex-wrap justify-start gap-3.5 items-center"
+              className="mt-4 sm:mt-5 flex flex-wrap justify-start gap-3.5 items-center"
             >
               <Button
                 asChild
@@ -288,7 +288,7 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-3 sm:mt-4 text-xs sm:text-sm font-semibold text-[#d7192a]"
+              className="mt-2.5 sm:mt-3 text-xs sm:text-sm font-semibold text-[#d7192a]"
             >
               We deliver what you expect. We keep our promises.
             </motion.p>
@@ -299,9 +299,9 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 flex items-center justify-center relative min-h-[340px] sm:min-h-[400px]"
+            className="lg:col-span-5 flex items-center justify-center relative"
           >
-            <DigitalGlobe className="w-full h-[320px] sm:h-[380px] md:h-[420px] lg:h-[440px]" />
+            <DigitalGlobe className="w-full h-[300px] sm:h-[340px] md:h-[370px] lg:h-[390px]" />
           </motion.div>
         </div>
       </div>
