@@ -426,17 +426,7 @@ function Page() {
                 className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
               >
                 <div>
-                  {/* Top Row: Icon Leaf Badge & Sector Pill (Sample image style) */}
-                  <div className="flex items-center justify-between mb-3.5">
-                    <div className="flex size-11 items-center justify-center icon-diagonal bg-gradient-to-br from-[#d7192a] to-[#b91c1c] text-white shadow-md shadow-red-500/20">
-                      {ind.icon}
-                    </div>
-                    <span className="rounded-full bg-slate-100/90 border border-slate-200/80 px-3 py-1 font-mono text-[11px] font-semibold text-slate-700">
-                      Sector 0{i + 1}
-                    </span>
-                  </div>
-
-                  <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-4">
                     <img
                       src={ind.image}
                       alt={ind.name}
