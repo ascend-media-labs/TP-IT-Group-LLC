@@ -1343,9 +1343,41 @@ export function ContactForm() {
           <input
             name="phone"
             type="tel"
+            inputMode="numeric"
+            pattern="[0-9+]*"
             autoComplete="tel"
             value={formData.phone}
-            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            onKeyDown={(e) => {
+              // Allow control keys (backspace, delete, tab, arrows, copy/paste)
+              if (
+                [
+                  'Backspace',
+                  'Delete',
+                  'Tab',
+                  'Escape',
+                  'Enter',
+                  'ArrowLeft',
+                  'ArrowRight',
+                  'Home',
+                  'End',
+                ].includes(e.key) ||
+                (e.ctrlKey && ['a', 'c', 'v', 'x'].includes(e.key.toLowerCase())) ||
+                (e.metaKey && ['a', 'c', 'v', 'x'].includes(e.key.toLowerCase()))
+              ) {
+                return;
+              }
+              // Disallow non-numeric characters (allow numbers 0-9 and leading +)
+              if (!/^[0-9+]$/.test(e.key)) {
+                e.preventDefault();
+              }
+            }}
+            onChange={(e) => {
+              // Filter out any non-numeric character (allow + only if at the start)
+              const onlyNums = e.target.value
+                .replace(/[^\d+]/g, '')
+                .replace(/(?!^)\+/g, '');
+              setFormData({ ...formData, phone: onlyNums });
+            }}
             placeholder="+1 (814) 844-1361"
             className="contact-field mt-1.5"
           />
