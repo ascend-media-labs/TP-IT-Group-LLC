@@ -190,11 +190,11 @@ export function Hero() {
         <img
           src="/hero-banner.jpg"
           alt="TP IT Group Executive Team Collaboration & Strategy Meeting"
-          className="h-full w-full object-cover object-center opacity-55 sm:opacity-65"
+          className="h-full w-full object-cover object-center opacity-70 sm:opacity-80"
           loading="eager"
         />
-        {/* Soft readability vignette on left text side with reduced white fade */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/45 to-transparent sm:from-white/80 sm:via-white/35 sm:to-transparent" />
+        {/* Enhanced white fade vignette covering the marked left text region */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white/40 md:bg-none md:bg-[linear-gradient(to_right,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.94)_35%,rgba(255,255,255,0.78)_52%,rgba(255,255,255,0)_72%)]" />
         <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent" />
       </div>
 
