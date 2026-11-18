@@ -146,29 +146,11 @@ html {
   transition: all 0.2s ease;
 }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0px;
-  left: 12px;
-  right: 12px;
-  height: 2.5px;
-  background-color: transparent;
-  border-radius: 9999px;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  transform: scaleX(0);
-}
-
 .nav-link:hover {
   color: #d7192a;
   background: rgba(215, 25, 42, 0.04);
   box-shadow: none;
   transform: none;
-}
-
-.nav-link:hover::after {
-  background: linear-gradient(90deg, rgba(215, 25, 42, 0.3), rgba(255, 75, 92, 0.6), rgba(215, 25, 42, 0.3));
-  transform: scaleX(0.7);
 }
 
 .nav-link.active {
@@ -187,12 +169,6 @@ html {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-}
-
-.nav-link.active::after {
-  background: linear-gradient(90deg, #d7192a 0%, #ff4b5c 50%, #d7192a 100%);
-  box-shadow: 0 2px 8px rgba(215, 25, 42, 0.45);
-  transform: scaleX(1);
 }
 
 .eyebrow {
