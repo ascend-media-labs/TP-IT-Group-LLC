@@ -112,10 +112,10 @@ function Page() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: idx * 0.05 }}
-                className="group flex flex-col card-diagonal border border-slate-200/85 bg-white p-3 shadow-sm hover:shadow-lg hover:border-[#d7192a]/50 hover:-translate-y-1 transition-all duration-300"
+                className="group flex flex-col rounded-2xl border border-slate-200/85 bg-white p-3 shadow-sm hover:shadow-lg hover:border-[#d7192a]/50 hover:-translate-y-1 transition-all duration-300"
               >
                 {/* 3D Illustrated Avatar */}
-                <div className="relative aspect-[4/4.2] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100">
+                <div className="relative aspect-[4/4.2] w-full overflow-hidden rounded-xl bg-slate-100 border border-slate-100">
                   <img
                     src={leader.image}
                     alt={`${leader.name} - ${leader.role}`}

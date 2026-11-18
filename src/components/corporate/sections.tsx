@@ -381,10 +381,10 @@ export function ConnectedCapabilitiesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group glass-card card-diagonal flex flex-col justify-between p-5 sm:p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
+              className="group glass-card rounded-2xl flex flex-col justify-between p-5 sm:p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
             >
               <div>
-                <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-5">
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-100 border border-slate-100 shadow-inner mb-5">
                   <img
                     src={cap.image}
                     alt={cap.title}
@@ -392,7 +392,7 @@ export function ConnectedCapabilitiesSection() {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" />
-                  <div className="absolute top-2.5 left-2.5 flex size-10 items-center justify-center icon-diagonal bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10">
+                  <div className="absolute top-2.5 left-2.5 flex size-10 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10">
                     {capIcons[i % capIcons.length]}
                   </div>
                   <span className="absolute top-2.5 right-2.5 rounded-lg bg-black/40 backdrop-blur-md px-2 py-0.5 font-mono text-[11px] font-bold text-white z-10">
@@ -780,9 +780,9 @@ export function WhyChooseUsSection() {
 
         <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12 max-w-6xl">
           {/* Left Handshake Card */}
-          <div className="group lg:col-span-6 card-diagonal border border-red-100/90 bg-white p-6 sm:p-8 shadow-[0_4px_24px_rgba(215,25,42,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 flex flex-col justify-between min-h-[360px] h-full transition-all duration-300 text-left">
+          <div className="group lg:col-span-6 rounded-2xl border border-red-100/90 bg-white p-6 sm:p-8 shadow-[0_4px_24px_rgba(215,25,42,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 flex flex-col justify-between min-h-[360px] h-full transition-all duration-300 text-left">
             <div>
-              <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-6">
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-100 border border-slate-100 shadow-inner mb-6">
                 <img
                   src="/why-choose-us-partnership.jpg"
                   alt="We don't just deliver services — We build partnerships"
@@ -790,7 +790,7 @@ export function WhyChooseUsSection() {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/45 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
-                <div className="absolute top-3.5 left-3.5 flex size-11 items-center justify-center icon-diagonal bg-white/95 backdrop-blur-md text-[#d7192a] shadow-md border border-white/80">
+                <div className="absolute top-3.5 left-3.5 flex size-11 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-md border border-white/80">
                   <Handshake className="size-6 text-[#d7192a] stroke-[1.8]" />
                 </div>
               </div>

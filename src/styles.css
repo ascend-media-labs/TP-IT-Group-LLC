@@ -249,9 +249,9 @@ p,
   transform: translateY(-5px);
 }
 
-/* 3. Signature 4-Sides Edge Curve Cards (Executive Talks & Sample Reference) */
-.card-diagonal,
-.rounded-3xl.border {
+/* 3. Signature 4-Sides Edge Curve Cards (General Cards across website) */
+.rounded-3xl.border,
+.rounded-2xl.border {
   border-radius: 22px !important;
   background-color: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px) saturate(180%);
@@ -268,12 +268,38 @@ p,
   position: relative;
 }
 
+/* 4. Dedicated One-Diagonal Curve ONLY for Industries Cards (Executive Talks Reference) */
+.card-diagonal {
+  border-top-left-radius: 42px !important;
+  border-bottom-right-radius: 42px !important;
+  border-top-right-radius: 14px !important;
+  border-bottom-left-radius: 14px !important;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-color: rgba(226, 232, 240, 0.9);
+  box-shadow: 
+    0 4px 20px -2px rgba(15, 23, 42, 0.04),
+    0 2px 6px -1px rgba(15, 23, 42, 0.02),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.95);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
 .img-diagonal {
-  border-radius: 16px !important;
+  border-top-left-radius: 28px !important;
+  border-bottom-right-radius: 28px !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
 }
 
 .icon-diagonal {
-  border-radius: 12px !important;
+  border-top-left-radius: 16px !important;
+  border-bottom-right-radius: 16px !important;
+  border-top-right-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
 }
 
 .rounded-2xl.border {
