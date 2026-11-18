@@ -1579,7 +1579,7 @@ export function OfficeLocationsMapCard() {
             </div>
           </div>
 
-          <div className="relative mt-3 aspect-[16/9] w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 shadow-inner">
+          <div className="relative mt-3 h-[180px] sm:h-[200px] w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 shadow-inner">
             <iframe
               title="TP IT GROUP LLC USA Office Map"
               src="https://maps.google.com/maps?q=1000+N.+West+Street,+Suite+1200,+Wilmington,+Delaware,+19801&t=&z=15&ie=UTF8&iwloc=&output=embed"
@@ -1622,7 +1622,7 @@ export function OfficeLocationsMapCard() {
             </div>
           </div>
 
-          <div className="relative mt-3 aspect-[16/9] w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 shadow-inner">
+          <div className="relative mt-3 h-[180px] sm:h-[200px] w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 shadow-inner">
             <iframe
               title="TP IT GROUP PVT LTD India Office Map"
               src="https://maps.google.com/maps?q=Manjeera+Trinity+Corporate+Kukatpally+Hyderabad+Telangana+500072&t=&z=15&ie=UTF8&iwloc=&output=embed"
