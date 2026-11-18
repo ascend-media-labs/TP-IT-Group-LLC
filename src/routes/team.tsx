@@ -63,7 +63,7 @@ function Page() {
   return (
     <div className="bg-white text-slate-900">
       {/* 1. HERO BANNER (Image 1) */}
-      <section className="relative overflow-hidden pt-12 pb-10 sm:pt-16 sm:pb-14 bg-white border-b border-slate-200/80">
+      <section className="relative overflow-hidden pt-8 pb-6 sm:pt-10 sm:pb-8 bg-white border-b border-slate-200/80">
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
             src={team}
@@ -77,43 +77,45 @@ function Page() {
           <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             TP IT GROUP / OUR TEAM
           </p>
-          <h1 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+          <h1 className="mt-1 text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 leading-tight">
             Our Team
           </h1>
-          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <p className="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
             Leadership bringing together enterprise strategy, operational discipline, cloud architecture and engineering
             to support your next transformation.
           </p>
         </div>
       </section>
 
-      {/* 2. LEADERSHIP SHOWCASE (Images 2 & 3) */}
-      <section className="section bg-white text-slate-900 bg-dot-pattern">
+      {/* 2. LEADERSHIP SHOWCASE (Single row 5-card layout) */}
+      <section className="py-8 sm:py-10 bg-white text-slate-900 bg-dot-pattern">
         <div className="site-container">
-          <div className="text-left mb-8">
-            <span className="inline-block rounded-full bg-red-50/90 border border-red-200 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
-              OUR TEAM
-            </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
-              Leadership
-            </h2>
-            <p className="mt-1.5 text-xs text-slate-500">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-5 pb-3 border-b border-slate-100">
+            <div>
+              <span className="inline-block rounded-full bg-red-50/90 border border-red-200 px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+                OUR TEAM
+              </span>
+              <h2 className="mt-1 text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900">
+                Leadership
+              </h2>
+            </div>
+            <p className="mt-1 sm:mt-0 text-[11px] text-slate-400">
               Illustrated avatars — not actual portraits.
             </p>
           </div>
 
-          <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 lg:gap-3">
             {leaders.map((leader, idx) => (
               <motion.article
                 key={leader.name}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.08 }}
-                className="group flex flex-col rounded-3xl border border-slate-200/90 bg-white overflow-hidden shadow-sm hover:shadow-xl hover:border-red-200 transition-all duration-300"
+                transition={{ duration: 0.35, delay: idx * 0.05 }}
+                className="group flex flex-col rounded-2xl border border-slate-200/85 bg-white p-3 shadow-sm hover:shadow-lg hover:border-[#d7192a]/50 hover:-translate-y-1 transition-all duration-300"
               >
                 {/* 3D Illustrated Avatar */}
-                <div className="relative aspect-[4/5] sm:aspect-square w-full overflow-hidden bg-[#cdd1dc]/40 border-b border-slate-100">
+                <div className="relative aspect-[4/4.2] w-full overflow-hidden rounded-xl bg-slate-100 border border-slate-100">
                   <img
                     src={leader.image}
                     alt={`${leader.name} - ${leader.role}`}
@@ -123,16 +125,18 @@ function Page() {
                 </div>
 
                 {/* Leader Bio Info */}
-                <div className="p-6 sm:p-7 flex flex-col flex-grow text-left">
-                  <h3 className="text-xl font-bold text-slate-900">{leader.name}</h3>
-                  <p className="text-xs sm:text-[13px] font-bold text-[#d7192a] mt-1">
+                <div className="pt-3 pb-1 flex flex-col flex-grow text-left">
+                  <h3 className="text-sm sm:text-[15px] font-bold text-slate-900 leading-tight group-hover:text-[#d7192a] transition-colors">
+                    {leader.name}
+                  </h3>
+                  <p className="text-[11px] font-bold text-[#d7192a] mt-0.5 leading-snug">
                     {leader.role}
                   </p>
-                  <p className="text-xs font-medium text-slate-700 mt-3 leading-relaxed">
+                  <p className="text-[11px] font-medium text-slate-600 mt-1.5 leading-tight line-clamp-2">
                     {leader.subRole}
                   </p>
-                  <div className="my-4 border-t border-slate-100" />
-                  <p className="text-xs leading-relaxed text-slate-600 flex-grow">
+                  <div className="my-2 border-t border-slate-100" />
+                  <p className="text-[11px] leading-relaxed text-slate-500 line-clamp-3 flex-grow">
                     {leader.bio}
                   </p>
                 </div>
