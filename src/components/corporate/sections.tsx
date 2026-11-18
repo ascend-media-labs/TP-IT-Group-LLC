@@ -597,15 +597,15 @@ export function Services({ full = false }: { full?: boolean }) {
               className="group glass-card flex flex-col justify-between p-5 sm:p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300"
             >
               <div>
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner mb-5">
+                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner mb-5">
                   <img
                     src={service.image}
                     alt={service.title}
                     className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
-                  <div className="absolute top-3 left-3 flex size-10 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-md border border-white/80">
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" />
+                  <div className="absolute top-2.5 left-2.5 flex size-9 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10">
                     {serviceIcons[i % serviceIcons.length]}
                   </div>
                 </div>
