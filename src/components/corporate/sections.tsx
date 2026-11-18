@@ -151,7 +151,7 @@ export function Navbar() {
                 key={`mobile-${item.label}-${item.to}`}
                 to={item.to}
                 className="rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 hover:bg-red-50 hover:text-[#d7192a]"
-                activeProps={{ className: 'rounded-lg bg-red-50 px-3 py-2.5 text-sm font-bold text-[#d7192a]' }}
+                activeProps={{ className: 'rounded-xl bg-white/95 shadow-sm border border-slate-200/90 px-3 py-2.5 text-sm font-bold text-[#d7192a]' }}
                 activeOptions={{ exact: true }}
                 onClick={() => setOpen(false)}
               >
@@ -1014,11 +1014,10 @@ export function Careers({ full = false }: { full?: boolean }) {
                 <button
                   key={dept}
                   onClick={() => setSelectedDept(dept)}
-                  className={`rounded-xl px-4 py-2 text-xs font-semibold transition ${
-                    selectedDept === dept
-                      ? 'border border-[#d7192a] bg-[#d7192a] text-white shadow-sm'
-                      : 'border border-slate-200/90 bg-white text-slate-600 hover:border-red-200 hover:text-[#d7192a]'
-                  }`}
+                  className={`rounded-xl px-4 py-2 text-xs font-semibold transition ${selectedDept === dept
+                    ? 'border border-[#d7192a] bg-[#d7192a] text-white shadow-sm'
+                    : 'border border-slate-200/90 bg-white text-slate-600 hover:border-red-200 hover:text-[#d7192a]'
+                    }`}
                 >
                   {dept}
                 </button>
