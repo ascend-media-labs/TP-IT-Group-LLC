@@ -767,11 +767,11 @@ export function IndustriesSection() {
           {duplicatedIndustries.map((ind, idx) => (
             <div
               key={`${ind.name}-${idx}`}
-              className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-2xl hover:shadow-red-500/10 hover:-translate-y-1.5 transition-all duration-300 text-left w-[290px] sm:w-[340px] md:w-[370px] shrink-0 rounded-2xl"
+              className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-2xl hover:shadow-red-500/10 hover:-translate-y-1.5 transition-all duration-300 text-left w-[290px] sm:w-[340px] md:w-[370px] shrink-0 rounded-2xl"
             >
               <div>
                 {/* Card Image */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-4 rounded-xl">
+                <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 shadow-inner mb-4 rounded-xl">
                   <img
                     src={ind.image}
                     alt={ind.name}

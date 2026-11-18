@@ -423,10 +423,10 @@ function Page() {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: false, amount: 0.15 }}
                 transition={{ delay: i * 0.07, duration: 0.45 }}
-                className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
+                className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
               >
                 <div>
-                  <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-4">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 shadow-inner mb-4">
                     <img
                       src={ind.image}
                       alt={ind.name}
