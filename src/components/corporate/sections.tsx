@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { useState, useEffect, useCallback, type ReactNode } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -88,11 +88,30 @@ const nav = [
   { label: 'Contact', to: '/contact' },
 ] as const;
 
+export function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 140,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  return (
+    <motion.div
+      aria-hidden="true"
+      className="fixed top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-[#d7192a] via-[#ff3b50] to-[#b91c1c] origin-left z-[9999] pointer-events-none shadow-[0_1px_10px_rgba(215,25,42,0.6)]"
+      style={{ scaleX }}
+    />
+  );
+}
+
 export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="site-header bg-white/75 backdrop-blur-xl">
+    <>
+      <ScrollProgress />
+      <header className="site-header bg-white/75 backdrop-blur-xl">
       <div className="mx-auto flex h-full w-full max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8 gap-3">
         <Link
           to="/"
@@ -174,6 +193,7 @@ export function Navbar() {
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 }
 
