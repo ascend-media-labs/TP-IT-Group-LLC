@@ -307,7 +307,7 @@ export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[
 
           // Label
           if (hub.z > currentRadius * 0.1) {
-            ctx.font = '700 10.5px Manrope, sans-serif';
+            ctx.font = '700 10.5px Inter, sans-serif';
             ctx.fillStyle = isHq ? '#b91c1c' : '#0f172a';
             ctx.fillText(hub.name, hub.px + size + 6, hub.py + 3);
           }
