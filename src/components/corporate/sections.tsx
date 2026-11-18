@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { useState, type ReactNode } from 'react';
+import { useState, useEffect, useCallback, type ReactNode } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   ArrowRight,
@@ -41,6 +41,10 @@ import {
   Compass,
   MessageSquare,
   RefreshCw,
+  ChevronLeft,
+  ChevronRight,
+  Play,
+  Pause,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -182,108 +186,460 @@ const capabilityTags = [
   'Global Workforce',
 ] as const;
 
+const heroSlides = [
+  {
+    id: 'connected-partner',
+    tabNumber: '01',
+    tabLabel: 'Connected Partner',
+    eyebrow: 'TECHNOLOGY · CONSULTING · IT & NON-IT TALENT',
+    titleLight: 'One partner.',
+    titleHighlight: 'Your next possibility.',
+    description:
+      'Build smarter systems. Bring the right expertise. Move your business forward with connected technology, consulting and workforce solutions.',
+    primaryCta: { label: 'Let’s solve your next challenge', to: '/contact' },
+    secondaryCta: { label: 'Explore solutions', to: '/services' },
+    badge: 'We deliver what you expect. We keep our promises.',
+    bgImage: '/hero-banner.jpg',
+    visualType: 'globe' as const,
+  },
+  {
+    id: 'cloud-ai',
+    tabNumber: '02',
+    tabLabel: 'Cloud & AI Innovation',
+    eyebrow: 'AI AGENTS · HYBRID CLOUD · CYBERSECURITY',
+    titleLight: 'Accelerate scale with',
+    titleHighlight: 'Intelligent Cloud & AI.',
+    description:
+      'Modernize enterprise infrastructure across AWS, Microsoft Azure, Google Cloud and deploy autonomous AI agents that transform workflow velocity and operational resilience.',
+    primaryCta: { label: 'Explore AI & Cloud Services', to: '/services' },
+    secondaryCta: { label: 'Consult with an Architect', to: '/consulting' },
+    badge: 'Zero Trust Security · Multi-Cloud Architecture · 99.99% Reliability',
+    bgImage: '/services/cloud-migration.jpg',
+    visualType: 'cloud-ai' as const,
+  },
+  {
+    id: 'erp-sap',
+    tabNumber: '03',
+    tabLabel: 'ERP & SAP Systems',
+    eyebrow: 'SAP S/4HANA · ERP INTEGRATION · PROCESS AUTOMATION',
+    titleLight: 'Operational excellence.',
+    titleHighlight: 'Proven SAP precision.',
+    description:
+      'Unify enterprise supply chain, finance, and global operations with certified SAP implementations, cloud migration, and continuous end-to-end support.',
+    primaryCta: { label: 'Discover ERP & SAP Solutions', to: '/services' },
+    secondaryCta: { label: 'Request an ERP Audit', to: '/contact' },
+    badge: 'Certified SAP Practice · 3.5x Faster Rollout · Continuous Support',
+    bgImage: '/services/erp-sap.jpg',
+    visualType: 'erp-sap' as const,
+  },
+  {
+    id: 'global-talent',
+    tabNumber: '04',
+    tabLabel: 'Global IT Talent',
+    eyebrow: 'IT & NON-IT TALENT · SPECIALIZED TEAMS · GLOBAL WORKFORCE',
+    titleLight: 'Power your growth with',
+    titleHighlight: 'Top-Tier Tech Talent.',
+    description:
+      'From specialized software engineering squads and cloud architects to domain leaders across USA, Canada and India—we deploy high-impact teams ready on day one.',
+    primaryCta: { label: 'Hire Specialized Talent', to: '/talent' },
+    secondaryCta: { label: 'Explore Careers', to: '/careers' },
+    badge: 'US, Canada & India Delivery Hubs · Fast 48h Squad Placement',
+    bgImage: '/capabilities/talent-solutions.jpg',
+    visualType: 'talent' as const,
+  },
+];
+
 export function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const nextSlide = useCallback(() => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setDirection(-1);
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  }, []);
+
+  const goToSlide = (idx: number) => {
+    setDirection(idx > currentSlide ? 1 : -1);
+    setCurrentSlide(idx);
+  };
+
+  // Auto-play interval
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 6500);
+    return () => clearInterval(interval);
+  }, [isPaused, nextSlide]);
+
+  const slide = heroSlides[currentSlide];
+
   return (
-    <section id="home" className="relative overflow-hidden pt-2 pb-6 sm:pt-3 sm:pb-8 md:pt-4 md:pb-8 bg-white text-slate-900 bg-dot-pattern">
-      {/* Generated Enterprise Hero Banner Background (Team Meeting) */}
+    <section
+      id="home"
+      aria-label="TP IT Group Hero Carousel"
+      className="relative overflow-hidden pt-2 pb-6 sm:pt-4 sm:pb-8 md:pt-4 md:pb-10 bg-white text-slate-900 bg-dot-pattern select-none"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {/* Background Images with smooth AnimatePresence crossfade */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <img
-          src="/hero-banner.jpg"
-          alt="TP IT Group Executive Team Collaboration & Strategy Meeting"
-          className="h-full w-full object-cover object-center opacity-55 sm:opacity-65"
-          loading="eager"
-        />
-        {/* Soft readability vignette on left text side with increased white fade */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 via-white/50 to-transparent sm:from-white/95 sm:via-white/80 sm:to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent" />
+        <AnimatePresence initial={false} mode="wait">
+          <motion.div
+            key={slide.id}
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: 'easeInOut' }}
+            className="absolute inset-0"
+          >
+            <img
+              src={slide.bgImage}
+              alt={slide.titleHighlight}
+              className="h-full w-full object-cover object-center opacity-45 sm:opacity-55"
+              loading="eager"
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Soft readability vignette for text side */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 via-white/55 to-white/20 sm:from-white/95 sm:via-white/85 sm:to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white to-transparent" />
       </div>
 
-      {/* Background Gradients & Transparent Grid Texture */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_-100px,rgba(215,25,42,0.04),transparent)]" />
+      {/* Background Gradients & Ambient Glows */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_-100px,rgba(215,25,42,0.05),transparent)]" />
       <div className="pointer-events-none absolute -left-40 top-1/4 size-96 rounded-full bg-red-500/5 blur-[130px]" />
       <div className="pointer-events-none absolute -right-40 bottom-1/4 size-96 rounded-full bg-red-500/5 blur-[130px]" />
 
       <div className="site-container relative z-10">
-        <div className="grid gap-6 lg:grid-cols-12 lg:gap-8 items-center">
-          {/* Left Hero Content with Staggered Motion */}
+        {/* Main Hero Row */}
+        <div className="grid gap-6 lg:grid-cols-12 lg:gap-8 items-center min-h-[460px] sm:min-h-[490px] md:min-h-[520px]">
+          {/* Left Column: Text & CTA with Smooth Slide Animations */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
-            {/* Top Red Eyebrow */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-xs sm:text-sm font-bold tracking-wider text-[#d7192a] uppercase"
-            >
-              TECHNOLOGY · CONSULTING · IT &amp; NON-IT TALENT
-            </motion.p>
-
-            {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mt-3 sm:mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-[62px] font-extrabold tracking-tight text-slate-900 leading-[1.12]"
-            >
-              One partner.
-              <br />
-              <span className="text-[#d7192a]">Your next possibility.</span>
-            </motion.h1>
-
-            {/* Subheadline / Copy */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base md:text-lg font-normal leading-relaxed text-slate-600"
-            >
-              Build smarter systems. Bring the right expertise. Move your business forward with connected technology,
-              consulting and workforce solutions.
-            </motion.p>
-
-            {/* Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-5 sm:mt-6 flex flex-wrap justify-center lg:justify-start gap-3.5 items-center"
-            >
-              <Button
-                asChild
-                className="h-11 sm:h-12 rounded-full bg-[#d7192a] hover:bg-[#b91c1c] px-6 sm:px-7 text-xs sm:text-sm font-bold text-white shadow-md shadow-red-500/20 transition-all hover:scale-[1.02]"
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={slide.id}
+                custom={direction}
+                initial={{ opacity: 0, x: direction * 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: direction * -20 }}
+                transition={{ duration: 0.45, ease: 'easeOut' }}
+                className="w-full"
               >
-                <Link to="/contact" className="inline-flex items-center gap-2">
-                  Let’s solve your next challenge <ArrowRight className="size-4" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="h-11 sm:h-12 rounded-full border border-slate-300 bg-white px-6 sm:px-7 text-xs sm:text-sm font-bold text-slate-800 shadow-xs backdrop-blur-md transition-all hover:bg-slate-50 hover:border-slate-400"
-              >
-                <Link to="/services">Explore solutions</Link>
-              </Button>
-            </motion.div>
+                {/* Eyebrow badge */}
+                <p className="text-xs sm:text-sm font-bold tracking-wider text-[#d7192a] uppercase">
+                  {slide.eyebrow}
+                </p>
 
-            {/* Promise line */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-3 sm:mt-4 text-xs sm:text-sm font-semibold text-[#d7192a]"
-            >
-              We deliver what you expect. We keep our promises.
-            </motion.p>
+                {/* Main Headline */}
+                <h1 className="mt-3 sm:mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-[60px] font-extrabold tracking-tight text-slate-900 leading-[1.12]">
+                  {slide.titleLight}
+                  <br />
+                  <span className="text-[#d7192a]">{slide.titleHighlight}</span>
+                </h1>
+
+                {/* Description */}
+                <p className="mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base md:text-lg font-normal leading-relaxed text-slate-600">
+                  {slide.description}
+                </p>
+
+                {/* Action Buttons */}
+                <div className="mt-5 sm:mt-6 flex flex-wrap justify-start gap-3.5 items-center">
+                  <Button
+                    asChild
+                    className="h-11 sm:h-12 rounded-full bg-[#d7192a] hover:bg-[#b91c1c] px-6 sm:px-7 text-xs sm:text-sm font-bold text-white shadow-md shadow-red-500/20 transition-all hover:scale-[1.02]"
+                  >
+                    <Link to={slide.primaryCta.to} className="inline-flex items-center gap-2">
+                      {slide.primaryCta.label} <ArrowRight className="size-4" />
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="h-11 sm:h-12 rounded-full border border-slate-300 bg-white/90 px-6 sm:px-7 text-xs sm:text-sm font-bold text-slate-800 shadow-xs backdrop-blur-md transition-all hover:bg-slate-50 hover:border-slate-400"
+                  >
+                    <Link to={slide.secondaryCta.to}>{slide.secondaryCta.label}</Link>
+                  </Button>
+                </div>
+
+                {/* Promise / Metric line */}
+                <p className="mt-3 sm:mt-4 text-xs sm:text-sm font-semibold text-[#d7192a]">
+                  {slide.badge}
+                </p>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          {/* Right 3D Interactive Digital Globe Canvas */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 flex items-center justify-center relative"
-          >
-            <DigitalGlobe className="w-full h-[320px] sm:h-[380px] md:h-[420px] lg:h-[440px]" />
-          </motion.div>
+          {/* Right Column: Visuals Matching the Slide */}
+          <div className="lg:col-span-5 flex items-center justify-center relative min-h-[340px] sm:min-h-[400px]">
+            <AnimatePresence mode="wait">
+              {slide.visualType === 'globe' && (
+                <motion.div
+                  key="visual-globe"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full flex items-center justify-center"
+                >
+                  <DigitalGlobe className="w-full h-[320px] sm:h-[380px] md:h-[420px] lg:h-[440px]" />
+                </motion.div>
+              )}
+
+              {slide.visualType === 'cloud-ai' && (
+                <motion.div
+                  key="visual-cloud-ai"
+                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: -15 }}
+                  transition={{ duration: 0.45 }}
+                  className="w-full max-w-md rounded-3xl border border-slate-200/90 bg-white/90 p-5 sm:p-6 backdrop-blur-xl shadow-xl shadow-red-500/5"
+                >
+                  <div className="flex items-center justify-between pb-3.5 border-b border-slate-100">
+                    <div className="flex items-center gap-2.5">
+                      <div className="flex size-9 items-center justify-center rounded-xl bg-red-50 text-[#d7192a]">
+                        <Bot className="size-5" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold text-slate-900">Enterprise AI &amp; Cloud Fabric</div>
+                        <div className="text-[11px] text-slate-500 font-medium">AWS · Azure · GCP Multi-Cloud</div>
+                      </div>
+                    </div>
+                    <span className="flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700">
+                      <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" /> Live System
+                    </span>
+                  </div>
+
+                  <div className="mt-3.5 grid grid-cols-2 gap-2.5">
+                    <div className="rounded-2xl border border-slate-100 bg-slate-50/80 p-3">
+                      <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900">
+                        <Cloud className="size-3.5 text-[#d7192a]" /> Multi-Cloud
+                      </div>
+                      <p className="mt-1 text-[11px] text-slate-500 leading-tight">Hybrid workload orchestrations</p>
+                    </div>
+                    <div className="rounded-2xl border border-slate-100 bg-slate-50/80 p-3">
+                      <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900">
+                        <Cpu className="size-3.5 text-[#d7192a]" /> AI Agents
+                      </div>
+                      <p className="mt-1 text-[11px] text-slate-500 leading-tight">Autonomous process pipelines</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-3.5 rounded-2xl bg-gradient-to-r from-slate-950 via-slate-900 to-slate-800 p-3.5 text-white shadow-inner">
+                    <div className="grid grid-cols-3 gap-2 text-center">
+                      <div>
+                        <div className="text-base font-extrabold text-white">99.99%</div>
+                        <div className="text-[10px] text-slate-300">Uptime SLA</div>
+                      </div>
+                      <div className="border-x border-white/10">
+                        <div className="text-base font-extrabold text-red-400">40+</div>
+                        <div className="text-[10px] text-slate-300">Deployments</div>
+                      </div>
+                      <div>
+                        <div className="text-base font-extrabold text-white">Zero Trust</div>
+                        <div className="text-[10px] text-slate-300">Security</div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {slide.visualType === 'erp-sap' && (
+                <motion.div
+                  key="visual-erp-sap"
+                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: -15 }}
+                  transition={{ duration: 0.45 }}
+                  className="w-full max-w-md rounded-3xl border border-slate-200/90 bg-white/90 p-5 sm:p-6 backdrop-blur-xl shadow-xl shadow-red-500/5"
+                >
+                  <div className="flex items-center justify-between pb-3.5 border-b border-slate-100">
+                    <div className="flex items-center gap-2.5">
+                      <div className="flex size-9 items-center justify-center rounded-xl bg-red-50 text-[#d7192a]">
+                        <Database className="size-5" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold text-slate-900">SAP S/4HANA Modernization</div>
+                        <div className="text-[11px] text-slate-500 font-medium">Enterprise Resource Planning</div>
+                      </div>
+                    </div>
+                    <span className="rounded-full bg-blue-50 border border-blue-200/80 px-2.5 py-0.5 text-[11px] font-bold text-blue-700">
+                      Certified Practice
+                    </span>
+                  </div>
+
+                  <div className="mt-3.5 space-y-2">
+                    <div className="flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50/80 px-3 py-2">
+                      <div className="flex items-center gap-2 text-xs font-semibold text-slate-800">
+                        <Layers className="size-3.5 text-[#d7192a]" /> SAP Cloud &amp; On-Premise
+                      </div>
+                      <span className="text-[10px] font-bold text-slate-500">Full Lifecycle</span>
+                    </div>
+                    <div className="flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50/80 px-3 py-2">
+                      <div className="flex items-center gap-2 text-xs font-semibold text-slate-800">
+                        <Activity className="size-3.5 text-[#d7192a]" /> Supply Chain &amp; FICO Modules
+                      </div>
+                      <span className="text-[10px] font-bold text-slate-500">Integrated</span>
+                    </div>
+                    <div className="flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50/80 px-3 py-2">
+                      <div className="flex items-center gap-2 text-xs font-semibold text-slate-800">
+                        <ShieldCheck className="size-3.5 text-[#d7192a]" /> 24/7 Managed Application Support
+                      </div>
+                      <span className="text-[10px] font-bold text-emerald-600">Active</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-3.5 flex items-center justify-between rounded-xl bg-red-50/70 border border-red-100 p-3">
+                    <div className="text-xs font-bold text-slate-900">Proven ROI · 3.5x Faster Rollout</div>
+                    <Link to="/services" className="text-xs font-bold text-[#d7192a] hover:underline flex items-center gap-1">
+                      Explore SAP <ArrowRight className="size-3" />
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+
+              {slide.visualType === 'talent' && (
+                <motion.div
+                  key="visual-talent"
+                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: -15 }}
+                  transition={{ duration: 0.45 }}
+                  className="w-full max-w-md rounded-3xl border border-slate-200/90 bg-white/90 p-5 sm:p-6 backdrop-blur-xl shadow-xl shadow-red-500/5"
+                >
+                  <div className="flex items-center justify-between pb-3.5 border-b border-slate-100">
+                    <div className="flex items-center gap-2.5">
+                      <div className="flex size-9 items-center justify-center rounded-xl bg-red-50 text-[#d7192a]">
+                        <Users className="size-5" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold text-slate-900">Global Talent Delivery Network</div>
+                        <div className="text-[11px] text-slate-500 font-medium">On-demand Engineering Squads</div>
+                      </div>
+                    </div>
+                    <span className="rounded-full bg-red-50 border border-red-200/80 px-2.5 py-0.5 text-[11px] font-bold text-[#d7192a]">
+                      48h Placement
+                    </span>
+                  </div>
+
+                  <div className="mt-3.5 grid grid-cols-3 gap-2 text-center">
+                    <div className="rounded-xl border border-slate-100 bg-slate-50/80 p-2">
+                      <div className="text-xs font-bold text-slate-900">USA</div>
+                      <div className="text-[10px] text-slate-500">HQ &amp; East/West</div>
+                    </div>
+                    <div className="rounded-xl border border-slate-100 bg-slate-50/80 p-2">
+                      <div className="text-xs font-bold text-slate-900">Canada</div>
+                      <div className="text-[10px] text-slate-500">Toronto Hub</div>
+                    </div>
+                    <div className="rounded-xl border border-slate-100 bg-slate-50/80 p-2">
+                      <div className="text-xs font-bold text-slate-900">India</div>
+                      <div className="text-[10px] text-slate-500">Pune Tech Center</div>
+                    </div>
+                  </div>
+
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {['Cloud Architects', 'SAP Specialists', 'AI / ML Leads', 'Cybersecurity', 'DevOps & QA'].map((skill) => (
+                      <span key={skill} className="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700 shadow-2xs">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-3.5 flex items-center justify-between pt-2.5 border-t border-slate-100">
+                    <div className="text-[11px] text-slate-600 font-medium">Over <strong className="text-slate-900">500+</strong> vetted specialists</div>
+                    <Link to="/talent" className="text-xs font-bold text-[#d7192a] hover:underline flex items-center gap-1">
+                      Find Talent <ArrowRight className="size-3" />
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Carousel Navigation Bar & Slide Tabs */}
+        <div className="mt-6 sm:mt-8 pt-4 border-t border-slate-200/70 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          {/* Segmented Interactive Tabs */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full md:max-w-3xl">
+            {heroSlides.map((s, idx) => {
+              const isActive = idx === currentSlide;
+              return (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => goToSlide(idx)}
+                  className={`relative flex flex-col items-start rounded-xl px-3 py-2 text-left transition-all duration-200 ${
+                    isActive
+                      ? 'bg-white shadow-sm border border-slate-200/90'
+                      : 'hover:bg-slate-100/70 border border-transparent opacity-75 hover:opacity-100'
+                  }`}
+                >
+                  <div className="flex items-center gap-1.5 w-full">
+                    <span
+                      className={`font-mono text-[10px] font-extrabold ${
+                        isActive ? 'text-[#d7192a]' : 'text-slate-400'
+                      }`}
+                    >
+                      {s.tabNumber}
+                    </span>
+                    <span
+                      className={`text-xs font-bold truncate ${
+                        isActive ? 'text-slate-900' : 'text-slate-600'
+                      }`}
+                    >
+                      {s.tabLabel}
+                    </span>
+                  </div>
+
+                  {/* Active Slide Progress Line */}
+                  <div className="mt-1.5 h-0.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                    {isActive ? (
+                      <motion.div
+                        key={`progress-${currentSlide}-${isPaused}`}
+                        initial={{ width: '0%' }}
+                        animate={{ width: isPaused ? undefined : '100%' }}
+                        transition={{ duration: 6.5, ease: 'linear' }}
+                        className="h-full bg-[#d7192a] rounded-full"
+                      />
+                    ) : null}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Controls: Prev / Next Buttons & Slide Counter */}
+          <div className="flex items-center justify-between md:justify-end gap-3 shrink-0">
+            <span className="font-mono text-xs font-bold text-slate-500">
+              <strong className="text-slate-900 font-extrabold">{heroSlides[currentSlide].tabNumber}</strong> / 04
+            </span>
+
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={prevSlide}
+                aria-label="Previous slide"
+                className="flex size-9 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-slate-700 shadow-2xs hover:border-[#d7192a] hover:text-[#d7192a] hover:bg-red-50/50 transition-colors"
+              >
+                <ChevronLeft className="size-4" />
+              </button>
+              <button
+                type="button"
+                onClick={nextSlide}
+                aria-label="Next slide"
+                className="flex size-9 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-slate-700 shadow-2xs hover:border-[#d7192a] hover:text-[#d7192a] hover:bg-red-50/50 transition-colors"
+              >
+                <ChevronRight className="size-4" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
