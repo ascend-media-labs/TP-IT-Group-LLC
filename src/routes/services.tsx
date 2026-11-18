@@ -9,8 +9,6 @@ import {
   Globe,
   ShieldCheck,
   CheckCircle2,
-  Cpu,
-  Compass,
   Briefcase,
   Monitor,
   Pill,
@@ -18,7 +16,6 @@ import {
   Rocket,
   HardHat,
   ArrowRight,
-  ArrowUpRight,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -30,54 +27,6 @@ export const Route = createFileRoute('/services')({
     ),
   component: Page,
 });
-
-const connectedCapabilities = [
-  {
-    number: '01',
-    icon: <Cpu className="size-6 text-[#d7192a]" />,
-    image: '/capabilities/technology-solutions.jpg',
-    title: 'Technology Solutions',
-    desc: 'Connect AI, cloud, enterprise applications and secure infrastructure with the way your organization works.',
-    items: [
-      'AI automation & agents',
-      'Cloud migration & modernization',
-      'ERP & SAP transformation',
-      'Custom software & digital experiences',
-    ],
-    linkText: 'Explore technology',
-    href: '#ai-automation',
-  },
-  {
-    number: '02',
-    icon: <Compass className="size-6 text-[#d7192a]" />,
-    image: '/capabilities/consulting-services.jpg',
-    title: 'Consulting Services',
-    desc: 'Bring clarity to technology decisions, process improvement and transformation delivery—from the first assessment to implementation.',
-    items: [
-      'Technology strategy & roadmaps',
-      'Business process improvement',
-      'Transformation & delivery advisory',
-      'Workforce planning',
-    ],
-    linkText: 'Explore consulting',
-    href: '/consulting',
-  },
-  {
-    number: '03',
-    icon: <Briefcase className="size-6 text-[#d7192a]" />,
-    image: '/capabilities/talent-solutions.jpg',
-    title: 'IT & Non-IT Talent',
-    desc: 'Align your skills requirements, team structure and hiring priorities across technical and business operations roles.',
-    items: [
-      'IT specialists & project teams',
-      'Business & operational talent',
-      'Contract & permanent hiring needs',
-      'Skills planning & team augmentation',
-    ],
-    linkText: 'Explore talent solutions',
-    href: '/talent',
-  },
-];
 
 const detailedServices = [
   {
@@ -211,9 +160,9 @@ function Page() {
   return (
     <div className="bg-white text-slate-900">
       {/* 1. ONE PARTNER. CONNECTED CAPABILITIES. SECTION */}
-      <section className="section bg-white text-slate-900 bg-dot-pattern pt-8 sm:pt-10">
+      <section className="section bg-white text-slate-900 bg-dot-pattern pt-8 sm:pt-10 pb-4 sm:pb-6">
         <div className="site-container">
-          <div className="mb-6 text-left">
+          <div className="text-left">
             <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
               ONE PARTNER. CONNECTED CAPABILITIES.
             </p>
@@ -223,61 +172,6 @@ function Page() {
             <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
               From defining the challenge to delivering the solution, bring your technology and people priorities together.
             </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {connectedCapabilities.map((cap) => (
-              <motion.div
-                key={cap.number}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
-                className="group card-diagonal overflow-hidden border border-slate-200/90 bg-white p-5 sm:p-6 shadow-sm flex flex-col justify-between hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
-              >
-                <div>
-                  <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-5">
-                    <img
-                      src={cap.image}
-                      alt={cap.title}
-                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" />
-                    <div className="absolute top-2.5 left-2.5 flex size-10 items-center justify-center icon-diagonal bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10">
-                      {cap.icon}
-                    </div>
-                    <span className="absolute top-2.5 right-2.5 rounded-lg bg-black/40 backdrop-blur-md px-2 py-0.5 font-mono text-[11px] font-bold text-white z-10">
-                      {cap.number}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors">{cap.title}</h3>
-                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">{cap.desc}</p>
-
-                  <ul className="mt-4 space-y-2 border-t border-slate-100 pt-3">
-                    {cap.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5 text-xs text-slate-700 font-medium">
-                        <CheckCircle2 className="size-4 mt-0.5 shrink-0 text-[#d7192a]" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <a
-                    href={cap.href}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
-                  >
-                    {cap.linkText}
-                  </a>
-                  <span className="flex size-8 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-600 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] transition-all shadow-2xs">
-                    <ArrowUpRight className="size-4" />
-                  </span>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
