@@ -1102,15 +1102,15 @@ export function Clients({ full = false }: { full?: boolean }) {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_50%_0%,rgba(215,25,42,0.04),transparent_60%)]" />
       <div className="site-container relative z-10">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-3xl text-left">
+          <div className="text-left">
             <p className="eyebrow text-[#d7192a]">CLIENT SUCCESS &amp; EXCELLENCE</p>
             <h2 className="section-title mt-2">Trusted by Fortune 500 &amp; Industry Leaders.</h2>
-            <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 lg:whitespace-nowrap">
               Partnering with world-class organizations to deliver cutting-edge IT excellence, digital engineering, and workforce solutions.
             </p>
           </div>
           {!full && (
-            <Button asChild variant="link" className="px-0 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c]">
+            <Button asChild variant="link" className="shrink-0 px-0 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c]">
               <Link to="/clients">
                 View all 20+ partners <ArrowRight className="size-4 ml-1" />
               </Link>
