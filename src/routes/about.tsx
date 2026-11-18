@@ -43,10 +43,9 @@ function Page() {
             TP IT GROUP / ABOUT TP IT GROUP
           </p>
           <h1 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            Technology. People. Partnership.<br />
-            <span className="text-[#d7192a]">One TP IT Group.</span>
+            Technology. People. Partnership. <span className="text-[#d7192a]">One TP IT Group.</span>
           </h1>
-          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-4xl">
             TP IT Group brings more than 20 years of industry experience, with a{' '}
             <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-700">US</span> USA head office and locations in Ontario,{' '}
             <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-700">CA</span> Canada, and Hyderabad,{' '}

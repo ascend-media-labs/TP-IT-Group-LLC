@@ -440,8 +440,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
               ABOUT US
             </span>
             <h2 className="section-title mt-3">
-              Your Trusted Technology <br />
-              Partner for <span className="text-[#d7192a]">Global Growth</span>
+              Your Trusted Technology Partner for <span className="text-[#d7192a]">Global Growth</span>
             </h2>
             <div className="mt-4 space-y-3 text-xs sm:text-sm leading-relaxed text-slate-600">
               <p>
@@ -702,8 +701,7 @@ export function WhyChooseUsSection() {
             <div>
               <Handshake className="size-16 sm:size-20 text-[#d7192a] stroke-[1.8]" />
               <h3 className="mt-8 text-2xl sm:text-3xl lg:text-[32px] font-bold text-[#d7192a] leading-snug">
-                We don’t just deliver services — <br />
-                We build partnerships.
+                We don’t just deliver services — We build partnerships.
               </h3>
             </div>
             <div className="mt-8 pt-6 border-t border-slate-100">
@@ -921,8 +919,7 @@ export function Careers({ full = false }: { full?: boolean }) {
           <div>
             <p className="eyebrow">GROW WITH US</p>
             <h2 className="section-title mt-2">
-              Build Your Future with a <br className="hidden sm:inline" />
-              Global Technology Leader.
+              Build Your Future with a Global Technology Leader.
             </h2>
             <p className="section-copy mt-3.5">
               Join TP IT Group LLC and work on cutting-edge projects with world-class clients across 5 continents. We

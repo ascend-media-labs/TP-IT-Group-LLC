@@ -216,10 +216,9 @@ function Page() {
             TP IT GROUP / OUR SERVICES
           </p>
           <h1 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            Connected Solutions for<br />
-            <span className="text-[#d7192a]">Your Next Business Move.</span>
+            Connected Solutions for <span className="text-[#d7192a]">Your Next Business Move.</span>
           </h1>
-          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
             Technology, consulting and IT and non-IT talent—one partner to connect your strategy, systems and people.
           </p>
         </div>
@@ -228,17 +227,14 @@ function Page() {
       {/* 2. ONE PARTNER. CONNECTED CAPABILITIES. SECTION (Screenshot 2) */}
       <section className="section bg-white text-slate-900 bg-dot-pattern">
         <div className="site-container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 text-left">
-            <div>
-              <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
-                ONE PARTNER. CONNECTED CAPABILITIES.
-              </p>
-              <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
-                Technology. Consulting. Talent.<br />
-                <span className="text-[#d7192a]">Built around your business.</span>
-              </h2>
-            </div>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-md md:text-right">
+          <div className="mb-8 text-left">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+              ONE PARTNER. CONNECTED CAPABILITIES.
+            </p>
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
+              Technology. Consulting. Talent. <span className="text-[#d7192a]">Built around your business.</span>
+            </h2>
+            <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
               From defining the challenge to delivering the solution, bring your technology and people priorities together.
             </p>
           </div>
