@@ -18,6 +18,7 @@ import {
   Rocket,
   HardHat,
   ArrowRight,
+  ArrowUpRight,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -256,10 +257,10 @@ function Page() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4 }}
-                className="group rounded-3xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-sm flex flex-col justify-between hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
+                className="group card-diagonal border border-slate-200/90 bg-white p-5 sm:p-6 shadow-sm flex flex-col justify-between hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
               >
                 <div>
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner mb-5">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-5">
                     <img
                       src={cap.image}
                       alt={cap.title}
@@ -267,7 +268,7 @@ function Page() {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" />
-                    <div className="absolute top-2.5 left-2.5 flex size-9 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10">
+                    <div className="absolute top-2.5 left-2.5 flex size-10 items-center justify-center icon-diagonal bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10">
                       {cap.icon}
                     </div>
                     <span className="absolute top-2.5 right-2.5 rounded-lg bg-black/40 backdrop-blur-md px-2 py-0.5 font-mono text-[11px] font-bold text-white z-10">
@@ -288,13 +289,16 @@ function Page() {
                   </ul>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-100">
+                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                   <a
                     href={cap.href}
                     className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
                   >
-                    {cap.linkText} <ArrowRight className="size-3.5 ml-0.5" />
+                    {cap.linkText}
                   </a>
+                  <span className="flex size-8 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-600 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] transition-all shadow-2xs">
+                    <ArrowUpRight className="size-4" />
+                  </span>
                 </div>
               </motion.div>
             ))}
@@ -323,7 +327,7 @@ function Page() {
                       transition={{ duration: 0.5 }}
                       className="lg:col-span-7 order-2 lg:order-1"
                     >
-                      <div className="rounded-3xl border border-slate-200/90 bg-white p-7 sm:p-9 shadow-sm">
+                      <div className="card-diagonal border border-slate-200/90 bg-white p-7 sm:p-9 shadow-sm">
                         <h4 className="text-sm font-bold uppercase tracking-wider text-slate-900 mb-5">
                           What We Offer
                         </h4>
@@ -345,7 +349,7 @@ function Page() {
                       transition={{ duration: 0.5 }}
                       className="lg:col-span-5 space-y-4 order-1 lg:order-2"
                     >
-                      <div className="flex size-14 items-center justify-center rounded-2xl bg-red-50 border border-red-100 shadow-xs">
+                      <div className="flex size-14 items-center justify-center icon-diagonal bg-red-50 border border-red-100 shadow-xs">
                         {service.icon}
                       </div>
                       <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
@@ -374,7 +378,7 @@ function Page() {
                       transition={{ duration: 0.5 }}
                       className="lg:col-span-5 space-y-4"
                     >
-                      <div className="flex size-14 items-center justify-center rounded-2xl bg-red-50 border border-red-100 shadow-xs">
+                      <div className="flex size-14 items-center justify-center icon-diagonal bg-red-50 border border-red-100 shadow-xs">
                         {service.icon}
                       </div>
                       <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
@@ -400,7 +404,7 @@ function Page() {
                       transition={{ duration: 0.5 }}
                       className="lg:col-span-7"
                     >
-                      <div className="rounded-3xl border border-slate-200/90 bg-white p-7 sm:p-9 shadow-sm">
+                      <div className="card-diagonal border border-slate-200/90 bg-white p-7 sm:p-9 shadow-sm">
                         <h4 className="text-sm font-bold uppercase tracking-wider text-slate-900 mb-5">
                           What We Offer
                         </h4>
@@ -443,10 +447,20 @@ function Page() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07 }}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300"
+                className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
               >
                 <div>
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner">
+                  {/* Top Row: Icon Leaf Badge & Sector Pill (Sample image style) */}
+                  <div className="flex items-center justify-between mb-3.5">
+                    <div className="flex size-11 items-center justify-center icon-diagonal bg-gradient-to-br from-[#d7192a] to-[#b91c1c] text-white shadow-md shadow-red-500/20">
+                      {ind.icon}
+                    </div>
+                    <span className="rounded-full bg-slate-100/90 border border-slate-200/80 px-3 py-1 font-mono text-[11px] font-semibold text-slate-700">
+                      Sector 0{i + 1}
+                    </span>
+                  </div>
+
+                  <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner">
                     <img
                       src={ind.image}
                       alt={ind.name}
@@ -454,9 +468,6 @@ function Page() {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
-                    <div className="absolute top-3 left-3 flex size-10 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-md border border-white/80">
-                      {ind.icon}
-                    </div>
                   </div>
                   <h3 className="mt-4 text-lg font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors">
                     {ind.name}
@@ -464,6 +475,16 @@ function Page() {
                   <p className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
                     {ind.desc}
                   </p>
+                </div>
+
+                {/* Bottom Footer: Platform status + Circular Arrow Button */}
+                <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100">
+                  <span className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-500">
+                    <span className="size-1.5 rounded-full bg-[#d7192a] animate-pulse" /> Enterprise Platform
+                  </span>
+                  <span className="flex size-8 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-600 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] transition-all shadow-2xs">
+                    <ArrowUpRight className="size-4" />
+                  </span>
                 </div>
               </motion.div>
             ))}

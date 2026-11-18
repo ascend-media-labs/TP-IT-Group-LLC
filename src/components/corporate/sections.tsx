@@ -381,10 +381,10 @@ export function ConnectedCapabilitiesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group glass-card flex flex-col justify-between p-5 sm:p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300"
+              className="group glass-card card-diagonal flex flex-col justify-between p-5 sm:p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
             >
               <div>
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner mb-5">
+                <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-5">
                   <img
                     src={cap.image}
                     alt={cap.title}
@@ -392,7 +392,7 @@ export function ConnectedCapabilitiesSection() {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" />
-                  <div className="absolute top-2.5 left-2.5 flex size-9 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10">
+                  <div className="absolute top-2.5 left-2.5 flex size-10 items-center justify-center icon-diagonal bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10">
                     {capIcons[i % capIcons.length]}
                   </div>
                   <span className="absolute top-2.5 right-2.5 rounded-lg bg-black/40 backdrop-blur-md px-2 py-0.5 font-mono text-[11px] font-bold text-white z-10">
@@ -413,13 +413,16 @@ export function ConnectedCapabilitiesSection() {
                 </ul>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-100">
+              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                 <Link
                   to={cap.href}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
                 >
-                  {cap.linkText} <ArrowRight className="size-3.5 ml-1" />
+                  {cap.linkText}
                 </Link>
+                <span className="flex size-8 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-600 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] transition-all shadow-2xs">
+                  <ArrowUpRight className="size-4" />
+                </span>
               </div>
             </motion.div>
           ))}
@@ -702,27 +705,47 @@ export function IndustriesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300"
+              className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
             >
               <div>
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner">
+                {/* Top Row: Icon Leaf Badge & Sector Pill (Sample image style) */}
+                <div className="flex items-center justify-between mb-3.5">
+                  <div className="flex size-11 items-center justify-center icon-diagonal bg-gradient-to-br from-[#d7192a] to-[#b91c1c] text-white shadow-md shadow-red-500/20">
+                    {industryIcons[i % industryIcons.length]}
+                  </div>
+                  <span className="rounded-full bg-slate-100/90 border border-slate-200/70 px-3 py-1 text-[11px] font-semibold text-slate-600">
+                    {ind.desc}
+                  </span>
+                </div>
+
+                {/* Card Image with matching diagonal curve */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-4">
                   <img
                     src={ind.image}
                     alt={ind.name}
                     className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
-                  <div className="absolute top-3 left-3 flex size-10 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-md border border-white/80">
-                    {industryIcons[i % industryIcons.length]}
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300" />
                 </div>
-                <h3 className="mt-4 text-lg font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors">
+
+                {/* Content */}
+                <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors">
                   {ind.name}
                 </h3>
-                <p className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                  {ind.desc}
+                <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                  Enterprise-grade digital systems and tailored technology workflows engineered for {ind.name.toLowerCase()}.
                 </p>
+              </div>
+
+              {/* Bottom Footer: Platform status + Circular Arrow Button */}
+              <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100">
+                <span className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-500">
+                  <span className="size-1.5 rounded-full bg-[#d7192a] animate-pulse" /> Enterprise Platform
+                </span>
+                <span className="flex size-8 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-600 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] transition-all shadow-2xs">
+                  <ArrowUpRight className="size-4" />
+                </span>
               </div>
             </motion.div>
           ))}
@@ -750,9 +773,9 @@ export function WhyChooseUsSection() {
 
         <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12 max-w-6xl">
           {/* Left Handshake Card */}
-          <div className="group lg:col-span-6 rounded-3xl border border-red-100/90 bg-white p-6 sm:p-8 shadow-[0_4px_24px_rgba(215,25,42,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 flex flex-col justify-between min-h-[360px] h-full transition-all duration-300">
+          <div className="group lg:col-span-6 card-diagonal border border-red-100/90 bg-white p-6 sm:p-8 shadow-[0_4px_24px_rgba(215,25,42,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 flex flex-col justify-between min-h-[360px] h-full transition-all duration-300 text-left">
             <div>
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner mb-6">
+              <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-6">
                 <img
                   src="/why-choose-us-partnership.jpg"
                   alt="We don't just deliver services — We build partnerships"
@@ -760,7 +783,7 @@ export function WhyChooseUsSection() {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/45 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
-                <div className="absolute top-3.5 left-3.5 flex size-11 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-md border border-white/80">
+                <div className="absolute top-3.5 left-3.5 flex size-11 items-center justify-center icon-diagonal bg-white/95 backdrop-blur-md text-[#d7192a] shadow-md border border-white/80">
                   <Handshake className="size-6 text-[#d7192a] stroke-[1.8]" />
                 </div>
               </div>
