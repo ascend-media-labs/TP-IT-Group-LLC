@@ -838,31 +838,100 @@ export function WhyChooseUsSection() {
 }
 
 export function WorkWithSection() {
+  const engagementMeta = [
+    {
+      icon: <Compass className="size-5" />,
+      tag: 'Strategic Advisory',
+      deliverable: 'Roadmap & technical scope',
+    },
+    {
+      icon: <Layers className="size-5" />,
+      tag: 'Scoped Execution',
+      deliverable: 'Milestones & clear handover',
+    },
+    {
+      icon: <Users className="size-5" />,
+      tag: 'Talent Augmentation',
+      deliverable: 'Dedicated niche specialists',
+    },
+    {
+      icon: <RefreshCw className="size-5" />,
+      tag: 'Managed Operations',
+      deliverable: 'Ongoing SLAs & optimization',
+    },
+  ];
+
   return (
     <section id="talent" className="section relative overflow-hidden bg-white text-slate-900 border-t border-slate-200/80 bg-dot-pattern">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(215,25,42,0.03),transparent_70%)]" />
       <div className="site-container relative z-10">
-        <div className="mb-8 text-left">
-          <p className="eyebrow text-[#d7192a]">WORK WITH TP IT GROUP</p>
-          <h2 className="section-title mt-2">The right engagement for your next move.</h2>
+        <div className="mb-8 sm:mb-10 text-left">
+          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
+            WORK WITH TP IT GROUP
+          </span>
+          <h2 className="section-title mt-3">
+            The right engagement for <span className="text-[#d7192a]">your next move.</span>
+          </h2>
           <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
             Flexible collaboration structures built to adapt to your enterprise milestones and talent demands.
           </p>
         </div>
+
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {engagementModels.map((item, i) => (
-            <motion.div
-              key={item.number}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="border-t-2 border-[#d7192a] pt-4"
-            >
-              <span className="font-mono text-xs font-bold text-slate-400">{item.number}</span>
-              <h3 className="mt-2 text-base font-bold text-slate-900">{item.title}</h3>
-              <p className="mt-1.5 text-xs leading-relaxed text-slate-600">{item.desc}</p>
-            </motion.div>
-          ))}
+          {engagementModels.map((item, i) => {
+            const meta = engagementMeta[i % engagementMeta.length];
+            return (
+              <motion.div
+                key={item.number}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.45 }}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-6 shadow-sm hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
+              >
+                {/* Top Accent Strip that expands on hover */}
+                <div className="absolute top-0 left-0 h-1 w-12 bg-gradient-to-r from-[#d7192a] to-red-400 group-hover:w-full transition-all duration-500 ease-out" />
+
+                <div>
+                  {/* Top Bar: Icon Badge & Number Monogram */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex size-11 items-center justify-center rounded-xl bg-red-50/90 border border-red-100 text-[#d7192a] shadow-xs group-hover:bg-[#d7192a] group-hover:text-white transition-all duration-300">
+                      {meta.icon}
+                    </div>
+                    <span className="inline-flex items-center justify-center font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100/80 text-slate-700 border border-slate-200/60 group-hover:bg-red-50 group-hover:text-[#d7192a] group-hover:border-red-100 transition-colors">
+                      {item.number}
+                    </span>
+                  </div>
+
+                  {/* Category Pill Tag */}
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a] block">
+                    {meta.tag}
+                  </span>
+
+                  {/* Title */}
+                  <h3 className="mt-1.5 text-lg font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors leading-tight">
+                    {item.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-slate-600">
+                    {item.desc}
+                  </p>
+                </div>
+
+                {/* Footer Highlight */}
+                <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-500">
+                  <span className="flex items-center gap-1.5">
+                    <CheckCircle2 className="size-3.5 text-[#d7192a] shrink-0" />
+                    <span>{meta.deliverable}</span>
+                  </span>
+                  <span className="flex size-6 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-400 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] group-hover:translate-x-0.5 transition-all">
+                    <ArrowRight className="size-3" />
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
