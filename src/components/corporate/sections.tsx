@@ -675,12 +675,12 @@ export function Services({ full = false }: { full?: boolean }) {
 
 export function IndustriesSection() {
   const industryIcons = [
-    <Briefcase key="fin" className="size-5 text-[#d7192a]" />,
-    <Monitor key="it" className="size-5 text-[#d7192a]" />,
-    <Pill key="health" className="size-5 text-[#d7192a]" />,
-    <Factory key="manu" className="size-5 text-[#d7192a]" />,
-    <Rocket key="start" className="size-5 text-[#d7192a]" />,
-    <HardHat key="eng" className="size-5 text-[#d7192a]" />,
+    <Briefcase key="fin" className="size-6 text-white stroke-[2.2]" />,
+    <Monitor key="it" className="size-6 text-white stroke-[2.2]" />,
+    <Pill key="health" className="size-6 text-white stroke-[2.2]" />,
+    <Factory key="manu" className="size-6 text-white stroke-[2.2]" />,
+    <Rocket key="start" className="size-6 text-white stroke-[2.2]" />,
+    <HardHat key="eng" className="size-6 text-white stroke-[2.2]" />,
   ];
 
   return (

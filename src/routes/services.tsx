@@ -172,37 +172,37 @@ const industries = [
   {
     name: 'Financial Services',
     desc: 'MODERN DIGITAL BANKING & FINTECH',
-    icon: <Briefcase className="size-5 text-[#d7192a]" />,
+    icon: <Briefcase className="size-6 text-white stroke-[2.2]" />,
     image: '/industries/financial-services.jpg',
   },
   {
     name: 'IT Companies',
     desc: 'ENTERPRISE TECHNOLOGY SOLUTIONS',
-    icon: <Monitor className="size-5 text-[#d7192a]" />,
+    icon: <Monitor className="size-6 text-white stroke-[2.2]" />,
     image: '/industries/it-companies.jpg',
   },
   {
     name: 'Pharma & Healthcare',
     desc: 'COMPLIANT HEALTHCARE SYSTEMS',
-    icon: <Pill className="size-5 text-[#d7192a]" />,
+    icon: <Pill className="size-6 text-white stroke-[2.2]" />,
     image: '/industries/pharma-healthcare.jpg',
   },
   {
     name: 'Manufacturing',
     desc: 'INDUSTRIAL AUTOMATION & IOT',
-    icon: <Factory className="size-5 text-[#d7192a]" />,
+    icon: <Factory className="size-6 text-white stroke-[2.2]" />,
     image: '/industries/manufacturing.jpg',
   },
   {
     name: 'Enterprises & Startups',
     desc: 'SCALABLE GROWTH SOLUTIONS',
-    icon: <Rocket className="size-5 text-[#d7192a]" />,
+    icon: <Rocket className="size-6 text-white stroke-[2.2]" />,
     image: '/industries/enterprises-startups.jpg',
   },
   {
     name: 'Engineering & Field Services',
     desc: 'TECHNICAL WORKFORCE SUPPORT',
-    icon: <HardHat className="size-5 text-[#d7192a]" />,
+    icon: <HardHat className="size-6 text-white stroke-[2.2]" />,
     image: '/industries/engineering-field-services.jpg',
   },
 ];
