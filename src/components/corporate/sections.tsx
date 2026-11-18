@@ -71,6 +71,7 @@ import { ClientMarquee } from './ClientMarquee';
 export { DigitalGlobe, GlobalPresence, ClientMarquee };
 import { ServiceCard3D } from './ServiceCard3D';
 import { AnimatedCounter } from './AnimatedCounter';
+import { CountryFlag } from './CountryFlag';
 
 const nav = [
   { label: 'Home', to: '/' },
@@ -377,15 +378,15 @@ export function StatsSection() {
 
           {/* 2. US USA CA Canada IN India */}
           <div className="text-center sm:text-left">
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm font-bold text-slate-900">
-              <span className="inline-flex items-center gap-1">
-                <span className="rounded bg-slate-200/80 px-1 py-0.5 text-[10px] font-bold text-slate-700">US</span> USA
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 text-xs sm:text-sm font-bold text-slate-900">
+              <span className="inline-flex items-center gap-1.5">
+                <CountryFlag country="us" /> USA
               </span>
-              <span className="inline-flex items-center gap-1">
-                <span className="rounded bg-slate-200/80 px-1 py-0.5 text-[10px] font-bold text-slate-700">CA</span> Canada
+              <span className="inline-flex items-center gap-1.5">
+                <CountryFlag country="ca" /> Canada
               </span>
-              <span className="inline-flex items-center gap-1">
-                <span className="rounded bg-slate-200/80 px-1 py-0.5 text-[10px] font-bold text-slate-700">IN</span> India
+              <span className="inline-flex items-center gap-1.5">
+                <CountryFlag country="in" /> India
               </span>
             </div>
             <div className="mt-1 text-xs text-slate-500 font-medium">Connected operations</div>
@@ -542,9 +543,9 @@ export function About({ detailed = false }: { detailed?: boolean }) {
             <div className="mt-4 space-y-3 text-xs sm:text-sm leading-relaxed text-slate-600">
               <p>
                 TP IT Group helps businesses navigate digital transformation with practical, reliable technology solutions.
-                Our <span className="inline-flex items-center rounded-md bg-slate-900 text-white px-1.5 py-0.5 text-[10px] font-bold tracking-wider shadow-2xs">US</span> USA head office and{' '}
-                <span className="inline-flex items-center rounded-md bg-slate-900 text-white px-1.5 py-0.5 text-[10px] font-bold tracking-wider shadow-2xs">CA</span> Canada and{' '}
-                <span className="inline-flex items-center rounded-md bg-slate-900 text-white px-1.5 py-0.5 text-[10px] font-bold tracking-wider shadow-2xs">IN</span> India operations connect
+                Our <span className="inline-flex items-center gap-1 font-semibold text-slate-800"><CountryFlag country="us" className="w-4 h-3 inline-block -mt-0.5" /> USA</span> head office and{' '}
+                <span className="inline-flex items-center gap-1 font-semibold text-slate-800"><CountryFlag country="ca" className="w-4 h-3 inline-block -mt-0.5" /> Canada</span> and{' '}
+                <span className="inline-flex items-center gap-1 font-semibold text-slate-800"><CountryFlag country="in" className="w-4 h-3 inline-block -mt-0.5" /> India</span> operations connect
                 business needs with technology, consulting and workforce expertise.
               </p>
               <p>
@@ -867,9 +868,9 @@ export function WhyChooseUsSection() {
                   <h3 className="text-base font-bold text-slate-900">{item.title}</h3>
                   {item.title === 'Global Technology Experience' ? (
                     <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
-                      <span className="text-[10px] font-bold uppercase text-slate-400">us</span> USA,{' '}
-                      <span className="text-[10px] font-bold uppercase text-slate-400">ca</span> Canada and{' '}
-                      <span className="text-[10px] font-bold uppercase text-slate-400">in</span> India operations connecting
+                      <span className="inline-flex items-center gap-1 font-semibold text-slate-700 mr-1.5"><CountryFlag country="us" className="w-4 h-3 inline-block -mt-0.5" /> USA</span>,{' '}
+                      <span className="inline-flex items-center gap-1 font-semibold text-slate-700 mr-1.5"><CountryFlag country="ca" className="w-4 h-3 inline-block -mt-0.5" /> Canada</span> and{' '}
+                      <span className="inline-flex items-center gap-1 font-semibold text-slate-700 mr-1.5"><CountryFlag country="in" className="w-4 h-3 inline-block -mt-0.5" /> India</span> operations connecting
                       business context with technical and workforce needs.
                     </p>
                   ) : (
@@ -1952,8 +1953,8 @@ export function Footer() {
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">OUR OFFICES</h3>
 
             <div>
-              <p className="text-xs sm:text-[13px] text-slate-900">
-                <span className="text-[10px] font-bold uppercase text-slate-400 mr-1.5">us</span>
+              <p className="text-xs sm:text-[13px] text-slate-900 flex items-center gap-1.5">
+                <CountryFlag country="us" />
                 <span className="font-bold">USA (Head Office) — TP IT Group LLC</span>
               </p>
               <p className="mt-1 text-xs text-slate-500 leading-relaxed">
@@ -1968,8 +1969,8 @@ export function Footer() {
             </div>
 
             <div>
-              <p className="text-xs sm:text-[13px] text-slate-900">
-                <span className="text-[10px] font-bold uppercase text-slate-400 mr-1.5">ca</span>
+              <p className="text-xs sm:text-[13px] text-slate-900 flex items-center gap-1.5">
+                <CountryFlag country="ca" />
                 <span className="font-bold">Canada — TP IT Group</span>
               </p>
               <p className="mt-1 text-xs text-slate-500 leading-relaxed">
@@ -1984,8 +1985,8 @@ export function Footer() {
             </div>
 
             <div>
-              <p className="text-xs sm:text-[13px] text-slate-900">
-                <span className="text-[10px] font-bold uppercase text-slate-400 mr-1.5">in</span>
+              <p className="text-xs sm:text-[13px] text-slate-900 flex items-center gap-1.5">
+                <CountryFlag country="in" />
                 <span className="font-bold">India — TP IT GROUP PVT LTD</span>
               </p>
               <p className="mt-1 text-xs text-slate-500 leading-relaxed">
