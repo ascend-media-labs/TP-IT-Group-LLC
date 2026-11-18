@@ -108,18 +108,24 @@ export function Navbar() {
     <>
       <ScrollProgress />
       <header className="site-header bg-white/75 backdrop-blur-xl">
-        <div className="site-container flex h-full items-center justify-between gap-3">
-          <Link
-            to="/"
-            className="brand-name flex items-center transition-opacity hover:opacity-90 shrink-0"
-            onClick={() => setOpen(false)}
-            aria-label="TP iT GROUP LLC Home"
-          >
-            <TPITLogo className="h-5 sm:h-6 md:h-6.5 max-w-[150px] sm:max-w-[170px] w-auto shrink-0" />
-          </Link>
+        <div className="site-container flex h-full items-center justify-between gap-4">
+          {/* Left: Brand Logo */}
+          <div className="flex items-center shrink-0 min-w-[140px] sm:min-w-[160px] lg:min-w-[170px]">
+            <Link
+              to="/"
+              className="brand-name flex items-center transition-opacity hover:opacity-90 shrink-0"
+              onClick={() => setOpen(false)}
+              aria-label="TP iT GROUP LLC Home"
+            >
+              <TPITLogo className="h-5 sm:h-6 md:h-6.5 max-w-[150px] sm:max-w-[170px] w-auto shrink-0" />
+            </Link>
+          </div>
 
-          {/* Desktop Navigation */}
-          <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:gap-2 lg:flex shrink-0">
+          {/* Center: Navigation Links centered & justified */}
+          <nav
+            aria-label="Main navigation"
+            className="hidden lg:flex flex-1 items-center justify-center gap-1 xl:gap-2.5 mx-auto max-w-4xl"
+          >
             {nav.map((item) => (
               <Link
                 key={`${item.label}-${item.to}`}
@@ -131,27 +137,31 @@ export function Navbar() {
                 <span className="nav-link-label">{item.label}</span>
               </Link>
             ))}
+          </nav>
+
+          {/* Right: Action Button & Mobile Toggle */}
+          <div className="flex items-center justify-end shrink-0 min-w-[140px] sm:min-w-[160px] lg:min-w-[170px] gap-2">
             <Button
               asChild
-              className="ml-2 h-9 xl:h-10 rounded-full bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] px-4 xl:px-5 text-xs xl:text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+              className="hidden lg:inline-flex h-9 xl:h-10 rounded-full bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] px-4 xl:px-5 text-xs xl:text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 items-center gap-1.5 shrink-0 whitespace-nowrap"
             >
               <Link to="/contact">
                 Let’s talk <ArrowUpRight className="size-3.5 xl:size-4" />
               </Link>
             </Button>
-          </nav>
 
-          {/* Mobile Menu Toggle */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden text-slate-800 hover:bg-slate-100 shrink-0"
-            aria-label={open ? 'Close navigation' : 'Open navigation'}
-            aria-expanded={open}
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <X className="size-6 text-[#d7192a]" /> : <Menu className="size-6" />}
-          </Button>
+            {/* Mobile Menu Toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden text-slate-800 hover:bg-slate-100 shrink-0"
+              aria-label={open ? 'Close navigation' : 'Open navigation'}
+              aria-expanded={open}
+              onClick={() => setOpen(!open)}
+            >
+              {open ? <X className="size-6 text-[#d7192a]" /> : <Menu className="size-6" />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Animated Drawer */}
