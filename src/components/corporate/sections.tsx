@@ -185,6 +185,18 @@ const capabilityTags = [
 export function Hero() {
   return (
     <section id="home" className="relative overflow-hidden pt-2 pb-6 sm:pt-3 sm:pb-8 md:pt-4 md:pb-8 bg-white text-slate-900 bg-dot-pattern">
+      {/* Generated Enterprise Hero Banner Background */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <img
+          src="/hero-banner.jpg"
+          alt="TP IT Group Global Enterprise Technology Innovation"
+          className="h-full w-full object-cover object-center opacity-25 sm:opacity-30"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-white/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-transparent to-white" />
+      </div>
+
       {/* Background Gradients & Transparent Grid Texture */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_-100px,rgba(215,25,42,0.04),transparent)]" />
       <div className="pointer-events-none absolute -left-40 top-1/4 size-96 rounded-full bg-red-500/5 blur-[130px]" />
