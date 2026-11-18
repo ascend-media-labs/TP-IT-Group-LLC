@@ -1,6 +1,6 @@
 import { useState, useRef, type MouseEvent, type ReactNode } from 'react';
 import { motion } from 'motion/react';
-import { ArrowUpRight, Check } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
 
 interface ServiceCard3DProps {
@@ -9,9 +9,10 @@ interface ServiceCard3DProps {
   title: string;
   summary: string;
   desc?: string;
+  image?: string;
   offers?: string[];
   icon: ReactNode;
-  isDetailed?: boolean;
+  full?: boolean;
 }
 
 export function ServiceCard3D({
@@ -20,9 +21,10 @@ export function ServiceCard3D({
   title,
   summary,
   desc,
+  image,
   offers = [],
   icon,
-  isDetailed = false,
+  full = false,
 }: ServiceCard3DProps) {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const [rotateX, setRotateX] = useState(0);
@@ -38,14 +40,20 @@ export function ServiceCard3D({
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rX = ((y - centerY) / centerY) * -10;
-    const rY = ((x - centerX) / centerX) * 10;
+    // Smooth tilt: max 12 deg
+    const rX = ((y - centerY) / centerY) * -12;
+    const rY = ((x - centerX) / centerX) * 12;
+
     setRotateX(rX);
     setRotateY(rY);
     setGlarePos({
       x: Math.round((x / rect.width) * 100),
       y: Math.round((y / rect.height) * 100),
     });
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
@@ -60,13 +68,13 @@ export function ServiceCard3D({
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: false, amount: 0.15 }}
       transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className="perspective-1000 h-full"
-      style={{ perspective: 1000 }}
+      className="h-full"
+      style={{ perspective: 1100 }}
     >
       <div
         ref={cardRef}
         onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovered(true)}
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
           transform: isHovered
@@ -74,107 +82,122 @@ export function ServiceCard3D({
             : 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
           transformStyle: 'preserve-3d',
           transition: isHovered
-            ? 'transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease-out'
-            : 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease-out',
+            ? 'transform 0.1s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out'
+            : 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease-out, border-color 0.6s ease-out',
         }}
-        className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border bg-white/95 p-8 shadow-sm backdrop-blur-xl transition-all duration-300 ${
+        className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border bg-white p-5 sm:p-6 shadow-sm backdrop-blur-xl transition-all duration-300 ${
           isHovered
-            ? 'border-red-300 shadow-[0_24px_50px_-15px_rgba(215,25,42,0.18)]'
+            ? 'border-red-300 shadow-[0_24px_50px_-12px_rgba(215,25,42,0.18)]'
             : 'border-slate-200/90'
         }`}
       >
-        {/* Dynamic Interactive Glare / Spotlight */}
+        {/* Dynamic Interactive Spotlight / Glare */}
         <div
-          className="pointer-events-none absolute inset-0 rounded-3xl transition-opacity duration-300"
+          className="pointer-events-none absolute inset-0 rounded-3xl transition-opacity duration-300 z-20"
           style={{
             opacity: isHovered ? 1 : 0,
-            background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(215, 25, 42, 0.1) 0%, rgba(255, 255, 255, 0.45) 35%, transparent 65%)`,
+            background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(215, 25, 42, 0.08) 0%, rgba(255, 255, 255, 0.4) 30%, transparent 65%)`,
           }}
         />
 
-        {/* Glow ambient highlight */}
+        {/* Soft Ambient Corner Glow */}
         <div
           className="pointer-events-none absolute -right-20 -top-20 size-48 rounded-full bg-red-500/10 blur-3xl transition-opacity duration-500"
           style={{ opacity: isHovered ? 1 : 0.25 }}
         />
 
         <div>
-          {/* Card Top: Icon & Number with Stagger 3D Depth */}
+          {/* 3D Stagger Layer 1: Image with Top-Left Floating Badge */}
           <div
             style={{
-              transform: isHovered ? 'translateZ(36px)' : 'translateZ(0px)',
-              transition: 'transform 0.38s cubic-bezier(0.16, 1, 0.3, 1) 0.04s',
+              transform: isHovered ? 'translateZ(30px)' : 'translateZ(0px)',
+              transition: isHovered
+                ? 'transform 0.36s cubic-bezier(0.16, 1, 0.3, 1) 0.03s'
+                : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+              transformStyle: 'preserve-3d',
             }}
-            className="flex items-center justify-between"
+            className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner mb-5"
           >
-            <div className="flex size-14 items-center justify-center rounded-2xl border border-red-200 bg-red-50 text-[#d7192a] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-transparent shadow-xs">
+            {image && (
+              <img
+                src={image}
+                alt={title}
+                className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                loading="lazy"
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" />
+
+            {/* Floating Icon Badge with higher 3D Pop (translateZ 44px) */}
+            <div
+              style={{
+                transform: isHovered ? 'translateZ(44px) scale(1.08)' : 'translateZ(0px) scale(1)',
+                transition: isHovered
+                  ? 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.06s'
+                  : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+              }}
+              className="absolute top-2.5 left-2.5 flex size-9 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10 group-hover:border-red-200 transition-colors"
+            >
               {icon}
             </div>
-            <span className="font-mono text-xs font-bold text-slate-400 tracking-wider">
-              0{index + 1}
-            </span>
           </div>
 
-          {/* Title & Description with Stagger 3D Depth */}
+          {/* 3D Stagger Layer 2: Title & Description */}
           <div
             style={{
-              transform: isHovered ? 'translateZ(26px)' : 'translateZ(0px)',
-              transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.08s',
+              transform: isHovered ? 'translateZ(24px)' : 'translateZ(0px)',
+              transition: isHovered
+                ? 'transform 0.38s cubic-bezier(0.16, 1, 0.3, 1) 0.09s'
+                : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           >
-            <h3 className="mt-6 text-xl font-extrabold text-slate-900 group-hover:text-[#d7192a] transition-colors">
+            <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors">
               {title}
             </h3>
-            <p className="mt-3 text-xs sm:text-sm leading-relaxed text-slate-600">
-              {isDetailed && desc ? desc : summary}
+            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">
+              {full && desc ? desc : summary}
             </p>
           </div>
 
-          {/* Key Offerings List if Detailed */}
-          {isDetailed && offers.length > 0 && (
+          {/* Key Offerings List if Full */}
+          {full && offers && offers.length > 0 && (
             <div
               style={{
-                transform: isHovered ? 'translateZ(20px)' : 'translateZ(0px)',
-                transition: 'transform 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.12s',
+                transform: isHovered ? 'translateZ(18px)' : 'translateZ(0px)',
+                transition: isHovered
+                  ? 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.12s'
+                  : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
               }}
-              className="mt-6 space-y-2 border-t border-slate-100 pt-5"
+              className="mt-4 space-y-1.5 border-t border-slate-100 pt-3"
             >
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-700">
-                Core Deliverables:
-              </span>
-              <ul className="grid gap-2 sm:grid-cols-2 mt-2">
-                {offers.map((offer) => (
-                  <li key={offer} className="flex items-start gap-2 text-xs text-slate-600">
-                    <Check className="size-3.5 mt-0.5 shrink-0 text-[#d7192a]" />
-                    <span>{offer}</span>
-                  </li>
-                ))}
-              </ul>
+              {offers.map((offer) => (
+                <div key={offer} className="flex items-start gap-2 text-xs text-slate-600">
+                  <Check className="size-3.5 mt-0.5 shrink-0 text-[#d7192a]" />
+                  <span>{offer}</span>
+                </div>
+              ))}
             </div>
           )}
         </div>
 
-        {/* Card Bottom CTA with Stagger 3D Depth */}
+        {/* 3D Stagger Layer 3: Bottom Explore Link */}
         <div
           style={{
-            transform: isHovered ? 'translateZ(18px)' : 'translateZ(0px)',
-            transition: 'transform 0.44s cubic-bezier(0.16, 1, 0.3, 1) 0.15s',
+            transform: isHovered ? 'translateZ(20px)' : 'translateZ(0px)',
+            transition: isHovered
+              ? 'transform 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.15s'
+              : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
-          className="mt-8 pt-5 border-t border-slate-100 flex items-center justify-between"
+          className="mt-6 pt-4 border-t border-slate-100"
         >
           <Link
-            to={isDetailed ? '/contact' : '/services'}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
+            to="/services"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors group/link"
           >
-            {isDetailed ? 'Request Consultation' : 'Explore Capabilities'}
-            <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            Explore {title} <ArrowRight className="size-3.5 ml-1 transition-transform group-hover/link:translate-x-1" />
           </Link>
-          <span className="text-[10px] font-medium text-slate-400 uppercase tracking-wider">
-            Enterprise SLA
-          </span>
         </div>
       </div>
     </motion.div>
   );
 }
-

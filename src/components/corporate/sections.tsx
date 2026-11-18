@@ -717,56 +717,21 @@ export function Services({ full = false }: { full?: boolean }) {
           </p>
         </div>
 
-        {/* 6 Services Grid */}
+        {/* 6 Services Grid with 3D Tilt + Stagger */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (
-            <motion.div
+            <ServiceCard3D
               key={service.id}
-              initial={{ opacity: 0, y: 25, scale: 0.97 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ delay: i * 0.08, duration: 0.45 }}
-              className="group glass-card flex flex-col justify-between p-5 sm:p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300"
-            >
-              <div>
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner mb-5">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" />
-                  <div className="absolute top-2.5 left-2.5 flex size-9 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10">
-                    {serviceIcons[i % serviceIcons.length]}
-                  </div>
-                </div>
-
-                <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors">{service.title}</h3>
-                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">
-                  {full && service.desc ? service.desc : service.summary}
-                </p>
-
-                {full && service.offers && (
-                  <ul className="mt-4 space-y-1.5 border-t border-slate-100 pt-3">
-                    {service.offers.map((offer) => (
-                      <li key={offer} className="flex items-start gap-2 text-xs text-slate-600">
-                        <Check className="size-3.5 mt-0.5 shrink-0 text-[#d7192a]" />
-                        <span>{offer}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              <div className="mt-6 pt-4 border-t border-slate-100">
-                <Link
-                  to="/services"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
-                >
-                  Explore {service.title} <ArrowRight className="size-3.5 ml-1" />
-                </Link>
-              </div>
-            </motion.div>
+              id={service.id}
+              index={i}
+              title={service.title}
+              summary={service.summary}
+              desc={service.desc}
+              image={service.image}
+              offers={service.offers}
+              icon={serviceIcons[i % serviceIcons.length]}
+              full={full}
+            />
           ))}
         </div>
       </div>
