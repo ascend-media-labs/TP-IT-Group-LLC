@@ -1003,49 +1003,104 @@ export function WorkWithSection() {
 }
 
 export function ProvenApproachSection() {
-  const processIcons = [
-    <MessageSquare key="chat" className="size-5 text-[#d7192a]" />,
-    <Lightbulb key="light" className="size-5 text-[#d7192a]" />,
-    <Rocket key="rocket" className="size-5 text-[#d7192a]" />,
-    <RefreshCw key="refresh" className="size-5 text-[#d7192a]" />,
-  ];
+  const processIcons = [MessageSquare, Lightbulb, Rocket, RefreshCw];
 
   return (
     <section className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
+      {/* Ambient background glow */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] lg:w-[900px] h-[300px] bg-red-500/[0.04] blur-[100px] rounded-full" />
+
       <div className="site-container relative z-10">
-        <div className="mb-8 text-left">
-          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
+        <div className="mb-10 text-left">
+          <div className="inline-flex items-center gap-2 rounded-full bg-red-50/90 border border-red-200/80 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a] shadow-xs backdrop-blur-sm">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#d7192a] opacity-75" />
+              <span className="relative inline-flex size-2 rounded-full bg-[#d7192a]" />
+            </span>
             OUR WORK PROCESS
-          </span>
-          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
+          </div>
+          <h2 className="mt-3.5 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
             A Clear Approach to <span className="text-[#d7192a]">Delivering Excellence</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
+          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 max-w-4xl leading-relaxed">
             Agree on the priorities, review progress together and validate what is delivered against your business needs.
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {provenApproach.map((step, i) => (
-            <motion.div
-              key={step.number}
-              initial={{ opacity: 0, y: 25, scale: 0.97 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ delay: i * 0.1, duration: 0.45 }}
-              className="glass-card p-6 bg-white/95 border-slate-200/90 hover:border-[#d7192a]/50 hover:shadow-xl transition-all relative"
-            >
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center justify-center rounded-lg bg-slate-900 text-white font-mono text-xs font-bold px-2.5 py-1">
-                  {step.number}
-                </span>
-                <div className="flex size-9 items-center justify-center rounded-xl bg-red-50 border border-red-100">
-                  {processIcons[i % processIcons.length]}
-                </div>
-              </div>
-              <h3 className="mt-4 text-base font-bold text-slate-900">{step.title}</h3>
-              <p className="mt-2 text-xs leading-relaxed text-slate-600">{step.desc}</p>
-            </motion.div>
-          ))}
+
+        <div className="relative">
+          {/* Subtle desktop connector track connecting the 4 phases */}
+          <div className="hidden lg:block absolute top-9 left-16 right-16 h-[2px] bg-gradient-to-r from-red-500/20 via-red-500/40 to-red-500/20 pointer-events-none z-0" />
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 relative z-10">
+            {provenApproach.map((step, i) => {
+              const IconComponent = processIcons[i % processIcons.length];
+              const progressPct = ((i + 1) / provenApproach.length) * 100;
+
+              return (
+                <motion.div
+                  key={step.number}
+                  initial={{ opacity: 0, y: 25, scale: 0.97 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: false, amount: 0.15 }}
+                  transition={{ delay: i * 0.1, duration: 0.45 }}
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-red-400/80 hover:shadow-[0_20px_40px_-15px_rgba(215,25,42,0.15)]"
+                >
+                  {/* Luxury Top Accent Line that highlights on hover */}
+                  <div className="absolute inset-x-0 top-0 h-[2.5px] bg-gradient-to-r from-transparent via-[#d7192a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Architectural Watermark Step Number */}
+                  <span className="pointer-events-none absolute -bottom-4 -right-1 font-mono text-7xl sm:text-8xl font-black tracking-tighter text-slate-100/70 select-none transition-all duration-500 group-hover:text-red-500/[0.08] group-hover:scale-105">
+                    {step.number}
+                  </span>
+
+                  {/* Ambient corner glow on hover */}
+                  <div className="pointer-events-none absolute -top-16 -right-16 size-36 rounded-full bg-red-500/5 blur-2xl group-hover:bg-red-500/10 transition-colors duration-500" />
+
+                  <div>
+                    {/* Header: Step Pill + Modern Icon Badge */}
+                    <div className="flex items-center justify-between relative z-10">
+                      <div className="flex items-center gap-1.5 rounded-full bg-slate-900 px-3 py-1 text-[11px] font-mono font-bold tracking-wider text-white shadow-xs group-hover:bg-[#d7192a] transition-colors duration-300">
+                        <span className="size-1.5 rounded-full bg-red-400 group-hover:bg-white animate-pulse" />
+                        <span>STEP {step.number}</span>
+                      </div>
+                      <div className="relative flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-red-50 to-red-100/60 border border-red-200/70 text-[#d7192a] shadow-xs transition-all duration-300 group-hover:scale-110 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] group-hover:shadow-md group-hover:shadow-red-500/25">
+                        <IconComponent className="size-5 transition-transform duration-300 group-hover:scale-105" />
+                      </div>
+                    </div>
+
+                    {/* Step Title & Description */}
+                    <h3 className="mt-5 text-base sm:text-lg font-bold tracking-tight text-slate-900 group-hover:text-[#d7192a] transition-colors duration-200 relative z-10">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2.5 text-xs sm:text-[13px] leading-relaxed text-slate-600 relative z-10">
+                      {step.desc}
+                    </p>
+                  </div>
+
+                  {/* Bottom: Milestone Tracker & Mini Progress Bar */}
+                  <div className="mt-6 pt-4 border-t border-slate-100/90 relative z-10">
+                    <div className="flex items-center justify-between text-[11px] font-medium text-slate-400">
+                      <span className="flex items-center gap-1.5 font-mono text-slate-500 group-hover:text-slate-700 transition-colors">
+                        <span className="size-1.5 rounded-full bg-[#d7192a]" />
+                        Phase {step.number}
+                      </span>
+                      <span className="flex items-center gap-1 text-slate-400 group-hover:text-[#d7192a] transition-colors">
+                        <span className="text-[10px] tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity font-semibold">Flow</span>
+                        <ArrowRight className="size-3 group-hover:translate-x-0.5 transition-transform" />
+                      </span>
+                    </div>
+
+                    <div className="mt-2 h-1 w-full rounded-full bg-slate-100 overflow-hidden">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-red-400 to-[#d7192a] transition-all duration-500"
+                        style={{ width: `${progressPct}%` }}
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
