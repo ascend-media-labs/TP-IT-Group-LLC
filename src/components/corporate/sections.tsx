@@ -712,12 +712,12 @@ export function IndustriesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
+              className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
             >
               <div>
                 {/* Top Row: Icon Leaf Badge & Sector Pill (Sample image style) */}
                 <div className="flex items-center justify-between mb-3.5">
-                  <div className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#d7192a] to-[#b91c1c] text-white shadow-md shadow-red-500/20">
+                  <div className="flex size-11 items-center justify-center icon-diagonal bg-gradient-to-br from-[#d7192a] to-[#b91c1c] text-white shadow-md shadow-red-500/20">
                     {industryIcons[i % industryIcons.length]}
                   </div>
                   <span className="rounded-full bg-slate-100/90 border border-slate-200/70 px-3 py-1 text-[11px] font-semibold text-slate-600">
@@ -725,8 +725,8 @@ export function IndustriesSection() {
                   </span>
                 </div>
 
-                {/* Card Image with normal 4-sides rounded curve */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-100 border border-slate-100 shadow-inner mb-4">
+                {/* Card Image with matching diagonal curve */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-4">
                   <img
                     src={ind.image}
                     alt={ind.name}
@@ -766,7 +766,13 @@ export function WhyChooseUsSection() {
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern pt-2 sm:pt-3">
       <div className="site-container relative z-10">
-        <div className="mb-5 sm:mb-6 text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-5 sm:mb-6 text-left"
+        >
           <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
             WHY CHOOSE US
           </span>
@@ -776,11 +782,17 @@ export function WhyChooseUsSection() {
           <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
             Dedicated partnership, proven global delivery models, and dependable support engineered around your growth.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12 max-w-6xl">
-          {/* Left Handshake Card */}
-          <div className="group lg:col-span-6 rounded-2xl border border-red-100/90 bg-white p-6 sm:p-8 shadow-[0_4px_24px_rgba(215,25,42,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 flex flex-col justify-between min-h-[360px] h-full transition-all duration-300 text-left">
+          {/* Left Handshake Card -> Slides in from Left to Right */}
+          <motion.div
+            initial={{ opacity: 0, x: -70 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="group lg:col-span-6 rounded-2xl border border-red-100/90 bg-white p-6 sm:p-8 shadow-[0_4px_24px_rgba(215,25,42,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 flex flex-col justify-between min-h-[360px] h-full transition-all duration-300 text-left"
+          >
             <div>
               <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-100 border border-slate-100 shadow-inner mb-6">
                 <img
@@ -806,13 +818,20 @@ export function WhyChooseUsSection() {
                 Get in Touch <ArrowUpRight className="size-4 ml-0.5" />
               </Link>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right 5 items */}
+          {/* Right 5 items -> Slide in from Right to Left with staggered delay */}
           <div className="lg:col-span-6 space-y-6 sm:space-y-7">
-            {whyChooseUs.map((item) => (
-              <div key={item.title} className="flex gap-4 items-start">
-                <div className="flex size-7 sm:size-8 shrink-0 items-center justify-center rounded-full bg-red-50/80 border border-red-200 text-[#d7192a] mt-0.5">
+            {whyChooseUs.map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, x: 70 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.55, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="flex gap-4 items-start"
+              >
+                <div className="flex size-7 sm:size-8 shrink-0 items-center justify-center rounded-full bg-red-50/80 border border-red-200 text-[#d7192a] mt-0.5 shadow-2xs">
                   <Check className="size-4 stroke-[2.5]" />
                 </div>
                 <div>
@@ -828,7 +847,7 @@ export function WhyChooseUsSection() {
                     <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">{item.desc}</p>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
