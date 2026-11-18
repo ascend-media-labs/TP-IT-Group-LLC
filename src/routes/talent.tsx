@@ -85,7 +85,7 @@ function Page() {
             </h2>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-3">
             {talentCapabilities.map((cap, idx) => (
               <motion.div
                 key={cap.title}
@@ -93,20 +93,20 @@ function Page() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className={`rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-sm hover:shadow-md transition-all ${
-                  idx === 2 ? 'md:col-span-1' : ''
-                }`}
+                className="rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-sm hover:shadow-md hover:border-red-200 transition-all text-left flex flex-col justify-between"
               >
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900">{cap.title}</h3>
-                <p className="mt-2 text-xs sm:text-[13px] text-slate-600 leading-relaxed">{cap.desc}</p>
-                <ul className="mt-5 space-y-2.5">
-                  {cap.skills.map((skill) => (
-                    <li key={skill} className="flex items-center gap-2.5 text-xs sm:text-[13px] text-slate-700">
-                      <Check className="size-4 text-[#d7192a] shrink-0" />
-                      <span>{skill}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900">{cap.title}</h3>
+                  <p className="mt-2 text-xs sm:text-[13px] text-slate-600 leading-relaxed">{cap.desc}</p>
+                  <ul className="mt-5 space-y-2.5">
+                    {cap.skills.map((skill) => (
+                      <li key={skill} className="flex items-center gap-2.5 text-xs sm:text-[13px] text-slate-700">
+                        <Check className="size-4 text-[#d7192a] shrink-0" />
+                        <span>{skill}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </motion.div>
             ))}
           </div>
