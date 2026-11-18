@@ -439,7 +439,10 @@ export function ConnectedCapabilitiesSection() {
               className="group card-diagonal overflow-hidden flex flex-col justify-between p-5 sm:p-6 bg-white/95 border border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
             >
               <div>
-                <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-5">
+                <Link
+                  to={cap.href}
+                  className="block relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-5"
+                >
                   <img
                     src={cap.image}
                     alt={cap.title}
@@ -453,9 +456,11 @@ export function ConnectedCapabilitiesSection() {
                   <span className="absolute top-2.5 right-2.5 rounded-lg bg-black/40 backdrop-blur-md px-2 py-0.5 font-mono text-[11px] font-bold text-white z-10">
                     {cap.number}
                   </span>
-                </div>
+                </Link>
 
-                <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors">{cap.title}</h3>
+                <Link to={cap.href} className="block group/title">
+                  <h3 className="text-xl font-bold text-slate-900 group-hover/title:text-[#d7192a] group-hover:text-[#d7192a] transition-colors">{cap.title}</h3>
+                </Link>
                 <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">{cap.desc}</p>
 
                 <ul className="mt-4 space-y-2 border-t border-slate-100 pt-3">
@@ -475,9 +480,13 @@ export function ConnectedCapabilitiesSection() {
                 >
                   {cap.linkText}
                 </Link>
-                <span className="flex size-8 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-600 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] transition-all shadow-2xs">
+                <Link
+                  to={cap.href}
+                  className="flex size-8 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-600 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] transition-all shadow-2xs"
+                  aria-label={cap.linkText}
+                >
                   <ArrowUpRight className="size-4" />
-                </span>
+                </Link>
               </div>
             </motion.div>
           ))}

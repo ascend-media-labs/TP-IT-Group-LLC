@@ -77,7 +77,7 @@ export const connectedCapabilities = [
       'Workforce planning',
     ],
     linkText: 'Explore consulting',
-    href: '/services',
+    href: '/consulting',
   },
   {
     number: '03',
@@ -91,7 +91,7 @@ export const connectedCapabilities = [
       'Skills planning & team augmentation',
     ],
     linkText: 'Explore talent solutions',
-    href: '/careers',
+    href: '/talent',
   },
 ];
 
