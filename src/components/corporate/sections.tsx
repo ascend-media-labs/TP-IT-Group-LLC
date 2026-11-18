@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
-import { useState, type ReactNode } from 'react';
-import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
+import { useState, useRef, useEffect, type ReactNode } from 'react';
+import { motion, AnimatePresence, useScroll, useSpring, useInView } from 'motion/react';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -319,6 +319,49 @@ export function Hero() {
   );
 }
 
+function AutoIncrementNumber({ end, suffix = '' }: { end: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement | null>(null);
+  const isInView = useInView(ref, { once: false, margin: '-20px' });
+
+  useEffect(() => {
+    if (!isInView) {
+      setCount(0);
+      return;
+    }
+
+    let start = 0;
+    const duration = 1400; // ms
+    const startTime = performance.now();
+
+    let animationFrameId: number;
+    const update = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // easeOutExpo
+      const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const current = Math.floor(start + (end - start) * ease);
+      setCount(current);
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(update);
+      } else {
+        setCount(end);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isInView, end]);
+
+  return (
+    <span ref={ref} className="tabular-nums">
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
 export function StatsSection() {
   return (
     <section className="relative border-y border-slate-200/80 bg-slate-50/80 py-4 sm:py-5 overflow-hidden bg-grid-pattern">
@@ -326,7 +369,9 @@ export function StatsSection() {
         <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 items-center">
           {/* 1. 20+ years */}
           <div className="text-center sm:text-left">
-            <div className="font-mono text-2xl sm:text-3xl font-extrabold text-slate-900">20+ years</div>
+            <div className="font-mono text-2xl sm:text-3xl font-extrabold text-slate-900">
+              <AutoIncrementNumber end={20} suffix="+ years" />
+            </div>
             <div className="mt-1 text-xs text-slate-500 font-medium">Industry experience</div>
           </div>
 
