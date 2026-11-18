@@ -63,7 +63,7 @@ function Page() {
   return (
     <div className="bg-white text-slate-900">
       {/* 1. HERO BANNER (Image 1) */}
-      <section className="relative overflow-hidden pt-8 pb-6 sm:pt-10 sm:pb-8 bg-white border-b border-slate-200/80">
+      <section className="relative overflow-hidden pt-4 pb-5 sm:pt-6 sm:pb-6 bg-white border-b border-slate-200/80">
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
             src={team}

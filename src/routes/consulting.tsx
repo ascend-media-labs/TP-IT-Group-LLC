@@ -80,7 +80,7 @@ function Page() {
   return (
     <div className="bg-white text-slate-900">
       {/* 1. HERO SECTION (Screenshot 1) */}
-      <section className="relative overflow-hidden pt-12 pb-10 sm:pt-16 sm:pb-14 bg-white border-b border-slate-200/80">
+      <section className="relative overflow-hidden pt-4 pb-5 sm:pt-6 sm:pb-6 bg-white border-b border-slate-200/80">
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
             src={headquarters}
@@ -94,10 +94,10 @@ function Page() {
           <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             TP IT GROUP / CONSULTING SERVICES
           </p>
-          <h1 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+          <h1 className="mt-1.5 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
             Clear strategy. Practical execution.
           </h1>
-          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
             Make your next decision with a clearer view of the business, technology and people involved. TP IT Group helps turn complex priorities into a focused transformation roadmap.
           </p>
           <div className="mt-5">

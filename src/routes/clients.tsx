@@ -50,7 +50,7 @@ function Page() {
   return (
     <div className="bg-white text-slate-900">
       {/* 1. HERO BANNER (Image 2) */}
-      <section className="relative overflow-hidden pt-12 pb-12 sm:pt-16 sm:pb-16 bg-white border-b border-slate-200/80">
+      <section className="relative overflow-hidden pt-4 pb-5 sm:pt-6 sm:pb-6 bg-white border-b border-slate-200/80">
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
             src={headquarters}
@@ -64,10 +64,10 @@ function Page() {
           <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             TP IT GROUP / CLIENT SUCCESS &amp; EXCELLENCE
           </p>
-          <h1 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+          <h1 className="mt-1.5 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
             Our Promise, <span className="text-[#d7192a]">Your Progress</span>
           </h1>
-          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
             We don’t just complete projects; we build enduring partnerships. TP IT Group LLC is committed to
             delivering professional excellence and measurable business outcomes for every client.
           </p>

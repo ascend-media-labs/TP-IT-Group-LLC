@@ -27,7 +27,7 @@ function Page() {
   return (
     <div className="bg-white text-slate-900">
       {/* 1. HERO / BANNER SECTION (Screenshot 1) */}
-      <section className="relative overflow-hidden pt-12 pb-8 sm:pt-16 sm:pb-10 bg-white border-b border-slate-200/80">
+      <section className="relative overflow-hidden pt-4 pb-5 sm:pt-6 sm:pb-6 bg-white border-b border-slate-200/80">
         {/* Subtle background image overlay with gradient */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
@@ -42,10 +42,10 @@ function Page() {
           <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             TP IT GROUP / ABOUT TP IT GROUP
           </p>
-          <h1 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+          <h1 className="mt-1.5 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
             Technology. People. Partnership. <span className="text-[#d7192a]">One TP IT Group.</span>
           </h1>
-          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-4xl">
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-4xl">
             TP IT Group brings more than 20 years of industry experience, with a{' '}
             <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-700">US</span> USA head office and locations in Ontario,{' '}
             <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-700">CA</span> Canada, and Hyderabad,{' '}
@@ -54,7 +54,7 @@ function Page() {
         </div>
 
         {/* 4 Operations / Stats Row */}
-        <div className="site-container relative z-10 mt-10 pt-7 border-t border-slate-200/80">
+        <div className="site-container relative z-10 mt-6 pt-5 border-t border-slate-200/80">
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4 text-center">
             <div>
               <div className="text-2xl sm:text-3xl font-extrabold text-[#d7192a]">Delaware</div>

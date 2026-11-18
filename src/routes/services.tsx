@@ -210,7 +210,7 @@ function Page() {
   return (
     <div className="bg-white text-slate-900">
       {/* 1. HERO SECTION (Screenshot 1) */}
-      <section className="relative overflow-hidden pt-12 pb-10 sm:pt-16 sm:pb-14 bg-white border-b border-slate-200/80">
+      <section className="relative overflow-hidden pt-4 pb-5 sm:pt-6 sm:pb-6 bg-white border-b border-slate-200/80">
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
             src={infrastructure}
@@ -224,10 +224,10 @@ function Page() {
           <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             TP IT GROUP / OUR SERVICES
           </p>
-          <h1 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+          <h1 className="mt-1.5 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
             Connected Solutions for <span className="text-[#d7192a]">Your Next Business Move.</span>
           </h1>
-          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
             Technology, consulting and IT and non-IT talent—one partner to connect your strategy, systems and people.
           </p>
         </div>
@@ -236,7 +236,7 @@ function Page() {
       {/* 2. ONE PARTNER. CONNECTED CAPABILITIES. SECTION (Screenshot 2) */}
       <section className="section bg-white text-slate-900 bg-dot-pattern">
         <div className="site-container">
-          <div className="mb-8 text-left">
+          <div className="mb-6 text-left">
             <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
               ONE PARTNER. CONNECTED CAPABILITIES.
             </p>
@@ -304,7 +304,7 @@ function Page() {
 
       {/* 3. DETAILED SERVICES ALTERNATING BLOCKS (Screenshots 3 to 8) */}
       <section className="section bg-slate-50/70 border-y border-slate-200/80 bg-grid-pattern">
-        <div className="site-container space-y-12 sm:space-y-16">
+        <div className="site-container space-y-8 sm:space-y-10">
           {detailedServices.map((service, index) => {
             const isEven = index % 2 === 1; // Alternating layout
             return (
