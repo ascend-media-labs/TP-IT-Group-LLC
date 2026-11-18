@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { ContactBanner } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
-import { team } from '@/components/corporate/content';
 import { Button } from '@/components/ui/button';
 import { Check, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -74,43 +73,8 @@ const engagementSteps = [
 function Page() {
   return (
     <div className="bg-white text-slate-900">
-      {/* 1. HERO BANNER (Image 1) */}
-      <section className="relative overflow-hidden pt-4 pb-5 sm:pt-6 sm:pb-6 bg-white border-b border-slate-200/80">
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <img
-            src={team}
-            alt="TP IT Group Talent Team"
-            className="h-full w-full object-cover object-center opacity-15"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/70" />
-        </div>
-
-        <div className="site-container relative z-10 text-left">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
-            TP IT GROUP / IT &amp; NON-IT TALENT
-          </p>
-          <h1 className="mt-1.5 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            The expertise your next move needs.
-          </h1>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
-            Technology only moves forward when the right people are behind it. TP IT Group connects your project and
-            operational priorities with IT and non-IT workforce solutions.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-4">
-            <Button
-              asChild
-              className="rounded-full bg-[#d7192a] hover:bg-[#b91c1c] text-white px-7 py-3 text-xs sm:text-sm font-bold shadow-md shadow-red-500/20 transition hover:scale-105"
-            >
-              <Link to="/contact">
-                Discuss your talent needs <ArrowRight className="size-4 ml-1.5" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. IT & NON-IT TALENT CAPABILITIES (Image 2) */}
-      <section className="section bg-white text-slate-900 bg-dot-pattern">
+      {/* 1. IT & NON-IT TALENT CAPABILITIES */}
+      <section className="section bg-white text-slate-900 bg-dot-pattern pt-8 sm:pt-10">
         <div className="site-container">
           <div className="text-left mb-8">
             <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">

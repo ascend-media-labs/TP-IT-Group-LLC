@@ -1,7 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { ContactBanner } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
-import { team } from '@/components/corporate/content';
 import { motion } from 'framer-motion';
 
 export const Route = createFileRoute('/team')({
@@ -62,33 +61,8 @@ const leaders: Leader[] = [
 function Page() {
   return (
     <div className="bg-white text-slate-900">
-      {/* 1. HERO BANNER (Image 1) */}
-      <section className="relative overflow-hidden pt-4 pb-5 sm:pt-6 sm:pb-6 bg-white border-b border-slate-200/80">
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <img
-            src={team}
-            alt="TP IT Group Leadership Team Meeting"
-            className="h-full w-full object-cover object-center opacity-15"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/70" />
-        </div>
-
-        <div className="site-container relative z-10 text-left">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
-            TP IT GROUP / OUR TEAM
-          </p>
-          <h1 className="mt-1 text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            Our Team
-          </h1>
-          <p className="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
-            Leadership bringing together enterprise strategy, operational discipline, cloud architecture and engineering
-            to support your next transformation.
-          </p>
-        </div>
-      </section>
-
-      {/* 2. LEADERSHIP SHOWCASE (Single row 5-card layout) */}
-      <section className="py-8 sm:py-10 bg-white text-slate-900 bg-dot-pattern">
+      {/* 1. LEADERSHIP SHOWCASE (Single row 5-card layout) */}
+      <section className="pt-8 sm:pt-10 pb-8 sm:pb-10 bg-white text-slate-900 bg-dot-pattern">
         <div className="site-container">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-5 pb-3 border-b border-slate-100">
             <div>

@@ -1,7 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { ContactBanner } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
-import { headquarters } from '@/components/corporate/content';
 import { Trophy, ShieldCheck, Zap, Clock, BarChart3 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -49,33 +48,8 @@ const deliverables = [
 function Page() {
   return (
     <div className="bg-white text-slate-900">
-      {/* 1. HERO BANNER (Image 2) */}
-      <section className="relative overflow-hidden pt-4 pb-5 sm:pt-6 sm:pb-6 bg-white border-b border-slate-200/80">
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <img
-            src={headquarters}
-            alt="TP IT Group Client Partnerships Meeting"
-            className="h-full w-full object-cover object-center opacity-15"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/70" />
-        </div>
-
-        <div className="site-container relative z-10 text-left">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
-            TP IT GROUP / CLIENT SUCCESS &amp; EXCELLENCE
-          </p>
-          <h1 className="mt-1.5 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            Our Promise, <span className="text-[#d7192a]">Your Progress</span>
-          </h1>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
-            We don’t just complete projects; we build enduring partnerships. TP IT Group LLC is committed to
-            delivering professional excellence and measurable business outcomes for every client.
-          </p>
-        </div>
-      </section>
-
-      {/* 2. THE TP IT COMMITMENT (Image 3) */}
-      <section className="section bg-white text-slate-900 bg-dot-pattern">
+      {/* 1. THE TP IT COMMITMENT */}
+      <section className="section bg-white text-slate-900 bg-dot-pattern pt-8 sm:pt-10">
         <div className="site-container">
           <div className="text-left mb-8">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">

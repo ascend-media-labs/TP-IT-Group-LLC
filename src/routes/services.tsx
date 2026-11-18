@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { ContactBanner } from '@/components/corporate/sections';
-import { metadata, infrastructure } from '@/components/corporate/content';
+import { metadata } from '@/components/corporate/content';
 import {
   Bot,
   Cloud,
@@ -210,32 +210,8 @@ const industries = [
 function Page() {
   return (
     <div className="bg-white text-slate-900">
-      {/* 1. HERO SECTION (Screenshot 1) */}
-      <section className="relative overflow-hidden pt-4 pb-5 sm:pt-6 sm:pb-6 bg-white border-b border-slate-200/80">
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <img
-            src={infrastructure}
-            alt="TP IT Group Services Technology"
-            className="h-full w-full object-cover object-center opacity-15"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/90 to-white" />
-        </div>
-
-        <div className="site-container relative z-10 text-left">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
-            TP IT GROUP / OUR SERVICES
-          </p>
-          <h1 className="mt-1.5 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            Connected Solutions for <span className="text-[#d7192a]">Your Next Business Move.</span>
-          </h1>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
-            Technology, consulting and IT and non-IT talent—one partner to connect your strategy, systems and people.
-          </p>
-        </div>
-      </section>
-
-      {/* 2. ONE PARTNER. CONNECTED CAPABILITIES. SECTION (Screenshot 2) */}
-      <section className="section bg-white text-slate-900 bg-dot-pattern">
+      {/* 1. ONE PARTNER. CONNECTED CAPABILITIES. SECTION */}
+      <section className="section bg-white text-slate-900 bg-dot-pattern pt-8 sm:pt-10">
         <div className="site-container">
           <div className="mb-6 text-left">
             <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">

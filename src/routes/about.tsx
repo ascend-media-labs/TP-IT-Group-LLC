@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { ContactBanner } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
-import { headquarters } from '@/components/corporate/content';
 import { Button } from '@/components/ui/button';
 import {
   Globe,
@@ -27,36 +26,10 @@ export const Route = createFileRoute('/about')({
 function Page() {
   return (
     <div className="bg-white text-slate-900">
-      {/* 1. HERO / BANNER SECTION (Screenshot 1) */}
-      <section className="relative overflow-hidden pt-4 pb-5 sm:pt-6 sm:pb-6 bg-white border-b border-slate-200/80">
-        {/* Subtle background image overlay with gradient */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <img
-            src={headquarters}
-            alt="TP IT Group Modern Office"
-            className="h-full w-full object-cover object-center opacity-15"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/75 via-white/90 to-white" />
-        </div>
-
-        <div className="site-container relative z-10 text-left">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
-            TP IT GROUP / ABOUT TP IT GROUP
-          </p>
-          <h1 className="mt-1.5 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            Technology. People. Partnership. <span className="text-[#d7192a]">One TP IT Group.</span>
-          </h1>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-4xl">
-            TP IT Group brings more than 20 years of industry experience, with a{' '}
-            <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-700">US</span> USA head office and locations in Ontario,{' '}
-            <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-700">CA</span> Canada, and Hyderabad,{' '}
-            <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-700">IN</span> India. We help businesses navigate digital transformation with confidence.
-          </p>
-        </div>
-
-        {/* 4 Operations / Stats Row */}
-        <div className="site-container relative z-10 mt-6 pt-5 border-t border-slate-200/80">
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4 text-center">
+      {/* 1. OPERATIONS / STATS ROW */}
+      <section className="bg-white border-b border-slate-200/80 py-4 sm:py-5">
+        <div className="site-container">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 text-center">
             <div>
               <div className="text-2xl sm:text-3xl font-extrabold text-[#d7192a]">Delaware</div>
               <div className="mt-1 flex items-center justify-center gap-1 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
