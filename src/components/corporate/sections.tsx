@@ -108,7 +108,7 @@ export function Navbar() {
     <>
       <ScrollProgress />
       <header className="site-header bg-white/75 backdrop-blur-xl">
-        <div className="mx-auto flex h-full w-full max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8 gap-3">
+        <div className="site-container flex h-full items-center justify-between gap-3">
           <Link
             to="/"
             className="brand-name flex items-center transition-opacity hover:opacity-90 shrink-0"
@@ -704,7 +704,7 @@ export function IndustriesSection() {
             Our expertise spans across diverse sectors, delivering tailored solutions that address unique industry challenges.
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {industries.map((ind, i) => (
             <motion.div
               key={ind.name}
@@ -784,7 +784,7 @@ export function WhyChooseUsSection() {
           </p>
         </motion.div>
 
-        <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12 max-w-6xl">
+        <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
           {/* Left Handshake Card -> Slides in from Left to Right */}
           <motion.div
             initial={{ opacity: 0, x: -70 }}
