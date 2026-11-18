@@ -108,9 +108,9 @@ export function Navbar() {
     <>
       <ScrollProgress />
       <header className="site-header bg-white/75 backdrop-blur-xl">
-        <div className="site-container flex h-full items-center justify-between gap-4">
+        <div className="mx-auto flex h-full w-full max-w-[1260px] items-center justify-between px-4 sm:px-6 gap-3 xl:gap-5">
           {/* Left: Brand Logo */}
-          <div className="flex items-center shrink-0 min-w-[140px] sm:min-w-[160px] lg:min-w-[170px]">
+          <div className="flex items-center shrink-0">
             <Link
               to="/"
               className="brand-name flex items-center transition-opacity hover:opacity-90 shrink-0"
@@ -121,10 +121,10 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Center: Navigation Links centered & justified */}
+          {/* Center: Navigation Links with tight, balanced side spacing */}
           <nav
             aria-label="Main navigation"
-            className="hidden lg:flex flex-1 items-center justify-center gap-1 xl:gap-2.5 mx-auto max-w-4xl"
+            className="hidden lg:flex items-center justify-center gap-1 xl:gap-2 shrink-0"
           >
             {nav.map((item) => (
               <Link
@@ -140,7 +140,7 @@ export function Navbar() {
           </nav>
 
           {/* Right: Action Button & Mobile Toggle */}
-          <div className="flex items-center justify-end shrink-0 min-w-[140px] sm:min-w-[160px] lg:min-w-[170px] gap-2">
+          <div className="flex items-center justify-end shrink-0 gap-2">
             <Button
               asChild
               className="hidden lg:inline-flex h-9 xl:h-10 rounded-full bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] px-4 xl:px-5 text-xs xl:text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 items-center gap-1.5 shrink-0 whitespace-nowrap"
