@@ -100,13 +100,13 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav aria-label="Main navigation" className="hidden items-center gap-0.5 xl:gap-1.5 lg:flex shrink-0">
+        <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:gap-2 lg:flex shrink-0">
           {nav.map((item) => (
             <Link
               key={`${item.label}-${item.to}`}
               to={item.to}
-              className="nav-link text-xs xl:text-[13px] px-2.5 xl:px-3 py-1.5"
-              activeProps={{ className: 'nav-link active text-xs xl:text-[13px] px-2.5 xl:px-3 py-1.5' }}
+              className="nav-link text-xs xl:text-[13px] px-2 xl:px-2.5 py-2"
+              activeProps={{ className: 'nav-link active text-xs xl:text-[13px] px-2 xl:px-2.5 py-2' }}
               activeOptions={{ exact: true }}
             >
               {item.label}
@@ -150,8 +150,8 @@ export function Navbar() {
               <Link
                 key={`mobile-${item.label}-${item.to}`}
                 to={item.to}
-                className="rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 hover:bg-red-50 hover:text-[#d7192a]"
-                activeProps={{ className: 'rounded-xl bg-white/95 shadow-sm border border-slate-200/90 px-3 py-2.5 text-sm font-bold text-[#d7192a]' }}
+                className="rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 hover:text-[#d7192a] transition-colors"
+                activeProps={{ className: 'rounded-lg px-3 py-2.5 text-sm font-bold text-[#d7192a] border-l-2 border-[#d7192a] pl-3.5 bg-red-50/40' }}
                 activeOptions={{ exact: true }}
                 onClick={() => setOpen(false)}
               >
