@@ -10,7 +10,6 @@ import {
   WorkWithSection,
   ProvenApproachSection,
   Clients,
-  ContactBanner,
 } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
 
@@ -45,9 +44,6 @@ function Index() {
 
       {/* 6. Clients */}
       <Clients />
-
-      {/* 7. Contact */}
-      <ContactBanner />
     </>
   );
 }

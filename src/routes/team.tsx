@@ -1,6 +1,5 @@
 import { useState, useRef, type MouseEvent } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
-import { ContactBanner } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
 import { ArrowUpRight, Building2 } from 'lucide-react';
 import { motion } from 'motion/react';
@@ -260,9 +259,6 @@ function Page() {
           </div>
         </div>
       </section>
-
-      {/* 2. CONTACT BANNER */}
-      <ContactBanner />
     </div>
   );
 }

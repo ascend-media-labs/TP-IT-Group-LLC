@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
-import { ContactBanner } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
 import {
   Bot,
@@ -341,9 +340,6 @@ function Page() {
           </div>
         </div>
       </section>
-
-      {/* 5. CONTACT BANNER */}
-      <ContactBanner />
     </div>
   );
 }

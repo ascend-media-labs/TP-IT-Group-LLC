@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
-import { ContactBanner } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
 import { Button } from '@/components/ui/button';
 import {
@@ -462,9 +461,6 @@ function Page() {
           </div>
         </div>
       </section>
-
-      {/* 6. CONTACT BANNER */}
-      <ContactBanner />
     </div>
   );
 }

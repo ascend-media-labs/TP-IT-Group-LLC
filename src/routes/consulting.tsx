@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
-import { ContactBanner } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check, Compass, Layers, Users, RefreshCw, CheckCircle2 } from 'lucide-react';
@@ -242,9 +241,6 @@ function Page() {
           </div>
         </div>
       </section>
-
-      {/* 5. CONTACT BANNER */}
-      <ContactBanner />
     </div>
   );
 }
