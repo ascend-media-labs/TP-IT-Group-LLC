@@ -1,8 +1,9 @@
+import { useState, useRef, type MouseEvent } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { ContactBanner } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
 import { ArrowUpRight, Building2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export const Route = createFileRoute('/team')({
   head: () =>
@@ -65,10 +66,171 @@ const leaders: Leader[] = [
   },
 ];
 
+interface TeamLeaderCardProps {
+  leader: Leader;
+  index: number;
+}
+
+function TeamLeaderCard({ leader, index }: TeamLeaderCardProps) {
+  const cardRef = useRef<HTMLDivElement | null>(null);
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+  const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    // 3D tilt calculation (up to 12 degrees)
+    const rX = ((y - centerY) / centerY) * -12;
+    const rY = ((x - centerX) / centerX) * 12;
+
+    setRotateX(rX);
+    setRotateY(rY);
+    setGlarePos({
+      x: Math.round((x / rect.width) * 100),
+      y: Math.round((y / rect.height) * 100),
+    });
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+    setIsHovered(false);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-20px' }}
+      transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      className="perspective-1000 h-full"
+      style={{ perspective: 1000 }}
+    >
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          transform: isHovered
+            ? `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`
+            : 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+          transformStyle: 'preserve-3d',
+          transition: isHovered
+            ? 'transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease-out'
+            : 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease-out',
+        }}
+        className={`group relative flex h-full flex-col justify-between rounded-3xl border bg-white/95 p-5 text-center transition-colors duration-300 ${
+          isHovered
+            ? 'border-red-300 shadow-[0_22px_45px_-12px_rgba(215,25,42,0.22)]'
+            : 'border-slate-200/90 shadow-sm'
+        }`}
+      >
+        {/* Dynamic Interactive Glare / Spotlight */}
+        <div
+          className="pointer-events-none absolute inset-0 rounded-3xl transition-opacity duration-300"
+          style={{
+            opacity: isHovered ? 1 : 0,
+            background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(215, 25, 42, 0.1) 0%, rgba(255, 255, 255, 0.45) 35%, transparent 65%)`,
+          }}
+        />
+
+        {/* Ambient Top Glow */}
+        <div
+          className="pointer-events-none absolute -right-10 -top-10 size-36 rounded-full bg-red-500/10 blur-2xl transition-opacity duration-500"
+          style={{ opacity: isHovered ? 1 : 0.25 }}
+        />
+
+        {/* 1. Top-Right Arrow Badge with 3D Depth & Stagger */}
+        <div
+          style={{
+            transform: isHovered ? 'translateZ(34px)' : 'translateZ(0px)',
+            transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.03s',
+          }}
+          className="absolute top-3.5 right-3.5 flex size-7 items-center justify-center rounded-lg bg-red-50/80 border border-red-100 text-[#d7192a] group-hover:bg-[#d7192a] group-hover:text-white transition-colors duration-200 shadow-2xs z-10"
+        >
+          <ArrowUpRight className="size-3.5" />
+        </div>
+
+        <div>
+          {/* 2. Circular Avatar with 3D Pop & Stagger */}
+          <div
+            style={{
+              transform: isHovered
+                ? 'translateZ(44px) scale(1.06)'
+                : 'translateZ(0px) scale(1)',
+              transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.06s',
+            }}
+            className="relative mx-auto size-24 sm:size-28 rounded-full p-1 ring-2 ring-red-100 bg-gradient-to-br from-red-50 via-white to-red-100/70 shadow-sm group-hover:ring-red-300 transition-all duration-300 mt-1"
+          >
+            <div className="size-full overflow-hidden rounded-full bg-slate-100">
+              <img
+                src={leader.image}
+                alt={`${leader.name} - ${leader.role}`}
+                className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-108"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          {/* 3. Leader Name & Role with Stagger Layer */}
+          <div
+            style={{
+              transform: isHovered ? 'translateZ(28px)' : 'translateZ(0px)',
+              transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.09s',
+            }}
+          >
+            <h3 className="mt-4 text-base font-bold text-slate-900 leading-tight group-hover:text-[#d7192a] transition-colors duration-200">
+              {leader.name}
+            </h3>
+            <p className="mt-1 text-xs font-bold text-[#d7192a] leading-snug">
+              {leader.role}
+            </p>
+          </div>
+
+          {/* 4. SubRole Description with Stagger Layer */}
+          <p
+            style={{
+              transform: isHovered ? 'translateZ(20px)' : 'translateZ(0px)',
+              transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.12s',
+            }}
+            className="mt-2 text-[11px] font-medium text-slate-500 leading-relaxed line-clamp-2 px-1"
+          >
+            {leader.subRole}
+          </p>
+        </div>
+
+        {/* 5. Bottom Department Pill with Stagger Layer */}
+        <div
+          style={{
+            transform: isHovered ? 'translateZ(18px)' : 'translateZ(0px)',
+            transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s',
+          }}
+          className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-center gap-1.5 text-xs text-slate-600 font-medium"
+        >
+          <Building2 className="size-3.5 text-[#d7192a] shrink-0" />
+          <span className="truncate">{leader.department}</span>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 function Page() {
   return (
     <div className="bg-white text-slate-900">
-      {/* 1. LEADERSHIP SHOWCASE (Reference style circular avatar cards) */}
+      {/* 1. LEADERSHIP SHOWCASE (3D Tilt + Stagger Cards) */}
       <section className="pt-8 sm:pt-10 pb-8 sm:pb-12 bg-white text-slate-900 bg-dot-pattern">
         <div className="site-container">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-6 pb-3 border-b border-slate-100">
@@ -87,50 +249,7 @@ function Page() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-3.5">
             {leaders.map((leader, idx) => (
-              <motion.article
-                key={leader.name}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: idx * 0.05 }}
-                className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/90 bg-white/95 p-5 sm:p-5 shadow-sm hover:shadow-xl hover:border-red-300 hover:-translate-y-1.5 transition-all duration-300 text-center"
-              >
-                {/* Top-Right Arrow Badge (Executive Talks reference) */}
-                <div className="absolute top-3.5 right-3.5 flex size-7 items-center justify-center rounded-lg bg-red-50/80 border border-red-100 text-[#d7192a] group-hover:bg-[#d7192a] group-hover:text-white transition-all shadow-2xs">
-                  <ArrowUpRight className="size-3.5" />
-                </div>
-
-                <div>
-                  {/* Circular Avatar with Accent Ring */}
-                  <div className="relative mx-auto size-24 sm:size-28 rounded-full p-1 ring-2 ring-red-100 bg-gradient-to-br from-red-50 via-white to-red-100/70 shadow-sm group-hover:ring-red-300 transition-all mt-1">
-                    <div className="size-full overflow-hidden rounded-full bg-slate-100">
-                      <img
-                        src={leader.image}
-                        alt={`${leader.name} - ${leader.role}`}
-                        className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Leader Info */}
-                  <h3 className="mt-4 text-base font-bold text-slate-900 leading-tight group-hover:text-[#d7192a] transition-colors">
-                    {leader.name}
-                  </h3>
-                  <p className="mt-1 text-xs font-bold text-[#d7192a] leading-snug">
-                    {leader.role}
-                  </p>
-                  <p className="mt-2 text-[11px] font-medium text-slate-500 leading-relaxed line-clamp-2 px-1">
-                    {leader.subRole}
-                  </p>
-                </div>
-
-                {/* Bottom Company / Department Pill */}
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-center gap-1.5 text-xs text-slate-600 font-medium">
-                  <Building2 className="size-3.5 text-[#d7192a] shrink-0" />
-                  <span className="truncate">{leader.department}</span>
-                </div>
-              </motion.article>
+              <TeamLeaderCard key={leader.name} leader={leader} index={idx} />
             ))}
           </div>
         </div>
