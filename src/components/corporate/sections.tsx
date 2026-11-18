@@ -88,7 +88,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="site-header">
+    <header className="site-header bg-white/75 backdrop-blur-xl">
       <div className="mx-auto flex h-full w-full max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8 gap-3">
         <Link
           to="/"
