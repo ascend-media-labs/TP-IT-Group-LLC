@@ -10,6 +10,7 @@ import {
   Shield,
   Target,
   Users,
+  Eye,
   ArrowRight,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -131,42 +132,59 @@ function Page() {
               </p>
             </div>
 
-            {/* Right Mission Card */}
-            <div className="lg:col-span-5">
-              <div className="card-diagonal border border-slate-200/90 bg-white p-6 sm:p-7 shadow-[0_4px_24px_rgba(0,0,0,0.03)] text-left space-y-5">
-                {/* Boardroom Presentation Image provided by User */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner">
-                  <img
-                    src="/about-mission.jpg"
-                    alt="TP IT Group Enterprise Collaboration and Leadership"
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute top-3 left-3 flex size-11 items-center justify-center icon-diagonal bg-white/95 backdrop-blur-md text-[#d7192a] shadow-md border border-white/80">
-                    <Globe className="size-6 text-[#d7192a] stroke-[1.8]" />
+            {/* Right Mission & Vision Showcase (Matching User's Reference Sample) */}
+            <div className="lg:col-span-5 space-y-4">
+              {/* Boardroom Presentation Image provided by User */}
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-200/90 shadow-sm">
+                <img
+                  src="/about-mission.jpg"
+                  alt="TP IT Group Enterprise Collaboration and Leadership"
+                  className="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent pointer-events-none" />
+              </div>
+
+              {/* Twin Cards: Our Vision & Our Mission (Exact Reference Design) */}
+              <div className="space-y-3.5">
+                {/* Our Vision Card */}
+                <div className="rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/90 border-l-[5px] border-l-sky-500 shadow-sm hover:shadow-md transition-all text-left">
+                  <div className="flex items-center gap-3.5 mb-2.5">
+                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-sky-50 border border-sky-100 text-sky-600 shadow-xs">
+                      <Eye className="size-5 stroke-[2]" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-sky-600">
+                        OUR IDENTITY
+                      </span>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-tight">
+                        Our Vision
+                      </h3>
+                    </div>
                   </div>
+                  <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
+                    To be a trusted technology partner for businesses worldwide, delivering solutions that create lasting value, connecting enterprise strategy with cloud and digital execution.
+                  </p>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 pt-1">
-                  Our Mission
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  To empower organizations with innovative, reliable, and scalable technology solutions that improve operational efficiency and connect business goals with technology capabilities.
-                </p>
-                <div className="pt-2 space-y-3">
-                  <div className="flex items-center gap-3 text-xs sm:text-sm font-semibold text-slate-800">
-                    <CheckCircle2 className="size-4 text-[#d7192a] shrink-0" />
-                    <span>Innovation-driven solutions</span>
+                {/* Our Mission Card */}
+                <div className="rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/90 border-l-[5px] border-l-[#d7192a] shadow-sm hover:shadow-md transition-all text-left">
+                  <div className="flex items-center gap-3.5 mb-2.5">
+                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-red-50 border border-red-100 text-[#d7192a] shadow-xs">
+                      <Target className="size-5 stroke-[2]" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+                        OUR COMMITMENT
+                      </span>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-tight">
+                        Our Mission
+                      </h3>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3 text-xs sm:text-sm font-semibold text-slate-800">
-                    <CheckCircle2 className="size-4 text-[#d7192a] shrink-0" />
-                    <span>Client-focused approach</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-xs sm:text-sm font-semibold text-slate-800">
-                    <CheckCircle2 className="size-4 text-[#d7192a] shrink-0" />
-                    <span>Global expertise, local execution</span>
-                  </div>
+                  <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
+                    To empower organizations with innovative, reliable, and scalable technology solutions that improve operational efficiency and connect business goals with technology capabilities.
+                  </p>
                 </div>
               </div>
             </div>
@@ -174,7 +192,7 @@ function Page() {
         </div>
       </section>
 
-      {/* 3. OUR CORE VALUES SECTION (Screenshots 3 & 4) */}
+      {/* 3. OUR CORE VALUES SECTION (Exact Sample 2 Reference Style with 4-side curve & colored left border) */}
       <section className="section bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
         <div className="site-container text-left">
           <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
@@ -187,20 +205,29 @@ function Page() {
             Our values shape every interaction, decision, and solution we deliver.
           </p>
 
-          <div className="grid gap-6 sm:grid-cols-2 mt-8 text-left">
+          <div className="grid gap-5 sm:grid-cols-2 mt-8 text-left">
             {/* Innovation */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
-              className="rounded-3xl bg-white p-7 sm:p-8 border border-slate-200/90 shadow-sm hover:border-red-200 hover:shadow-md transition-all"
+              className="rounded-2xl bg-white p-6 sm:p-7 border border-slate-200/90 border-l-[5px] border-l-sky-500 shadow-sm hover:shadow-md transition-all"
             >
-              <div className="flex size-11 items-center justify-center rounded-xl bg-red-50 border border-red-100 text-[#d7192a]">
-                <Lightbulb className="size-5" />
+              <div className="flex items-center gap-3.5 mb-3">
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-sky-50/90 border border-sky-100 text-sky-600 shadow-xs">
+                  <Lightbulb className="size-6 stroke-[1.9]" />
+                </div>
+                <div>
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-sky-600">
+                    CORE VALUE
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 leading-tight">
+                    Innovation
+                  </h3>
+                </div>
               </div>
-              <h3 className="mt-5 text-lg font-bold text-slate-900">Innovation</h3>
-              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 We embrace evolving technologies to create practical, forward-thinking solutions for your business.
               </p>
             </motion.div>
@@ -211,13 +238,22 @@ function Page() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="rounded-3xl bg-white p-7 sm:p-8 border border-red-200/90 shadow-sm hover:border-[#d7192a] hover:shadow-md transition-all"
+              className="rounded-2xl bg-white p-6 sm:p-7 border border-slate-200/90 border-l-[5px] border-l-[#d7192a] shadow-sm hover:shadow-md transition-all"
             >
-              <div className="flex size-11 items-center justify-center rounded-xl bg-[#d7192a] text-white shadow-xs">
-                <Shield className="size-5 fill-white" />
+              <div className="flex items-center gap-3.5 mb-3">
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-red-50/90 border border-red-100 text-[#d7192a] shadow-xs">
+                  <Shield className="size-6 stroke-[1.9]" />
+                </div>
+                <div>
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+                    ETHICAL COMMITMENT
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 leading-tight">
+                    Integrity
+                  </h3>
+                </div>
               </div>
-              <h3 className="mt-5 text-lg font-bold text-slate-900">Integrity</h3>
-              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 Transparent communication and ethical practices guide our relationships and the work we deliver.
               </p>
             </motion.div>
@@ -228,13 +264,22 @@ function Page() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="rounded-3xl bg-white p-7 sm:p-8 border border-slate-200/90 shadow-sm hover:border-red-200 hover:shadow-md transition-all"
+              className="rounded-2xl bg-white p-6 sm:p-7 border border-slate-200/90 border-l-[5px] border-l-amber-500 shadow-sm hover:shadow-md transition-all"
             >
-              <div className="flex size-11 items-center justify-center rounded-xl bg-red-50 border border-red-100 text-[#d7192a]">
-                <Target className="size-5" />
+              <div className="flex items-center gap-3.5 mb-3">
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-amber-50/90 border border-amber-100 text-amber-600 shadow-xs">
+                  <Target className="size-6 stroke-[1.9]" />
+                </div>
+                <div>
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-amber-600">
+                    QUALITY STANDARD
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 leading-tight">
+                    Excellence
+                  </h3>
+                </div>
               </div>
-              <h3 className="mt-5 text-lg font-bold text-slate-900">Excellence</h3>
-              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 We focus on quality, reliability, and continuous improvement in every technology engagement.
               </p>
             </motion.div>
@@ -245,13 +290,22 @@ function Page() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.3 }}
-              className="rounded-3xl bg-white p-7 sm:p-8 border border-slate-200/90 shadow-sm hover:border-red-200 hover:shadow-md transition-all"
+              className="rounded-2xl bg-white p-6 sm:p-7 border border-slate-200/90 border-l-[5px] border-l-emerald-500 shadow-sm hover:shadow-md transition-all"
             >
-              <div className="flex size-11 items-center justify-center rounded-xl bg-red-50 border border-red-100 text-[#d7192a]">
-                <Users className="size-5" />
+              <div className="flex items-center gap-3.5 mb-3">
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-50/90 border border-emerald-100 text-emerald-600 shadow-xs">
+                  <Users className="size-6 stroke-[1.9]" />
+                </div>
+                <div>
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-emerald-600">
+                    CLIENT ENGAGEMENT
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 leading-tight">
+                    Partnership
+                  </h3>
+                </div>
               </div>
-              <h3 className="mt-5 text-lg font-bold text-slate-900">Partnership</h3>
-              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 We build lasting relationships through trust, collaboration, and a shared commitment to your success.
               </p>
             </motion.div>

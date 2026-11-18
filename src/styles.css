@@ -249,14 +249,11 @@ p,
   transform: translateY(-5px);
 }
 
-/* 3. Signature Asymmetrical Diagonal Curve Cards (Executive Talks Reference) */
+/* 3. Signature 4-Sides Edge Curve Cards (Executive Talks & Sample Reference) */
 .card-diagonal,
 .rounded-3xl.border {
-  border-top-left-radius: 36px !important;
-  border-bottom-right-radius: 36px !important;
-  border-top-right-radius: 14px !important;
-  border-bottom-left-radius: 14px !important;
-  background-color: rgba(255, 255, 255, 0.88);
+  border-radius: 22px !important;
+  background-color: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-color: rgba(226, 232, 240, 0.85);
@@ -272,17 +269,11 @@ p,
 }
 
 .img-diagonal {
-  border-top-left-radius: 26px !important;
-  border-bottom-right-radius: 26px !important;
-  border-top-right-radius: 8px !important;
-  border-bottom-left-radius: 8px !important;
+  border-radius: 16px !important;
 }
 
 .icon-diagonal {
-  border-top-left-radius: 16px !important;
-  border-bottom-right-radius: 16px !important;
-  border-top-right-radius: 4px !important;
-  border-bottom-left-radius: 4px !important;
+  border-radius: 12px !important;
 }
 
 .rounded-2xl.border {

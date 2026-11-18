@@ -503,7 +503,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
             )}
           </motion.div>
 
-          {/* Right 4 Cards (2x2 Grid) */}
+          {/* Right 4 Cards (2x2 Grid matching reference style with 4-side curve & left accent border) */}
           <div className="grid gap-4 sm:grid-cols-2">
             {aboutCards.map((card, i) => (
               <motion.div
@@ -512,13 +512,20 @@ export function About({ detailed = false }: { detailed?: boolean }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="glass-card p-5 sm:p-6 bg-white/95 border-slate-200/90 hover:border-[#d7192a]/50 hover:shadow-lg transition-all"
+                className="rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/90 border-l-[4px] border-l-[#d7192a] shadow-sm hover:shadow-md transition-all text-left"
               >
-                <div className="flex size-10 items-center justify-center rounded-full bg-red-50 border border-red-100">
-                  {card.icon}
+                <div className="flex items-center gap-3 mb-2.5">
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-red-50 border border-red-100 text-[#d7192a] shadow-xs">
+                    {card.icon}
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">
+                      CORE PILLAR
+                    </span>
+                    <h3 className="text-base font-bold text-slate-900 leading-tight">{card.title}</h3>
+                  </div>
                 </div>
-                <h3 className="mt-4 text-base font-bold text-slate-900">{card.title}</h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-slate-600">{card.desc}</p>
+                <p className="text-xs leading-relaxed text-slate-600">{card.desc}</p>
               </motion.div>
             ))}
           </div>
