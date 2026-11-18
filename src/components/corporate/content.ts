@@ -242,26 +242,32 @@ export const industries = [
   {
     name: 'Financial Services',
     desc: 'MODERN DIGITAL BANKING & FINTECH',
+    image: '/industries/financial-services.jpg',
   },
   {
     name: 'IT Companies',
     desc: 'ENTERPRISE TECHNOLOGY SOLUTIONS',
+    image: '/industries/it-companies.jpg',
   },
   {
     name: 'Pharma & Healthcare',
     desc: 'COMPLIANT HEALTHCARE SYSTEMS',
+    image: '/industries/pharma-healthcare.jpg',
   },
   {
     name: 'Manufacturing',
     desc: 'INDUSTRIAL AUTOMATION & IOT',
+    image: '/industries/manufacturing.jpg',
   },
   {
     name: 'Enterprises & Startups',
     desc: 'SCALABLE GROWTH SOLUTIONS',
+    image: '/industries/enterprises-startups.jpg',
   },
   {
     name: 'Engineering & Field Services',
     desc: 'TECHNICAL WORKFORCE SUPPORT',
+    image: '/industries/engineering-field-services.jpg',
   },
 ];
 
