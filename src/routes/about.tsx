@@ -287,14 +287,21 @@ function Page() {
       </section>
 
       {/* 4. OUR APPROACH SECTION (Screenshot 5) */}
-      <section className="section bg-white text-slate-900 bg-dot-pattern">
+      <section className="section bg-white text-slate-900 bg-dot-pattern overflow-hidden">
         <div className="site-container text-left">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
-            OUR APPROACH
-          </p>
-          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
-            From Ideas to <span className="text-[#d7192a]">Lasting Value</span>
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+              OUR APPROACH
+            </p>
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
+              From Ideas to <span className="text-[#d7192a]">Lasting Value</span>
+            </h2>
+          </motion.div>
 
           {/* Vertical Alternating Timeline */}
           <div className="relative mt-10 max-w-3xl mx-auto">
@@ -302,9 +309,15 @@ function Page() {
             <div className="absolute left-1/2 top-6 bottom-6 -translate-x-1/2 w-0.5 bg-slate-200 hidden md:block" />
 
             <div className="space-y-6 md:space-y-10">
-              {/* Step 1 - DISCOVER (Left) */}
+              {/* Step 1 - DISCOVER (Left -> slides in from left to right) */}
               <div className="relative flex flex-col md:flex-row items-center">
-                <div className="w-full md:w-1/2 md:pr-10 text-left">
+                <motion.div
+                  initial={{ opacity: 0, x: -70 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-full md:w-1/2 md:pr-10 text-left"
+                >
                   <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm hover:border-red-200 hover:shadow-md transition-all">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">
                       DISCOVER
@@ -316,18 +329,36 @@ function Page() {
                       Connect your objectives with the right technology priorities and a clear scope.
                     </p>
                   </div>
-                </div>
+                </motion.div>
                 {/* Center Node Dot */}
-                <div className="absolute left-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[#d7192a] ring-4 ring-red-100 hidden md:block" />
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.4, delay: 0.15 }}
+                  className="absolute left-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[#d7192a] ring-4 ring-red-100 hidden md:block"
+                />
                 <div className="w-full md:w-1/2" />
               </div>
 
-              {/* Step 2 - PLAN (Right) */}
+              {/* Step 2 - PLAN (Right -> slides in from right to left) */}
               <div className="relative flex flex-col md:flex-row items-center">
                 <div className="w-full md:w-1/2" />
                 {/* Center Node Dot */}
-                <div className="absolute left-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[#d7192a] ring-4 ring-red-100 hidden md:block" />
-                <div className="w-full md:w-1/2 md:pl-10 text-left">
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.4, delay: 0.15 }}
+                  className="absolute left-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[#d7192a] ring-4 ring-red-100 hidden md:block"
+                />
+                <motion.div
+                  initial={{ opacity: 0, x: 70 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-full md:w-1/2 md:pl-10 text-left"
+                >
                   <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm hover:border-red-200 hover:shadow-md transition-all">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">
                       PLAN
@@ -339,12 +370,18 @@ function Page() {
                       Create a practical roadmap for cloud, AI, development, or enterprise applications.
                     </p>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
-              {/* Step 3 - DELIVER (Left) */}
+              {/* Step 3 - DELIVER (Left -> slides in from left to right) */}
               <div className="relative flex flex-col md:flex-row items-center">
-                <div className="w-full md:w-1/2 md:pr-10 text-left">
+                <motion.div
+                  initial={{ opacity: 0, x: -70 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-full md:w-1/2 md:pr-10 text-left"
+                >
                   <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm hover:border-red-200 hover:shadow-md transition-all">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">
                       DELIVER
@@ -356,18 +393,36 @@ function Page() {
                       Develop, integrate, and test solutions with collaboration throughout delivery.
                     </p>
                   </div>
-                </div>
+                </motion.div>
                 {/* Center Node Dot */}
-                <div className="absolute left-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[#d7192a] ring-4 ring-red-100 hidden md:block" />
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.4, delay: 0.15 }}
+                  className="absolute left-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[#d7192a] ring-4 ring-red-100 hidden md:block"
+                />
                 <div className="w-full md:w-1/2" />
               </div>
 
-              {/* Step 4 - IMPROVE (Right) */}
+              {/* Step 4 - IMPROVE (Right -> slides in from right to left) */}
               <div className="relative flex flex-col md:flex-row items-center">
                 <div className="w-full md:w-1/2" />
                 {/* Center Node Dot */}
-                <div className="absolute left-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[#d7192a] ring-4 ring-red-100 hidden md:block" />
-                <div className="w-full md:w-1/2 md:pl-10 text-left">
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.4, delay: 0.15 }}
+                  className="absolute left-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[#d7192a] ring-4 ring-red-100 hidden md:block"
+                />
+                <motion.div
+                  initial={{ opacity: 0, x: 70 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-full md:w-1/2 md:pl-10 text-left"
+                >
                   <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm hover:border-red-200 hover:shadow-md transition-all">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">
                       IMPROVE
@@ -379,7 +434,7 @@ function Page() {
                       Maintain and refine your technology as your business needs evolve.
                     </p>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </div>
