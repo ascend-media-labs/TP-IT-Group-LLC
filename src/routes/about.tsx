@@ -95,13 +95,6 @@ function Page() {
               <p>
                 Our project story spans enterprise applications, cloud transformations and digital experiences. Each engagement begins with the client's goals and carries through design, implementation, validation and ongoing improvement.
               </p>
-
-              <h3 className="text-base sm:text-lg font-bold text-slate-900 pt-3">
-                Our Vision
-              </h3>
-              <p>
-                To be a trusted technology partner for businesses worldwide, delivering solutions that create lasting value and support sustainable growth.
-              </p>
             </div>
 
             {/* Right Mission & Vision Showcase (Matching User's Reference Sample) */}
