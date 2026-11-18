@@ -1467,8 +1467,9 @@ export function OfficialSocialChannels({ className = '' }: { className?: string 
 
 export function Footer() {
   return (
-    <footer className="footer bg-white border-t border-slate-200/90 pt-12 pb-6">
-      <div className="site-container">
+    <footer className="footer relative overflow-hidden bg-[#d7192a]/[0.05] border-t border-[#d7192a]/15 pt-12 pb-6 bg-dot-pattern">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-red-50/60 via-[#d7192a]/[0.03] to-[#d7192a]/[0.07]" />
+      <div className="site-container relative z-10">
         <div className="grid gap-10 pb-12 sm:grid-cols-2 lg:grid-cols-12">
           {/* Column 1: Brand & Motto */}
           <div className="lg:col-span-3">
@@ -1568,11 +1569,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-slate-200/90 pt-6 text-[11px] text-slate-500">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#d7192a]/15 pt-6 text-[11px] text-slate-500">
           <span>© 2026 TP IT GROUP LLC. All rights reserved.</span>
           <div className="flex gap-6">
-            <Link to="/privacy" className="hover:text-slate-900 transition">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-slate-900 transition">Terms &amp; Conditions</Link>
+            <Link to="/privacy" className="hover:text-[#d7192a] transition">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-[#d7192a] transition">Terms &amp; Conditions</Link>
           </div>
         </div>
       </div>
