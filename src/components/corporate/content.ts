@@ -110,6 +110,7 @@ export const services = [
     shortTitle: 'AI Automation & Agents',
     summary: 'Bring AI into your business with workflow automation, custom AI agents, and end-to-end project setup.',
     desc: 'Bring AI into your business with workflow automation, custom AI agents, and end-to-end project setup.',
+    image: '/services/ai-automation.jpg',
     offers: [
       'Workflow automation & autonomous agents',
       'Custom enterprise AI agents',
@@ -125,6 +126,7 @@ export const services = [
     shortTitle: 'Cloud Migration',
     summary: 'Plan and migrate your infrastructure to AWS, Microsoft Azure, Google Cloud, or Oracle Cloud with a focus on continuity and security.',
     desc: 'Plan and migrate your infrastructure to AWS, Microsoft Azure, Google Cloud, or Oracle Cloud with a focus on continuity and security.',
+    image: '/services/cloud-migration.jpg',
     offers: [
       'AWS, Azure, Google Cloud & Oracle migration',
       'Zero-downtime infrastructure transition',
@@ -140,6 +142,7 @@ export const services = [
     shortTitle: 'IT Development',
     summary: 'Turn business requirements into custom software and applications, from initial concept through development, testing, and deployment.',
     desc: 'Turn business requirements into custom software and applications, from initial concept through development, testing, and deployment.',
+    image: '/services/it-development.jpg',
     offers: [
       'Custom web & mobile application engineering',
       'Enterprise software solutions & portals',
@@ -155,6 +158,7 @@ export const services = [
     shortTitle: 'ERP & SAP Solutions',
     summary: 'Connect your enterprise operations with SAP implementation, ERP integration, migration, and ongoing application support.',
     desc: 'Connect your enterprise operations with SAP implementation, ERP integration, migration, and ongoing application support.',
+    image: '/services/erp-sap.jpg',
     offers: [
       'SAP implementation & customization',
       'ERP planning, integration & advisory',
@@ -170,6 +174,7 @@ export const services = [
     shortTitle: 'Web Design & Development',
     summary: 'Create modern, responsive websites that reflect your brand, engage your audience, and support your business goals.',
     desc: 'Create modern, responsive websites that reflect your brand, engage your audience, and support your business goals.',
+    image: '/services/web-design.jpg',
     offers: [
       'Modern, highly responsive responsive websites',
       'Brand identity & visual communication',
@@ -185,6 +190,7 @@ export const services = [
     shortTitle: 'Networking & Security',
     summary: 'Build reliable enterprise networks and strengthen cybersecurity to protect your systems, users, and digital assets.',
     desc: 'Build reliable enterprise networks and strengthen cybersecurity to protect your systems, users, and digital assets.',
+    image: '/services/networking-security.jpg',
     offers: [
       'Enterprise network architecture & setup',
       'Cybersecurity & threat defense audits',

@@ -594,13 +594,23 @@ export function Services({ full = false }: { full?: boolean }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="glass-card flex flex-col justify-between p-6 sm:p-7 bg-white/95 border-slate-200/90 hover:border-[#d7192a]/50 hover:shadow-xl transition-all"
+              className="group glass-card flex flex-col justify-between p-5 sm:p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300"
             >
               <div>
-                <div className="flex size-11 items-center justify-center rounded-xl bg-red-50 border border-red-100">
-                  {serviceIcons[i % serviceIcons.length]}
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner mb-5">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+                  <div className="absolute top-3 left-3 flex size-10 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-md border border-white/80">
+                    {serviceIcons[i % serviceIcons.length]}
+                  </div>
                 </div>
-                <h3 className="mt-5 text-lg font-bold text-slate-900">{service.title}</h3>
+
+                <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors">{service.title}</h3>
                 <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">
                   {full && service.desc ? service.desc : service.summary}
                 </p>
