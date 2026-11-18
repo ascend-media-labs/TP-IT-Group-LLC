@@ -107,10 +107,10 @@ export function Navbar() {
   return (
     <>
       <ScrollProgress />
-      <header className="site-header bg-white/75 backdrop-blur-xl">
-        <div className="mx-auto flex h-full w-full max-w-[1260px] items-center justify-between px-4 sm:px-6 gap-3 xl:gap-5">
+      <header className="site-header bg-white/80 backdrop-blur-xl">
+        <div className="w-full h-full px-4 sm:px-6 lg:px-8 xl:px-12 grid grid-cols-2 lg:grid-cols-[1fr_auto_1fr] items-center">
           {/* Left: Brand Logo */}
-          <div className="flex items-center shrink-0">
+          <div className="flex items-center justify-start min-w-0">
             <Link
               to="/"
               className="brand-name flex items-center transition-opacity hover:opacity-90 shrink-0"
@@ -121,17 +121,17 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Center: Navigation Links with tight, balanced side spacing */}
+          {/* Center: Navigation Links centered in cohesive capsule pill */}
           <nav
             aria-label="Main navigation"
-            className="hidden lg:flex items-center justify-center gap-1 xl:gap-2 shrink-0"
+            className="hidden lg:flex items-center justify-center p-1 rounded-full bg-slate-100/80 border border-slate-200/80 shadow-[inset_0_1px_2px_rgba(0,0,0,0.03)] backdrop-blur-md gap-0.5 xl:gap-1.5"
           >
             {nav.map((item) => (
               <Link
                 key={`${item.label}-${item.to}`}
                 to={item.to}
-                className="nav-link text-xs xl:text-[13px] px-2.5 xl:px-3 py-1.5"
-                activeProps={{ className: 'nav-link active text-xs xl:text-[13px] px-2.5 xl:px-3 py-1.5' }}
+                className="nav-link"
+                activeProps={{ className: 'nav-link active' }}
                 activeOptions={{ exact: true }}
               >
                 <span className="nav-link-label">{item.label}</span>
