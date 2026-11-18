@@ -442,16 +442,6 @@ function Page() {
                     {ind.desc}
                   </p>
                 </div>
-
-                {/* Bottom Footer: Platform status + Circular Arrow Button */}
-                <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100">
-                  <span className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-500">
-                    <span className="size-1.5 rounded-full bg-[#d7192a] animate-pulse" /> Enterprise Platform
-                  </span>
-                  <span className="flex size-8 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-600 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] transition-all shadow-2xs">
-                    <ArrowUpRight className="size-4" />
-                  </span>
-                </div>
               </motion.div>
             ))}
           </div>

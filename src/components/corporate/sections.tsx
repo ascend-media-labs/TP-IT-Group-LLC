@@ -736,17 +736,10 @@ export function Services({ full = false }: { full?: boolean }) {
 }
 
 export function IndustriesSection() {
-  const industryIcons = [
-    <Briefcase key="fin" className="size-6 text-white stroke-[2.2]" />,
-    <Monitor key="it" className="size-6 text-white stroke-[2.2]" />,
-    <Pill key="health" className="size-6 text-white stroke-[2.2]" />,
-    <Factory key="manu" className="size-6 text-white stroke-[2.2]" />,
-    <Rocket key="start" className="size-6 text-white stroke-[2.2]" />,
-    <HardHat key="eng" className="size-6 text-white stroke-[2.2]" />,
-  ];
+  const duplicatedIndustries = [...industries, ...industries];
 
   return (
-    <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern pt-2 sm:pt-3 pb-4 sm:pb-6">
+    <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern pt-2 sm:pt-3 pb-6 sm:pb-8">
       <div className="site-container relative z-10">
         <div className="mb-6 sm:mb-8 text-left">
           <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
@@ -759,19 +752,26 @@ export function IndustriesSection() {
             Our expertise spans across diverse sectors, delivering tailored solutions that address unique industry challenges.
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {industries.map((ind, i) => (
-            <motion.div
-              key={ind.name}
-              initial={{ opacity: 0, y: 25, scale: 0.97 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ delay: i * 0.08, duration: 0.45 }}
-              className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
+      </div>
+
+      {/* Auto-scrolling continuous carousel track */}
+      <div className="relative w-full overflow-hidden py-3">
+        {/* Soft edge gradient masks */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-16 sm:w-28 bg-gradient-to-r from-white via-white/80 to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-16 sm:w-28 bg-gradient-to-l from-white via-white/80 to-transparent" />
+
+        <div
+          className="flex w-max animate-marquee hover:[animation-play-state:paused] gap-6 items-stretch px-4"
+          style={{ animationDuration: '45s' }}
+        >
+          {duplicatedIndustries.map((ind, idx) => (
+            <div
+              key={`${ind.name}-${idx}`}
+              className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-2xl hover:shadow-red-500/10 hover:-translate-y-1.5 transition-all duration-300 text-left w-[290px] sm:w-[340px] md:w-[370px] shrink-0 rounded-2xl"
             >
               <div>
-                {/* Card Image with matching diagonal curve */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-4">
+                {/* Card Image */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-4 rounded-xl">
                   <img
                     src={ind.image}
                     alt={ind.name}
@@ -785,21 +785,11 @@ export function IndustriesSection() {
                 <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors">
                   {ind.name}
                 </h3>
-                <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                <p className="mt-2 text-xs sm:text-[13px] text-slate-600 leading-relaxed">
                   Enterprise-grade digital systems and tailored technology workflows engineered for {ind.name.toLowerCase()}.
                 </p>
               </div>
-
-              {/* Bottom Footer: Platform status + Circular Arrow Button */}
-              <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100">
-                <span className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-500">
-                  <span className="size-1.5 rounded-full bg-[#d7192a] animate-pulse" /> Enterprise Platform
-                </span>
-                <span className="flex size-8 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-600 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] transition-all shadow-2xs">
-                  <ArrowUpRight className="size-4" />
-                </span>
-              </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
