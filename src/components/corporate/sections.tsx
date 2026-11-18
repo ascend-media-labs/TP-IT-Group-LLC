@@ -712,12 +712,12 @@ export function IndustriesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
             >
               <div>
                 {/* Top Row: Icon Leaf Badge & Sector Pill (Sample image style) */}
                 <div className="flex items-center justify-between mb-3.5">
-                  <div className="flex size-11 items-center justify-center icon-diagonal bg-gradient-to-br from-[#d7192a] to-[#b91c1c] text-white shadow-md shadow-red-500/20">
+                  <div className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#d7192a] to-[#b91c1c] text-white shadow-md shadow-red-500/20">
                     {industryIcons[i % industryIcons.length]}
                   </div>
                   <span className="rounded-full bg-slate-100/90 border border-slate-200/70 px-3 py-1 text-[11px] font-semibold text-slate-600">
@@ -725,8 +725,8 @@ export function IndustriesSection() {
                   </span>
                 </div>
 
-                {/* Card Image with matching diagonal curve */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-4">
+                {/* Card Image with normal 4-sides rounded curve */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-100 border border-slate-100 shadow-inner mb-4">
                   <img
                     src={ind.image}
                     alt={ind.name}
