@@ -1485,7 +1485,7 @@ export function ContactForm() {
         <textarea
           required
           name="message"
-          rows={4}
+          rows={3}
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           placeholder="Please describe your digital goals, timeline, and technical scope..."
@@ -1514,8 +1514,8 @@ export function OfficeLocationsMapCard() {
   const [activeOffice, setActiveOffice] = useState<'usa' | 'india' | 'both'>('usa');
 
   return (
-    <div className="glass-card rounded-2xl border border-slate-200/90 bg-white/95 p-5 sm:p-6 shadow-sm hover:border-red-300 hover:shadow-md transition-all text-left">
-      <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+    <div className="glass-card rounded-2xl border border-slate-200/90 bg-white/95 p-4 sm:p-5 shadow-sm hover:border-red-300 hover:shadow-md transition-all text-left">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
         <div>
           <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">
             FIND OUR OFFICES
@@ -1526,11 +1526,11 @@ export function OfficeLocationsMapCard() {
         </div>
 
         {/* Tab Switcher */}
-        <div className="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200/80 text-xs font-bold">
+        <div className="inline-flex rounded-xl bg-slate-100 p-0.5 border border-slate-200/80 text-xs font-bold">
           <button
             type="button"
             onClick={() => setActiveOffice('usa')}
-            className={`px-3 py-1 rounded-lg transition-all ${activeOffice === 'usa'
+            className={`px-2.5 py-1 rounded-lg transition-all ${activeOffice === 'usa'
               ? 'bg-white text-slate-900 shadow-xs'
               : 'text-slate-600 hover:text-slate-900'
               }`}
@@ -1540,7 +1540,7 @@ export function OfficeLocationsMapCard() {
           <button
             type="button"
             onClick={() => setActiveOffice('india')}
-            className={`px-3 py-1 rounded-lg transition-all ${activeOffice === 'india'
+            className={`px-2.5 py-1 rounded-lg transition-all ${activeOffice === 'india'
               ? 'bg-white text-slate-900 shadow-xs'
               : 'text-slate-600 hover:text-slate-900'
               }`}
@@ -1562,8 +1562,8 @@ export function OfficeLocationsMapCard() {
 
       {/* USA Office View */}
       {(activeOffice === 'usa' || activeOffice === 'both') && (
-        <div className={activeOffice === 'both' ? 'mb-6 pb-6 border-b border-slate-100' : ''}>
-          <div className="flex items-center justify-between mb-1.5">
+        <div className={activeOffice === 'both' ? 'mb-4 pb-4 border-b border-slate-100' : ''}>
+          <div className="flex items-center justify-between mb-1">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-900 text-white font-mono text-[10px] font-bold">
               <span className="size-1.5 rounded-full bg-red-500 animate-pulse" /> USA HEADQUARTERS
             </span>
@@ -1579,7 +1579,7 @@ export function OfficeLocationsMapCard() {
             </div>
           </div>
 
-          <div className="relative mt-3 h-[180px] sm:h-[200px] w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 shadow-inner">
+          <div className="relative mt-2.5 h-[135px] sm:h-[145px] w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 shadow-inner">
             <iframe
               title="TP IT GROUP LLC USA Office Map"
               src="https://maps.google.com/maps?q=1000+N.+West+Street,+Suite+1200,+Wilmington,+Delaware,+19801&t=&z=15&ie=UTF8&iwloc=&output=embed"
@@ -1589,7 +1589,7 @@ export function OfficeLocationsMapCard() {
             />
           </div>
 
-          <div className="mt-2.5 flex items-center justify-between text-xs">
+          <div className="mt-2 flex items-center justify-between text-xs">
             <a
               href="https://maps.google.com/?q=1000+N+West+Street+Suite+1200+Wilmington+Delaware+19801"
               target="_blank"
@@ -1606,7 +1606,7 @@ export function OfficeLocationsMapCard() {
       {/* India Office View */}
       {(activeOffice === 'india' || activeOffice === 'both') && (
         <div>
-          <div className="flex items-center justify-between mb-1.5">
+          <div className="flex items-center justify-between mb-1">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-900 text-white font-mono text-[10px] font-bold">
               <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" /> INDIA CORPORATE HUB
             </span>
@@ -1622,7 +1622,7 @@ export function OfficeLocationsMapCard() {
             </div>
           </div>
 
-          <div className="relative mt-3 h-[180px] sm:h-[200px] w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 shadow-inner">
+          <div className="relative mt-2.5 h-[135px] sm:h-[145px] w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 shadow-inner">
             <iframe
               title="TP IT GROUP PVT LTD India Office Map"
               src="https://maps.google.com/maps?q=Manjeera+Trinity+Corporate+Kukatpally+Hyderabad+Telangana+500072&t=&z=15&ie=UTF8&iwloc=&output=embed"
@@ -1632,7 +1632,7 @@ export function OfficeLocationsMapCard() {
             />
           </div>
 
-          <div className="mt-2.5 flex items-center justify-between text-xs">
+          <div className="mt-2 flex items-center justify-between text-xs">
             <a
               href="https://maps.google.com/?q=Manjeera+Trinity+Corporate+Kukatpally+Hyderabad+Telangana+500072"
               target="_blank"
@@ -1653,16 +1653,18 @@ export function Contact() {
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_20%_20%,rgba(215,25,42,0.04),transparent_60%)]" />
-      <div className="site-container relative z-10 grid gap-8 lg:grid-cols-2 items-start">
-        <div>
-          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
-            START A CONVERSATION
-          </span>
-          <h2 className="section-title mt-3">Let’s connect.</h2>
+      <div className="site-container relative z-10 grid gap-8 lg:grid-cols-2 items-stretch">
+        <div className="flex flex-col justify-between h-full">
+          <div>
+            <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
+              START A CONVERSATION
+            </span>
+            <h2 className="section-title mt-2">Let’s connect.</h2>
+          </div>
 
-          <div className="mt-6 space-y-4">
+          <div className="mt-5 flex-1 flex flex-col justify-between gap-3 sm:gap-3.5">
             {/* 1. USA Office */}
-            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
+            <div className="glass-card flex gap-4 p-4 sm:p-4.5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
               <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
                 <MapPin className="size-5" />
               </div>
@@ -1678,7 +1680,7 @@ export function Contact() {
                   href={companyInfo.headOffice.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors mt-2"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors mt-1.5"
                 >
                   View on Google Maps <ArrowUpRight className="size-3.5" />
                 </a>
@@ -1686,7 +1688,7 @@ export function Contact() {
             </div>
 
             {/* 2. India Office */}
-            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
+            <div className="glass-card flex gap-4 p-4 sm:p-4.5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
               <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
                 <Building2 className="size-5" />
               </div>
@@ -1702,7 +1704,7 @@ export function Contact() {
                   href={companyInfo.indiaOffice.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors mt-2"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors mt-1.5"
                 >
                   View on Google Maps <ArrowUpRight className="size-3.5" />
                 </a>
@@ -1710,15 +1712,15 @@ export function Contact() {
             </div>
 
             {/* 3. Corporate Email */}
-            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
-                <Mail className="size-5" />
+            <div className="glass-card flex gap-4 p-3.5 sm:p-4 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
+                <Mail className="size-4.5" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-slate-900">Corporate Email</h3>
+                <h3 className="text-xs font-bold text-slate-900">Corporate Email</h3>
                 <a
                   href={`mailto:${companyInfo.email}`}
-                  className="text-xs text-slate-700 hover:text-[#d7192a] transition mt-1 block font-mono"
+                  className="text-xs text-slate-700 hover:text-[#d7192a] transition mt-0.5 block font-mono"
                 >
                   {companyInfo.email}
                 </a>
@@ -1726,15 +1728,15 @@ export function Contact() {
             </div>
 
             {/* 4. Phone Support */}
-            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
-                <Phone className="size-5" />
+            <div className="glass-card flex gap-4 p-3.5 sm:p-4 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
+                <Phone className="size-4.5" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-slate-900">Phone Support</h3>
+                <h3 className="text-xs font-bold text-slate-900">Phone Support</h3>
                 <a
                   href={`tel:${companyInfo.phone.replace(/[^0-9+]/g, '')}`}
-                  className="text-xs text-slate-700 hover:text-[#d7192a] transition mt-1 block font-mono"
+                  className="text-xs text-slate-700 hover:text-[#d7192a] transition mt-0.5 block font-mono"
                 >
                   {companyInfo.phone}
                 </a>
@@ -1742,21 +1744,21 @@ export function Contact() {
             </div>
 
             {/* 5. Global Operations */}
-            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
-                <Clock className="size-5" />
+            <div className="glass-card flex gap-4 p-3.5 sm:p-4 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
+                <Clock className="size-4.5" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-slate-900">Global Operations</h3>
-                <p className="text-xs text-slate-600 mt-1">{companyInfo.workingHours}</p>
+                <h3 className="text-xs font-bold text-slate-900">Global Operations</h3>
+                <p className="text-xs text-slate-600 mt-0.5">{companyInfo.workingHours}</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Right Column: Contact Form + Maps directly below Submit Request */}
-        <div className="space-y-6">
-          <div className="glass-card p-6 sm:p-8 border-slate-200/90 bg-white/95 shadow-xl shadow-slate-900/5">
+        <div className="flex flex-col justify-between h-full gap-4">
+          <div className="glass-card p-5 sm:p-6 border-slate-200/90 bg-white/95 shadow-xl shadow-slate-900/5">
             <ContactForm />
           </div>
 
