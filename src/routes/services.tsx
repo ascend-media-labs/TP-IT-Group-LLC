@@ -168,32 +168,38 @@ const industries = [
   {
     name: 'Financial Services',
     desc: 'MODERN DIGITAL BANKING & FINTECH',
-    icon: <Briefcase className="size-6 text-[#d7192a]" />,
+    icon: <Briefcase className="size-5 text-[#d7192a]" />,
+    image: '/industries/financial-services.jpg',
   },
   {
     name: 'IT Companies',
     desc: 'ENTERPRISE TECHNOLOGY SOLUTIONS',
-    icon: <Monitor className="size-6 text-[#d7192a]" />,
+    icon: <Monitor className="size-5 text-[#d7192a]" />,
+    image: '/industries/it-companies.jpg',
   },
   {
     name: 'Pharma & Healthcare',
     desc: 'COMPLIANT HEALTHCARE SYSTEMS',
-    icon: <Pill className="size-6 text-[#d7192a]" />,
+    icon: <Pill className="size-5 text-[#d7192a]" />,
+    image: '/industries/pharma-healthcare.jpg',
   },
   {
     name: 'Manufacturing',
     desc: 'INDUSTRIAL AUTOMATION & IOT',
-    icon: <Factory className="size-6 text-[#d7192a]" />,
+    icon: <Factory className="size-5 text-[#d7192a]" />,
+    image: '/industries/manufacturing.jpg',
   },
   {
     name: 'Enterprises & Startups',
     desc: 'SCALABLE GROWTH SOLUTIONS',
-    icon: <Rocket className="size-6 text-[#d7192a]" />,
+    icon: <Rocket className="size-5 text-[#d7192a]" />,
+    image: '/industries/enterprises-startups.jpg',
   },
   {
     name: 'Engineering & Field Services',
     desc: 'TECHNICAL WORKFORCE SUPPORT',
-    icon: <HardHat className="size-6 text-[#d7192a]" />,
+    icon: <HardHat className="size-5 text-[#d7192a]" />,
+    image: '/industries/engineering-field-services.jpg',
   },
 ];
 
@@ -407,10 +413,10 @@ function Page() {
       {/* 4. INDUSTRIES WE SERVE SECTION (Screenshot 9) */}
       <section className="section bg-white text-slate-900 bg-dot-pattern">
         <div className="site-container relative z-10 text-left">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+          <span className="inline-block rounded-full bg-red-50/90 border border-red-200/70 px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
             INDUSTRIES WE SERVE
-          </p>
-          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
+          </span>
+          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
             Solutions for the Needs of <span className="text-[#d7192a]">Multiple Industries</span>
           </h2>
           <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-3xl">
@@ -425,15 +431,28 @@ function Page() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07 }}
-                className="rounded-3xl bg-white p-7 sm:p-8 border border-slate-200/90 shadow-[0_2px_14px_rgba(0,0,0,0.03)] hover:border-red-200 hover:shadow-lg transition-all"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300"
               >
-                <div className="flex size-12 items-center justify-center rounded-2xl bg-[#fef2f2] text-[#d7192a]">
-                  {ind.icon}
+                <div>
+                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner">
+                    <img
+                      src={ind.image}
+                      alt={ind.name}
+                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+                    <div className="absolute top-3 left-3 flex size-10 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-md border border-white/80">
+                      {ind.icon}
+                    </div>
+                  </div>
+                  <h3 className="mt-4 text-lg font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors">
+                    {ind.name}
+                  </h3>
+                  <p className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    {ind.desc}
+                  </p>
                 </div>
-                <h3 className="mt-5 text-lg font-bold text-slate-900">{ind.name}</h3>
-                <p className="mt-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                  {ind.desc}
-                </p>
               </motion.div>
             ))}
           </div>
