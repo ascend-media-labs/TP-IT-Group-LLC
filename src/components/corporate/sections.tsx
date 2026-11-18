@@ -1375,27 +1375,65 @@ export function Contact() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_20%_20%,rgba(215,25,42,0.04),transparent_60%)]" />
       <div className="site-container relative z-10 grid gap-8 lg:grid-cols-2 items-start">
         <div>
-          <p className="eyebrow">START A CONVERSATION</p>
-          <h2 className="section-title mt-2">Let’s connect.</h2>
+          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
+            START A CONVERSATION
+          </span>
+          <h2 className="section-title mt-3">Let’s connect.</h2>
           <p className="section-copy mt-3 max-w-lg">
-            Ready to accelerate your digital transformation? TP IT GROUP LLC provides world-class technology and
-            enterprise IT solutions globally.
+            Ready to accelerate your digital transformation? TP IT GROUP provides world-class technology and
+            enterprise IT solutions globally across the USA, India, and beyond.
           </p>
 
           <div className="mt-6 space-y-4">
+            {/* 1. USA Office */}
             <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
               <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
                 <MapPin className="size-5" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-slate-900">USA Head Office</h3>
-                <p className="text-xs text-slate-600 mt-1">{companyInfo.headOffice.fullAddress}</p>
-                <p className="text-[11px] font-semibold text-[#d7192a] mt-1 uppercase tracking-wider">
-                  Branch Hubs: {companyInfo.branchOffices}
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">USA HEADQUARTERS</span>
+                </div>
+                <h3 className="text-sm font-bold text-slate-900 mt-0.5">TP IT GROUP LLC</h3>
+                <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                  {companyInfo.headOffice.fullAddress}
                 </p>
+                <a
+                  href={companyInfo.headOffice.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors mt-2"
+                >
+                  View on Google Maps <ArrowUpRight className="size-3.5" />
+                </a>
               </div>
             </div>
 
+            {/* 2. India Office */}
+            <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
+                <Building2 className="size-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">INDIA CORPORATE HUB</span>
+                </div>
+                <h3 className="text-sm font-bold text-slate-900 mt-0.5">TP IT GROUP PVT LTD</h3>
+                <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                  {companyInfo.indiaOffice.fullAddress}
+                </p>
+                <a
+                  href={companyInfo.indiaOffice.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors mt-2"
+                >
+                  View on Google Maps <ArrowUpRight className="size-3.5" />
+                </a>
+              </div>
+            </div>
+
+            {/* 3. Corporate Email */}
             <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
               <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
                 <Mail className="size-5" />
@@ -1411,6 +1449,7 @@ export function Contact() {
               </div>
             </div>
 
+            {/* 4. Phone Support */}
             <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
               <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
                 <Phone className="size-5" />
@@ -1426,6 +1465,7 @@ export function Contact() {
               </div>
             </div>
 
+            {/* 5. Global Operations */}
             <div className="glass-card flex gap-4 p-4 sm:p-5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
               <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
                 <Clock className="size-5" />
@@ -1444,6 +1484,117 @@ export function Contact() {
 
         <div className="glass-card p-6 sm:p-8 border-slate-200/90 bg-white/95 shadow-xl shadow-slate-900/5">
           <ContactForm />
+        </div>
+      </div>
+
+      {/* Interactive Global Office Maps Section */}
+      <div className="site-container relative z-10 mt-16 pt-12 border-t border-slate-200/80 text-left">
+        <div className="mb-8">
+          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
+            FIND OUR OFFICES
+          </span>
+          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
+            Global Headquarters &amp; <span className="text-[#d7192a]">Technology Hub</span>
+          </h2>
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-2xl">
+            Visit us at our corporate offices in the USA and India, or navigate directly using interactive maps below.
+          </p>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-2">
+          {/* 1. USA Office Card with Map */}
+          <div className="rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-7 shadow-sm hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 text-white font-mono text-xs font-bold shadow-xs">
+                  <span className="size-2 rounded-full bg-red-500 animate-pulse" /> USA HEADQUARTERS
+                </span>
+                <span className="text-xs font-semibold text-slate-500">Wilmington, Delaware</span>
+              </div>
+
+              <h3 className="text-xl font-bold text-slate-900">
+                TP IT GROUP LLC
+              </h3>
+              
+              <div className="mt-3 flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <MapPin className="size-4 shrink-0 text-[#d7192a] mt-0.5" />
+                <div>
+                  <span className="font-bold text-slate-800">USA Office address: </span>
+                  <span>1000 N. West Street, Suite 1200, Wilmington, Delaware, 19801, United States of America.</span>
+                </div>
+              </div>
+
+              {/* Embedded Google Map */}
+              <div className="relative mt-5 aspect-[16/10] w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 shadow-inner">
+                <iframe
+                  title="TP IT GROUP LLC USA Office Map"
+                  src="https://maps.google.com/maps?q=1000+N.+West+Street,+Suite+1200,+Wilmington,+Delaware,+19801&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  className="h-full w-full border-0"
+                  loading="lazy"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <a
+                href={companyInfo.headOffice.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
+              >
+                Open in Google Maps <ArrowUpRight className="size-4" />
+              </a>
+              <span className="text-[11px] font-medium text-slate-500">1000 N. West St, Suite 1200</span>
+            </div>
+          </div>
+
+          {/* 2. India Office Card with Map */}
+          <div className="rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-7 shadow-sm hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 text-white font-mono text-xs font-bold shadow-xs">
+                  <span className="size-2 rounded-full bg-emerald-500 animate-pulse" /> INDIA CORPORATE HUB
+                </span>
+                <span className="text-xs font-semibold text-slate-500">Hyderabad, Telangana</span>
+              </div>
+
+              <h3 className="text-xl font-bold text-slate-900">
+                TP IT GROUP PVT LTD
+              </h3>
+              
+              <div className="mt-3 flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <MapPin className="size-4 shrink-0 text-[#d7192a] mt-0.5" />
+                <div>
+                  <span className="font-bold text-slate-800">Address: </span>
+                  <span>13th Floor, Manjeera Trinity Corporate, Unit No. 12A04, next to Lulu Mall, Kukatpally Housing Board Colony, K P H B Phase 3, Kukatpally, Hyderabad, Telangana 500072</span>
+                </div>
+              </div>
+
+              {/* Embedded Google Map */}
+              <div className="relative mt-5 aspect-[16/10] w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 shadow-inner">
+                <iframe
+                  title="TP IT GROUP PVT LTD India Office Map"
+                  src="https://maps.google.com/maps?q=Manjeera+Trinity+Corporate+Kukatpally+Hyderabad+Telangana+500072&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  className="h-full w-full border-0"
+                  loading="lazy"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <a
+                href={companyInfo.indiaOffice.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
+              >
+                Open in Google Maps <ArrowUpRight className="size-4" />
+              </a>
+              <span className="text-[11px] font-medium text-slate-500">Manjeera Trinity, Kukatpally</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
