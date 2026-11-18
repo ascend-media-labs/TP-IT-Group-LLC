@@ -712,14 +712,25 @@ export function WhyChooseUsSection() {
 
         <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12 max-w-6xl">
           {/* Left Handshake Card */}
-          <div className="lg:col-span-6 rounded-3xl border border-red-100/90 bg-white p-8 sm:p-12 shadow-[0_4px_24px_rgba(215,25,42,0.03)] flex flex-col justify-between min-h-[360px] h-full">
+          <div className="group lg:col-span-6 rounded-3xl border border-red-100/90 bg-white p-6 sm:p-8 shadow-[0_4px_24px_rgba(215,25,42,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 flex flex-col justify-between min-h-[360px] h-full transition-all duration-300">
             <div>
-              <Handshake className="size-16 sm:size-20 text-[#d7192a] stroke-[1.8]" />
-              <h3 className="mt-8 text-2xl sm:text-3xl lg:text-[32px] font-bold text-[#d7192a] leading-snug">
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner mb-6">
+                <img
+                  src="/why-choose-us-partnership.jpg"
+                  alt="We don't just deliver services — We build partnerships"
+                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/45 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+                <div className="absolute top-3.5 left-3.5 flex size-11 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-md border border-white/80">
+                  <Handshake className="size-6 text-[#d7192a] stroke-[1.8]" />
+                </div>
+              </div>
+              <h3 className="text-xl sm:text-2xl lg:text-[28px] font-bold text-[#d7192a] leading-snug">
                 We don’t just deliver services — We build partnerships.
               </h3>
             </div>
-            <div className="mt-8 pt-6 border-t border-slate-100">
+            <div className="mt-6 pt-5 border-t border-slate-100">
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#d7192a] hover:underline"
