@@ -377,10 +377,10 @@ export function ConnectedCapabilitiesSection() {
           {connectedCapabilities.map((cap, i) => (
             <motion.div
               key={cap.number}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              initial={{ opacity: 0, y: 25, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ delay: i * 0.1, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               className="group card-diagonal overflow-hidden flex flex-col justify-between p-5 sm:p-6 bg-white/95 border border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
             >
               <div>
@@ -464,7 +464,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.6 }}
           >
             <span className="inline-block rounded-full bg-red-50 border border-red-200 px-3.5 py-1 text-xs font-bold text-[#d7192a]">
@@ -508,10 +508,10 @@ export function About({ detailed = false }: { detailed?: boolean }) {
             {aboutCards.map((card, i) => (
               <motion.div
                 key={card.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                initial={{ opacity: 0, y: 25, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ delay: i * 0.1, duration: 0.45 }}
                 className="rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/90 border-l-[4px] border-l-[#d7192a] shadow-sm hover:shadow-md transition-all text-left"
               >
                 <div className="flex items-center gap-3 mb-2.5">
@@ -549,7 +549,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
                     key={val.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.15 }}
                     transition={{ delay: i * 0.1 }}
                     className="glass-card p-6"
                   >
@@ -578,7 +578,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
                     key={m.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.15 }}
                     transition={{ delay: i * 0.1 }}
                     className="glass-card p-6"
                   >
@@ -628,10 +628,10 @@ export function Services({ full = false }: { full?: boolean }) {
           {services.map((service, i) => (
             <motion.div
               key={service.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
+              initial={{ opacity: 0, y: 25, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ delay: i * 0.08, duration: 0.45 }}
               className="group glass-card flex flex-col justify-between p-5 sm:p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300"
             >
               <div>
@@ -708,10 +708,10 @@ export function IndustriesSection() {
           {industries.map((ind, i) => (
             <motion.div
               key={ind.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
+              initial={{ opacity: 0, y: 25, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ delay: i * 0.08, duration: 0.45 }}
               className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
             >
               <div>
@@ -769,7 +769,7 @@ export function WhyChooseUsSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.5 }}
           className="mb-5 sm:mb-6 text-left"
         >
@@ -789,7 +789,7 @@ export function WhyChooseUsSection() {
           <motion.div
             initial={{ opacity: 0, x: -70 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             className="group lg:col-span-6 rounded-2xl border border-red-100/90 bg-white p-6 sm:p-8 shadow-[0_4px_24px_rgba(215,25,42,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 flex flex-col justify-between min-h-[360px] h-full transition-all duration-300 text-left"
           >
@@ -827,7 +827,7 @@ export function WhyChooseUsSection() {
                 key={item.title}
                 initial={{ opacity: 0, x: 70 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ duration: 0.55, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="flex gap-4 items-start"
               >
@@ -902,9 +902,9 @@ export function WorkWithSection() {
             return (
               <motion.div
                 key={item.number}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                initial={{ opacity: 0, y: 25, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.15 }}
                 transition={{ delay: i * 0.08, duration: 0.45 }}
                 className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-6 shadow-sm hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
               >
@@ -983,10 +983,10 @@ export function ProvenApproachSection() {
           {provenApproach.map((step, i) => (
             <motion.div
               key={step.number}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              initial={{ opacity: 0, y: 25, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ delay: i * 0.1, duration: 0.45 }}
               className="glass-card p-6 bg-white/95 border-slate-200/90 hover:border-[#d7192a]/50 hover:shadow-xl transition-all relative"
             >
               <div className="flex items-center justify-between">

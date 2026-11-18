@@ -110,9 +110,9 @@ function TeamLeaderCard({ leader, index }: TeamLeaderCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 25 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-20px' }}
+      initial={{ opacity: 0, y: 35, scale: 0.96 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: false, amount: 0.15 }}
       transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
       className="perspective-1000 h-full"
       style={{ perspective: 1000 }}
@@ -233,7 +233,13 @@ function Page() {
       {/* 1. LEADERSHIP SHOWCASE (3D Tilt + Stagger Cards) */}
       <section className="pt-8 sm:pt-10 pb-8 sm:pb-12 bg-white text-slate-900 bg-dot-pattern">
         <div className="site-container">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-6 pb-3 border-b border-slate-100">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-6 pb-3 border-b border-slate-100"
+          >
             <div>
               <span className="inline-block rounded-full bg-red-50/90 border border-red-200 px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
                 OUR TEAM
@@ -245,7 +251,7 @@ function Page() {
             <p className="mt-1 sm:mt-0 text-[11px] text-slate-400">
               Illustrated avatars — not actual portraits.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-3.5">
             {leaders.map((leader, idx) => (
