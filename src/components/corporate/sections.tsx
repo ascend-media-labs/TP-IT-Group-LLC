@@ -881,25 +881,20 @@ export function WorkWithSection() {
   ];
 
   return (
-    <section id="talent" className="section relative overflow-hidden bg-white text-slate-900 py-16 sm:py-20">
+    <section id="talent" className="section relative overflow-hidden bg-white text-slate-900 border-t border-slate-200/80 bg-dot-pattern">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(215,25,42,0.03),transparent_70%)]" />
       <div className="site-container relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 sm:mb-10 text-left"
-        >
-          <span className="inline-block rounded-full bg-[#FFF1F2] border border-[#FECDD3] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#E3182D]">
+        <div className="mb-8 sm:mb-10 text-left">
+          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
             WORK WITH TP IT GROUP
           </span>
-          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
-            The right engagement for <span className="text-[#E3182D]">your next move.</span>
+          <h2 className="section-title mt-3">
+            The right engagement for <span className="text-[#d7192a]">your next move.</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl leading-relaxed">
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
             Flexible collaboration structures built to adapt to your enterprise milestones and talent demands.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {engagementModels.map((item, i) => {
@@ -911,26 +906,29 @@ export function WorkWithSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.45 }}
-                className="group relative flex flex-col justify-between rounded-2xl sm:rounded-[22px] border border-red-100/90 bg-white p-6 sm:p-7 shadow-[0_4px_24px_rgba(227,24,45,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/5 transition-all duration-300 text-left"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-6 shadow-sm hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
               >
+                {/* Top Accent Strip that expands on hover */}
+                <div className="absolute top-0 left-0 h-1 w-12 bg-gradient-to-r from-[#d7192a] to-red-400 group-hover:w-full transition-all duration-500 ease-out" />
+
                 <div>
-                  {/* Top Bar: Dark Pill Number Badge (Left) + Soft Pink Icon Circle (Right) */}
-                  <div className="flex items-center justify-between mb-5">
-                    <span className="inline-flex items-center justify-center font-mono text-[11px] font-bold px-3 py-1 rounded-full bg-slate-950 text-white shadow-2xs tracking-wider">
-                      {item.number}
-                    </span>
-                    <div className="flex size-10 items-center justify-center rounded-full bg-[#FFF1F2] border border-[#FFE4E6] text-[#E3182D] group-hover:bg-[#E3182D] group-hover:text-white group-hover:border-[#E3182D] transition-colors duration-300 shadow-2xs">
+                  {/* Top Bar: Icon Badge & Number Monogram */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex size-11 items-center justify-center rounded-xl bg-red-50/90 border border-red-100 text-[#d7192a] shadow-xs group-hover:bg-[#d7192a] group-hover:text-white transition-all duration-300">
                       {meta.icon}
                     </div>
+                    <span className="inline-flex items-center justify-center font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100/80 text-slate-700 border border-slate-200/60 group-hover:bg-red-50 group-hover:text-[#d7192a] group-hover:border-red-100 transition-colors">
+                      {item.number}
+                    </span>
                   </div>
 
-                  {/* Category Tag */}
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#E3182D] block">
+                  {/* Category Pill Tag */}
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a] block">
                     {meta.tag}
                   </span>
 
                   {/* Title */}
-                  <h3 className="mt-1.5 text-base sm:text-[17px] font-bold text-slate-900 group-hover:text-[#E3182D] transition-colors leading-snug">
+                  <h3 className="mt-1.5 text-lg font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors leading-tight">
                     {item.title}
                   </h3>
 
@@ -943,10 +941,10 @@ export function WorkWithSection() {
                 {/* Footer Highlight */}
                 <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-500">
                   <span className="flex items-center gap-1.5">
-                    <CheckCircle2 className="size-3.5 text-[#E3182D] shrink-0" />
+                    <CheckCircle2 className="size-3.5 text-[#d7192a] shrink-0" />
                     <span>{meta.deliverable}</span>
                   </span>
-                  <span className="flex size-6 items-center justify-center rounded-full bg-red-50/70 border border-red-100 text-[#E3182D] group-hover:bg-[#E3182D] group-hover:text-white group-hover:border-[#E3182D] group-hover:translate-x-0.5 transition-all">
+                  <span className="flex size-6 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-400 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] group-hover:translate-x-0.5 transition-all">
                     <ArrowRight className="size-3" />
                   </span>
                 </div>
@@ -961,33 +959,26 @@ export function WorkWithSection() {
 
 export function ProvenApproachSection() {
   const processIcons = [
-    <MessageSquare key="chat" className="size-4.5 text-[#E3182D] stroke-[1.9]" />,
-    <Lightbulb key="light" className="size-4.5 text-[#E3182D] stroke-[1.9]" />,
-    <Rocket key="rocket" className="size-4.5 text-[#E3182D] stroke-[1.9]" />,
-    <RefreshCw key="refresh" className="size-4.5 text-[#E3182D] stroke-[1.9]" />,
+    <MessageSquare key="chat" className="size-5 text-[#d7192a]" />,
+    <Lightbulb key="light" className="size-5 text-[#d7192a]" />,
+    <Rocket key="rocket" className="size-5 text-[#d7192a]" />,
+    <RefreshCw key="refresh" className="size-5 text-[#d7192a]" />,
   ];
 
   return (
-    <section className="section relative overflow-hidden bg-white text-slate-900 py-16 sm:py-20">
+    <section className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
       <div className="site-container relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 sm:mb-10 text-left"
-        >
-          <span className="inline-block rounded-full bg-[#FFF1F2] border border-[#FECDD3] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#E3182D]">
+        <div className="mb-8 text-left">
+          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
             OUR WORK PROCESS
           </span>
-          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
-            A Clear Approach to <span className="text-[#E3182D]">Delivering Excellence</span>
+          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
+            A Clear Approach to <span className="text-[#d7192a]">Delivering Excellence</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl leading-relaxed">
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
             Agree on the priorities, review progress together and validate what is delivered against your business needs.
           </p>
-        </motion.div>
-
+        </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {provenApproach.map((step, i) => (
             <motion.div
@@ -995,30 +986,19 @@ export function ProvenApproachSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative flex flex-col justify-between rounded-2xl sm:rounded-[22px] bg-white p-6 sm:p-7 border border-red-100/90 shadow-[0_4px_24px_rgba(227,24,45,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/5 transition-all duration-300 text-left"
+              transition={{ delay: i * 0.1 }}
+              className="glass-card p-6 bg-white/95 border-slate-200/90 hover:border-[#d7192a]/50 hover:shadow-xl transition-all relative"
             >
-              <div>
-                {/* Top Row: Dark Pill Step Badge (Left) + Soft Pink Icon Circle (Right) */}
-                <div className="flex items-center justify-between mb-5">
-                  <span className="inline-flex items-center justify-center rounded-full bg-slate-950 text-white font-mono text-[11px] font-bold px-3 py-1 shadow-2xs tracking-wider">
-                    {step.number}
-                  </span>
-                  <div className="flex size-10 items-center justify-center rounded-full bg-[#FFF1F2] border border-[#FFE4E6] text-[#E3182D] group-hover:bg-[#E3182D] group-hover:text-white group-hover:border-[#E3182D] transition-colors duration-300 shadow-2xs">
-                    {processIcons[i % processIcons.length]}
-                  </div>
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center justify-center rounded-lg bg-slate-900 text-white font-mono text-xs font-bold px-2.5 py-1">
+                  {step.number}
+                </span>
+                <div className="flex size-9 items-center justify-center rounded-xl bg-red-50 border border-red-100">
+                  {processIcons[i % processIcons.length]}
                 </div>
-
-                {/* Title in Dark Navy Text */}
-                <h3 className="text-base sm:text-[17px] font-bold text-slate-900 tracking-tight leading-snug group-hover:text-[#E3182D] transition-colors duration-200">
-                  {step.title}
-                </h3>
-
-                {/* Description */}
-                <p className="mt-2.5 text-xs sm:text-[13px] leading-relaxed text-slate-600">
-                  {step.desc}
-                </p>
               </div>
+              <h3 className="mt-4 text-base font-bold text-slate-900">{step.title}</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">{step.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -1029,7 +1009,8 @@ export function ProvenApproachSection() {
 
 export function Clients({ full = false }: { full?: boolean }) {
   return (
-    <section id="clients" className="section relative overflow-hidden bg-white text-slate-900 py-14 sm:py-16">
+    <section id="clients" className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_50%_0%,rgba(215,25,42,0.04),transparent_60%)]" />
       <div className="site-container relative z-10">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-3xl text-left">
