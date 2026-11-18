@@ -34,6 +34,7 @@ const connectedCapabilities = [
   {
     number: '01',
     icon: <Cpu className="size-6 text-[#d7192a]" />,
+    image: '/capabilities/technology-solutions.jpg',
     title: 'Technology Solutions',
     desc: 'Connect AI, cloud, enterprise applications and secure infrastructure with the way your organization works.',
     items: [
@@ -48,6 +49,7 @@ const connectedCapabilities = [
   {
     number: '02',
     icon: <Compass className="size-6 text-[#d7192a]" />,
+    image: '/capabilities/consulting-services.jpg',
     title: 'Consulting Services',
     desc: 'Bring clarity to technology decisions, process improvement and transformation delivery—from the first assessment to implementation.',
     items: [
@@ -62,6 +64,7 @@ const connectedCapabilities = [
   {
     number: '03',
     icon: <Briefcase className="size-6 text-[#d7192a]" />,
+    image: '/capabilities/talent-solutions.jpg',
     title: 'IT & Non-IT Talent',
     desc: 'Align your skills requirements, team structure and hiring priorities across technical and business operations roles.',
     items: [
@@ -253,20 +256,29 @@ function Page() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4 }}
-                className="rounded-3xl border border-slate-200/90 bg-white p-7 sm:p-8 shadow-sm flex flex-col justify-between hover:border-red-200 hover:shadow-md transition-all text-left"
+                className="group rounded-3xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-sm flex flex-col justify-between hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
               >
                 <div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex size-11 items-center justify-center rounded-xl bg-red-50 border border-red-100">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner mb-5">
+                    <img
+                      src={cap.image}
+                      alt={cap.title}
+                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" />
+                    <div className="absolute top-2.5 left-2.5 flex size-9 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10">
                       {cap.icon}
                     </div>
-                    <span className="font-mono text-xs font-bold text-slate-400">{cap.number}</span>
+                    <span className="absolute top-2.5 right-2.5 rounded-lg bg-black/40 backdrop-blur-md px-2 py-0.5 font-mono text-[11px] font-bold text-white z-10">
+                      {cap.number}
+                    </span>
                   </div>
 
-                  <h3 className="mt-5 text-xl font-bold text-slate-900">{cap.title}</h3>
+                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors">{cap.title}</h3>
                   <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">{cap.desc}</p>
 
-                  <ul className="mt-5 space-y-2.5 border-t border-slate-100 pt-4">
+                  <ul className="mt-4 space-y-2 border-t border-slate-100 pt-3">
                     {cap.items.map((item) => (
                       <li key={item} className="flex items-start gap-2.5 text-xs text-slate-700 font-medium">
                         <CheckCircle2 className="size-4 mt-0.5 shrink-0 text-[#d7192a]" />

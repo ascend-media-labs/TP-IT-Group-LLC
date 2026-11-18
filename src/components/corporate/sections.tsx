@@ -362,20 +362,29 @@ export function ConnectedCapabilitiesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="glass-card flex flex-col justify-between p-6 sm:p-7 bg-white/95 border-slate-200/90 hover:border-[#d7192a]/50 hover:shadow-xl transition-all"
+              className="group glass-card flex flex-col justify-between p-5 sm:p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300"
             >
               <div>
-                <div className="flex items-center justify-between">
-                  <div className="flex size-11 items-center justify-center rounded-xl bg-red-50 border border-red-100">
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner mb-5">
+                  <img
+                    src={cap.image}
+                    alt={cap.title}
+                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" />
+                  <div className="absolute top-2.5 left-2.5 flex size-9 items-center justify-center rounded-xl bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10">
                     {capIcons[i % capIcons.length]}
                   </div>
-                  <span className="font-mono text-xs font-bold text-slate-400">{cap.number}</span>
+                  <span className="absolute top-2.5 right-2.5 rounded-lg bg-black/40 backdrop-blur-md px-2 py-0.5 font-mono text-[11px] font-bold text-white z-10">
+                    {cap.number}
+                  </span>
                 </div>
 
-                <h3 className="mt-5 text-xl font-bold text-slate-900">{cap.title}</h3>
-                <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-slate-600">{cap.desc}</p>
+                <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors">{cap.title}</h3>
+                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">{cap.desc}</p>
 
-                <ul className="mt-5 space-y-2 border-t border-slate-100 pt-4">
+                <ul className="mt-4 space-y-2 border-t border-slate-100 pt-3">
                   {cap.items.map((item) => (
                     <li key={item} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
                       <Check className="size-3.5 mt-0.5 shrink-0 text-[#d7192a]" />

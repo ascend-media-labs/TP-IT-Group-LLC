@@ -43,6 +43,7 @@ export const connectedCapabilities = [
     number: '01',
     title: 'Technology Solutions',
     desc: 'Connect AI, cloud, enterprise applications and secure infrastructure with the way your organization works.',
+    image: '/capabilities/technology-solutions.jpg',
     items: [
       'AI automation & agents',
       'Cloud migration & modernization',
@@ -56,6 +57,7 @@ export const connectedCapabilities = [
     number: '02',
     title: 'Consulting Services',
     desc: 'Bring clarity to technology decisions, process improvement and transformation delivery—from the first assessment to implementation.',
+    image: '/capabilities/consulting-services.jpg',
     items: [
       'Technology strategy & roadmaps',
       'Business process improvement',
@@ -69,6 +71,7 @@ export const connectedCapabilities = [
     number: '03',
     title: 'IT & Non-IT Talent',
     desc: 'Align your skills requirements, team structure and hiring priorities across technical and business operations roles.',
+    image: '/capabilities/talent-solutions.jpg',
     items: [
       'IT specialists & project teams',
       'Business & operational talent',
