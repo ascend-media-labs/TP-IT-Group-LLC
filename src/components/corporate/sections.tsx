@@ -597,7 +597,7 @@ export function Services({ full = false }: { full?: boolean }) {
               className="group glass-card flex flex-col justify-between p-5 sm:p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300"
             >
               <div>
-                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner mb-5">
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-100 shadow-inner mb-5">
                   <img
                     src={service.image}
                     alt={service.title}
