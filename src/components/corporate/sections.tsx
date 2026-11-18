@@ -1537,10 +1537,6 @@ export function Contact() {
             START A CONVERSATION
           </span>
           <h2 className="section-title mt-3">Let’s connect.</h2>
-          <p className="section-copy mt-3 max-w-lg">
-            Ready to accelerate your digital transformation? TP IT GROUP provides world-class technology and
-            enterprise IT solutions globally across the USA, India, and beyond.
-          </p>
 
           <div className="mt-6 space-y-4">
             {/* 1. USA Office */}
