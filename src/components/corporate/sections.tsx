@@ -185,11 +185,11 @@ const capabilityTags = [
 export function Hero() {
   return (
     <section id="home" className="relative overflow-hidden pt-2 pb-6 sm:pt-3 sm:pb-8 md:pt-4 md:pb-8 bg-white text-slate-900 bg-dot-pattern">
-      {/* Generated Enterprise Hero Banner Background */}
+      {/* Generated Enterprise Hero Banner Background (Team Meeting) */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <img
           src="/hero-banner.jpg"
-          alt="TP IT Group Global Enterprise Technology Innovation"
+          alt="TP IT Group Executive Team Collaboration & Strategy Meeting"
           className="h-full w-full object-cover object-center opacity-25 sm:opacity-30"
           loading="eager"
         />
