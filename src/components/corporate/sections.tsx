@@ -499,30 +499,31 @@ export function ConnectedCapabilitiesSection() {
 export function About({ detailed = false }: { detailed?: boolean }) {
   const aboutCards = [
     {
-      icon: <Target className="size-5 text-[#d7192a]" />,
+      icon: <Target className="size-5 transition-colors" />,
       title: 'Mission-Driven',
       desc: 'Deliver smart solutions that drive real business growth and digital transformation.',
     },
     {
-      icon: <Users className="size-5 text-[#d7192a]" />,
+      icon: <Users className="size-5 transition-colors" />,
       title: 'Client-Centric',
       desc: 'Building long-term partnerships through reliable service and dedicated support.',
     },
     {
-      icon: <Lightbulb className="size-5 text-[#d7192a]" />,
+      icon: <Lightbulb className="size-5 transition-colors" />,
       title: 'Innovation First',
       desc: 'Leveraging cutting-edge technologies to solve complex business challenges.',
     },
     {
-      icon: <TrendingUp className="size-5 text-[#d7192a]" />,
+      icon: <TrendingUp className="size-5 transition-colors" />,
       title: 'Scalable Growth',
       desc: 'Solutions designed to grow with your business from startup to enterprise.',
     },
   ];
 
   return (
-    <section id="about" className="section bg-white text-slate-900 bg-dot-pattern pb-2 sm:pb-3">
-      <div className="site-container space-y-8 sm:space-y-10">
+    <section id="about" className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern pb-2 sm:pb-3">
+      <div className="pointer-events-none absolute -right-20 top-1/2 -translate-y-1/2 size-96 rounded-full bg-red-500/[0.03] blur-3xl" />
+      <div className="site-container relative z-10 space-y-8 sm:space-y-10">
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Left Text */}
           <motion.div
@@ -531,7 +532,8 @@ export function About({ detailed = false }: { detailed?: boolean }) {
             viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block rounded-full bg-red-50 border border-red-200 px-3.5 py-1 text-xs font-bold text-[#d7192a]">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-red-50 border border-red-200/90 px-3.5 py-1 text-xs font-bold text-[#d7192a] shadow-2xs">
+              <span className="size-1.5 rounded-full bg-[#d7192a] animate-pulse" />
               ABOUT US
             </span>
             <h2 className="section-title mt-3">
@@ -540,35 +542,36 @@ export function About({ detailed = false }: { detailed?: boolean }) {
             <div className="mt-4 space-y-3 text-xs sm:text-sm leading-relaxed text-slate-600">
               <p>
                 TP IT Group helps businesses navigate digital transformation with practical, reliable technology solutions.
-                Our <span className="rounded bg-slate-100 px-1.5 py-0.5 text-xs font-bold text-slate-800">US</span> USA head office and{' '}
-                <span className="rounded bg-slate-100 px-1.5 py-0.5 text-xs font-bold text-slate-800">CA</span> Canada and{' '}
-                <span className="rounded bg-slate-100 px-1.5 py-0.5 text-xs font-bold text-slate-800">IN</span> India operations connect
+                Our <span className="inline-flex items-center rounded-md bg-slate-900 text-white px-1.5 py-0.5 text-[10px] font-bold tracking-wider shadow-2xs">US</span> USA head office and{' '}
+                <span className="inline-flex items-center rounded-md bg-slate-900 text-white px-1.5 py-0.5 text-[10px] font-bold tracking-wider shadow-2xs">CA</span> Canada and{' '}
+                <span className="inline-flex items-center rounded-md bg-slate-900 text-white px-1.5 py-0.5 text-[10px] font-bold tracking-wider shadow-2xs">IN</span> India operations connect
                 business needs with technology, consulting and workforce expertise.
               </p>
               <p>
                 We bring together AI automation, cloud migration, custom development, ERP and SAP, web design, and
                 networking to support your business from planning through ongoing improvement.
               </p>
-              <p className="mt-4 font-semibold italic text-[#d7192a]">
-                We deliver what you expect and keep our promises — with clear communication, agreed priorities and
-                dependable support.
-              </p>
+              <div className="mt-4 rounded-xl border border-red-200/80 border-l-[4px] border-l-[#d7192a] bg-gradient-to-r from-red-50/80 via-red-50/30 to-white p-3.5 shadow-2xs">
+                <p className="font-semibold italic text-[#d7192a] text-xs sm:text-sm leading-relaxed">
+                  &ldquo;We deliver what you expect and keep our promises — with clear communication, agreed priorities and dependable support.&rdquo;
+                </p>
+              </div>
             </div>
 
             {!detailed && (
               <Button
                 asChild
-                className="mt-6 h-11 rounded-xl bg-slate-100 px-6 text-xs font-bold text-slate-800 border border-slate-200/90 shadow-xs hover:bg-slate-200/80 hover:border-red-300 transition-all"
+                className="mt-6 h-11 rounded-xl bg-slate-900 px-6 text-xs font-bold text-white shadow-md shadow-slate-900/10 hover:bg-[#d7192a] hover:shadow-lg hover:shadow-red-600/20 hover:-translate-y-0.5 transition-all group"
               >
                 <Link to="/about">
-                  Learn More About Us <ArrowRight className="size-4 ml-2" />
+                  Learn More About Us <ArrowRight className="size-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </Button>
             )}
           </motion.div>
 
-          {/* Right 4 Cards (2x2 Grid matching reference style with 4-side curve & left accent border) */}
-          <div className="grid gap-4 sm:grid-cols-2">
+          {/* Right 4 Pillar Cards */}
+          <div className="grid gap-4 sm:gap-5 sm:grid-cols-2">
             {aboutCards.map((card, i) => (
               <motion.div
                 key={card.title}
@@ -576,20 +579,47 @@ export function About({ detailed = false }: { detailed?: boolean }) {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: false, amount: 0.15 }}
                 transition={{ delay: i * 0.1, duration: 0.45 }}
-                className="rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/90 border-l-[4px] border-l-[#d7192a] shadow-sm hover:shadow-md transition-all text-left"
+                className="group relative overflow-hidden rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05),0_1px_3px_rgba(15,23,42,0.02)] hover:shadow-[0_20px_40px_-10px_rgba(215,25,42,0.12),0_4px_12px_rgba(15,23,42,0.04)] hover:border-red-200 hover:-translate-y-1 transition-all duration-300 text-left flex flex-col justify-between"
               >
-                <div className="flex items-center gap-3 mb-2.5">
-                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-red-50 border border-red-100 text-[#d7192a] shadow-xs">
-                    {card.icon}
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">
-                      CORE PILLAR
+                {/* Top highlight bar on hover */}
+                <div className="pointer-events-none absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#d7192a] via-rose-500 to-red-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Soft gradient ambient glow on hover */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-red-50/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                <div>
+                  {/* Header with Icon, Labels and Watermark Index */}
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-red-50/90 border border-red-200/70 text-[#d7192a] shadow-2xs group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] group-hover:scale-105 transition-all duration-300">
+                        {card.icon}
+                      </div>
+                      <div>
+                        <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest text-[#d7192a]">
+                          <span className="size-1 rounded-full bg-[#d7192a]" />
+                          CORE PILLAR
+                        </span>
+                        <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors leading-tight mt-0.5">
+                          {card.title}
+                        </h3>
+                      </div>
+                    </div>
+                    <span className="text-xl font-black text-slate-200 group-hover:text-red-200/80 font-mono select-none transition-colors duration-300">
+                      0{i + 1}
                     </span>
-                    <h3 className="text-base font-bold text-slate-900 leading-tight">{card.title}</h3>
                   </div>
+
+                  <p className="text-xs sm:text-[13px] leading-relaxed text-slate-600 group-hover:text-slate-700 transition-colors">
+                    {card.desc}
+                  </p>
                 </div>
-                <p className="text-xs leading-relaxed text-slate-600">{card.desc}</p>
+
+                {/* Bottom subtle progress line */}
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <div className="h-[2px] w-6 bg-red-200/80 group-hover:w-16 group-hover:bg-[#d7192a] rounded-full transition-all duration-500" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-300 group-hover:text-[#d7192a] transition-colors">
+                    Enterprise Focus
+                  </span>
+                </div>
               </motion.div>
             ))}
           </div>
