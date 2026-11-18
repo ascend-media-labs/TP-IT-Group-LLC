@@ -108,87 +108,87 @@ export function Navbar() {
     <>
       <ScrollProgress />
       <header className="site-header bg-white/75 backdrop-blur-xl">
-      <div className="mx-auto flex h-full w-full max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8 gap-3">
-        <Link
-          to="/"
-          className="brand-name flex items-center transition-opacity hover:opacity-90 shrink-0"
-          onClick={() => setOpen(false)}
-          aria-label="TP iT GROUP LLC Home"
-        >
-          <TPITLogo className="h-5 sm:h-6 md:h-6.5 max-w-[150px] sm:max-w-[170px] w-auto shrink-0" />
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:gap-2 lg:flex shrink-0">
-          {nav.map((item) => (
-            <Link
-              key={`${item.label}-${item.to}`}
-              to={item.to}
-              className="nav-link text-xs xl:text-[13px] px-2.5 xl:px-3 py-1.5"
-              activeProps={{ className: 'nav-link active text-xs xl:text-[13px] px-2.5 xl:px-3 py-1.5' }}
-              activeOptions={{ exact: true }}
-            >
-              <span className="nav-link-label">{item.label}</span>
-            </Link>
-          ))}
-          <Button
-            asChild
-            className="ml-2 h-9 xl:h-10 rounded-full bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] px-4 xl:px-5 text-xs xl:text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+        <div className="mx-auto flex h-full w-full max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8 gap-3">
+          <Link
+            to="/"
+            className="brand-name flex items-center transition-opacity hover:opacity-90 shrink-0"
+            onClick={() => setOpen(false)}
+            aria-label="TP iT GROUP LLC Home"
           >
-            <Link to="/contact">
-              Let’s talk <ArrowUpRight className="size-3.5 xl:size-4" />
-            </Link>
-          </Button>
-        </nav>
+            <TPITLogo className="h-5 sm:h-6 md:h-6.5 max-w-[150px] sm:max-w-[170px] w-auto shrink-0" />
+          </Link>
 
-        {/* Mobile Menu Toggle */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="lg:hidden text-slate-800 hover:bg-slate-100 shrink-0"
-          aria-label={open ? 'Close navigation' : 'Open navigation'}
-          aria-expanded={open}
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <X className="size-6 text-[#d7192a]" /> : <Menu className="size-6" />}
-        </Button>
-      </div>
-
-      {/* Mobile Animated Drawer */}
-      <AnimatePresence>
-        {open && (
-          <motion.nav
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25 }}
-            aria-label="Mobile navigation"
-            className="absolute left-0 top-full flex w-full flex-col border-b border-slate-200 bg-white/95 px-6 py-6 shadow-2xl backdrop-blur-2xl lg:hidden"
-          >
+          {/* Desktop Navigation */}
+          <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:gap-2 lg:flex shrink-0">
             {nav.map((item) => (
               <Link
-                key={`mobile-${item.label}-${item.to}`}
+                key={`${item.label}-${item.to}`}
                 to={item.to}
-                className="rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 hover:text-[#d7192a] transition-colors"
-                activeProps={{ className: 'rounded-xl px-3.5 py-2.5 text-sm font-bold text-white bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] shadow-md shadow-red-500/25' }}
+                className="nav-link text-xs xl:text-[13px] px-2.5 xl:px-3 py-1.5"
+                activeProps={{ className: 'nav-link active text-xs xl:text-[13px] px-2.5 xl:px-3 py-1.5' }}
                 activeOptions={{ exact: true }}
-                onClick={() => setOpen(false)}
               >
-                {item.label}
+                <span className="nav-link-label">{item.label}</span>
               </Link>
             ))}
             <Button
               asChild
-              className="mt-4 h-11 w-full rounded-full bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] text-xs font-bold text-white shadow-md shadow-red-500/20"
+              className="ml-2 h-9 xl:h-10 rounded-full bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] px-4 xl:px-5 text-xs xl:text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap"
             >
-              <Link to="/contact" onClick={() => setOpen(false)}>
-                Let’s talk <ArrowUpRight className="size-4 ml-1" />
+              <Link to="/contact">
+                Let’s talk <ArrowUpRight className="size-3.5 xl:size-4" />
               </Link>
             </Button>
-          </motion.nav>
-        )}
-      </AnimatePresence>
-    </header>
+          </nav>
+
+          {/* Mobile Menu Toggle */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden text-slate-800 hover:bg-slate-100 shrink-0"
+            aria-label={open ? 'Close navigation' : 'Open navigation'}
+            aria-expanded={open}
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <X className="size-6 text-[#d7192a]" /> : <Menu className="size-6" />}
+          </Button>
+        </div>
+
+        {/* Mobile Animated Drawer */}
+        <AnimatePresence>
+          {open && (
+            <motion.nav
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.25 }}
+              aria-label="Mobile navigation"
+              className="absolute left-0 top-full flex w-full flex-col border-b border-slate-200 bg-white/95 px-6 py-6 shadow-2xl backdrop-blur-2xl lg:hidden"
+            >
+              {nav.map((item) => (
+                <Link
+                  key={`mobile-${item.label}-${item.to}`}
+                  to={item.to}
+                  className="rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 hover:text-[#d7192a] transition-colors"
+                  activeProps={{ className: 'rounded-xl px-3.5 py-2.5 text-sm font-bold text-white bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] shadow-md shadow-red-500/25' }}
+                  activeOptions={{ exact: true }}
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Button
+                asChild
+                className="mt-4 h-11 w-full rounded-full bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] text-xs font-bold text-white shadow-md shadow-red-500/20"
+              >
+                <Link to="/contact" onClick={() => setOpen(false)}>
+                  Let’s talk <ArrowUpRight className="size-4 ml-1" />
+                </Link>
+              </Button>
+            </motion.nav>
+          )}
+        </AnimatePresence>
+      </header>
     </>
   );
 }
@@ -881,20 +881,25 @@ export function WorkWithSection() {
   ];
 
   return (
-    <section id="talent" className="section relative overflow-hidden bg-white text-slate-900 border-t border-slate-200/80 bg-dot-pattern">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(215,25,42,0.03),transparent_70%)]" />
+    <section id="talent" className="section relative overflow-hidden bg-white text-slate-900 py-16 sm:py-20">
       <div className="site-container relative z-10">
-        <div className="mb-8 sm:mb-10 text-left">
-          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-8 sm:mb-10 text-left"
+        >
+          <span className="inline-block rounded-full bg-[#FFF1F2] border border-[#FECDD3] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#E3182D]">
             WORK WITH TP IT GROUP
           </span>
-          <h2 className="section-title mt-3">
-            The right engagement for <span className="text-[#d7192a]">your next move.</span>
+          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
+            The right engagement for <span className="text-[#E3182D]">your next move.</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl leading-relaxed">
             Flexible collaboration structures built to adapt to your enterprise milestones and talent demands.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {engagementModels.map((item, i) => {
@@ -906,29 +911,26 @@ export function WorkWithSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.45 }}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-6 shadow-sm hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
+                className="group relative flex flex-col justify-between rounded-2xl sm:rounded-[22px] border border-red-100/90 bg-white p-6 sm:p-7 shadow-[0_4px_24px_rgba(227,24,45,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/5 transition-all duration-300 text-left"
               >
-                {/* Top Accent Strip that expands on hover */}
-                <div className="absolute top-0 left-0 h-1 w-12 bg-gradient-to-r from-[#d7192a] to-red-400 group-hover:w-full transition-all duration-500 ease-out" />
-
                 <div>
-                  {/* Top Bar: Icon Badge & Number Monogram */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex size-11 items-center justify-center rounded-xl bg-red-50/90 border border-red-100 text-[#d7192a] shadow-xs group-hover:bg-[#d7192a] group-hover:text-white transition-all duration-300">
-                      {meta.icon}
-                    </div>
-                    <span className="inline-flex items-center justify-center font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100/80 text-slate-700 border border-slate-200/60 group-hover:bg-red-50 group-hover:text-[#d7192a] group-hover:border-red-100 transition-colors">
+                  {/* Top Bar: Dark Pill Number Badge (Left) + Soft Pink Icon Circle (Right) */}
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="inline-flex items-center justify-center font-mono text-[11px] font-bold px-3 py-1 rounded-full bg-slate-950 text-white shadow-2xs tracking-wider">
                       {item.number}
                     </span>
+                    <div className="flex size-10 items-center justify-center rounded-full bg-[#FFF1F2] border border-[#FFE4E6] text-[#E3182D] group-hover:bg-[#E3182D] group-hover:text-white group-hover:border-[#E3182D] transition-colors duration-300 shadow-2xs">
+                      {meta.icon}
+                    </div>
                   </div>
 
-                  {/* Category Pill Tag */}
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a] block">
+                  {/* Category Tag */}
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#E3182D] block">
                     {meta.tag}
                   </span>
 
                   {/* Title */}
-                  <h3 className="mt-1.5 text-lg font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors leading-tight">
+                  <h3 className="mt-1.5 text-base sm:text-[17px] font-bold text-slate-900 group-hover:text-[#E3182D] transition-colors leading-snug">
                     {item.title}
                   </h3>
 
@@ -941,10 +943,10 @@ export function WorkWithSection() {
                 {/* Footer Highlight */}
                 <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-500">
                   <span className="flex items-center gap-1.5">
-                    <CheckCircle2 className="size-3.5 text-[#d7192a] shrink-0" />
+                    <CheckCircle2 className="size-3.5 text-[#E3182D] shrink-0" />
                     <span>{meta.deliverable}</span>
                   </span>
-                  <span className="flex size-6 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-400 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] group-hover:translate-x-0.5 transition-all">
+                  <span className="flex size-6 items-center justify-center rounded-full bg-red-50/70 border border-red-100 text-[#E3182D] group-hover:bg-[#E3182D] group-hover:text-white group-hover:border-[#E3182D] group-hover:translate-x-0.5 transition-all">
                     <ArrowRight className="size-3" />
                   </span>
                 </div>
@@ -959,26 +961,33 @@ export function WorkWithSection() {
 
 export function ProvenApproachSection() {
   const processIcons = [
-    <MessageSquare key="chat" className="size-5 text-[#d7192a]" />,
-    <Lightbulb key="light" className="size-5 text-[#d7192a]" />,
-    <Rocket key="rocket" className="size-5 text-[#d7192a]" />,
-    <RefreshCw key="refresh" className="size-5 text-[#d7192a]" />,
+    <MessageSquare key="chat" className="size-4.5 text-[#E3182D] stroke-[1.9]" />,
+    <Lightbulb key="light" className="size-4.5 text-[#E3182D] stroke-[1.9]" />,
+    <Rocket key="rocket" className="size-4.5 text-[#E3182D] stroke-[1.9]" />,
+    <RefreshCw key="refresh" className="size-4.5 text-[#E3182D] stroke-[1.9]" />,
   ];
 
   return (
-    <section className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
+    <section className="section relative overflow-hidden bg-white text-slate-900 py-16 sm:py-20">
       <div className="site-container relative z-10">
-        <div className="mb-8 text-left">
-          <span className="inline-block rounded-full bg-red-50/80 border border-red-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-8 sm:mb-10 text-left"
+        >
+          <span className="inline-block rounded-full bg-[#FFF1F2] border border-[#FECDD3] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#E3182D]">
             OUR WORK PROCESS
           </span>
-          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
-            A Clear Approach to <span className="text-[#d7192a]">Delivering Excellence</span>
+          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
+            A Clear Approach to <span className="text-[#E3182D]">Delivering Excellence</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl leading-relaxed">
             Agree on the priorities, review progress together and validate what is delivered against your business needs.
           </p>
-        </div>
+        </motion.div>
+
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {provenApproach.map((step, i) => (
             <motion.div
@@ -986,19 +995,30 @@ export function ProvenApproachSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="glass-card p-6 bg-white/95 border-slate-200/90 hover:border-[#d7192a]/50 hover:shadow-xl transition-all relative"
+              transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative flex flex-col justify-between rounded-2xl sm:rounded-[22px] bg-white p-6 sm:p-7 border border-red-100/90 shadow-[0_4px_24px_rgba(227,24,45,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/5 transition-all duration-300 text-left"
             >
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center justify-center rounded-lg bg-slate-900 text-white font-mono text-xs font-bold px-2.5 py-1">
-                  {step.number}
-                </span>
-                <div className="flex size-9 items-center justify-center rounded-xl bg-red-50 border border-red-100">
-                  {processIcons[i % processIcons.length]}
+              <div>
+                {/* Top Row: Dark Pill Step Badge (Left) + Soft Pink Icon Circle (Right) */}
+                <div className="flex items-center justify-between mb-5">
+                  <span className="inline-flex items-center justify-center rounded-full bg-slate-950 text-white font-mono text-[11px] font-bold px-3 py-1 shadow-2xs tracking-wider">
+                    {step.number}
+                  </span>
+                  <div className="flex size-10 items-center justify-center rounded-full bg-[#FFF1F2] border border-[#FFE4E6] text-[#E3182D] group-hover:bg-[#E3182D] group-hover:text-white group-hover:border-[#E3182D] transition-colors duration-300 shadow-2xs">
+                    {processIcons[i % processIcons.length]}
+                  </div>
                 </div>
+
+                {/* Title in Dark Navy Text */}
+                <h3 className="text-base sm:text-[17px] font-bold text-slate-900 tracking-tight leading-snug group-hover:text-[#E3182D] transition-colors duration-200">
+                  {step.title}
+                </h3>
+
+                {/* Description */}
+                <p className="mt-2.5 text-xs sm:text-[13px] leading-relaxed text-slate-600">
+                  {step.desc}
+                </p>
               </div>
-              <h3 className="mt-4 text-base font-bold text-slate-900">{step.title}</h3>
-              <p className="mt-2 text-xs leading-relaxed text-slate-600">{step.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -1009,8 +1029,7 @@ export function ProvenApproachSection() {
 
 export function Clients({ full = false }: { full?: boolean }) {
   return (
-    <section id="clients" className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_50%_0%,rgba(215,25,42,0.04),transparent_60%)]" />
+    <section id="clients" className="section relative overflow-hidden bg-white text-slate-900 py-14 sm:py-16">
       <div className="site-container relative z-10">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-3xl text-left">
@@ -1408,33 +1427,30 @@ export function OfficeLocationsMapCard() {
           <button
             type="button"
             onClick={() => setActiveOffice('usa')}
-            className={`px-3 py-1 rounded-lg transition-all ${
-              activeOffice === 'usa'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
+            className={`px-3 py-1 rounded-lg transition-all ${activeOffice === 'usa'
+              ? 'bg-white text-slate-900 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900'
+              }`}
           >
             USA
           </button>
           <button
             type="button"
             onClick={() => setActiveOffice('india')}
-            className={`px-3 py-1 rounded-lg transition-all ${
-              activeOffice === 'india'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
+            className={`px-3 py-1 rounded-lg transition-all ${activeOffice === 'india'
+              ? 'bg-white text-slate-900 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900'
+              }`}
           >
             India
           </button>
           <button
             type="button"
             onClick={() => setActiveOffice('both')}
-            className={`px-2.5 py-1 rounded-lg transition-all ${
-              activeOffice === 'both'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
+            className={`px-2.5 py-1 rounded-lg transition-all ${activeOffice === 'both'
+              ? 'bg-white text-slate-900 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900'
+              }`}
           >
             Both
           </button>

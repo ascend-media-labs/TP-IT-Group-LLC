@@ -11,6 +11,9 @@ import {
   Users,
   Eye,
   ArrowRight,
+  Compass,
+  Rocket,
+  RefreshCw,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -286,157 +289,89 @@ function Page() {
         </div>
       </section>
 
-      {/* 4. OUR APPROACH SECTION (Screenshot 5) */}
-      <section className="section bg-white text-slate-900 bg-dot-pattern overflow-hidden">
+      {/* 4. OUR APPROACH SECTION */}
+      <section className="section bg-white text-slate-900 py-16 sm:py-20 overflow-hidden">
         <div className="site-container text-left">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            className="mb-8 sm:mb-10"
           >
-            <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+            <span className="inline-block rounded-full bg-[#FFF1F2] border border-[#FECDD3] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#E3182D]">
               OUR APPROACH
-            </p>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
-              From Ideas to <span className="text-[#d7192a]">Lasting Value</span>
+            </span>
+            <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
+              From Ideas to <span className="text-[#E3182D]">Lasting Value</span>
             </h2>
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl leading-relaxed">
+              A structured, collaborative framework engineered to connect executive strategy with precise technical execution.
+            </p>
           </motion.div>
 
-          {/* Vertical Alternating Timeline */}
-          <div className="relative mt-10 max-w-3xl mx-auto">
-            {/* Center Vertical Guideline (visible on md+) */}
-            <div className="absolute left-1/2 top-6 bottom-6 -translate-x-1/2 w-0.5 bg-slate-200 hidden md:block" />
-
-            <div className="space-y-6 md:space-y-10">
-              {/* Step 1 - DISCOVER (Left -> slides in from left to right) */}
-              <div className="relative flex flex-col md:flex-row items-center">
-                <motion.div
-                  initial={{ opacity: 0, x: -70 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                  className="w-full md:w-1/2 md:pr-10 text-left"
-                >
-                  <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm hover:border-red-200 hover:shadow-md transition-all">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">
-                      DISCOVER
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                number: '01',
+                phase: 'DISCOVER',
+                title: 'Understand Your Business',
+                desc: 'Connect your objectives with the right technology priorities, scope, and technical roadmaps.',
+                icon: <Compass className="size-4.5 text-[#E3182D] stroke-[1.9]" />,
+              },
+              {
+                number: '02',
+                phase: 'PLAN',
+                title: 'Design Smart Solutions',
+                desc: 'Create an architectural blueprint for cloud, AI, custom software, and enterprise applications.',
+                icon: <Lightbulb className="size-4.5 text-[#E3182D] stroke-[1.9]" />,
+              },
+              {
+                number: '03',
+                phase: 'DELIVER',
+                title: 'Build & Implement',
+                desc: 'Develop, integrate, and test solutions with transparent milestones, agile reviews, and rigor.',
+                icon: <Rocket className="size-4.5 text-[#E3182D] stroke-[1.9]" />,
+              },
+              {
+                number: '04',
+                phase: 'IMPROVE',
+                title: 'Ongoing Support & Growth',
+                desc: 'Maintain, monitor, and optimize your systems to ensure sustainable long-term enterprise value.',
+                icon: <RefreshCw className="size-4.5 text-[#E3182D] stroke-[1.9]" />,
+              },
+            ].map((step, i) => (
+              <motion.div
+                key={step.number}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative flex flex-col justify-between rounded-2xl sm:rounded-[22px] bg-white p-6 sm:p-7 border border-red-100/90 shadow-[0_4px_24px_rgba(227,24,45,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/5 transition-all duration-300 text-left"
+              >
+                <div>
+                  {/* Top Row: Dark Pill Step Badge (Left) + Soft Pink Icon Circle (Right) */}
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="inline-flex items-center justify-center rounded-full bg-slate-950 text-white font-mono text-[11px] font-bold px-3 py-1 shadow-2xs tracking-wider">
+                      {step.number}
                     </span>
-                    <h3 className="mt-1 text-base font-bold text-slate-900">
-                      Understand Your Business
-                    </h3>
-                    <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                      Connect your objectives with the right technology priorities and a clear scope.
-                    </p>
+                    <div className="flex size-10 items-center justify-center rounded-full bg-[#FFF1F2] border border-[#FFE4E6] text-[#E3182D] group-hover:bg-[#E3182D] group-hover:text-white group-hover:border-[#E3182D] transition-colors duration-300 shadow-2xs">
+                      {step.icon}
+                    </div>
                   </div>
-                </motion.div>
-                {/* Center Node Dot */}
-                <motion.div
-                  initial={{ scale: 0, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.4, delay: 0.15 }}
-                  className="absolute left-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[#d7192a] ring-4 ring-red-100 hidden md:block"
-                />
-                <div className="w-full md:w-1/2" />
-              </div>
 
-              {/* Step 2 - PLAN (Right -> slides in from right to left) */}
-              <div className="relative flex flex-col md:flex-row items-center">
-                <div className="w-full md:w-1/2" />
-                {/* Center Node Dot */}
-                <motion.div
-                  initial={{ scale: 0, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.4, delay: 0.15 }}
-                  className="absolute left-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[#d7192a] ring-4 ring-red-100 hidden md:block"
-                />
-                <motion.div
-                  initial={{ opacity: 0, x: 70 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                  className="w-full md:w-1/2 md:pl-10 text-left"
-                >
-                  <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm hover:border-red-200 hover:shadow-md transition-all">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">
-                      PLAN
-                    </span>
-                    <h3 className="mt-1 text-base font-bold text-slate-900">
-                      Design the Right Solution
-                    </h3>
-                    <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                      Create a practical roadmap for cloud, AI, development, or enterprise applications.
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
+                  {/* Title in Dark Navy Text */}
+                  <h3 className="text-base sm:text-[17px] font-bold text-slate-900 tracking-tight leading-snug group-hover:text-[#E3182D] transition-colors duration-200">
+                    {step.title}
+                  </h3>
 
-              {/* Step 3 - DELIVER (Left -> slides in from left to right) */}
-              <div className="relative flex flex-col md:flex-row items-center">
-                <motion.div
-                  initial={{ opacity: 0, x: -70 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                  className="w-full md:w-1/2 md:pr-10 text-left"
-                >
-                  <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm hover:border-red-200 hover:shadow-md transition-all">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">
-                      DELIVER
-                    </span>
-                    <h3 className="mt-1 text-base font-bold text-slate-900">
-                      Build &amp; Implement
-                    </h3>
-                    <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                      Develop, integrate, and test solutions with collaboration throughout delivery.
-                    </p>
-                  </div>
-                </motion.div>
-                {/* Center Node Dot */}
-                <motion.div
-                  initial={{ scale: 0, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.4, delay: 0.15 }}
-                  className="absolute left-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[#d7192a] ring-4 ring-red-100 hidden md:block"
-                />
-                <div className="w-full md:w-1/2" />
-              </div>
-
-              {/* Step 4 - IMPROVE (Right -> slides in from right to left) */}
-              <div className="relative flex flex-col md:flex-row items-center">
-                <div className="w-full md:w-1/2" />
-                {/* Center Node Dot */}
-                <motion.div
-                  initial={{ scale: 0, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.4, delay: 0.15 }}
-                  className="absolute left-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[#d7192a] ring-4 ring-red-100 hidden md:block"
-                />
-                <motion.div
-                  initial={{ opacity: 0, x: 70 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                  className="w-full md:w-1/2 md:pl-10 text-left"
-                >
-                  <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm hover:border-red-200 hover:shadow-md transition-all">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">
-                      IMPROVE
-                    </span>
-                    <h3 className="mt-1 text-base font-bold text-slate-900">
-                      Support Your Growth
-                    </h3>
-                    <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                      Maintain and refine your technology as your business needs evolve.
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
+                  {/* Description */}
+                  <p className="mt-2.5 text-xs sm:text-[13px] leading-relaxed text-slate-600">
+                    {step.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
