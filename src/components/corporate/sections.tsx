@@ -1633,10 +1633,6 @@ export function Contact() {
                 <p className="text-xs text-slate-600 mt-1">{companyInfo.workingHours}</p>
               </div>
             </div>
-
-            <div className="pt-2">
-              <OfficialSocialChannels />
-            </div>
           </div>
         </div>
 
