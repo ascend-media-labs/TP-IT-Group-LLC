@@ -124,16 +124,16 @@ export function Navbar() {
             <Link
               key={`${item.label}-${item.to}`}
               to={item.to}
-              className="nav-link text-xs xl:text-[13px] px-2 xl:px-2.5 py-2"
-              activeProps={{ className: 'nav-link active text-xs xl:text-[13px] px-2 xl:px-2.5 py-2' }}
+              className="nav-link text-xs xl:text-[13px] px-2.5 xl:px-3 py-1.5"
+              activeProps={{ className: 'nav-link active text-xs xl:text-[13px] px-2.5 xl:px-3 py-1.5' }}
               activeOptions={{ exact: true }}
             >
-              {item.label}
+              <span className="nav-link-label">{item.label}</span>
             </Link>
           ))}
           <Button
             asChild
-            className="ml-2 h-9 xl:h-10 rounded-full bg-[#d7192a] hover:bg-[#b91c1c] px-4 xl:px-5 text-xs xl:text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+            className="ml-2 h-9 xl:h-10 rounded-full bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] px-4 xl:px-5 text-xs xl:text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap"
           >
             <Link to="/contact">
               Let’s talk <ArrowUpRight className="size-3.5 xl:size-4" />
@@ -170,7 +170,7 @@ export function Navbar() {
                 key={`mobile-${item.label}-${item.to}`}
                 to={item.to}
                 className="rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 hover:text-[#d7192a] transition-colors"
-                activeProps={{ className: 'rounded-lg px-3 py-2.5 text-sm font-bold text-[#d7192a] border-l-2 border-[#d7192a] pl-3.5 bg-red-50/40' }}
+                activeProps={{ className: 'rounded-xl px-3.5 py-2.5 text-sm font-bold text-white bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] shadow-md shadow-red-500/25' }}
                 activeOptions={{ exact: true }}
                 onClick={() => setOpen(false)}
               >
@@ -179,7 +179,7 @@ export function Navbar() {
             ))}
             <Button
               asChild
-              className="mt-4 h-11 w-full rounded-full bg-[#d7192a] hover:bg-[#b91c1c] text-xs font-bold text-white shadow-md shadow-red-500/20"
+              className="mt-4 h-11 w-full rounded-full bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] text-xs font-bold text-white shadow-md shadow-red-500/20"
             >
               <Link to="/contact" onClick={() => setOpen(false)}>
                 Let’s talk <ArrowUpRight className="size-4 ml-1" />
