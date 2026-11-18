@@ -133,11 +133,22 @@ function Page() {
 
             {/* Right Mission Card */}
             <div className="lg:col-span-5">
-              <div className="rounded-3xl border border-slate-200/90 bg-white p-7 sm:p-9 shadow-[0_4px_24px_rgba(0,0,0,0.03)] text-left space-y-5">
-                <div className="flex size-14 items-center justify-center rounded-2xl bg-red-50 border border-red-100 text-[#d7192a]">
-                  <Globe className="size-8 stroke-[1.8]" />
+              <div className="card-diagonal border border-slate-200/90 bg-white p-6 sm:p-7 shadow-[0_4px_24px_rgba(0,0,0,0.03)] text-left space-y-5">
+                {/* Boardroom Presentation Image provided by User */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner">
+                  <img
+                    src="/about-mission.jpg"
+                    alt="TP IT Group Enterprise Collaboration and Leadership"
+                    className="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute top-3 left-3 flex size-11 items-center justify-center icon-diagonal bg-white/95 backdrop-blur-md text-[#d7192a] shadow-md border border-white/80">
+                    <Globe className="size-6 text-[#d7192a] stroke-[1.8]" />
+                  </div>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
+
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 pt-1">
                   Our Mission
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
