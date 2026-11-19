@@ -1169,66 +1169,15 @@ export function Careers({ full = false }: { full?: boolean }) {
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(215,25,42,0.04),transparent_60%)]" />
       <div className="site-container relative z-10 space-y-8 sm:space-y-10">
-        {/* Intro */}
-        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-          <div className="relative overflow-hidden rounded-3xl border border-slate-200/90 shadow-xl group">
-            <img
-              className="editorial-image h-[300px] sm:h-[380px] w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              src={team}
-              alt="TP iT GROUP LLC global engineering team"
-              width={1536}
-              height={1024}
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
-          </div>
-
+        {/* Open Positions Section */}
+        <div className="space-y-7">
           <div>
-            <p className="eyebrow">GROW WITH US</p>
-            <h2 className="section-title mt-2">
-              Build Your Future with a Global Technology Leader.
-            </h2>
-            <p className="section-copy mt-3.5">
-              Join TP IT Group LLC and work on cutting-edge projects with world-class clients across 5 continents. We
-              foster an environment where curiosity is rewarded, continuous learning is in our DNA, and leadership is
-              nurtured.
+            <p className="eyebrow text-[#d7192a]">OPEN POSITIONS</p>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2">Find Your Next Challenge</h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1.5">
+              Explore current engineering, consulting, and management roles across USA, India, and Canada.
             </p>
-            <div className="mt-5 space-y-2.5">
-              {careersBenefits.map((b) => (
-                <div key={b.title} className="flex items-start gap-2.5">
-                  <div className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-red-50 border border-red-200 text-[#d7192a] mt-0.5">
-                    <Check className="size-3.5" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-900">{b.title}</h4>
-                    <p className="text-xs text-slate-600">{b.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            {!full && (
-              <Button
-                asChild
-                className="mt-6 h-11 rounded-xl bg-slate-100 border border-slate-200 px-6 text-xs font-bold text-slate-900 hover:bg-slate-200 hover:border-red-400 transition-all"
-              >
-                <Link to="/careers">
-                  View Open Positions ({careersJobs.length}) <ArrowRight className="size-4 ml-2" />
-                </Link>
-              </Button>
-            )}
           </div>
-        </div>
-
-        {/* Detailed Careers View */}
-        {full && (
-          <div className="space-y-7 border-t border-slate-200/90 pt-7">
-            <div>
-              <p className="eyebrow">OPEN POSITIONS</p>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Find Your Next Challenge</h3>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1.5">
-                Explore current engineering, consulting, and management roles across USA, India, and Canada.
-              </p>
-            </div>
 
             {/* Department Filter */}
             <div className="flex flex-wrap gap-2">
@@ -1300,7 +1249,6 @@ export function Careers({ full = false }: { full?: boolean }) {
               </Button>
             </div>
           </div>
-        )}
       </div>
     </section>
   );
