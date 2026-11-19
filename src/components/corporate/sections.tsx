@@ -312,13 +312,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-5 flex items-center justify-center relative"
           >
-            {/* Ambient High-Tech Luminous Glow Backing */}
-            <div className="pointer-events-none absolute inset-0 -m-6 flex items-center justify-center -z-10">
-              <div className="size-[290px] sm:size-[340px] md:size-[370px] lg:size-[400px] rounded-full bg-radial from-white via-white/85 to-red-500/10 blur-xl opacity-95" />
-              <div className="absolute size-[270px] sm:size-[310px] md:size-[340px] lg:size-[370px] rounded-full border border-red-500/15 shadow-[0_0_50px_rgba(215,25,42,0.1)] bg-gradient-to-b from-white/60 via-white/30 to-transparent backdrop-blur-[1px]" />
-            </div>
-
-            <DigitalGlobe className="w-full h-[320px] sm:h-[360px] md:h-[390px] lg:h-[410px]" />
+            <DigitalGlobe className="w-full h-[300px] sm:h-[340px] md:h-[370px] lg:h-[390px]" />
           </motion.div>
         </div>
       </div>
