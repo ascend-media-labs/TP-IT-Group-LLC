@@ -21,6 +21,7 @@ import {
   LayoutDashboard,
   ShieldCheck,
   X,
+  Menu,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -72,6 +73,7 @@ export function AdminPage() {
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<{ email: string; name: string } | null>(null);
   const [activeTab, setActiveTab] = useState<'overview' | 'team' | 'clients' | 'careers'>('overview');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Login form state
   const [loginEmail, setLoginEmail] = useState('admin@tpitgroup.com');
@@ -386,10 +388,10 @@ export function AdminPage() {
   }
 
   // -------------------------------------------------------------
-  // 2. AUTHENTICATED ADMIN DASHBOARD
+  // 2. AUTHENTICATED ADMIN DASHBOARD (LEFT SIDEBAR + RIGHT DATA)
   // -------------------------------------------------------------
   return (
-    <div className="admin-root min-h-screen bg-[#050811] text-slate-100 flex flex-col font-sans">
+    <div className="admin-root min-h-screen bg-[#050811] text-slate-100 flex flex-col md:flex-row font-sans">
       {/* Top Notification Toast */}
       {notification && (
         <div
@@ -408,116 +410,303 @@ export function AdminPage() {
         </div>
       )}
 
-      {/* Top Header Navbar */}
-      <header className="border-b border-slate-800 bg-[#0b1120]/95 backdrop-blur-md sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <Link to="/" className="inline-flex items-center gap-1.5 group">
-              <span className="font-black text-lg tracking-tight text-white group-hover:text-red-400 transition-colors">
-                TP <span className="text-[#d7192a]">iT</span> GROUP
-              </span>
-              <span className="rounded-md bg-[#d7192a]/20 border border-[#d7192a]/40 px-2 py-0.5 text-[10px] font-bold text-red-300 uppercase">
-                Admin
-              </span>
-            </Link>
+      {/* Mobile Drawer Backdrop */}
+      {mobileMenuOpen && (
+        <div
+          onClick={() => setMobileMenuOpen(false)}
+          className="fixed inset-0 z-40 bg-black/80 backdrop-blur-xs md:hidden"
+        />
+      )}
 
-            {/* DB Status Badge */}
-            <div className="hidden sm:flex items-center gap-2 rounded-full border border-slate-800 bg-[#111a2e] px-3 py-1 text-xs text-slate-200">
+      {/* ========================================================= */}
+      {/* LEFT SIDEBAR NAVIGATION                                   */}
+      {/* ========================================================= */}
+      <aside
+        className={`fixed md:sticky top-0 left-0 z-50 h-screen w-64 lg:w-72 bg-[#090e1a] border-r border-slate-800/80 flex flex-col shrink-0 transition-transform duration-300 ease-in-out md:translate-x-0 ${
+          mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        {/* Sidebar Brand & Header */}
+        <div className="h-16 px-5 border-b border-slate-800/80 flex items-center justify-between">
+          <Link to="/" className="inline-flex items-center gap-2 group">
+            <span className="font-black text-lg tracking-tight text-white group-hover:text-red-400 transition-colors">
+              TP <span className="text-[#d7192a]">iT</span> GROUP
+            </span>
+            <span className="rounded-md bg-[#d7192a]/20 border border-[#d7192a]/40 px-2 py-0.5 text-[10px] font-bold text-red-300 uppercase">
+              Admin
+            </span>
+          </Link>
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className="md:hidden text-slate-400 hover:text-white p-1 cursor-pointer"
+          >
+            <X className="size-5" />
+          </button>
+        </div>
+
+        {/* Database Connection Status Card */}
+        <div className="mx-4 mt-4 p-3 rounded-xl border border-emerald-900/50 bg-[#071912]">
+          <div className="flex items-center justify-between text-xs text-emerald-300 font-semibold mb-1">
+            <span className="flex items-center gap-1.5">
               <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="font-medium text-slate-300">Laragon MySQL:</span>
-              <code className="text-emerald-400 font-mono font-bold">tpitgroup_db</code>
+              Laragon MySQL
+            </span>
+            <span className="text-[10px] bg-emerald-500/20 px-1.5 py-0.5 rounded font-mono text-emerald-300 font-bold">Live</span>
+          </div>
+          <div className="flex items-center justify-between text-[11px] font-mono text-emerald-400 font-bold truncate">
+            <span>tpitgroup_db</span>
+            <span className="text-slate-400 font-normal">:3306</span>
+          </div>
+        </div>
+
+        {/* Navigation Menu */}
+        <div className="flex-1 px-3 py-4 overflow-y-auto space-y-6">
+          <div>
+            <div className="px-3 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2">
+              Main Management
             </div>
+            <nav className="space-y-1">
+              <button
+                onClick={() => {
+                  setActiveTab('overview');
+                  setMobileMenuOpen(false);
+                }}
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+                  activeTab === 'overview'
+                    ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
+                    : 'text-slate-300 hover:bg-[#111a2e] hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <LayoutDashboard className="size-4.5" />
+                  <span>Overview</span>
+                </div>
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveTab('team');
+                  setMobileMenuOpen(false);
+                }}
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+                  activeTab === 'team'
+                    ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
+                    : 'text-slate-300 hover:bg-[#111a2e] hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Users className="size-4.5" />
+                  <span>Our Team</span>
+                </div>
+                <span
+                  className={`px-2 py-0.5 text-[11px] font-bold rounded-full ${
+                    activeTab === 'team' ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-300'
+                  }`}
+                >
+                  {team.length}
+                </span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveTab('clients');
+                  setMobileMenuOpen(false);
+                }}
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+                  activeTab === 'clients'
+                    ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
+                    : 'text-slate-300 hover:bg-[#111a2e] hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Building2 className="size-4.5" />
+                  <span>Clients & Partners</span>
+                </div>
+                <span
+                  className={`px-2 py-0.5 text-[11px] font-bold rounded-full ${
+                    activeTab === 'clients' ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-300'
+                  }`}
+                >
+                  {clients.length}
+                </span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveTab('careers');
+                  setMobileMenuOpen(false);
+                }}
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+                  activeTab === 'careers'
+                    ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
+                    : 'text-slate-300 hover:bg-[#111a2e] hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Briefcase className="size-4.5" />
+                  <span>Careers / Jobs</span>
+                </div>
+                <span
+                  className={`px-2 py-0.5 text-[11px] font-bold rounded-full ${
+                    activeTab === 'careers' ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-300'
+                  }`}
+                >
+                  {careers.length}
+                </span>
+              </button>
+            </nav>
           </div>
 
-          <div className="flex items-center gap-3">
+          {/* Quick Insert Actions Section */}
+          <div className="pt-2 border-t border-slate-800/80">
+            <div className="px-3 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2">
+              Quick Actions
+            </div>
+            <div className="space-y-1">
+              <button
+                onClick={() => {
+                  openModal('team');
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-[#111a2e] hover:text-red-400 transition cursor-pointer group"
+              >
+                <span className="flex items-center gap-2">
+                  <Plus className="size-3.5 text-[#d7192a]" /> Add Team Leader
+                </span>
+              </button>
+              <button
+                onClick={() => {
+                  openModal('client');
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-[#111a2e] hover:text-blue-400 transition cursor-pointer group"
+              >
+                <span className="flex items-center gap-2">
+                  <Plus className="size-3.5 text-blue-400" /> Add Client Partner
+                </span>
+              </button>
+              <button
+                onClick={() => {
+                  openModal('career');
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-[#111a2e] hover:text-emerald-400 transition cursor-pointer group"
+              >
+                <span className="flex items-center gap-2">
+                  <Plus className="size-3.5 text-emerald-400" /> Post Job Opening
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Admin User Profile & Logout at Bottom of Sidebar */}
+        <div className="p-4 border-t border-slate-800/80 bg-[#070b14]">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="size-9 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center text-[#d7192a] shrink-0">
+              <ShieldCheck className="size-4.5" />
+            </div>
+            <div className="truncate">
+              <div className="text-xs font-bold text-white truncate">{user?.name || 'TP IT Admin'}</div>
+              <div className="text-[11px] text-slate-400 truncate">{user?.email || 'admin@tpitgroup.com'}</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
             <Button
               asChild
               variant="outline"
               size="sm"
-              className="h-8 rounded-lg border-slate-700 bg-[#111a2e] text-slate-200 hover:bg-[#17223b] hover:text-white text-xs gap-1.5 font-semibold"
+              className="flex-1 h-8 rounded-lg border-slate-700 bg-[#111a2e] text-slate-200 hover:bg-[#17223b] hover:text-white text-xs font-semibold"
             >
               <Link to="/" target="_blank">
-                Live Website <ExternalLink className="size-3.5" />
+                Website <ExternalLink className="size-3 ml-1" />
               </Link>
             </Button>
-
-            <div className="h-4 w-px bg-slate-800 hidden sm:block" />
-
-            <div className="hidden md:flex items-center gap-2 text-xs text-slate-200 font-semibold">
-              <ShieldCheck className="size-4 text-[#d7192a]" />
-              <span>{user?.name || 'Admin'}</span>
-            </div>
-
             <Button
               onClick={handleLogout}
               variant="ghost"
               size="sm"
-              className="h-8 rounded-lg text-slate-300 hover:text-red-400 hover:bg-red-500/10 text-xs gap-1.5 font-semibold"
+              className="h-8 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-500/10 text-xs font-semibold cursor-pointer"
+              title="Logout"
             >
-              <LogOut className="size-3.5" /> Logout
+              <LogOut className="size-3.5" />
             </Button>
           </div>
         </div>
-      </header>
+      </aside>
 
-      {/* Main Body */}
-      <div className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
-        {/* Navigation Tabs */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-8 border-b border-slate-800 pb-4">
-          <nav className="flex flex-wrap items-center gap-2">
+      {/* ========================================================= */}
+      {/* RIGHT SIDE DATA AREA                                      */}
+      {/* ========================================================= */}
+      <div className="flex-1 flex flex-col min-w-0 bg-[#050811] min-h-screen">
+        {/* Top Header Bar for Right Side */}
+        <header className="h-16 border-b border-slate-800 bg-[#090e1a]/95 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
             <button
-              onClick={() => setActiveTab('overview')}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition cursor-pointer ${
-                activeTab === 'overview'
-                  ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
-                  : 'admin-card-inner bg-[#111a2e] text-slate-300 hover:bg-[#17223b] hover:text-white border border-slate-800'
-              }`}
+              onClick={() => setMobileMenuOpen(true)}
+              className="md:hidden p-2 rounded-lg bg-[#111a2e] text-slate-300 hover:text-white border border-slate-800 cursor-pointer"
             >
-              <LayoutDashboard className="size-4" /> Overview
+              <Menu className="size-5" />
             </button>
-            <button
-              onClick={() => setActiveTab('team')}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition cursor-pointer ${
-                activeTab === 'team'
-                  ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
-                  : 'admin-card-inner bg-[#111a2e] text-slate-300 hover:bg-[#17223b] hover:text-white border border-slate-800'
-              }`}
-            >
-              <Users className="size-4" /> Our Team ({team.length})
-            </button>
-            <button
-              onClick={() => setActiveTab('clients')}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition cursor-pointer ${
-                activeTab === 'clients'
-                  ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
-                  : 'admin-card-inner bg-[#111a2e] text-slate-300 hover:bg-[#17223b] hover:text-white border border-slate-800'
-              }`}
-            >
-              <Building2 className="size-4" /> Clients ({clients.length})
-            </button>
-            <button
-              onClick={() => setActiveTab('careers')}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition cursor-pointer ${
-                activeTab === 'careers'
-                  ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
-                  : 'admin-card-inner bg-[#111a2e] text-slate-300 hover:bg-[#17223b] hover:text-white border border-slate-800'
-              }`}
-            >
-              <Briefcase className="size-4" /> Careers ({careers.length})
-            </button>
-          </nav>
+            <div>
+              <h1 className="text-base sm:text-lg font-black text-white">
+                {activeTab === 'overview' && 'Dashboard Overview'}
+                {activeTab === 'team' && 'Our Team Leadership'}
+                {activeTab === 'clients' && 'Clients & Enterprise Partners'}
+                {activeTab === 'careers' && 'Career Openings & Jobs'}
+              </h1>
+              <p className="text-[11px] text-slate-400 hidden sm:block">
+                {activeTab === 'overview' && 'Real-time database metrics and system activity'}
+                {activeTab === 'team' && 'Manage executive team members stored in Laragon MySQL'}
+                {activeTab === 'clients' && 'Manage partner logos and affiliations displayed on /clients'}
+                {activeTab === 'careers' && 'Manage live job postings displayed on /careers'}
+              </p>
+            </div>
+          </div>
 
-          <Button
-            onClick={fetchAllData}
-            disabled={loadingData}
-            variant="outline"
-            size="sm"
-            className="admin-card-inner h-9 rounded-xl border-slate-700 bg-[#111a2e] text-slate-200 hover:bg-[#17223b] hover:text-white text-xs gap-1.5 font-bold cursor-pointer"
-          >
-            <RefreshCw className={`size-3.5 ${loadingData ? 'animate-spin text-red-400' : ''}`} />
-            Refresh DB
-          </Button>
-        </div>
+          <div className="flex items-center gap-2.5">
+            <Button
+              onClick={fetchAllData}
+              disabled={loadingData}
+              variant="outline"
+              size="sm"
+              className="admin-card-inner h-9 rounded-xl border-slate-700 bg-[#111a2e] text-slate-200 hover:bg-[#17223b] text-xs gap-1.5 font-bold cursor-pointer"
+            >
+              <RefreshCw className={`size-3.5 ${loadingData ? 'animate-spin text-red-400' : ''}`} />
+              <span className="hidden sm:inline">Refresh DB</span>
+            </Button>
+
+            {activeTab === 'team' && (
+              <Button
+                onClick={() => openModal('team')}
+                className="h-9 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs gap-1.5 shadow-md cursor-pointer"
+              >
+                <Plus className="size-3.5" /> <span className="hidden sm:inline">Add Team Member</span><span className="sm:hidden">Add</span>
+              </Button>
+            )}
+
+            {activeTab === 'clients' && (
+              <Button
+                onClick={() => openModal('client')}
+                className="h-9 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs gap-1.5 shadow-md cursor-pointer"
+              >
+                <Plus className="size-3.5" /> <span className="hidden sm:inline">Add Client Partner</span><span className="sm:hidden">Add</span>
+              </Button>
+            )}
+
+            {activeTab === 'careers' && (
+              <Button
+                onClick={() => openModal('career')}
+                className="h-9 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs gap-1.5 shadow-md cursor-pointer"
+              >
+                <Plus className="size-3.5" /> <span className="hidden sm:inline">Post Job Opening</span><span className="sm:hidden">Add</span>
+              </Button>
+            )}
+          </div>
+        </header>
+
+        {/* Main Body Content on Right Side */}
+        <main className="flex-1 p-4 sm:p-8 max-w-7xl w-full">
 
         {/* -------------------------------------------------------- */}
         {/* TAB 1: OVERVIEW */}
@@ -728,8 +917,22 @@ export function AdminPage() {
                   key={c.id}
                   className="admin-card rounded-2xl border border-slate-800 bg-[#0b1120] p-4 flex flex-col justify-between hover:border-slate-700 transition group relative shadow-md"
                 >
-                  <div className="h-16 flex items-center justify-center p-2 rounded-xl bg-white/95">
-                    <img src={c.src} alt={c.name} className="max-h-10 max-w-[85%] object-contain" />
+                  <div className="h-16 flex items-center justify-center p-2 rounded-xl bg-white/95 overflow-hidden">
+                    <img
+                      src={c.src}
+                      alt={c.name}
+                      className="max-h-11 max-w-[85%] object-contain"
+                      onError={(e) => {
+                        const img = e.currentTarget;
+                        img.style.display = 'none';
+                        if (img.nextElementSibling) {
+                          (img.nextElementSibling as HTMLElement).style.display = 'block';
+                        }
+                      }}
+                    />
+                    <span className="hidden text-xs font-black text-slate-900 text-center tracking-tight px-1">
+                      {c.name}
+                    </span>
                   </div>
                   <div className="mt-3">
                     <h4 className="text-xs font-bold text-white truncate">{c.name}</h4>
@@ -828,6 +1031,7 @@ export function AdminPage() {
             </div>
           </div>
         )}
+        </main>
       </div>
 
       {/* -------------------------------------------------------- */}
