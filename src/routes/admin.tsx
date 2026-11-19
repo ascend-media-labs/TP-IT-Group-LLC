@@ -1048,13 +1048,6 @@ export function AdminPage() {
         {/* -------------------------------------------------------- */}
         {activeTab === 'team' && (
           <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">Our Team Leadership</h2>
-                <p className="text-xs text-slate-500 mt-0.5">Manage executive team members stored in Laragon MySQL</p>
-              </div>
-            </div>
-
             {/* Filter & Live Search Bar */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 rounded-xl border border-slate-200 bg-white shadow-xs">
               <div className="relative flex-1">
@@ -1152,13 +1145,6 @@ export function AdminPage() {
         {/* -------------------------------------------------------- */}
         {activeTab === 'clients' && (
           <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">Clients & Enterprise Partners</h2>
-                <p className="text-xs text-slate-500 mt-0.5">Manage all partner logos and categories in Laragon MySQL</p>
-              </div>
-            </div>
-
             {/* Filter & Live Search Bar */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 rounded-xl border border-slate-200 bg-white shadow-xs">
               <div className="relative flex-1">
@@ -1249,13 +1235,6 @@ export function AdminPage() {
         {/* -------------------------------------------------------- */}
         {activeTab === 'careers' && (
           <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">Career Openings & Jobs</h2>
-                <p className="text-xs text-slate-500 mt-0.5">Manage live job listings displayed on /careers</p>
-              </div>
-            </div>
-
             {/* Filter & Live Search Bar */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 rounded-xl border border-slate-200 bg-white shadow-xs">
               <div className="relative flex-1">
@@ -1345,25 +1324,6 @@ export function AdminPage() {
         {/* -------------------------------------------------------- */}
         {activeTab === 'enquiries' && (
           <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">Client Enquiries &amp; Leads</h2>
-                <p className="text-xs text-slate-500 mt-0.5">
-                  Direct consultation enquiries submitted through the /contact page, stored in Laragon MySQL
-                </p>
-              </div>
-              <div className="flex items-center gap-2">
-                <Button
-                  onClick={fetchAllData}
-                  variant="outline"
-                  size="sm"
-                  className="h-9 rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 text-xs gap-1.5 font-bold shadow-xs cursor-pointer"
-                >
-                  <RefreshCw className="size-3.5" /> Refresh Leads
-                </Button>
-              </div>
-            </div>
-
             {/* Filter & Live Search Bar */}
             <div className="admin-card p-4 rounded-2xl border border-slate-200 bg-white shadow-xs flex flex-wrap items-center justify-between gap-3">
               <div className="relative flex-1 min-w-[240px]">
