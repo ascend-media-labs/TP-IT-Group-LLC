@@ -1,8 +1,27 @@
+import { useState, useEffect } from 'react';
 import { clientLogos } from './content';
 
 export function ClientMarquee() {
+  const [logosList, setLogosList] = useState(clientLogos);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch('/api/clients')
+      .then((r) => r.json())
+      .then((data) => {
+        if (isMounted && data.success && Array.isArray(data.clients) && data.clients.length > 0) {
+          setLogosList(data.clients);
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // Duplicate for seamless infinite marquee loop
-  const logos = [...clientLogos, ...clientLogos];
+  const logos = [...logosList, ...logosList];
 
   return (
     <div className="relative w-full overflow-hidden py-3 sm:py-4">

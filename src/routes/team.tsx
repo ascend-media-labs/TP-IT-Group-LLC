@@ -1,4 +1,4 @@
-import { useState, useRef, type MouseEvent } from 'react';
+import { useState, useRef, useEffect, type MouseEvent } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { metadata } from '@/components/corporate/content';
 import { ArrowUpRight, Building2 } from 'lucide-react';
@@ -227,6 +227,35 @@ function TeamLeaderCard({ leader, index }: TeamLeaderCardProps) {
 }
 
 function Page() {
+  const [teamList, setTeamList] = useState<Leader[]>(leaders);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch('/api/team')
+      .then((r) => r.json())
+      .then((data) => {
+        if (isMounted && data.success && Array.isArray(data.team) && data.team.length > 0) {
+          setTeamList(
+            data.team.map((t: any) => ({
+              name: t.name,
+              role: t.role,
+              subRole: t.sub_role || t.subRole || '',
+              bio: t.bio || '',
+              image: t.image || '/team/karthik.jpg',
+              department: t.department || 'TP IT Group LLC',
+            }))
+          );
+        }
+      })
+      .catch((err) => {
+        console.error('Error fetching live team from DB:', err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <div className="bg-white text-slate-900">
       {/* 1. LEADERSHIP SHOWCASE (3D Tilt + Stagger Cards) */}
@@ -252,9 +281,9 @@ function Page() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-3.5">
-            {leaders.map((leader, idx) => (
-              <TeamLeaderCard key={leader.name} leader={leader} index={idx} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-5">
+            {teamList.map((leader, idx) => (
+              <TeamLeaderCard key={`${leader.name}-${idx}`} leader={leader} index={idx} />
             ))}
           </div>
         </div>

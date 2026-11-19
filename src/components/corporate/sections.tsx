@@ -1095,6 +1095,24 @@ export function ProvenApproachSection() {
 }
 
 export function Clients({ full = false }: { full?: boolean }) {
+  const [clientList, setClientList] = useState(clientLogos);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch('/api/clients')
+      .then((r) => r.json())
+      .then((data) => {
+        if (isMounted && data.success && Array.isArray(data.clients) && data.clients.length > 0) {
+          setClientList(data.clients);
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <section id="clients" className="section relative overflow-hidden bg-slate-50/70 text-slate-900 border-y border-slate-200/80 bg-grid-pattern">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_50%_0%,rgba(215,25,42,0.04),transparent_60%)]" />
@@ -1110,7 +1128,7 @@ export function Clients({ full = false }: { full?: boolean }) {
           {!full && (
             <Button asChild variant="link" className="shrink-0 px-0 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c]">
               <Link to="/clients">
-                View all 20+ partners <ArrowRight className="size-4 ml-1" />
+                View all {clientList.length}+ partners <ArrowRight className="size-4 ml-1" />
               </Link>
             </Button>
           )}
@@ -1131,7 +1149,7 @@ export function Clients({ full = false }: { full?: boolean }) {
               Delivering high-impact technology and workforce support to world-class enterprises.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-6">
-              {clientLogos.map((client) => (
+              {clientList.map((client) => (
                 <div
                   key={client.name}
                   className="group flex h-24 sm:h-28 items-center justify-center rounded-2xl border border-slate-200/90 bg-white p-4 shadow-xs transition-all duration-300 hover:border-red-300 hover:shadow-md hover:-translate-y-1"
@@ -1154,6 +1172,33 @@ export function Clients({ full = false }: { full?: boolean }) {
 
 export function Careers({ full = false }: { full?: boolean }) {
   const [selectedDept, setSelectedDept] = useState('All');
+  const [jobsList, setJobsList] = useState(careersJobs);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch('/api/careers')
+      .then((r) => r.json())
+      .then((data) => {
+        if (isMounted && data.success && Array.isArray(data.careers) && data.careers.length > 0) {
+          setJobsList(
+            data.careers.map((c: any) => ({
+              title: c.title,
+              dept: c.dept,
+              location: c.location,
+              type: c.type || 'Full-Time',
+              experience: c.experience || '3+ years',
+              description: c.description || '',
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const departments = [
     'All',
     'Cloud Operations',
@@ -1165,7 +1210,7 @@ export function Careers({ full = false }: { full?: boolean }) {
   ];
 
   const filteredJobs =
-    selectedDept === 'All' ? careersJobs : careersJobs.filter((j) => j.dept === selectedDept);
+    selectedDept === 'All' ? jobsList : jobsList.filter((j) => j.dept === selectedDept);
 
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">

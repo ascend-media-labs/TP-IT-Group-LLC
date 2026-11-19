@@ -52,6 +52,23 @@ export function ApplyPage() {
   const [selectedRole, setSelectedRole] = useState(initialRole);
   const [selectedDept, setSelectedDept] = useState(initialDept);
   const [selectedLocation, setSelectedLocation] = useState(initialLocation);
+  const [jobsList, setJobsList] = useState(careersJobs);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch('/api/careers')
+      .then((r) => r.json())
+      .then((data) => {
+        if (isMounted && data.success && Array.isArray(data.careers) && data.careers.length > 0) {
+          setJobsList(data.careers);
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Form input states
   const [fullName, setFullName] = useState('');
@@ -75,7 +92,7 @@ export function ApplyPage() {
   // When selectedRole changes, update department and location if it matches a preset job
   const handleRoleChange = (roleTitle: string) => {
     setSelectedRole(roleTitle);
-    const matched = careersJobs.find((j) => j.title === roleTitle);
+    const matched = jobsList.find((j) => j.title === roleTitle);
     if (matched) {
       setSelectedDept(matched.dept);
       setSelectedLocation(matched.location);
@@ -268,7 +285,7 @@ export function ApplyPage() {
                   onChange={(e) => handleRoleChange(e.target.value)}
                   className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 font-semibold focus:border-[#d7192a] focus:ring-1 focus:ring-[#d7192a] focus:outline-none"
                 >
-                  {careersJobs.map((j) => (
+                  {jobsList.map((j) => (
                     <option key={j.title} value={j.title}>
                       {j.title} ({j.dept})
                     </option>
