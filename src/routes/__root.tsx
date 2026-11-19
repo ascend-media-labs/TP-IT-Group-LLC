@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -130,15 +131,17 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const routerState = useRouterState();
+  const isAdmin = routerState?.location?.pathname?.startsWith('/admin');
 
   return (
     <QueryClientProvider client={queryClient}>
       <LenisProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Navbar />
-        <main className="bg-white"><Outlet /></main>
-        <Footer />
-        <FloatingActions />
+        {!isAdmin && <Navbar />}
+        <main className={isAdmin ? 'min-h-screen bg-slate-950' : 'bg-white'}><Outlet /></main>
+        {!isAdmin && <Footer />}
+        {!isAdmin && <FloatingActions />}
       </LenisProvider>
     </QueryClientProvider>
   );

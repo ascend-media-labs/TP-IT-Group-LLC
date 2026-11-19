@@ -50,6 +50,24 @@ function isH3SwallowedErrorBody(body: string): boolean {
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const url = new URL(request.url);
+      if (url.pathname.startsWith('/api/')) {
+        let body: any = null;
+        if (request.method === 'POST' || request.method === 'PUT' || request.method === 'DELETE') {
+          try {
+            body = await request.json();
+          } catch {
+            body = {};
+          }
+        }
+        const { handleApiRoute } = await import('./lib/api-handler');
+        const result = await handleApiRoute(url.pathname, request.method, body);
+        return new Response(JSON.stringify(result.data), {
+          status: result.status,
+          headers: { 'content-type': 'application/json' },
+        });
+      }
+
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);
