@@ -1511,374 +1511,417 @@ export function AdminPage() {
       {/* ADD / EDIT MODAL */}
       {/* -------------------------------------------------------- */}
       {modalType && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
-          <div className="admin-card relative w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl text-slate-900 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-xs">
+          <div className="admin-card relative w-full max-w-4xl rounded-2xl sm:rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xl text-slate-900 max-h-[92vh] overflow-y-auto no-scrollbar [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <div className="flex items-center justify-between pb-4 border-b border-slate-200 sticky top-0 bg-white z-10">
-              <h3 className="text-lg font-bold text-slate-900">
-                {editingItem ? 'Edit' : 'Add'}{' '}
-                {modalType === 'team' ? 'Team Member' : modalType === 'client' ? 'Client Partner' : 'Job Opening'}
-              </h3>
-              <button onClick={closeModal} className="text-slate-400 hover:text-slate-700 cursor-pointer">
+              <div>
+                <h3 className="text-xl font-bold text-slate-900">
+                  {editingItem ? 'Edit' : 'Add'}{' '}
+                  {modalType === 'team' ? 'Team Member' : modalType === 'client' ? 'Client Partner' : 'Job Opening'}
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  {modalType === 'team'
+                    ? 'Configure executive profile details, role, and profile photo for /team'
+                    : modalType === 'client'
+                    ? 'Configure partner credentials and logo for /clients'
+                    : 'Configure position requirements and visibility for /careers'}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={closeModal}
+                className="text-slate-400 hover:text-slate-700 p-1.5 rounded-xl hover:bg-slate-100 transition cursor-pointer"
+              >
                 <X className="size-5" />
               </button>
             </div>
 
-            <form onSubmit={handleSaveModal} className="space-y-4 mt-4 text-xs">
+            <form onSubmit={handleSaveModal} className="mt-5 space-y-5 text-xs">
               {/* TEAM FORM */}
               {modalType === 'team' && (
-                <>
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">Full Name</label>
-                    <input
-                      required
-                      type="text"
-                      value={formData.name || ''}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                      placeholder="e.g. Karthik Pushpa"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">Role / Job Title</label>
-                    <input
-                      required
-                      type="text"
-                      value={formData.role || ''}
-                      onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                      placeholder="e.g. CEO & Founder"
-                    />
-                  </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* LEFT COLUMN: Identity & Photo */}
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Full Name *</label>
+                      <input
+                        required
+                        type="text"
+                        value={formData.name || ''}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-slate-900 placeholder:text-slate-400 font-medium text-xs"
+                        placeholder="e.g. Karthik Pushpa"
+                      />
+                    </div>
 
-                  {/* PROFILE PHOTO UPLOAD / SELECTION SECTION */}
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50/90 p-3.5 space-y-3">
-                    <label className="block font-bold text-slate-800 text-xs flex items-center justify-between">
-                      <span className="flex items-center gap-1.5">
-                        <Camera className="size-3.5 text-[#d7192a]" /> Profile Photo / Avatar
-                      </span>
-                      <span className="text-[11px] font-normal text-slate-500">
-                        PNG, JPG, WebP up to 5MB
-                      </span>
-                    </label>
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Role / Job Title *</label>
+                      <input
+                        required
+                        type="text"
+                        value={formData.role || ''}
+                        onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-slate-900 placeholder:text-slate-400 font-medium text-xs"
+                        placeholder="e.g. CEO & Founder"
+                      />
+                    </div>
 
-                    {/* Preview + File Upload Input */}
-                    <div className="flex items-center gap-3.5">
-                      <div className="relative size-16 shrink-0 rounded-2xl overflow-hidden border-2 border-slate-200 bg-white shadow-xs">
-                        <img
-                          src={formData.image || '/team/karthik.jpg'}
-                          alt="Profile Preview"
-                          className="h-full w-full object-cover"
-                          onError={(e) => {
-                            (e.currentTarget as HTMLImageElement).src = '/team/karthik.jpg';
-                          }}
-                        />
-                        {uploadingImage && (
-                          <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-                            <Loader2 className="size-5 text-white animate-spin" />
-                          </div>
-                        )}
-                      </div>
+                    {/* PROFILE PHOTO UPLOAD / SELECTION SECTION */}
+                    <div className="rounded-2xl border border-slate-200 bg-slate-50/90 p-4 space-y-3">
+                      <label className="block font-bold text-slate-800 text-xs flex items-center justify-between">
+                        <span className="flex items-center gap-1.5">
+                          <Camera className="size-3.5 text-[#d7192a]" /> Profile Photo / Avatar
+                        </span>
+                        <span className="text-[11px] font-normal text-slate-500">
+                          PNG, JPG, WebP up to 5MB
+                        </span>
+                      </label>
 
-                      <div className="flex-1 space-y-1.5">
-                        <label className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs cursor-pointer shadow-xs transition active:scale-98">
-                          {uploadingImage ? (
-                            <>
-                              <Loader2 className="size-3.5 animate-spin" />
-                              <span>Uploading...</span>
-                            </>
-                          ) : (
-                            <>
-                              <Upload className="size-3.5" />
-                              <span>Upload Photo from Device</span>
-                            </>
-                          )}
-                          <input
-                            type="file"
-                            accept="image/*"
-                            disabled={uploadingImage}
-                            onChange={(e) => handleFileUpload(e, 'team')}
-                            className="hidden"
+                      {/* Preview + File Upload Input */}
+                      <div className="flex items-center gap-3.5">
+                        <div className="relative size-16 shrink-0 rounded-2xl overflow-hidden border-2 border-slate-200 bg-white shadow-xs">
+                          <img
+                            src={formData.image || '/team/karthik.jpg'}
+                            alt="Profile Preview"
+                            className="h-full w-full object-cover"
+                            onError={(e) => {
+                              (e.currentTarget as HTMLImageElement).src = '/team/karthik.jpg';
+                            }}
                           />
-                        </label>
-                        <p className="text-[11px] text-slate-500">
-                          Upload image directly, or choose from presets below
-                        </p>
+                          {uploadingImage && (
+                            <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                              <Loader2 className="size-5 text-white animate-spin" />
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="flex-1 space-y-1.5">
+                          <label className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs cursor-pointer shadow-xs transition active:scale-98">
+                            {uploadingImage ? (
+                              <>
+                                <Loader2 className="size-3.5 animate-spin" />
+                                <span>Uploading...</span>
+                              </>
+                            ) : (
+                              <>
+                                <Upload className="size-3.5" />
+                                <span>Upload Photo from Device</span>
+                              </>
+                            )}
+                            <input
+                              type="file"
+                              accept="image/*"
+                              disabled={uploadingImage}
+                              onChange={(e) => handleFileUpload(e, 'team')}
+                              className="hidden"
+                            />
+                          </label>
+                          <p className="text-[11px] text-slate-500">
+                            Upload image directly, or choose from presets below
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Quick Avatar Presets */}
+                      <div>
+                        <span className="text-[11px] font-semibold text-slate-600 block mb-1.5">
+                          Or select standard avatar:
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {[
+                            { name: 'Karthik', src: '/team/karthik.jpg' },
+                            { name: 'Gayathri', src: '/team/gayathri.jpg' },
+                            { name: 'Lakshmi', src: '/team/lakshmi.jpg' },
+                            { name: 'Sai Deepa', src: '/team/sai-deepa.jpg' },
+                            { name: 'Vijayan', src: '/team/vijayan.jpg' },
+                          ].map((av) => (
+                            <button
+                              key={av.src}
+                              type="button"
+                              onClick={() => setFormData({ ...formData, image: av.src })}
+                              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-xl border text-[11px] font-medium transition cursor-pointer ${
+                                formData.image === av.src
+                                  ? 'border-[#d7192a] bg-red-50 text-[#d7192a] font-bold ring-1 ring-[#d7192a]'
+                                  : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
+                              }`}
+                            >
+                              <img src={av.src} alt={av.name} className="size-4 rounded-full object-cover" />
+                              <span>{av.name}</span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Image URL text fallback */}
+                      <div>
+                        <input
+                          type="text"
+                          value={formData.image || ''}
+                          onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                          className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3 py-1.5 text-[11px] text-slate-700 font-mono placeholder:text-slate-400"
+                          placeholder="Image URL or path (e.g. /team/myphoto.jpg)"
+                        />
                       </div>
                     </div>
+                  </div>
 
-                    {/* Quick Avatar Presets */}
+                  {/* RIGHT COLUMN: Details & Bio */}
+                  <div className="space-y-4">
                     <div>
-                      <span className="text-[11px] font-semibold text-slate-600 block mb-1.5">
-                        Or select standard avatar:
-                      </span>
-                      <div className="flex flex-wrap gap-1.5">
-                        {[
-                          { name: 'Karthik', src: '/team/karthik.jpg' },
-                          { name: 'Gayathri', src: '/team/gayathri.jpg' },
-                          { name: 'Lakshmi', src: '/team/lakshmi.jpg' },
-                          { name: 'Sai Deepa', src: '/team/sai-deepa.jpg' },
-                          { name: 'Vijayan', src: '/team/vijayan.jpg' },
-                        ].map((av) => (
-                          <button
-                            key={av.src}
-                            type="button"
-                            onClick={() => setFormData({ ...formData, image: av.src })}
-                            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-xl border text-[11px] font-medium transition cursor-pointer ${
-                              formData.image === av.src
-                                ? 'border-[#d7192a] bg-red-50 text-[#d7192a] font-bold ring-1 ring-[#d7192a]'
-                                : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
-                            }`}
-                          >
-                            <img src={av.src} alt={av.name} className="size-4 rounded-full object-cover" />
-                            <span>{av.name}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Image URL text fallback */}
-                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Department</label>
                       <input
                         type="text"
-                        value={formData.image || ''}
-                        onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3 py-1.5 text-[11px] text-slate-700 font-mono placeholder:text-slate-400"
-                        placeholder="Image URL or path (e.g. /team/myphoto.jpg)"
+                        value={formData.department || ''}
+                        onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-slate-900 placeholder:text-slate-400 font-medium text-xs"
+                        placeholder="e.g. TP IT Group LLC, Cloud & Deep-Tech"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Sub Role Description</label>
+                      <input
+                        type="text"
+                        value={formData.sub_role || ''}
+                        onChange={(e) => setFormData({ ...formData, sub_role: e.target.value })}
+                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-slate-900 placeholder:text-slate-400 font-medium text-xs"
+                        placeholder="15+ Years in Enterprise IT Strategy..."
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Bio / Summary</label>
+                      <textarea
+                        rows={4}
+                        value={formData.bio || ''}
+                        onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-slate-900 placeholder:text-slate-400 font-medium text-xs leading-relaxed"
+                        placeholder="Brief executive profile summary..."
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Display Order</label>
+                      <input
+                        type="number"
+                        value={formData.display_order ?? 1}
+                        onChange={(e) => setFormData({ ...formData, display_order: Number(e.target.value) })}
+                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium text-xs"
                       />
                     </div>
                   </div>
-
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">Department</label>
-                    <input
-                      type="text"
-                      value={formData.department || ''}
-                      onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                      placeholder="e.g. TP IT Group LLC, Cloud & Deep-Tech"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">Sub Role Description</label>
-                    <input
-                      type="text"
-                      value={formData.sub_role || ''}
-                      onChange={(e) => setFormData({ ...formData, sub_role: e.target.value })}
-                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                      placeholder="15+ Years in Enterprise IT Strategy..."
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">Bio</label>
-                    <textarea
-                      rows={3}
-                      value={formData.bio || ''}
-                      onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                      placeholder="Brief executive profile summary..."
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">Display Order</label>
-                    <input
-                      type="number"
-                      value={formData.display_order ?? 1}
-                      onChange={(e) => setFormData({ ...formData, display_order: Number(e.target.value) })}
-                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                    />
-                  </div>
-                </>
+                </div>
               )}
 
               {/* CLIENT FORM */}
               {modalType === 'client' && (
-                <>
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">Client Name</label>
-                    <input
-                      required
-                      type="text"
-                      value={formData.name || ''}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                      placeholder="e.g. USAA, Progressive, Chase"
-                    />
-                  </div>
-
-                  {/* CLIENT LOGO UPLOAD SECTION */}
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50/90 p-3.5 space-y-3">
-                    <label className="block font-bold text-slate-800 text-xs flex items-center justify-between">
-                      <span className="flex items-center gap-1.5">
-                        <ImageIcon className="size-3.5 text-[#d7192a]" /> Partner Company Logo
-                      </span>
-                      <span className="text-[11px] font-normal text-slate-500">
-                        PNG, JPG, SVG, WebP up to 5MB
-                      </span>
-                    </label>
-
-                    <div className="flex items-center gap-3.5">
-                      <div className="relative h-14 w-24 shrink-0 rounded-xl border border-slate-200 bg-white p-2 shadow-xs flex items-center justify-center">
-                        <img
-                          src={formData.src || '/logos/usaa.jpg'}
-                          alt="Logo Preview"
-                          className="max-h-10 max-w-full object-contain"
-                          onError={(e) => {
-                            (e.currentTarget as HTMLImageElement).src = '/logos/usaa.jpg';
-                          }}
-                        />
-                        {uploadingImage && (
-                          <div className="absolute inset-0 bg-black/60 rounded-xl flex items-center justify-center">
-                            <Loader2 className="size-4 text-white animate-spin" />
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="flex-1 space-y-1.5">
-                        <label className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs cursor-pointer shadow-xs transition active:scale-98">
-                          {uploadingImage ? (
-                            <>
-                              <Loader2 className="size-3.5 animate-spin" />
-                              <span>Uploading...</span>
-                            </>
-                          ) : (
-                            <>
-                              <Upload className="size-3.5" />
-                              <span>Upload Logo from Device</span>
-                            </>
-                          )}
-                          <input
-                            type="file"
-                            accept="image/*"
-                            disabled={uploadingImage}
-                            onChange={(e) => handleFileUpload(e, 'logos')}
-                            className="hidden"
-                          />
-                        </label>
-                        <p className="text-[11px] text-slate-500">
-                          Upload logo file directly, or enter path below
-                        </p>
-                      </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* LEFT COLUMN: Client Details */}
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Client Name *</label>
+                      <input
+                        required
+                        type="text"
+                        value={formData.name || ''}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-slate-900 placeholder:text-slate-400 font-medium text-xs"
+                        placeholder="e.g. USAA, Progressive, Chase"
+                      />
                     </div>
 
-                    <input
-                      required
-                      type="text"
-                      value={formData.src || ''}
-                      onChange={(e) => setFormData({ ...formData, src: e.target.value })}
-                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3 py-1.5 text-[11px] text-slate-700 font-mono placeholder:text-slate-400"
-                      placeholder="Logo path (e.g. /logos/mycompany.png)"
-                    />
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Category</label>
+                      <input
+                        type="text"
+                        value={formData.category || ''}
+                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-slate-900 placeholder:text-slate-400 font-medium text-xs"
+                        placeholder="Fortune 500, Financial Services, etc."
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Display Order</label>
+                      <input
+                        type="number"
+                        value={formData.display_order ?? 1}
+                        onChange={(e) => setFormData({ ...formData, display_order: Number(e.target.value) })}
+                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium text-xs"
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">Category</label>
-                    <input
-                      type="text"
-                      value={formData.category || ''}
-                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                      placeholder="Fortune 500, Financial Services, etc."
-                    />
+
+                  {/* RIGHT COLUMN: Logo Uploader */}
+                  <div className="space-y-4">
+                    <div className="rounded-2xl border border-slate-200 bg-slate-50/90 p-4 space-y-3">
+                      <label className="block font-bold text-slate-800 text-xs flex items-center justify-between">
+                        <span className="flex items-center gap-1.5">
+                          <ImageIcon className="size-3.5 text-[#d7192a]" /> Partner Company Logo
+                        </span>
+                        <span className="text-[11px] font-normal text-slate-500">
+                          PNG, JPG, SVG, WebP up to 5MB
+                        </span>
+                      </label>
+
+                      <div className="flex items-center gap-3.5">
+                        <div className="relative h-16 w-28 shrink-0 rounded-xl border border-slate-200 bg-white p-2 shadow-xs flex items-center justify-center">
+                          <img
+                            src={formData.src || '/logos/usaa.jpg'}
+                            alt="Logo Preview"
+                            className="max-h-12 max-w-full object-contain"
+                            onError={(e) => {
+                              (e.currentTarget as HTMLImageElement).src = '/logos/usaa.jpg';
+                            }}
+                          />
+                          {uploadingImage && (
+                            <div className="absolute inset-0 bg-black/60 rounded-xl flex items-center justify-center">
+                              <Loader2 className="size-4 text-white animate-spin" />
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="flex-1 space-y-1.5">
+                          <label className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs cursor-pointer shadow-xs transition active:scale-98">
+                            {uploadingImage ? (
+                              <>
+                                <Loader2 className="size-3.5 animate-spin" />
+                                <span>Uploading...</span>
+                              </>
+                            ) : (
+                              <>
+                                <Upload className="size-3.5" />
+                                <span>Upload Logo from Device</span>
+                              </>
+                            )}
+                            <input
+                              type="file"
+                              accept="image/*"
+                              disabled={uploadingImage}
+                              onChange={(e) => handleFileUpload(e, 'logos')}
+                              className="hidden"
+                            />
+                          </label>
+                          <p className="text-[11px] text-slate-500">
+                            Upload logo file directly, or enter path below
+                          </p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-600 mb-1">Logo Asset Path</label>
+                        <input
+                          required
+                          type="text"
+                          value={formData.src || ''}
+                          onChange={(e) => setFormData({ ...formData, src: e.target.value })}
+                          className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-[11px] text-slate-700 font-mono placeholder:text-slate-400"
+                          placeholder="Logo path (e.g. /logos/mycompany.png)"
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">Display Order</label>
-                    <input
-                      type="number"
-                      value={formData.display_order ?? 1}
-                      onChange={(e) => setFormData({ ...formData, display_order: Number(e.target.value) })}
-                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                    />
-                  </div>
-                </>
+                </div>
               )}
 
               {/* CAREER FORM */}
               {modalType === 'career' && (
-                <>
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">Job Title</label>
-                    <input
-                      required
-                      type="text"
-                      value={formData.title || ''}
-                      onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                      placeholder="e.g. Senior SAP S/4HANA Consultant"
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* LEFT COLUMN: Job Overview */}
+                  <div className="space-y-4">
                     <div>
-                      <label className="block font-bold text-slate-700 mb-1">Department</label>
+                      <label className="block font-bold text-slate-700 mb-1">Job Title *</label>
                       <input
                         required
                         type="text"
-                        value={formData.dept || ''}
-                        onChange={(e) => setFormData({ ...formData, dept: e.target.value })}
-                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                        placeholder="Engineering, FinLabs..."
+                        value={formData.title || ''}
+                        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-slate-900 placeholder:text-slate-400 font-medium text-xs"
+                        placeholder="e.g. Senior SAP S/4HANA Consultant"
                       />
                     </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">Department *</label>
+                        <input
+                          required
+                          type="text"
+                          value={formData.dept || ''}
+                          onChange={(e) => setFormData({ ...formData, dept: e.target.value })}
+                          className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium text-xs"
+                          placeholder="Engineering, FinLabs..."
+                        />
+                      </div>
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">Location *</label>
+                        <input
+                          required
+                          type="text"
+                          value={formData.location || ''}
+                          onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                          className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium text-xs"
+                          placeholder="Wilmington, DE / Hybrid"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">Employment Type</label>
+                        <select
+                          value={formData.type || 'Full-time'}
+                          onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                          className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 font-medium text-xs"
+                        >
+                          <option value="Full-time" className="bg-white text-slate-900">Full-time</option>
+                          <option value="Contract" className="bg-white text-slate-900">Contract</option>
+                          <option value="Part-time" className="bg-white text-slate-900">Part-time</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">Experience</label>
+                        <input
+                          type="text"
+                          value={formData.experience || ''}
+                          onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
+                          className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium text-xs"
+                          placeholder="3-5 years"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* RIGHT COLUMN: Description & Status */}
+                  <div className="space-y-4">
                     <div>
-                      <label className="block font-bold text-slate-700 mb-1">Location</label>
+                      <label className="block font-bold text-slate-700 mb-1">Role Description</label>
+                      <textarea
+                        rows={5}
+                        value={formData.description || ''}
+                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-slate-900 placeholder:text-slate-400 font-medium text-xs leading-relaxed"
+                        placeholder="Key responsibilities and qualifications..."
+                      />
+                    </div>
+
+                    <div className="flex items-center gap-2 pt-2">
                       <input
-                        required
-                        type="text"
-                        value={formData.location || ''}
-                        onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                        placeholder="Wilmington, DE / Hybrid"
+                        type="checkbox"
+                        id="is_active"
+                        checked={Boolean(formData.is_active)}
+                        onChange={(e) => setFormData({ ...formData, is_active: e.target.checked ? 1 : 0 })}
+                        className="size-4 rounded border-slate-300 text-[#d7192a]"
                       />
+                      <label htmlFor="is_active" className="font-bold text-slate-700 cursor-pointer text-xs">
+                        Listing is Active (Visible on /careers)
+                      </label>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="block font-bold text-slate-700 mb-1">Type</label>
-                      <select
-                        value={formData.type || 'Full-time'}
-                        onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 font-medium"
-                      >
-                        <option value="Full-time" className="bg-white text-slate-900">Full-time</option>
-                        <option value="Contract" className="bg-white text-slate-900">Contract</option>
-                        <option value="Part-time" className="bg-white text-slate-900">Part-time</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block font-bold text-slate-700 mb-1">Experience</label>
-                      <input
-                        type="text"
-                        value={formData.experience || ''}
-                        onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
-                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                        placeholder="3-5 years"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">Description</label>
-                    <textarea
-                      rows={3}
-                      value={formData.description || ''}
-                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                      placeholder="Key responsibilities and qualifications..."
-                    />
-                  </div>
-                  <div className="flex items-center gap-2 pt-1">
-                    <input
-                      type="checkbox"
-                      id="is_active"
-                      checked={Boolean(formData.is_active)}
-                      onChange={(e) => setFormData({ ...formData, is_active: e.target.checked ? 1 : 0 })}
-                      className="size-4 rounded border-slate-300 text-[#d7192a]"
-                    />
-                    <label htmlFor="is_active" className="font-bold text-slate-700 cursor-pointer">
-                      Listing is Active (Visible on /careers)
-                    </label>
-                  </div>
-                </>
+                </div>
               )}
 
-              <div className="pt-3 border-t border-slate-200 flex items-center justify-end gap-3">
+              <div className="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
                 <Button
                   type="button"
                   onClick={closeModal}
@@ -1889,7 +1932,7 @@ export function AdminPage() {
                 </Button>
                 <Button
                   type="submit"
-                  className="h-9 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs cursor-pointer shadow-md shadow-red-500/20"
+                  className="h-9 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs cursor-pointer shadow-md shadow-red-500/20 px-5"
                 >
                   Save to Laragon MySQL
                 </Button>
