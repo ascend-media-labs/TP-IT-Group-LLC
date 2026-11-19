@@ -774,17 +774,11 @@ export function AdminPage() {
         {/* -------------------------------------------------------- */}
         {activeTab === 'team' && (
           <div className="space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl font-bold text-white">Our Team Leadership</h2>
                 <p className="text-xs text-slate-400 mt-0.5">Manage executive team members stored in Laragon MySQL</p>
               </div>
-              <Button
-                onClick={() => openModal('team')}
-                className="h-10 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs gap-1.5 shadow-md"
-              >
-                <Plus className="size-4" /> Add Team Member
-              </Button>
             </div>
 
             {/* Table */}
@@ -853,17 +847,11 @@ export function AdminPage() {
         {/* -------------------------------------------------------- */}
         {activeTab === 'clients' && (
           <div className="space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl font-bold text-white">Clients & Enterprise Partners</h2>
                 <p className="text-xs text-slate-300 mt-0.5">Manage all partner logos and categories in Laragon MySQL</p>
               </div>
-              <Button
-                onClick={() => openModal('client')}
-                className="h-10 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs gap-1.5 shadow-md cursor-pointer"
-              >
-                <Plus className="size-4" /> Add Client Partner
-              </Button>
             </div>
 
             {/* Grid View */}
@@ -924,17 +912,11 @@ export function AdminPage() {
         {/* -------------------------------------------------------- */}
         {activeTab === 'careers' && (
           <div className="space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl font-bold text-white">Career Openings & Jobs</h2>
                 <p className="text-xs text-slate-300 mt-0.5">Manage live job listings displayed on /careers</p>
               </div>
-              <Button
-                onClick={() => openModal('career')}
-                className="h-10 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs gap-1.5 shadow-md cursor-pointer"
-              >
-                <Plus className="size-4" /> Post Job Opening
-              </Button>
             </div>
 
             {/* List */}
