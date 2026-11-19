@@ -8,110 +8,26 @@ interface Hub {
 }
 
 const HUBS: Hub[] = [
-  { name: 'USA Head Office', lat: 39.74, lon: -75.54, type: 'headquarters' },
-  { name: 'Canada Delivery', lat: 43.65, lon: -79.38, type: 'hub' },
+  { name: 'USA Head Office (Wilmington)', lat: 39.74, lon: -75.54, type: 'headquarters' },
+  { name: 'New York Operations', lat: 40.71, lon: -74.0, type: 'hub' },
   { name: 'London UK Hub', lat: 51.5, lon: -0.12, type: 'hub' },
-  { name: 'India (Hyderabad)', lat: 17.38, lon: 78.48, type: 'hub' },
+  { name: 'India Tech Center (Pune)', lat: 18.52, lon: 73.85, type: 'hub' },
   { name: 'Australia APAC (Sydney)', lat: -33.86, lon: 151.2, type: 'hub' },
+  { name: 'Canada Delivery (Toronto)', lat: 43.65, lon: -79.38, type: 'hub' },
 ];
 
 const CONNECTIONS: [number, number][] = [
-  [0, 1], // Wilmington -> Toronto
+  [0, 1], // Wilmington -> NY
   [0, 2], // Wilmington -> London
-  [0, 3], // Wilmington -> Hyderabad
-  [2, 3], // London -> Hyderabad
-  [3, 4], // Hyderabad -> Sydney
+  [0, 3], // Wilmington -> Pune
+  [0, 5], // Wilmington -> Toronto
+  [2, 3], // London -> Pune
+  [3, 4], // Pune -> Sydney
 ];
 
-// Simplified geographic polygon boundaries for real Earth continents
-const NORTH_AMERICA: [number, number][] = [
-  [71, -165], [71, -135], [70, -128], [60, -125], [55, -130], [50, -128], [48, -124], [38, -123], [34, -120], [30, -115],
-  [23, -110], [19, -105], [16, -95], [14, -92], [9, -83], [8, -77], [12, -86], [16, -88], [18, -91], [22, -97],
-  [26, -97], [29, -95], [30, -88], [25, -81], [25, -80], [31, -81], [35, -75], [40, -74], [44, -70], [45, -66],
-  [47, -64], [52, -56], [58, -62], [62, -64], [60, -75], [52, -80], [55, -88], [58, -94], [63, -90], [68, -85],
-  [70, -95], [72, -125], [71, -165]
-];
-
-const SOUTH_AMERICA: [number, number][] = [
-  [12, -72], [11, -62], [8, -59], [5, -51], [0, -50], [-3, -40], [-6, -35], [-10, -36], [-15, -39], [-22, -41],
-  [-25, -48], [-33, -52], [-38, -57], [-45, -65], [-53, -68], [-55, -71], [-52, -75], [-45, -75], [-35, -73], [-25, -70],
-  [-15, -75], [-5, -81], [1, -80], [5, -77], [9, -77], [12, -72]
-];
-
-const EUROPE: [number, number][] = [
-  [71, 28], [70, 20], [62, 5], [58, 6], [54, 9], [51, 2], [47, -2], [43, -9], [36, -6], [36, -2],
-  [38, 15], [36, 23], [38, 28], [42, 29], [46, 31], [46, 38], [55, 38], [60, 30], [65, 32], [68, 43], [71, 28]
-];
-
-const UK_IRELAND: [number, number][] = [
-  [59, -3], [58, -6], [55, -6], [51, -5], [50, -1], [51, 1], [53, 0], [56, -2], [59, -3]
-];
-
-const AFRICA: [number, number][] = [
-  [37, 10], [36, 1], [35, -6], [30, -10], [21, -17], [15, -17], [11, -15], [5, -1], [4, 7], [4, 9],
-  [-5, 12], [-15, 12], [-22, 14], [-34, 18], [-34, 26], [-28, 32], [-20, 35], [-11, 41], [4, 48], [11, 51],
-  [12, 44], [15, 41], [22, 37], [28, 34], [31, 32], [32, 24], [37, 10]
-];
-
-const ASIA: [number, number][] = [
-  [77, 105], [73, 80], [70, 60], [60, 60], [50, 50], [40, 50], [30, 48], [25, 55], [24, 60], [25, 67],
-  [30, 70], [35, 75], [35, 90], [30, 100], [22, 108], [10, 105], [8, 103], [1, 104], [6, 108], [15, 108],
-  [22, 114], [25, 120], [32, 122], [38, 118], [40, 125], [43, 132], [53, 141], [60, 163], [66, 170], [70, 180],
-  [75, 175], [77, 105]
-];
-
-const INDIA: [number, number][] = [
-  [35, 74], [32, 76], [28, 80], [27, 88], [25, 92], [22, 89], [20, 86], [16, 82], [13, 80], [8, 77],
-  [10, 76], [15, 74], [19, 73], [22, 69], [24, 69], [28, 70], [32, 72], [35, 74]
-];
-
-const AUSTRALIA: [number, number][] = [
-  [-11, 142], [-15, 145], [-20, 149], [-25, 153], [-32, 153], [-37, 150], [-38, 144], [-36, 137], [-32, 133],
-  [-34, 123], [-34, 116], [-30, 114], [-22, 114], [-17, 122], [-14, 126], [-15, 135], [-12, 136], [-11, 142]
-];
-
-const JAPAN: [number, number][] = [
-  [45, 142], [43, 145], [35, 140], [33, 132], [35, 135], [40, 140], [45, 142]
-];
-
-const CONTINENTS = [NORTH_AMERICA, SOUTH_AMERICA, EUROPE, UK_IRELAND, AFRICA, ASIA, INDIA, AUSTRALIA, JAPAN];
-
-function pointInPoly(lat: number, lon: number, poly: [number, number][]) {
-  let inside = false;
-  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-    const xi = poly[i][1];
-    const yi = poly[i][0];
-    const xj = poly[j][1];
-    const yj = poly[j][0];
-    const intersect = yi > lat !== yj > lat && lon < ((xj - xi) * (lat - yi)) / (yj - yi) + xi;
-    if (intersect) inside = !inside;
-  }
-  return inside;
-}
-
-function isLand(lat: number, lon: number) {
-  for (const c of CONTINENTS) {
-    if (pointInPoly(lat, lon, c)) return true;
-  }
-  return false;
-}
-
-function latLonToXYZ(lat: number, lon: number, r: number) {
-  const phi = (90 - lat) * (Math.PI / 180);
-  const theta = (lon + 180) * (Math.PI / 180);
-  return {
-    x: -(r * Math.sin(phi) * Math.cos(theta)),
-    y: r * Math.cos(phi),
-    z: r * Math.sin(phi) * Math.sin(theta),
-  };
-}
-
-export function DigitalGlobe({
-  className = 'w-full h-[300px] sm:h-[340px] md:h-[370px] lg:h-[390px]',
-}: {
-  className?: string;
-}) {
+export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[500px]' }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [activeHub, setActiveHub] = useState<string | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -120,50 +36,58 @@ export function DigitalGlobe({
     if (!ctx) return;
 
     let animId: number;
-    let width = canvas.parentElement?.clientWidth || 500;
-    let height = canvas.parentElement?.clientHeight || 500;
+    let width = (canvas.width = canvas.parentElement?.clientWidth || 600);
+    let height = (canvas.height = canvas.parentElement?.clientHeight || 600);
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.scale(dpr, dpr);
 
-    const setupCanvas = () => {
-      width = canvas.parentElement?.clientWidth || 500;
-      height = canvas.parentElement?.clientHeight || 500;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      ctx.scale(dpr, dpr);
-    };
-    setupCanvas();
-
-    let rotationY = 0.55;
-    let rotationX = 0.22;
-    let targetRotationY = 0.55;
-    let targetRotationX = 0.22;
+    let rotationY = 0.5;
+    let rotationX = 0.25;
+    let targetRotationY = 0.5;
+    let targetRotationX = 0.25;
     let isDragging = false;
     let startX = 0;
     let startY = 0;
 
-    // Generate real Earth continent & ocean points
-    const points: { lat: number; lon: number; isLand: boolean }[] = [];
-    const totalPoints = 2200;
+    // Generate points on sphere
+    const points: { x: number; y: number; z: number; isLand?: boolean }[] = [];
+    const count = 480;
+    const radius = Math.min(width, height) * 0.36;
 
-    for (let i = 0; i < totalPoints; i++) {
-      const phi = Math.acos(-1 + (2 * i) / totalPoints);
-      const theta = Math.sqrt(totalPoints * Math.PI) * phi;
-      const lat = 90 - (phi * 180) / Math.PI;
-      let lon = (theta * 180) / Math.PI - 180;
-      lon = ((((lon + 180) % 360) + 360) % 360) - 180;
-      const land = isLand(lat, lon);
-      // Keep all land points + a sparser subset of ocean points for 3D depth
-      if (land || i % 3 === 0) {
-        points.push({ lat, lon, isLand: land });
-      }
+    for (let i = 0; i < count; i++) {
+      const phi = Math.acos(-1 + (2 * i) / count);
+      const theta = Math.sqrt(count * Math.PI) * phi;
+      points.push({
+        x: radius * Math.cos(theta) * Math.sin(phi),
+        y: radius * Math.cos(phi),
+        z: radius * Math.sin(theta) * Math.sin(phi),
+      });
     }
 
+    function latLonToXYZ(lat: number, lon: number, r: number) {
+      const phi = (90 - lat) * (Math.PI / 180);
+      const theta = (lon + 180) * (Math.PI / 180);
+      return {
+        x: -(r * Math.sin(phi) * Math.cos(theta)),
+        y: r * Math.cos(phi),
+        z: r * Math.sin(phi) * Math.sin(theta),
+      };
+    }
+
+    // Resize handler
     const handleResize = () => {
       if (!canvas || !canvas.parentElement) return;
-      setupCanvas();
+      width = canvas.width = canvas.parentElement.clientWidth;
+      height = canvas.height = canvas.parentElement.clientHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
     };
     window.addEventListener('resize', handleResize);
 
+    // Mouse / Touch interaction
     const onMouseDown = (e: MouseEvent) => {
       isDragging = true;
       startX = e.clientX;
@@ -193,8 +117,8 @@ export function DigitalGlobe({
       if (!isDragging || e.touches.length !== 1) return;
       const dx = e.touches[0].clientX - startX;
       const dy = e.touches[0].clientY - startY;
-      targetRotationY += dx * 0.006;
-      targetRotationX += dy * 0.006;
+      targetRotationY += dx * 0.007;
+      targetRotationX += dy * 0.007;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
     };
@@ -213,36 +137,56 @@ export function DigitalGlobe({
 
     function render() {
       if (!ctx) return;
-      // 100% Transparent clear (NO background disc / fills)
       ctx.clearRect(0, 0, width, height);
 
       // Auto rotation
       if (!isDragging) {
-        targetRotationY += 0.0028;
+        targetRotationY += 0.003;
       }
       rotationY += (targetRotationY - rotationY) * 0.08;
       rotationX += (targetRotationX - rotationX) * 0.08;
+      // Clamp vertical tilt
       rotationX = Math.max(-0.6, Math.min(0.6, rotationX));
 
       pulseTime += 0.02;
 
       const cx = width / 2;
       const cy = height / 2;
-      const currentRadius = Math.min(width, height) * 0.38;
+      const currentRadius = Math.min(width, height) * 0.36;
 
-      // 3D Perspective Projection
+      // Draw Atmospheric Glow
+      const glowGrad = ctx.createRadialGradient(cx, cy, currentRadius * 0.7, cx, cy, currentRadius * 1.35);
+      glowGrad.addColorStop(0, 'rgba(2, 132, 199, 0.12)');
+      glowGrad.addColorStop(0.5, 'rgba(14, 165, 233, 0.05)');
+      glowGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = glowGrad;
+      ctx.beginPath();
+      ctx.arc(cx, cy, currentRadius * 1.35, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Outer Ring
+      ctx.strokeStyle = 'rgba(2, 132, 199, 0.22)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(cx, cy, currentRadius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Transform function
       function project(p: { x: number; y: number; z: number }) {
+        // Rotate around X
         const cosX = Math.cos(rotationX);
         const sinX = Math.sin(rotationX);
         const y1 = p.y * cosX - p.z * sinX;
         const z1 = p.y * sinX + p.z * cosX;
 
+        // Rotate around Y
         const cosY = Math.cos(rotationY);
         const sinY = Math.sin(rotationY);
         const x2 = p.x * cosY + z1 * sinY;
         const z2 = -p.x * sinY + z1 * cosY;
 
-        const fov = 750;
+        // Perspective
+        const fov = 700;
         const scale = fov / (fov + z2);
         return {
           px: cx + x2 * scale,
@@ -252,20 +196,13 @@ export function DigitalGlobe({
         };
       }
 
-      // 1. Subtle Outer Atmosphere Horizon Ring (Transparent)
-      ctx.strokeStyle = 'rgba(2, 132, 199, 0.28)';
-      ctx.lineWidth = 1.2;
-      ctx.beginPath();
-      ctx.arc(cx, cy, currentRadius, 0, Math.PI * 2);
-      ctx.stroke();
-
-      // 2. Latitude Guide Wireframes
-      ctx.strokeStyle = 'rgba(2, 132, 199, 0.09)';
+      // Draw Lat/Lon Guide Rings
+      ctx.strokeStyle = 'rgba(2, 132, 199, 0.08)';
       ctx.lineWidth = 0.8;
       for (let lat = -60; lat <= 60; lat += 30) {
         ctx.beginPath();
         let first = true;
-        for (let lon = 0; lon <= 360; lon += 8) {
+        for (let lon = 0; lon <= 360; lon += 10) {
           const pt = latLonToXYZ(lat, lon, currentRadius);
           const pr = project(pt);
           if (pr.z < 0) {
@@ -282,115 +219,97 @@ export function DigitalGlobe({
         ctx.stroke();
       }
 
-      // 3. Render Earth Real Continents & Ocean Dots
+      // Render Dots
       points.forEach((pt) => {
-        const coords = latLonToXYZ(pt.lat, pt.lon, currentRadius);
-        const pr = project(coords);
+        const pr = project({
+          x: (pt.x / radius) * currentRadius,
+          y: (pt.y / radius) * currentRadius,
+          z: (pt.z / radius) * currentRadius,
+        });
 
-        const depth = (pr.z + currentRadius) / (currentRadius * 2);
-        const alpha = Math.max(0.08, depth);
-
-        if (pt.isLand) {
-          // CONTINENT LAND POINT (Crisp & Realistic)
-          if (pr.z > 0) {
-            ctx.fillStyle = `rgba(2, 132, 199, ${alpha * 0.95})`;
-            ctx.beginPath();
-            ctx.arc(pr.px, pr.py, 1.7 * pr.scale, 0, Math.PI * 2);
-            ctx.fill();
-          } else {
-            ctx.fillStyle = `rgba(148, 163, 184, ${alpha * 0.35})`;
-            ctx.beginPath();
-            ctx.arc(pr.px, pr.py, 0.95 * pr.scale, 0, Math.PI * 2);
-            ctx.fill();
-          }
+        // Depth cue
+        const alpha = Math.max(0.06, (pr.z + currentRadius) / (currentRadius * 2));
+        if (pr.z > 0) {
+          ctx.fillStyle = `rgba(2, 132, 199, ${alpha * 0.95})`;
+          ctx.beginPath();
+          ctx.arc(pr.px, pr.py, 1.4 * pr.scale, 0, Math.PI * 2);
+          ctx.fill();
         } else {
-          // OCEAN POINT (Subtle Depth Grid)
-          if (pr.z > 0) {
-            ctx.fillStyle = `rgba(148, 163, 184, ${alpha * 0.2})`;
-            ctx.beginPath();
-            ctx.arc(pr.px, pr.py, 0.7 * pr.scale, 0, Math.PI * 2);
-            ctx.fill();
-          }
+          ctx.fillStyle = `rgba(148, 163, 184, ${alpha * 0.35})`;
+          ctx.beginPath();
+          ctx.arc(pr.px, pr.py, 0.9 * pr.scale, 0, Math.PI * 2);
+          ctx.fill();
         }
       });
 
-      // 4. Project Hubs
+      // Project Hubs
       const projectedHubs = HUBS.map((hub) => {
         const coords = latLonToXYZ(hub.lat, hub.lon, currentRadius);
         const pr = project(coords);
         return { ...hub, ...pr };
       });
 
-      // 5. Inter-Hub Data Arcs & Laser Photons
-      CONNECTIONS.forEach(([i1, i2], idx) => {
+      // Draw Arcs & Photons
+      CONNECTIONS.forEach(([i1, i2]) => {
         const h1 = projectedHubs[i1];
         const h2 = projectedHubs[i2];
         if (!h1 || !h2) return;
 
-        if (h1.z > -currentRadius * 0.35 || h2.z > -currentRadius * 0.35) {
+        // Draw only if at least partially visible
+        if (h1.z > -currentRadius * 0.4 || h2.z > -currentRadius * 0.4) {
           const midX = (h1.px + h2.px) / 2;
-          const midY = (h1.py + h2.py) / 2 - currentRadius * 0.2;
+          const midY = (h1.py + h2.py) / 2 - currentRadius * 0.18;
 
-          // Glowing Arc
-          ctx.strokeStyle = 'rgba(2, 132, 199, 0.6)';
-          ctx.lineWidth = 1.4;
+          ctx.strokeStyle = 'rgba(2, 132, 199, 0.5)';
+          ctx.lineWidth = 1.3;
           ctx.beginPath();
           ctx.moveTo(h1.px, h1.py);
           ctx.quadraticCurveTo(midX, midY, h2.px, h2.py);
           ctx.stroke();
 
-          // High-Speed Traveling Photon Packet
-          const t = (pulseTime * 0.7 + idx * 0.2) % 1;
+          // Traveling photon packet
+          const t = (pulseTime * 0.6 + i1 * 0.25) % 1;
           const px = (1 - t) * (1 - t) * h1.px + 2 * (1 - t) * t * midX + t * t * h2.px;
           const py = (1 - t) * (1 - t) * h1.py + 2 * (1 - t) * t * midY + t * t * h2.py;
 
           ctx.fillStyle = '#d7192a';
-          ctx.shadowColor = 'rgba(215, 25, 42, 0.9)';
+          ctx.shadowColor = 'rgba(215, 25, 42, 0.8)';
           ctx.shadowBlur = 8;
           ctx.beginPath();
-          ctx.arc(px, py, 2.8, 0, Math.PI * 2);
+          ctx.arc(px, py, 2.5, 0, Math.PI * 2);
           ctx.fill();
           ctx.shadowBlur = 0;
         }
       });
 
-      // 6. Draw Hubs (Pins & Radar Pulses)
-      projectedHubs.forEach((hub, idx) => {
+      // Draw Hubs & Labels
+      projectedHubs.forEach((hub) => {
         if (hub.z > -currentRadius * 0.2) {
           const isHq = hub.type === 'headquarters';
-          const size = (isHq ? 5.5 : 4) * hub.scale;
+          const size = (isHq ? 5 : 3.5) * hub.scale;
 
-          // Radar pulse ring
-          const ringSize = size + ((pulseTime * 2 + idx * 0.5) % 1) * 10;
-          const pulseAlpha = 1 - ((pulseTime * 2 + idx * 0.5) % 1);
-          ctx.strokeStyle = isHq
-            ? `rgba(215, 25, 42, ${pulseAlpha * 0.8})`
-            : `rgba(2, 132, 199, ${pulseAlpha * 0.8})`;
+          // Pulse ring
+          const ringSize = size + (Math.sin(pulseTime * 3) + 1) * 3;
+          ctx.strokeStyle = isHq ? 'rgba(215, 25, 42, 0.9)' : 'rgba(215, 25, 42, 0.5)';
           ctx.lineWidth = 1.5;
           ctx.beginPath();
           ctx.arc(hub.px, hub.py, ringSize, 0, Math.PI * 2);
           ctx.stroke();
 
-          // Hub Node Dot
-          ctx.fillStyle = isHq ? '#d7192a' : '#0284c7';
-          ctx.shadowColor = isHq ? '#d7192a' : '#0284c7';
-          ctx.shadowBlur = 8;
+          // Hub dot
+          ctx.fillStyle = isHq ? '#d7192a' : '#ef4444';
+          ctx.shadowColor = isHq ? '#d7192a' : '#ef4444';
+          ctx.shadowBlur = 10;
           ctx.beginPath();
           ctx.arc(hub.px, hub.py, size, 0, Math.PI * 2);
           ctx.fill();
           ctx.shadowBlur = 0;
 
-          // Inner white dot
-          ctx.fillStyle = '#ffffff';
-          ctx.beginPath();
-          ctx.arc(hub.px, hub.py, size * 0.4, 0, Math.PI * 2);
-          ctx.fill();
-
-          // Clean Floating Label (Visible when hub faces front: z > currentRadius * 0.08)
-          if (hub.z > currentRadius * 0.08) {
-            ctx.font = '700 11px Inter, system-ui, sans-serif';
+          // Label
+          if (hub.z > currentRadius * 0.1) {
+            ctx.font = '700 10.5px Inter, sans-serif';
             ctx.fillStyle = isHq ? '#b91c1c' : '#0f172a';
-            ctx.fillText(hub.name, hub.px + size + 7, hub.py + 3.5);
+            ctx.fillText(hub.name, hub.px + size + 6, hub.py + 3);
           }
         }
       });
@@ -422,3 +341,4 @@ export function DigitalGlobe({
     </div>
   );
 }
+
