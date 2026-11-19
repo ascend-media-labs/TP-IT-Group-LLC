@@ -436,7 +436,12 @@ export function AdminPage() {
     e.preventDefault();
     if (!modalType) return;
 
-    const endpoint = `/api/${modalType === 'career' ? 'careers' : modalType}`;
+    const endpoint =
+      modalType === 'team'
+        ? '/api/team'
+        : modalType === 'client'
+        ? '/api/clients'
+        : '/api/careers';
     const method = editingItem ? 'PUT' : 'POST';
 
     try {
@@ -449,12 +454,12 @@ export function AdminPage() {
       if (data.success) {
         showNotice('success', `${editingItem ? 'Updated' : 'Added'} successfully in Laragon MySQL!`);
         closeModal();
-        fetchAllData();
+        await fetchAllData();
       } else {
         showNotice('error', data.error || 'Failed to save');
       }
     } catch (err: any) {
-      showNotice('error', 'Network error while saving to MySQL');
+      showNotice('error', 'Network error while saving to MySQL: ' + (err.message || ''));
     }
   };
 

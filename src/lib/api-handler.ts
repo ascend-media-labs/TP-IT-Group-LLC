@@ -209,7 +209,7 @@ export async function handleApiRoute(
     // =================================================================
     // 4. TEAM MEMBERS (CRUD + SEARCH & FILTER)
     // =================================================================
-    if (pathname === '/api/team') {
+    if (pathname === '/api/team' || pathname === '/api/teams' || pathname === '/api/team_members') {
       if (method === 'GET') {
         let sql = 'SELECT * FROM team_members WHERE 1=1';
         const queryArgs: any[] = [];
@@ -292,7 +292,7 @@ export async function handleApiRoute(
     // =================================================================
     // 5. CLIENTS & PARTNERS (CRUD + SEARCH & FILTER)
     // =================================================================
-    if (pathname === '/api/clients') {
+    if (pathname === '/api/clients' || pathname === '/api/client') {
       if (method === 'GET') {
         let sql = 'SELECT * FROM clients WHERE 1=1';
         const queryArgs: any[] = [];
@@ -355,7 +355,7 @@ export async function handleApiRoute(
     // =================================================================
     // 6. CAREERS & JOB OPENINGS (CRUD + SEARCH & FILTER)
     // =================================================================
-    if (pathname === '/api/careers') {
+    if (pathname === '/api/careers' || pathname === '/api/career') {
       if (method === 'GET') {
         let sql = 'SELECT * FROM careers WHERE 1=1';
         const queryArgs: any[] = [];
