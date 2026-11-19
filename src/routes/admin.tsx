@@ -277,8 +277,8 @@ export function AdminPage() {
   // -------------------------------------------------------------
   if (!token) {
     return (
-      <div className="min-h-screen bg-slate-950 text-white flex flex-col justify-center items-center px-4 relative overflow-hidden bg-dot-pattern selection:bg-[#d7192a]/30">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(215,25,42,0.12),transparent_70%)]" />
+      <div className="admin-root min-h-screen bg-[#050811] text-white flex flex-col justify-center items-center px-4 relative overflow-hidden bg-dot-pattern selection:bg-[#d7192a]/30">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(215,25,42,0.18),transparent_70%)]" />
 
         <div className="w-full max-w-md relative z-10">
           {/* Logo & Header */}
@@ -289,15 +289,15 @@ export function AdminPage() {
               </span>
             </Link>
             <h1 className="mt-4 text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Admin Console</h1>
-            <p className="mt-2 text-xs sm:text-sm text-slate-400">
+            <p className="mt-2 text-xs sm:text-sm text-slate-300 font-medium">
               Sign in with your email and password to manage website data.
             </p>
           </div>
 
           {/* Login Card */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-7 shadow-2xl backdrop-blur-xl">
+          <div className="admin-card rounded-2xl border border-slate-800 bg-[#0b1120] p-7 shadow-2xl backdrop-blur-xl">
             {loginError && (
-              <div className="mb-5 flex items-center gap-2.5 rounded-xl border border-red-500/40 bg-red-500/10 p-3.5 text-xs text-red-200">
+              <div className="mb-5 flex items-center gap-2.5 rounded-xl border border-red-500/50 bg-red-950/40 p-3.5 text-xs text-red-200">
                 <AlertCircle className="size-4 shrink-0 text-red-400" />
                 <span>{loginError}</span>
               </div>
@@ -305,36 +305,36 @@ export function AdminPage() {
 
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">Email Address</label>
+                <label className="block text-xs font-bold text-slate-200 mb-1.5 uppercase tracking-wider">Email Address</label>
                 <div className="relative">
-                  <Mail className="absolute left-3.5 top-3 size-4 text-slate-500" />
+                  <Mail className="absolute left-3.5 top-3 size-4 text-slate-400" />
                   <input
                     type="email"
                     required
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
                     placeholder="admin@tpitgroup.com"
-                    className="w-full rounded-xl border border-slate-700 bg-slate-800/80 pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:border-[#d7192a] focus:ring-1 focus:ring-[#d7192a] focus:outline-hidden transition"
+                    className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:border-[#d7192a] focus:ring-1 focus:ring-[#d7192a] focus:outline-hidden transition font-medium"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">Password</label>
+                <label className="block text-xs font-bold text-slate-200 mb-1.5 uppercase tracking-wider">Password</label>
                 <div className="relative">
-                  <Lock className="absolute left-3.5 top-3 size-4 text-slate-500" />
+                  <Lock className="absolute left-3.5 top-3 size-4 text-slate-400" />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     required
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full rounded-xl border border-slate-700 bg-slate-800/80 pl-10 pr-10 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:border-[#d7192a] focus:ring-1 focus:ring-[#d7192a] focus:outline-hidden transition"
+                    className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] pl-10 pr-10 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:border-[#d7192a] focus:ring-1 focus:ring-[#d7192a] focus:outline-hidden transition font-medium"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-3 text-slate-500 hover:text-slate-300"
+                    className="absolute right-3.5 top-3 text-slate-400 hover:text-white"
                   >
                     {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                   </button>
@@ -342,33 +342,33 @@ export function AdminPage() {
               </div>
 
               {/* Database indicator pill */}
-              <div className="pt-1 flex items-center justify-between text-[11px] text-slate-400">
-                <span className="flex items-center gap-1.5">
-                  <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-                  Laragon MySQL: <code className="text-slate-300 font-mono">tpitgroup_db</code>
+              <div className="pt-1 flex items-center justify-between text-[11px] text-slate-300">
+                <span className="flex items-center gap-1.5 font-medium">
+                  <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Laragon MySQL: <code className="text-emerald-400 font-mono font-bold">tpitgroup_db</code>
                 </span>
-                <span className="text-slate-500">Port 3306</span>
+                <span className="text-slate-400 font-mono">Port 3306</span>
               </div>
 
               <Button
                 type="submit"
                 disabled={loginLoading}
-                className="w-full mt-2 h-11 rounded-xl bg-gradient-to-r from-[#d7192a] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] text-white text-xs sm:text-sm font-bold shadow-lg shadow-red-900/40 transition-all"
+                className="w-full mt-2 h-11 rounded-xl bg-gradient-to-r from-[#d7192a] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] text-white text-xs sm:text-sm font-bold shadow-lg shadow-red-900/40 transition-all cursor-pointer"
               >
                 {loginLoading ? 'Authenticating with MySQL...' : 'Sign In to Dashboard'}
               </Button>
             </form>
 
             {/* Quick Demo Credentials Pill */}
-            <div className="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
-              <span>Demo Login:</span>
+            <div className="mt-5 pt-4 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-300">
+              <span className="font-semibold text-slate-400">Demo Login:</span>
               <button
                 type="button"
                 onClick={() => {
                   setLoginEmail('admin@tpitgroup.com');
                   setLoginPassword('admin123');
                 }}
-                className="font-mono text-[#d7192a] hover:underline"
+                className="font-mono text-red-400 hover:text-red-300 hover:underline cursor-pointer"
               >
                 admin@tpitgroup.com / admin123
               </button>
@@ -376,7 +376,7 @@ export function AdminPage() {
           </div>
 
           <div className="mt-6 text-center">
-            <Link to="/" className="text-xs text-slate-400 hover:text-white inline-flex items-center gap-1 transition">
+            <Link to="/" className="text-xs text-slate-300 hover:text-white inline-flex items-center gap-1 transition font-medium">
               ← Return to TP IT Group Website
             </Link>
           </div>
@@ -389,14 +389,14 @@ export function AdminPage() {
   // 2. AUTHENTICATED ADMIN DASHBOARD
   // -------------------------------------------------------------
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="admin-root min-h-screen bg-[#050811] text-slate-100 flex flex-col font-sans">
       {/* Top Notification Toast */}
       {notification && (
         <div
           className={`fixed top-4 right-4 z-50 flex items-center gap-2.5 rounded-xl border px-4 py-3 text-xs sm:text-sm shadow-2xl backdrop-blur-md transition-all ${
             notification.type === 'success'
-              ? 'border-emerald-500/50 bg-emerald-950/90 text-emerald-200'
-              : 'border-red-500/50 bg-red-950/90 text-red-200'
+              ? 'border-emerald-500/50 bg-[#071912] text-emerald-200'
+              : 'border-red-500/50 bg-[#200c0e] text-red-200'
           }`}
         >
           {notification.type === 'success' ? (
@@ -404,12 +404,12 @@ export function AdminPage() {
           ) : (
             <AlertCircle className="size-4.5 text-red-400" />
           )}
-          <span>{notification.message}</span>
+          <span className="font-semibold">{notification.message}</span>
         </div>
       )}
 
       {/* Top Header Navbar */}
-      <header className="border-b border-slate-800 bg-slate-900/90 backdrop-blur-md sticky top-0 z-30">
+      <header className="border-b border-slate-800 bg-[#0b1120]/95 backdrop-blur-md sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <Link to="/" className="inline-flex items-center gap-1.5 group">
@@ -422,9 +422,9 @@ export function AdminPage() {
             </Link>
 
             {/* DB Status Badge */}
-            <div className="hidden sm:flex items-center gap-2 rounded-full border border-slate-800 bg-slate-950/80 px-3 py-1 text-xs text-slate-300">
-              <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Laragon MySQL:</span>
+            <div className="hidden sm:flex items-center gap-2 rounded-full border border-slate-800 bg-[#111a2e] px-3 py-1 text-xs text-slate-200">
+              <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="font-medium text-slate-300">Laragon MySQL:</span>
               <code className="text-emerald-400 font-mono font-bold">tpitgroup_db</code>
             </div>
           </div>
@@ -434,7 +434,7 @@ export function AdminPage() {
               asChild
               variant="outline"
               size="sm"
-              className="h-8 rounded-lg border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white text-xs gap-1.5"
+              className="h-8 rounded-lg border-slate-700 bg-[#111a2e] text-slate-200 hover:bg-[#17223b] hover:text-white text-xs gap-1.5 font-semibold"
             >
               <Link to="/" target="_blank">
                 Live Website <ExternalLink className="size-3.5" />
@@ -443,7 +443,7 @@ export function AdminPage() {
 
             <div className="h-4 w-px bg-slate-800 hidden sm:block" />
 
-            <div className="hidden md:flex items-center gap-2 text-xs text-slate-300">
+            <div className="hidden md:flex items-center gap-2 text-xs text-slate-200 font-semibold">
               <ShieldCheck className="size-4 text-[#d7192a]" />
               <span>{user?.name || 'Admin'}</span>
             </div>
@@ -452,7 +452,7 @@ export function AdminPage() {
               onClick={handleLogout}
               variant="ghost"
               size="sm"
-              className="h-8 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-500/10 text-xs gap-1.5"
+              className="h-8 rounded-lg text-slate-300 hover:text-red-400 hover:bg-red-500/10 text-xs gap-1.5 font-semibold"
             >
               <LogOut className="size-3.5" /> Logout
             </Button>
@@ -467,40 +467,40 @@ export function AdminPage() {
           <nav className="flex flex-wrap items-center gap-2">
             <button
               onClick={() => setActiveTab('overview')}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-semibold transition ${
+              className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition cursor-pointer ${
                 activeTab === 'overview'
-                  ? 'bg-[#d7192a] text-white shadow-md shadow-red-900/30'
-                  : 'bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800'
+                  ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
+                  : 'admin-card-inner bg-[#111a2e] text-slate-300 hover:bg-[#17223b] hover:text-white border border-slate-800'
               }`}
             >
               <LayoutDashboard className="size-4" /> Overview
             </button>
             <button
               onClick={() => setActiveTab('team')}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-semibold transition ${
+              className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition cursor-pointer ${
                 activeTab === 'team'
-                  ? 'bg-[#d7192a] text-white shadow-md shadow-red-900/30'
-                  : 'bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800'
+                  ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
+                  : 'admin-card-inner bg-[#111a2e] text-slate-300 hover:bg-[#17223b] hover:text-white border border-slate-800'
               }`}
             >
               <Users className="size-4" /> Our Team ({team.length})
             </button>
             <button
               onClick={() => setActiveTab('clients')}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-semibold transition ${
+              className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition cursor-pointer ${
                 activeTab === 'clients'
-                  ? 'bg-[#d7192a] text-white shadow-md shadow-red-900/30'
-                  : 'bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800'
+                  ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
+                  : 'admin-card-inner bg-[#111a2e] text-slate-300 hover:bg-[#17223b] hover:text-white border border-slate-800'
               }`}
             >
               <Building2 className="size-4" /> Clients ({clients.length})
             </button>
             <button
               onClick={() => setActiveTab('careers')}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-semibold transition ${
+              className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition cursor-pointer ${
                 activeTab === 'careers'
-                  ? 'bg-[#d7192a] text-white shadow-md shadow-red-900/30'
-                  : 'bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800'
+                  ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
+                  : 'admin-card-inner bg-[#111a2e] text-slate-300 hover:bg-[#17223b] hover:text-white border border-slate-800'
               }`}
             >
               <Briefcase className="size-4" /> Careers ({careers.length})
@@ -512,7 +512,7 @@ export function AdminPage() {
             disabled={loadingData}
             variant="outline"
             size="sm"
-            className="h-9 rounded-xl border-slate-700 bg-slate-900 text-slate-300 hover:bg-slate-800 text-xs gap-1.5"
+            className="admin-card-inner h-9 rounded-xl border-slate-700 bg-[#111a2e] text-slate-200 hover:bg-[#17223b] hover:text-white text-xs gap-1.5 font-bold cursor-pointer"
           >
             <RefreshCw className={`size-3.5 ${loadingData ? 'animate-spin text-red-400' : ''}`} />
             Refresh DB
@@ -528,94 +528,94 @@ export function AdminPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               <div
                 onClick={() => setActiveTab('team')}
-                className="cursor-pointer rounded-2xl border border-slate-800 bg-slate-900/80 p-5 hover:border-red-500/50 hover:bg-slate-850 transition-all group"
+                className="admin-card cursor-pointer rounded-2xl border border-slate-800 bg-[#0b1120] p-5 hover:border-red-500/50 hover:bg-[#0f172a] transition-all group"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-slate-400">Our Team Members</span>
+                  <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">Our Team Members</span>
                   <div className="size-9 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-[#d7192a] group-hover:scale-110 transition-transform">
                     <Users className="size-4.5" />
                   </div>
                 </div>
-                <div className="mt-4 text-3xl font-extrabold text-white">{team.length}</div>
-                <p className="mt-1 text-xs text-slate-500">Executive leaders & founders</p>
+                <div className="mt-4 text-3xl font-black text-white tracking-tight">{team.length}</div>
+                <p className="mt-1 text-xs font-medium text-slate-400">Executive leaders & founders</p>
               </div>
 
               <div
                 onClick={() => setActiveTab('clients')}
-                className="cursor-pointer rounded-2xl border border-slate-800 bg-slate-900/80 p-5 hover:border-red-500/50 hover:bg-slate-850 transition-all group"
+                className="admin-card cursor-pointer rounded-2xl border border-slate-800 bg-[#0b1120] p-5 hover:border-blue-500/50 hover:bg-[#0f172a] transition-all group"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-slate-400">Enterprise Clients</span>
+                  <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">Enterprise Clients</span>
                   <div className="size-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
                     <Building2 className="size-4.5" />
                   </div>
                 </div>
-                <div className="mt-4 text-3xl font-extrabold text-white">{clients.length}</div>
-                <p className="mt-1 text-xs text-slate-500">Fortune 500 & partner network</p>
+                <div className="mt-4 text-3xl font-black text-white tracking-tight">{clients.length}</div>
+                <p className="mt-1 text-xs font-medium text-slate-400">Fortune 500 & partner network</p>
               </div>
 
               <div
                 onClick={() => setActiveTab('careers')}
-                className="cursor-pointer rounded-2xl border border-slate-800 bg-slate-900/80 p-5 hover:border-red-500/50 hover:bg-slate-850 transition-all group"
+                className="admin-card cursor-pointer rounded-2xl border border-slate-800 bg-[#0b1120] p-5 hover:border-emerald-500/50 hover:bg-[#0f172a] transition-all group"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-slate-400">Career Openings</span>
+                  <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">Career Openings</span>
                   <div className="size-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
                     <Briefcase className="size-4.5" />
                   </div>
                 </div>
-                <div className="mt-4 text-3xl font-extrabold text-white">{careers.length}</div>
-                <p className="mt-1 text-xs text-slate-500">Active job listings across USA, India, Canada</p>
+                <div className="mt-4 text-3xl font-black text-white tracking-tight">{careers.length}</div>
+                <p className="mt-1 text-xs font-medium text-slate-400">Active job listings in USA, IN, CA</p>
               </div>
 
-              <div className="rounded-2xl border border-emerald-900/50 bg-emerald-950/20 p-5">
+              <div className="admin-card rounded-2xl border border-emerald-900/60 bg-[#071912] p-5">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-emerald-300">Database Engine</span>
+                  <span className="text-xs font-bold text-emerald-300 uppercase tracking-wider">Database Engine</span>
                   <div className="size-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
                     <Database className="size-4.5" />
                   </div>
                 </div>
-                <div className="mt-4 text-lg font-bold text-white flex items-center gap-2">
+                <div className="mt-4 text-xl font-bold text-white flex items-center gap-2">
                   <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
                   Laragon MySQL
                 </div>
-                <p className="mt-1 text-xs text-emerald-400 font-mono">DB: tpitgroup_db</p>
+                <p className="mt-1 text-xs text-emerald-400 font-mono font-bold">DB: tpitgroup_db</p>
               </div>
             </div>
 
             {/* Quick Actions Card */}
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-6">
-              <h3 className="text-lg font-bold text-white mb-4">Quick Management Actions</h3>
+            <div className="admin-card rounded-2xl border border-slate-800 bg-[#0b1120] p-6 shadow-xl">
+              <h3 className="text-lg font-extrabold text-white mb-4">Quick Management Actions</h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <button
                   onClick={() => openModal('team')}
-                  className="flex items-center justify-between p-4 rounded-xl border border-slate-800 bg-slate-950/60 hover:border-red-500/50 hover:bg-slate-800 transition group text-left"
+                  className="admin-card-inner flex items-center justify-between p-4 rounded-xl border border-slate-800 bg-[#111a2e] hover:border-red-500/50 hover:bg-[#17223b] transition group text-left cursor-pointer"
                 >
                   <div>
                     <h4 className="text-sm font-bold text-white group-hover:text-red-400 transition">Add Team Leader</h4>
-                    <p className="text-xs text-slate-400 mt-1">Insert new executive into MySQL</p>
+                    <p className="text-xs font-medium text-slate-400 mt-1">Insert new executive into MySQL</p>
                   </div>
                   <Plus className="size-5 text-[#d7192a]" />
                 </button>
 
                 <button
                   onClick={() => openModal('client')}
-                  className="flex items-center justify-between p-4 rounded-xl border border-slate-800 bg-slate-950/60 hover:border-blue-500/50 hover:bg-slate-800 transition group text-left"
+                  className="admin-card-inner flex items-center justify-between p-4 rounded-xl border border-slate-800 bg-[#111a2e] hover:border-blue-500/50 hover:bg-[#17223b] transition group text-left cursor-pointer"
                 >
                   <div>
                     <h4 className="text-sm font-bold text-white group-hover:text-blue-400 transition">Add Client Partner</h4>
-                    <p className="text-xs text-slate-400 mt-1">Add enterprise logo to /clients</p>
+                    <p className="text-xs font-medium text-slate-400 mt-1">Add enterprise logo to /clients</p>
                   </div>
                   <Plus className="size-5 text-blue-400" />
                 </button>
 
                 <button
                   onClick={() => openModal('career')}
-                  className="flex items-center justify-between p-4 rounded-xl border border-slate-800 bg-slate-950/60 hover:border-emerald-500/50 hover:bg-slate-800 transition group text-left"
+                  className="admin-card-inner flex items-center justify-between p-4 rounded-xl border border-slate-800 bg-[#111a2e] hover:border-emerald-500/50 hover:bg-[#17223b] transition group text-left cursor-pointer"
                 >
                   <div>
                     <h4 className="text-sm font-bold text-white group-hover:text-emerald-400 transition">Post Job Opening</h4>
-                    <p className="text-xs text-slate-400 mt-1">Create new role on /careers</p>
+                    <p className="text-xs font-medium text-slate-400 mt-1">Create new role on /careers</p>
                   </div>
                   <Plus className="size-5 text-emerald-400" />
                 </button>
@@ -643,9 +643,9 @@ export function AdminPage() {
             </div>
 
             {/* Table */}
-            <div className="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/90">
+            <div className="admin-card overflow-x-auto rounded-2xl border border-slate-800 bg-[#0b1120] shadow-xl">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-850 border-b border-slate-800 text-slate-400 uppercase font-semibold text-[11px]">
+                <thead className="bg-[#111a2e] border-b border-slate-800 text-slate-200 uppercase font-bold text-[11px] tracking-wider">
                   <tr>
                     <th className="px-5 py-3.5">Member</th>
                     <th className="px-5 py-3.5">Role</th>
@@ -655,27 +655,27 @@ export function AdminPage() {
                     <th className="px-5 py-3.5 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/60">
+                <tbody className="divide-y divide-slate-800/80">
                   {team.map((member) => (
-                    <tr key={member.id} className="hover:bg-slate-800/40 transition">
+                    <tr key={member.id} className="hover:bg-[#111a2e]/60 transition">
                       <td className="px-5 py-3.5 font-bold text-white flex items-center gap-3">
                         <img
                           src={member.image || '/team/karthik.jpg'}
                           alt={member.name}
                           className="size-9 rounded-full object-cover border border-slate-700"
                         />
-                        <span>{member.name}</span>
+                        <span className="text-sm font-bold text-white">{member.name}</span>
                       </td>
-                      <td className="px-5 py-3.5 text-red-400 font-semibold">{member.role}</td>
-                      <td className="px-5 py-3.5 text-slate-300">{member.department || 'TP IT Group LLC'}</td>
-                      <td className="px-5 py-3.5 text-slate-400 max-w-xs truncate">{member.sub_role || '—'}</td>
-                      <td className="px-5 py-3.5 text-center font-mono text-slate-400">{member.display_order ?? 0}</td>
+                      <td className="px-5 py-3.5 text-red-400 font-bold">{member.role}</td>
+                      <td className="px-5 py-3.5 text-slate-300 font-medium">{member.department || 'TP IT Group LLC'}</td>
+                      <td className="px-5 py-3.5 text-slate-300 max-w-xs truncate">{member.sub_role || '—'}</td>
+                      <td className="px-5 py-3.5 text-center font-mono text-slate-300 font-bold">{member.display_order ?? 0}</td>
                       <td className="px-5 py-3.5 text-right space-x-2">
                         <Button
                           onClick={() => openModal('team', member)}
                           variant="ghost"
                           size="icon"
-                          className="size-8 text-slate-400 hover:text-white hover:bg-slate-800"
+                          className="size-8 text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer"
                         >
                           <Pencil className="size-3.5" />
                         </Button>
@@ -683,7 +683,7 @@ export function AdminPage() {
                           onClick={() => handleDelete('team', member.id, member.name)}
                           variant="ghost"
                           size="icon"
-                          className="size-8 text-slate-400 hover:text-red-400 hover:bg-red-500/10"
+                          className="size-8 text-slate-300 hover:text-red-400 hover:bg-red-500/10 cursor-pointer"
                         >
                           <Trash2 className="size-3.5" />
                         </Button>
@@ -692,7 +692,7 @@ export function AdminPage() {
                   ))}
                   {team.length === 0 && (
                     <tr>
-                      <td colSpan={6} className="text-center py-8 text-slate-500">
+                      <td colSpan={6} className="text-center py-8 text-slate-400 font-medium">
                         No team members in database. Click "Add Team Member" to create one.
                       </td>
                     </tr>
@@ -711,11 +711,11 @@ export function AdminPage() {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h2 className="text-xl font-bold text-white">Clients & Enterprise Partners</h2>
-                <p className="text-xs text-slate-400 mt-0.5">Manage all partner logos and categories in Laragon MySQL</p>
+                <p className="text-xs text-slate-300 mt-0.5">Manage all partner logos and categories in Laragon MySQL</p>
               </div>
               <Button
                 onClick={() => openModal('client')}
-                className="h-10 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs gap-1.5 shadow-md"
+                className="h-10 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs gap-1.5 shadow-md cursor-pointer"
               >
                 <Plus className="size-4" /> Add Client Partner
               </Button>
@@ -726,28 +726,28 @@ export function AdminPage() {
               {clients.map((c) => (
                 <div
                   key={c.id}
-                  className="rounded-2xl border border-slate-800 bg-slate-900/90 p-4 flex flex-col justify-between hover:border-slate-700 transition group relative"
+                  className="admin-card rounded-2xl border border-slate-800 bg-[#0b1120] p-4 flex flex-col justify-between hover:border-slate-700 transition group relative shadow-md"
                 >
                   <div className="h-16 flex items-center justify-center p-2 rounded-xl bg-white/95">
                     <img src={c.src} alt={c.name} className="max-h-10 max-w-[85%] object-contain" />
                   </div>
                   <div className="mt-3">
                     <h4 className="text-xs font-bold text-white truncate">{c.name}</h4>
-                    <p className="text-[10px] text-slate-400 truncate">{c.category || 'Enterprise Partner'}</p>
+                    <p className="text-[10px] text-slate-400 font-medium truncate">{c.category || 'Enterprise Partner'}</p>
                   </div>
-                  <div className="mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-500">
-                    <span>Order: {c.display_order ?? 0}</span>
+                  <div className="mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+                    <span className="font-medium">Order: {c.display_order ?? 0}</span>
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => openModal('client', c)}
-                        className="p-1 hover:text-white transition"
+                        className="p-1 text-slate-400 hover:text-white transition cursor-pointer"
                         title="Edit"
                       >
                         <Pencil className="size-3.5" />
                       </button>
                       <button
                         onClick={() => handleDelete('clients', c.id, c.name)}
-                        className="p-1 hover:text-red-400 transition"
+                        className="p-1 text-slate-400 hover:text-red-400 transition cursor-pointer"
                         title="Delete"
                       >
                         <Trash2 className="size-3.5" />
@@ -768,11 +768,11 @@ export function AdminPage() {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h2 className="text-xl font-bold text-white">Career Openings & Jobs</h2>
-                <p className="text-xs text-slate-400 mt-0.5">Manage live job listings displayed on /careers</p>
+                <p className="text-xs text-slate-300 mt-0.5">Manage live job listings displayed on /careers</p>
               </div>
               <Button
                 onClick={() => openModal('career')}
-                className="h-10 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs gap-1.5 shadow-md"
+                className="h-10 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs gap-1.5 shadow-md cursor-pointer"
               >
                 <Plus className="size-4" /> Post Job Opening
               </Button>
@@ -783,26 +783,26 @@ export function AdminPage() {
               {careers.map((job) => (
                 <div
                   key={job.id}
-                  className="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-slate-700 transition"
+                  className="admin-card rounded-2xl border border-slate-800 bg-[#0b1120] p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-slate-700 transition shadow-md"
                 >
                   <div className="space-y-1.5">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="rounded-md border border-red-500/30 bg-red-500/10 px-2 py-0.5 text-[10px] font-bold text-red-300">
                         {job.dept}
                       </span>
-                      <span className="text-xs text-slate-400 font-medium">{job.type}</span>
+                      <span className="text-xs text-slate-300 font-medium">{job.type}</span>
                       <span className="text-xs text-slate-500">•</span>
-                      <span className="text-xs text-slate-400">{job.location}</span>
+                      <span className="text-xs text-slate-300">{job.location}</span>
                       <span
                         className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                          job.is_active ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-800 text-slate-500'
+                          job.is_active ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-850 text-slate-400'
                         }`}
                       >
                         {job.is_active ? 'Active' : 'Inactive'}
                       </span>
                     </div>
                     <h3 className="text-base font-bold text-white">{job.title}</h3>
-                    <p className="text-xs text-slate-400 max-w-2xl line-clamp-2">{job.description || 'No description'}</p>
+                    <p className="text-xs text-slate-300 max-w-2xl line-clamp-2">{job.description || 'No description'}</p>
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-800">
@@ -810,7 +810,7 @@ export function AdminPage() {
                       onClick={() => openModal('career', job)}
                       variant="outline"
                       size="sm"
-                      className="h-9 rounded-xl border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 text-xs gap-1"
+                      className="admin-card-inner h-9 rounded-xl border-slate-700 bg-[#111a2e] text-slate-200 hover:bg-[#17223b] text-xs gap-1 font-semibold cursor-pointer"
                     >
                       <Pencil className="size-3.5" /> Edit
                     </Button>
@@ -818,7 +818,7 @@ export function AdminPage() {
                       onClick={() => handleDelete('careers', job.id, job.title)}
                       variant="ghost"
                       size="sm"
-                      className="h-9 rounded-xl text-slate-400 hover:text-red-400 hover:bg-red-500/10 text-xs gap-1"
+                      className="h-9 rounded-xl text-slate-300 hover:text-red-400 hover:bg-red-500/10 text-xs gap-1 font-semibold cursor-pointer"
                     >
                       <Trash2 className="size-3.5" /> Delete
                     </Button>
@@ -834,14 +834,14 @@ export function AdminPage() {
       {/* ADD / EDIT MODAL */}
       {/* -------------------------------------------------------- */}
       {modalType && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="relative w-full max-w-lg rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-2xl text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+          <div className="admin-card relative w-full max-w-lg rounded-2xl border border-slate-800 bg-[#0b1120] p-6 shadow-2xl text-white">
             <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-              <h3 className="text-lg font-bold">
+              <h3 className="text-lg font-bold text-white">
                 {editingItem ? 'Edit' : 'Add'}{' '}
                 {modalType === 'team' ? 'Team Member' : modalType === 'client' ? 'Client Partner' : 'Job Opening'}
               </h3>
-              <button onClick={closeModal} className="text-slate-400 hover:text-white">
+              <button onClick={closeModal} className="text-slate-400 hover:text-white cursor-pointer">
                 <X className="size-5" />
               </button>
             </div>
@@ -851,64 +851,64 @@ export function AdminPage() {
               {modalType === 'team' && (
                 <>
                   <div>
-                    <label className="block font-semibold mb-1">Full Name</label>
+                    <label className="block font-bold text-slate-200 mb-1">Full Name</label>
                     <input
                       required
                       type="text"
                       value={formData.name || ''}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                      className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                       placeholder="e.g. Karthik Pushpa"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold mb-1">Role / Job Title</label>
+                    <label className="block font-bold text-slate-200 mb-1">Role / Job Title</label>
                     <input
                       required
                       type="text"
                       value={formData.role || ''}
                       onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                      className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                       placeholder="e.g. CEO & Founder"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold mb-1">Department</label>
+                    <label className="block font-bold text-slate-200 mb-1">Department</label>
                     <input
                       type="text"
                       value={formData.department || ''}
                       onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                      className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                       placeholder="e.g. TP IT Group LLC, Cloud & Deep-Tech"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold mb-1">Sub Role Description</label>
+                    <label className="block font-bold text-slate-200 mb-1">Sub Role Description</label>
                     <input
                       type="text"
                       value={formData.sub_role || ''}
                       onChange={(e) => setFormData({ ...formData, sub_role: e.target.value })}
-                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                      className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                       placeholder="15+ Years in Enterprise IT Strategy..."
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold mb-1">Bio</label>
+                    <label className="block font-bold text-slate-200 mb-1">Bio</label>
                     <textarea
                       rows={3}
                       value={formData.bio || ''}
                       onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                      className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                       placeholder="Brief executive profile summary..."
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold mb-1">Display Order</label>
+                    <label className="block font-bold text-slate-200 mb-1">Display Order</label>
                     <input
                       type="number"
                       value={formData.display_order ?? 1}
                       onChange={(e) => setFormData({ ...formData, display_order: Number(e.target.value) })}
-                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                      className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                     />
                   </div>
                 </>
@@ -918,44 +918,44 @@ export function AdminPage() {
               {modalType === 'client' && (
                 <>
                   <div>
-                    <label className="block font-semibold mb-1">Client Name</label>
+                    <label className="block font-bold text-slate-200 mb-1">Client Name</label>
                     <input
                       required
                       type="text"
                       value={formData.name || ''}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                      className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                       placeholder="e.g. USAA, Progressive, Chase"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold mb-1">Logo Image Path / URL</label>
+                    <label className="block font-bold text-slate-200 mb-1">Logo Image Path / URL</label>
                     <input
                       required
                       type="text"
                       value={formData.src || ''}
                       onChange={(e) => setFormData({ ...formData, src: e.target.value })}
-                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                      className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                       placeholder="/logos/usaa.png"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold mb-1">Category</label>
+                    <label className="block font-bold text-slate-200 mb-1">Category</label>
                     <input
                       type="text"
                       value={formData.category || ''}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                      className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                       placeholder="Fortune 500, Financial Services, etc."
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold mb-1">Display Order</label>
+                    <label className="block font-bold text-slate-200 mb-1">Display Order</label>
                     <input
                       type="number"
                       value={formData.display_order ?? 1}
                       onChange={(e) => setFormData({ ...formData, display_order: Number(e.target.value) })}
-                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                      className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                     />
                   </div>
                 </>
@@ -965,71 +965,71 @@ export function AdminPage() {
               {modalType === 'career' && (
                 <>
                   <div>
-                    <label className="block font-semibold mb-1">Job Title</label>
+                    <label className="block font-bold text-slate-200 mb-1">Job Title</label>
                     <input
                       required
                       type="text"
                       value={formData.title || ''}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                      className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                       placeholder="e.g. Senior SAP S/4HANA Consultant"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block font-semibold mb-1">Department</label>
+                      <label className="block font-bold text-slate-200 mb-1">Department</label>
                       <input
                         required
                         type="text"
                         value={formData.dept || ''}
                         onChange={(e) => setFormData({ ...formData, dept: e.target.value })}
-                        className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                        className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                         placeholder="Engineering, FinLabs..."
                       />
                     </div>
                     <div>
-                      <label className="block font-semibold mb-1">Location</label>
+                      <label className="block font-bold text-slate-200 mb-1">Location</label>
                       <input
                         required
                         type="text"
                         value={formData.location || ''}
                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                        className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                        className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                         placeholder="Wilmington, DE / Hybrid"
                       />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block font-semibold mb-1">Type</label>
+                      <label className="block font-bold text-slate-200 mb-1">Type</label>
                       <select
                         value={formData.type || 'Full-time'}
                         onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                        className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                        className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                       >
-                        <option value="Full-time">Full-time</option>
-                        <option value="Contract">Contract</option>
-                        <option value="Part-time">Part-time</option>
+                        <option value="Full-time" className="bg-[#111a2e] text-white">Full-time</option>
+                        <option value="Contract" className="bg-[#111a2e] text-white">Contract</option>
+                        <option value="Part-time" className="bg-[#111a2e] text-white">Part-time</option>
                       </select>
                     </div>
                     <div>
-                      <label className="block font-semibold mb-1">Experience</label>
+                      <label className="block font-bold text-slate-200 mb-1">Experience</label>
                       <input
                         type="text"
                         value={formData.experience || ''}
                         onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
-                        className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                        className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                         placeholder="3-5 years"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block font-semibold mb-1">Description</label>
+                    <label className="block font-bold text-slate-200 mb-1">Description</label>
                     <textarea
                       rows={3}
                       value={formData.description || ''}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-white"
+                      className="admin-input w-full rounded-xl border border-slate-700 bg-[#111a2e] px-3.5 py-2 text-white font-medium"
                       placeholder="Key responsibilities and qualifications..."
                     />
                   </div>
@@ -1041,7 +1041,7 @@ export function AdminPage() {
                       onChange={(e) => setFormData({ ...formData, is_active: e.target.checked ? 1 : 0 })}
                       className="size-4 rounded border-slate-700 text-[#d7192a]"
                     />
-                    <label htmlFor="is_active" className="font-semibold text-slate-300">
+                    <label htmlFor="is_active" className="font-bold text-slate-200 cursor-pointer">
                       Listing is Active (Visible on /careers)
                     </label>
                   </div>
@@ -1053,13 +1053,13 @@ export function AdminPage() {
                   type="button"
                   onClick={closeModal}
                   variant="outline"
-                  className="h-9 rounded-xl border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs"
+                  className="admin-card-inner h-9 rounded-xl border-slate-700 bg-[#111a2e] text-slate-300 hover:bg-[#17223b] text-xs font-semibold cursor-pointer"
                 >
                   Cancel
                 </Button>
                 <Button
                   type="submit"
-                  className="h-9 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs"
+                  className="h-9 rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs cursor-pointer shadow-md"
                 >
                   Save to Laragon MySQL
                 </Button>
