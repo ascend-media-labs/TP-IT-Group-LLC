@@ -136,7 +136,7 @@ function RootComponent() {
       <LenisProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Navbar />
-        <main className="min-h-screen bg-white"><Outlet /></main>
+        <main className="bg-white"><Outlet /></main>
         <Footer />
         <FloatingActions />
       </LenisProvider>

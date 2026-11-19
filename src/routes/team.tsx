@@ -230,7 +230,7 @@ function Page() {
   return (
     <div className="bg-white text-slate-900">
       {/* 1. LEADERSHIP SHOWCASE (3D Tilt + Stagger Cards) */}
-      <section className="pt-8 sm:pt-10 pb-8 sm:pb-12 bg-white text-slate-900 bg-dot-pattern">
+      <section className="pt-8 sm:pt-10 pb-6 sm:pb-8 bg-white text-slate-900 bg-dot-pattern">
         <div className="site-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
