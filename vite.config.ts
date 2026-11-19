@@ -27,7 +27,7 @@ function apiMiddlewarePlugin(): Plugin {
           }
           try {
             const { handleApiRoute } = await import('./src/lib/api-handler.ts');
-            const result = await handleApiRoute(url.pathname, req.method || 'GET', body);
+            const result = await handleApiRoute(url.pathname, req.method || 'GET', body, url.searchParams);
             res.setHeader('Content-Type', 'application/json');
             res.statusCode = result.status;
             res.end(JSON.stringify(result.data));

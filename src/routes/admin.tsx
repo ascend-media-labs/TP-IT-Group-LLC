@@ -67,6 +67,8 @@ interface Stats {
   activeCareerCount: number;
   dbStatus: string;
   dbName: string;
+  tables?: string[];
+  tableCounts?: Record<string, number>;
 }
 
 export function AdminPage() {
@@ -88,8 +90,18 @@ export function AdminPage() {
   const [clients, setClients] = useState<ClientPartner[]>([]);
   const [careers, setCareers] = useState<CareerOpening[]>([]);
   const [loadingData, setLoadingData] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [syncingSchema, setSyncingSchema] = useState(false);
   const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  // Live Search & Filtering states
+  const [teamSearch, setTeamSearch] = useState('');
+  const [teamDeptFilter, setTeamDeptFilter] = useState('all');
+
+  const [clientSearch, setClientSearch] = useState('');
+  const [clientCatFilter, setClientCatFilter] = useState('all');
+
+  const [careerSearch, setCareerSearch] = useState('');
+  const [careerStatusFilter, setCareerStatusFilter] = useState('all');
 
   // Modals state
   const [modalType, setModalType] = useState<'team' | 'client' | 'career' | null>(null);
@@ -142,6 +154,62 @@ export function AdminPage() {
     setNotification({ type, message });
     setTimeout(() => setNotification(null), 4000);
   };
+
+  // Auto-Sync Database Schema (Tables & Columns)
+  const handleSyncSchema = async () => {
+    setSyncingSchema(true);
+    try {
+      const res = await fetch('/api/schema/sync', { method: 'POST' });
+      const data = await res.json();
+      if (data.success) {
+        showNotice('success', 'Laragon MySQL tables & columns verified and synchronized!');
+        fetchAllData();
+      } else {
+        showNotice('error', data.error || 'Failed to synchronize schema');
+      }
+    } catch {
+      showNotice('error', 'Network error during schema sync');
+    } finally {
+      setSyncingSchema(false);
+    }
+  };
+
+  // Filtered Team Members
+  const filteredTeam = team.filter((m) => {
+    const matchesSearch =
+      !teamSearch.trim() ||
+      m.name.toLowerCase().includes(teamSearch.toLowerCase()) ||
+      m.role.toLowerCase().includes(teamSearch.toLowerCase()) ||
+      (m.department && m.department.toLowerCase().includes(teamSearch.toLowerCase())) ||
+      (m.sub_role && m.sub_role.toLowerCase().includes(teamSearch.toLowerCase()));
+    const matchesDept = teamDeptFilter === 'all' || m.department === teamDeptFilter;
+    return matchesSearch && matchesDept;
+  });
+
+  // Filtered Clients
+  const filteredClients = clients.filter((c) => {
+    const matchesSearch =
+      !clientSearch.trim() ||
+      c.name.toLowerCase().includes(clientSearch.toLowerCase()) ||
+      (c.category && c.category.toLowerCase().includes(clientSearch.toLowerCase()));
+    const matchesCat = clientCatFilter === 'all' || c.category === clientCatFilter;
+    return matchesSearch && matchesCat;
+  });
+
+  // Filtered Careers
+  const filteredCareers = careers.filter((j) => {
+    const matchesSearch =
+      !careerSearch.trim() ||
+      j.title.toLowerCase().includes(careerSearch.toLowerCase()) ||
+      j.dept.toLowerCase().includes(careerSearch.toLowerCase()) ||
+      j.location.toLowerCase().includes(careerSearch.toLowerCase()) ||
+      (j.description && j.description.toLowerCase().includes(careerSearch.toLowerCase()));
+    const matchesStatus =
+      careerStatusFilter === 'all' ||
+      (careerStatusFilter === 'active' && Boolean(j.is_active)) ||
+      (careerStatusFilter === 'inactive' && !Boolean(j.is_active));
+    return matchesSearch && matchesStatus;
+  });
 
   // Handle Login
   const handleLogin = async (e: React.FormEvent) => {
@@ -622,6 +690,18 @@ export function AdminPage() {
 
           <div className="flex items-center gap-2.5">
             <Button
+              onClick={handleSyncSchema}
+              disabled={syncingSchema}
+              variant="outline"
+              size="sm"
+              className="admin-card-inner h-9 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 text-xs gap-1.5 font-bold cursor-pointer shadow-xs"
+              title="Automatically verify and sync all Laragon MySQL tables and columns"
+            >
+              <Database className={`size-3.5 ${syncingSchema ? 'animate-spin text-emerald-600' : 'text-emerald-700'}`} />
+              <span className="hidden sm:inline">{syncingSchema ? 'Syncing...' : 'Sync Schema'}</span>
+            </Button>
+
+            <Button
               onClick={fetchAllData}
               disabled={loadingData}
               variant="outline"
@@ -724,7 +804,12 @@ export function AdminPage() {
                   <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
                   Laragon MySQL
                 </div>
-                <p className="mt-1 text-xs text-emerald-800 font-mono font-bold">DB: tpitgroup_db</p>
+                <div className="mt-1 flex items-center justify-between text-xs">
+                  <span className="text-emerald-800 font-mono font-bold">DB: tpitgroup_db</span>
+                  <span className="text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded-full text-[10px]">
+                    {stats?.tables?.length || 6} Tables Synced
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -774,10 +859,41 @@ export function AdminPage() {
         {/* -------------------------------------------------------- */}
         {activeTab === 'team' && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <h2 className="text-xl font-bold text-slate-900">Our Team Leadership</h2>
                 <p className="text-xs text-slate-500 mt-0.5">Manage executive team members stored in Laragon MySQL</p>
+              </div>
+            </div>
+
+            {/* Filter & Live Search Bar */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 rounded-xl border border-slate-200 bg-white shadow-xs">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-2.5 size-4 text-slate-400" />
+                <input
+                  type="text"
+                  value={teamSearch}
+                  onChange={(e) => setTeamSearch(e.target.value)}
+                  placeholder="Search team by name, role, department..."
+                  className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:border-[#d7192a] focus:outline-none"
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <select
+                  value={teamDeptFilter}
+                  onChange={(e) => setTeamDeptFilter(e.target.value)}
+                  className="px-3 py-1.5 text-xs rounded-lg border border-slate-200 bg-slate-50 text-slate-700 focus:bg-white focus:outline-none font-medium"
+                >
+                  <option value="all">All Departments</option>
+                  <option value="TP IT Group LLC">TP IT Group LLC</option>
+                  <option value="Cloud & Deep-Tech">Cloud & Deep-Tech</option>
+                  <option value="Engineering & Apps">Engineering & Apps</option>
+                  <option value="Project & Operations">Project & Operations</option>
+                  <option value="Business & Growth">Business & Growth</option>
+                </select>
+                <span className="text-[11px] text-slate-500 font-bold shrink-0 bg-slate-100 px-2 py-1 rounded-md">
+                  {filteredTeam.length} of {team.length}
+                </span>
               </div>
             </div>
 
@@ -795,7 +911,7 @@ export function AdminPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {team.map((member) => (
+                  {filteredTeam.map((member) => (
                     <tr key={member.id} className="hover:bg-slate-50/80 transition">
                       <td className="px-5 py-3.5 font-bold text-slate-900 flex items-center gap-3">
                         <img
@@ -829,10 +945,10 @@ export function AdminPage() {
                       </td>
                     </tr>
                   ))}
-                  {team.length === 0 && (
+                  {filteredTeam.length === 0 && (
                     <tr>
                       <td colSpan={6} className="text-center py-8 text-slate-500 font-medium">
-                        No team members in database. Click "Add Team Member" to create one.
+                        No team members match your search criteria.
                       </td>
                     </tr>
                   )}
@@ -847,16 +963,48 @@ export function AdminPage() {
         {/* -------------------------------------------------------- */}
         {activeTab === 'clients' && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <h2 className="text-xl font-bold text-slate-900">Clients & Enterprise Partners</h2>
                 <p className="text-xs text-slate-500 mt-0.5">Manage all partner logos and categories in Laragon MySQL</p>
               </div>
             </div>
 
+            {/* Filter & Live Search Bar */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 rounded-xl border border-slate-200 bg-white shadow-xs">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-2.5 size-4 text-slate-400" />
+                <input
+                  type="text"
+                  value={clientSearch}
+                  onChange={(e) => setClientSearch(e.target.value)}
+                  placeholder="Search clients by name, category..."
+                  className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:border-[#d7192a] focus:outline-none"
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <select
+                  value={clientCatFilter}
+                  onChange={(e) => setClientCatFilter(e.target.value)}
+                  className="px-3 py-1.5 text-xs rounded-lg border border-slate-200 bg-slate-50 text-slate-700 focus:bg-white focus:outline-none font-medium"
+                >
+                  <option value="all">All Categories</option>
+                  <option value="Fortune 500">Fortune 500</option>
+                  <option value="Financial Services">Financial Services</option>
+                  <option value="Enterprise Partner">Enterprise Partner</option>
+                  <option value="Technology Partner">Technology Partner</option>
+                  <option value="Healthcare & Retail">Healthcare & Retail</option>
+                  <option value="Banking & Finance">Banking & Finance</option>
+                </select>
+                <span className="text-[11px] text-slate-500 font-bold shrink-0 bg-slate-100 px-2 py-1 rounded-md">
+                  {filteredClients.length} of {clients.length}
+                </span>
+              </div>
+            </div>
+
             {/* Grid View */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {clients.map((c) => (
+              {filteredClients.map((c) => (
                 <div
                   key={c.id}
                   className="admin-card rounded-2xl border border-slate-200 bg-white p-4 flex flex-col justify-between hover:border-slate-300 hover:shadow-md transition group relative shadow-xs"
@@ -912,16 +1060,44 @@ export function AdminPage() {
         {/* -------------------------------------------------------- */}
         {activeTab === 'careers' && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <h2 className="text-xl font-bold text-slate-900">Career Openings & Jobs</h2>
                 <p className="text-xs text-slate-500 mt-0.5">Manage live job listings displayed on /careers</p>
               </div>
             </div>
 
+            {/* Filter & Live Search Bar */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 rounded-xl border border-slate-200 bg-white shadow-xs">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-2.5 size-4 text-slate-400" />
+                <input
+                  type="text"
+                  value={careerSearch}
+                  onChange={(e) => setCareerSearch(e.target.value)}
+                  placeholder="Search jobs by title, skills, location..."
+                  className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:border-[#d7192a] focus:outline-none"
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <select
+                  value={careerStatusFilter}
+                  onChange={(e) => setCareerStatusFilter(e.target.value)}
+                  className="px-3 py-1.5 text-xs rounded-lg border border-slate-200 bg-slate-50 text-slate-700 focus:bg-white focus:outline-none font-medium"
+                >
+                  <option value="all">All Status</option>
+                  <option value="active">Active Only</option>
+                  <option value="inactive">Inactive Only</option>
+                </select>
+                <span className="text-[11px] text-slate-500 font-bold shrink-0 bg-slate-100 px-2 py-1 rounded-md">
+                  {filteredCareers.length} of {careers.length}
+                </span>
+              </div>
+            </div>
+
             {/* List */}
             <div className="space-y-4">
-              {careers.map((job) => (
+              {filteredCareers.map((job) => (
                 <div
                   key={job.id}
                   className="admin-card rounded-2xl border border-slate-200 bg-white p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-slate-300 hover:shadow-md transition shadow-xs"
@@ -966,6 +1142,11 @@ export function AdminPage() {
                   </div>
                 </div>
               ))}
+              {filteredCareers.length === 0 && (
+                <div className="p-8 text-center text-xs text-slate-500 font-medium bg-white rounded-2xl border border-slate-200 shadow-xs">
+                  No job openings match your search criteria.
+                </div>
+              )}
             </div>
           </div>
         )}
