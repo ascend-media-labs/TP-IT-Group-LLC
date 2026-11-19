@@ -97,6 +97,8 @@ export async function handleApiRoute(
       const [clientRes] = await query<any[]>('SELECT count(*) as count FROM clients');
       const [careerRes] = await query<any[]>('SELECT count(*) as count FROM careers');
       const [activeCareerRes] = await query<any[]>('SELECT count(*) as count FROM careers WHERE is_active = 1');
+      const [contactRes] = await query<any[]>('SELECT count(*) as count FROM contact_messages');
+      const [unreadContactRes] = await query<any[]>('SELECT count(*) as count FROM contact_messages WHERE is_read = 0');
 
       return {
         status: 200,
@@ -106,6 +108,8 @@ export async function handleApiRoute(
           clientCount: clientRes?.count || 0,
           careerCount: careerRes?.count || 0,
           activeCareerCount: activeCareerRes?.count || 0,
+          contactCount: contactRes?.count || 0,
+          unreadContactCount: unreadContactRes?.count || 0,
           dbStatus: health.connected ? 'Connected (Laragon MySQL)' : 'Offline',
           dbName: health.database,
           tables: health.tables,
@@ -462,6 +466,12 @@ export async function handleApiRoute(
         const id = body?.id || params.id;
         if (!id) return { status: 400, data: { success: false, error: 'ID is required' } };
         await query('DELETE FROM contact_messages WHERE id = ?', [id]);
+        return { status: 200, data: { success: true } };
+      }
+      if (method === 'PUT' || method === 'PATCH') {
+        const { id, is_read } = body || {};
+        if (!id) return { status: 400, data: { success: false, error: 'ID is required' } };
+        await query('UPDATE contact_messages SET is_read = ? WHERE id = ?', [is_read ? 1 : 0, id]);
         return { status: 200, data: { success: true } };
       }
     }

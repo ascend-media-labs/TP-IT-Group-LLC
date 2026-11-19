@@ -26,6 +26,9 @@ import {
   Image as ImageIcon,
   Camera,
   Loader2,
+  MessageSquare,
+  Phone,
+  Clock,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -64,11 +67,24 @@ interface CareerOpening {
   is_active: number | boolean;
 }
 
+export interface ContactMessage {
+  id: number;
+  name: string;
+  email: string;
+  phone?: string;
+  subject?: string;
+  message: string;
+  is_read: number | boolean;
+  created_at: string;
+}
+
 interface Stats {
   teamCount: number;
   clientCount: number;
   careerCount: number;
   activeCareerCount: number;
+  contactCount?: number;
+  unreadContactCount?: number;
   dbStatus: string;
   dbName: string;
   tables?: string[];
@@ -78,7 +94,7 @@ interface Stats {
 export function AdminPage() {
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<{ email: string; name: string } | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'team' | 'clients' | 'careers'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'team' | 'clients' | 'careers' | 'enquiries'>('overview');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Login form state
@@ -93,6 +109,7 @@ export function AdminPage() {
   const [team, setTeam] = useState<TeamMember[]>([]);
   const [clients, setClients] = useState<ClientPartner[]>([]);
   const [careers, setCareers] = useState<CareerOpening[]>([]);
+  const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [loadingData, setLoadingData] = useState(false);
   const [syncingSchema, setSyncingSchema] = useState(false);
   const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
@@ -106,6 +123,10 @@ export function AdminPage() {
 
   const [careerSearch, setCareerSearch] = useState('');
   const [careerStatusFilter, setCareerStatusFilter] = useState('all');
+
+  const [messageSearch, setMessageSearch] = useState('');
+  const [messageFilter, setMessageFilter] = useState<'all' | 'unread' | 'read'>('all');
+  const [viewingMessage, setViewingMessage] = useState<ContactMessage | null>(null);
 
   const [uploadingImage, setUploadingImage] = useState(false);
 
@@ -132,17 +153,19 @@ export function AdminPage() {
   const fetchAllData = async () => {
     setLoadingData(true);
     try {
-      const [sRes, tRes, cRes, jRes] = await Promise.all([
+      const [sRes, tRes, cRes, jRes, mRes] = await Promise.all([
         fetch('/api/stats').then((r) => r.json()),
         fetch('/api/team').then((r) => r.json()),
         fetch('/api/clients').then((r) => r.json()),
         fetch('/api/careers').then((r) => r.json()),
+        fetch('/api/contact').then((r) => r.json()),
       ]);
 
       if (sRes.success) setStats(sRes);
       if (tRes.success) setTeam(tRes.team || []);
       if (cRes.success) setClients(cRes.clients || []);
       if (jRes.success) setCareers(jRes.careers || []);
+      if (mRes.success) setMessages(mRes.messages || []);
     } catch (err) {
       console.error('Failed to fetch dashboard data', err);
     } finally {
@@ -216,6 +239,66 @@ export function AdminPage() {
       (careerStatusFilter === 'inactive' && !Boolean(j.is_active));
     return matchesSearch && matchesStatus;
   });
+
+  // Filtered Contact Messages / Enquiries
+  const filteredMessages = messages.filter((m) => {
+    const matchesSearch =
+      !messageSearch.trim() ||
+      m.name.toLowerCase().includes(messageSearch.toLowerCase()) ||
+      m.email.toLowerCase().includes(messageSearch.toLowerCase()) ||
+      (m.phone && m.phone.includes(messageSearch)) ||
+      (m.subject && m.subject.toLowerCase().includes(messageSearch.toLowerCase())) ||
+      (m.message && m.message.toLowerCase().includes(messageSearch.toLowerCase()));
+
+    const matchesStatus =
+      messageFilter === 'all' ||
+      (messageFilter === 'unread' && !m.is_read) ||
+      (messageFilter === 'read' && Boolean(m.is_read));
+
+    return matchesSearch && matchesStatus;
+  });
+
+  const handleToggleRead = async (msg: ContactMessage) => {
+    const newRead = !msg.is_read;
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: msg.id, is_read: newRead }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setMessages((prev) =>
+          prev.map((m) => (m.id === msg.id ? { ...m, is_read: newRead ? 1 : 0 } : m))
+        );
+        if (viewingMessage?.id === msg.id) {
+          setViewingMessage({ ...viewingMessage, is_read: newRead ? 1 : 0 });
+        }
+        showNotice('success', `Marked as ${newRead ? 'read' : 'unread'}`);
+      }
+    } catch {
+      showNotice('error', 'Failed to update message status');
+    }
+  };
+
+  const handleDeleteMessage = async (id: number, name: string) => {
+    if (!window.confirm(`Delete enquiry from "${name}"?`)) return;
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setMessages((prev) => prev.filter((m) => m.id !== id));
+        if (viewingMessage?.id === id) setViewingMessage(null);
+        showNotice('success', 'Enquiry deleted from Laragon MySQL');
+      }
+    } catch {
+      showNotice('error', 'Failed to delete message');
+    }
+  };
 
   // Handle Login
   const handleLogin = async (e: React.FormEvent) => {
@@ -676,6 +759,34 @@ export function AdminPage() {
                 {careers.length}
               </span>
             </button>
+
+            <button
+              onClick={() => {
+                setActiveTab('enquiries');
+                setMobileMenuOpen(false);
+              }}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+                activeTab === 'enquiries'
+                  ? 'bg-[#d7192a] text-white shadow-md shadow-red-500/20'
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <MessageSquare className="size-4.5" />
+                <span>Client Enquiries</span>
+              </div>
+              <span
+                className={`px-2 py-0.5 text-[11px] font-bold rounded-full ${
+                  activeTab === 'enquiries'
+                    ? 'bg-white/20 text-white'
+                    : messages.some((m) => !m.is_read)
+                    ? 'bg-red-100 text-[#d7192a]'
+                    : 'bg-slate-100 text-slate-700'
+                }`}
+              >
+                {messages.length}
+              </span>
+            </button>
           </nav>
         </div>
 
@@ -733,12 +844,14 @@ export function AdminPage() {
                 {activeTab === 'team' && 'Our Team Leadership'}
                 {activeTab === 'clients' && 'Clients & Enterprise Partners'}
                 {activeTab === 'careers' && 'Career Openings & Jobs'}
+                {activeTab === 'enquiries' && 'Client Enquiries & Consultation Leads'}
               </h1>
               <p className="text-[11px] text-slate-500 hidden sm:block">
                 {activeTab === 'overview' && 'Real-time database metrics and system activity'}
                 {activeTab === 'team' && 'Manage executive team members stored in Laragon MySQL'}
                 {activeTab === 'clients' && 'Manage partner logos and affiliations displayed on /clients'}
                 {activeTab === 'careers' && 'Manage live job postings displayed on /careers'}
+                {activeTab === 'enquiries' && 'Direct consultation enquiries submitted through the /contact page, stored in Laragon MySQL'}
               </p>
             </div>
           </div>
@@ -805,7 +918,7 @@ export function AdminPage() {
         {activeTab === 'overview' && (
           <div className="space-y-8">
             {/* Metric Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5">
               <div
                 onClick={() => setActiveTab('team')}
                 className="admin-card cursor-pointer rounded-2xl border border-slate-200 bg-white p-5 hover:border-red-300 hover:shadow-md transition-all group shadow-xs"
@@ -848,6 +961,27 @@ export function AdminPage() {
                 <p className="mt-1 text-xs font-medium text-slate-500">Active job listings in USA, IN, CA</p>
               </div>
 
+              <div
+                onClick={() => setActiveTab('enquiries')}
+                className="admin-card cursor-pointer rounded-2xl border border-slate-200 bg-white p-5 hover:border-purple-300 hover:shadow-md transition-all group shadow-xs"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Client Enquiries</span>
+                  <div className="size-9 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-600 group-hover:scale-110 transition-transform">
+                    <MessageSquare className="size-4.5" />
+                  </div>
+                </div>
+                <div className="mt-4 flex items-baseline gap-2">
+                  <span className="text-3xl font-black text-slate-900 tracking-tight">{messages.length}</span>
+                  {messages.some((m) => !m.is_read) && (
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-100 text-[#d7192a]">
+                      {messages.filter((m) => !m.is_read).length} new
+                    </span>
+                  )}
+                </div>
+                <p className="mt-1 text-xs font-medium text-slate-500">Direct consultation leads from /contact</p>
+              </div>
+
               <div className="admin-card rounded-2xl border border-emerald-200 bg-emerald-50/60 p-5 shadow-xs">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-emerald-900 uppercase tracking-wider">Database Engine</span>
@@ -862,7 +996,7 @@ export function AdminPage() {
                 <div className="mt-1 flex items-center justify-between text-xs">
                   <span className="text-emerald-800 font-mono font-bold">DB: tpitgroup_db</span>
                   <span className="text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded-full text-[10px]">
-                    {stats?.tables?.length || 6} Tables Synced
+                    {stats?.tables?.length || 7} Tables Synced
                   </span>
                 </div>
               </div>
@@ -1200,6 +1334,171 @@ export function AdminPage() {
               {filteredCareers.length === 0 && (
                 <div className="p-8 text-center text-xs text-slate-500 font-medium bg-white rounded-2xl border border-slate-200 shadow-xs">
                   No job openings match your search criteria.
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* -------------------------------------------------------- */}
+        {/* TAB 5: CLIENT ENQUIRIES & CONTACT MESSAGES */}
+        {/* -------------------------------------------------------- */}
+        {activeTab === 'enquiries' && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-xl font-bold text-slate-900">Client Enquiries &amp; Leads</h2>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Direct consultation enquiries submitted through the /contact page, stored in Laragon MySQL
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button
+                  onClick={fetchAllData}
+                  variant="outline"
+                  size="sm"
+                  className="h-9 rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 text-xs gap-1.5 font-bold shadow-xs cursor-pointer"
+                >
+                  <RefreshCw className="size-3.5" /> Refresh Leads
+                </Button>
+              </div>
+            </div>
+
+            {/* Filter & Live Search Bar */}
+            <div className="admin-card p-4 rounded-2xl border border-slate-200 bg-white shadow-xs flex flex-wrap items-center justify-between gap-3">
+              <div className="relative flex-1 min-w-[240px]">
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+                <input
+                  type="text"
+                  value={messageSearch}
+                  onChange={(e) => setMessageSearch(e.target.value)}
+                  placeholder="Search by client name, email, phone, requirements..."
+                  className="admin-input w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 bg-slate-50/70 text-xs text-slate-900 placeholder:text-slate-400 focus:bg-white font-medium"
+                />
+              </div>
+
+              <div className="flex items-center gap-2">
+                {(['all', 'unread', 'read'] as const).map((filter) => (
+                  <button
+                    key={filter}
+                    onClick={() => setMessageFilter(filter)}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition capitalize cursor-pointer ${
+                      messageFilter === filter
+                        ? 'bg-[#d7192a] text-white shadow-xs'
+                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    }`}
+                  >
+                    {filter === 'all' && `All (${messages.length})`}
+                    {filter === 'unread' && `New (${messages.filter((m) => !m.is_read).length})`}
+                    {filter === 'read' && `Read (${messages.filter((m) => m.is_read).length})`}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Enquiries Cards List */}
+            <div className="space-y-3">
+              {filteredMessages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`admin-card p-5 rounded-2xl border transition-all ${
+                    !msg.is_read
+                      ? 'border-red-200 bg-red-50/20 shadow-sm'
+                      : 'border-slate-200 bg-white shadow-xs'
+                  }`}
+                >
+                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                    <div className="flex items-start gap-3.5 flex-1 min-w-0">
+                      <div className={`size-10 rounded-xl flex items-center justify-center shrink-0 ${
+                        !msg.is_read
+                          ? 'bg-red-100 text-[#d7192a]'
+                          : 'bg-slate-100 text-slate-500'
+                      }`}>
+                        <MessageSquare className="size-5" />
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h4 className="text-sm font-bold text-slate-900">{msg.name}</h4>
+                          {!msg.is_read && (
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#d7192a] text-white uppercase tracking-wider">
+                              New Lead
+                            </span>
+                          )}
+                          <span className="text-[11px] px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-700 font-semibold border border-slate-200">
+                            {msg.subject || 'General Consultation'}
+                          </span>
+                        </div>
+
+                        {/* Contact details */}
+                        <div className="flex flex-wrap items-center gap-4 mt-1.5 text-xs text-slate-600 font-medium">
+                          <a
+                            href={`mailto:${msg.email}`}
+                            className="inline-flex items-center gap-1.5 hover:text-[#d7192a] transition font-semibold"
+                          >
+                            <Mail className="size-3.5 text-slate-400" />
+                            <span>{msg.email}</span>
+                          </a>
+                          {msg.phone && (
+                            <a
+                              href={`tel:${msg.phone}`}
+                              className="inline-flex items-center gap-1.5 hover:text-[#d7192a] transition"
+                            >
+                              <Phone className="size-3.5 text-slate-400" />
+                              <span>{msg.phone}</span>
+                            </a>
+                          )}
+                          <span className="inline-flex items-center gap-1 text-[11px] text-slate-400">
+                            <Clock className="size-3" />
+                            {new Date(msg.created_at).toLocaleString()}
+                          </span>
+                        </div>
+
+                        {/* Message Preview */}
+                        <p className="mt-2 text-xs text-slate-700 leading-relaxed bg-slate-50/70 p-3 rounded-xl border border-slate-100 font-normal">
+                          {msg.message}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex items-center gap-2 shrink-0 md:self-start">
+                      <Button
+                        onClick={() => handleToggleRead(msg)}
+                        variant="outline"
+                        size="sm"
+                        className="h-8 rounded-lg border-slate-200 bg-white text-slate-700 hover:bg-slate-50 text-xs font-semibold cursor-pointer shadow-xs"
+                      >
+                        {msg.is_read ? 'Mark Unread' : 'Mark Read'}
+                      </Button>
+                      <Button
+                        asChild
+                        variant="outline"
+                        size="sm"
+                        className="h-8 rounded-lg border-slate-200 bg-white text-slate-700 hover:text-[#d7192a] hover:bg-red-50 text-xs font-semibold shadow-xs"
+                      >
+                        <a href={`mailto:${msg.email}?subject=Regarding your enquiry at TP IT Group LLC&body=Dear ${encodeURIComponent(msg.name)},%0D%0A%0D%0AThank you for contacting TP IT Group LLC regarding "${encodeURIComponent(msg.subject || 'our services')}".%0D%0A%0D%0A`}>
+                          Reply
+                        </a>
+                      </Button>
+                      <Button
+                        onClick={() => handleDeleteMessage(msg.id, msg.name)}
+                        variant="ghost"
+                        size="sm"
+                        className="h-8 rounded-lg text-slate-400 hover:text-[#d7192a] hover:bg-red-50 cursor-pointer"
+                        title="Delete Enquiry"
+                      >
+                        <Trash2 className="size-3.5" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              {filteredMessages.length === 0 && (
+                <div className="p-12 text-center text-xs text-slate-500 font-medium bg-white rounded-2xl border border-slate-200 shadow-xs">
+                  <MessageSquare className="size-8 mx-auto mb-2 text-slate-300" />
+                  No enquiries match your search criteria.
                 </div>
               )}
             </div>
