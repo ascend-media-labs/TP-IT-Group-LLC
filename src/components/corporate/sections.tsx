@@ -1132,12 +1132,12 @@ export function Clients({ full = false }: { full?: boolean }) {
               {clientLogos.map((client) => (
                 <div
                   key={client.name}
-                  className="flex h-24 items-center justify-center rounded-2xl border border-slate-200/90 bg-white p-4 shadow-xs transition hover:border-red-300 hover:shadow-md"
+                  className="group flex h-24 sm:h-28 items-center justify-center rounded-2xl border border-slate-200/90 bg-white p-4 shadow-xs transition-all duration-300 hover:border-red-300 hover:shadow-md hover:-translate-y-1"
                 >
                   <img
                     src={client.src}
                     alt={client.name}
-                    className="max-h-12 max-w-[85%] object-contain contrast-125"
+                    className="max-h-12 sm:max-h-14 max-w-[85%] object-contain contrast-125 transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                   />
                 </div>

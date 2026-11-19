@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { Clients } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
 import { Trophy, ShieldCheck, Zap, Clock, BarChart3 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -140,6 +141,9 @@ function Page() {
           </div>
         </div>
       </section>
+
+      {/* 3. ALL 20+ CLIENT PARTNERS & ENTERPRISE NETWORK */}
+      <Clients full />
     </div>
   );
 }
