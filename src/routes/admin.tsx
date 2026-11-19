@@ -422,7 +422,7 @@ export function AdminPage() {
       {/* LEFT SIDEBAR NAVIGATION                                   */}
       {/* ========================================================= */}
       <aside
-        className={`fixed md:sticky top-0 left-0 z-50 h-screen w-64 lg:w-72 bg-[#090e1a] border-r border-slate-800/80 flex flex-col shrink-0 transition-transform duration-300 ease-in-out md:translate-x-0 ${
+        className={`fixed md:sticky top-0 left-0 z-50 h-screen w-64 lg:w-72 bg-[#090e1a] border-r border-slate-800/80 flex flex-col shrink-0 no-scrollbar overflow-hidden select-none transition-transform duration-300 ease-in-out md:translate-x-0 ${
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -459,145 +459,101 @@ export function AdminPage() {
           </div>
         </div>
 
-        {/* Navigation Menu */}
-        <div className="flex-1 px-3 py-4 overflow-y-auto space-y-6">
-          <div>
-            <div className="px-3 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2">
-              Main Management
-            </div>
-            <nav className="space-y-1">
-              <button
-                onClick={() => {
-                  setActiveTab('overview');
-                  setMobileMenuOpen(false);
-                }}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
-                  activeTab === 'overview'
-                    ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
-                    : 'text-slate-300 hover:bg-[#111a2e] hover:text-white'
-                }`}
-              >
-                <div className="flex items-center gap-2.5">
-                  <LayoutDashboard className="size-4.5" />
-                  <span>Overview</span>
-                </div>
-              </button>
-
-              <button
-                onClick={() => {
-                  setActiveTab('team');
-                  setMobileMenuOpen(false);
-                }}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
-                  activeTab === 'team'
-                    ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
-                    : 'text-slate-300 hover:bg-[#111a2e] hover:text-white'
-                }`}
-              >
-                <div className="flex items-center gap-2.5">
-                  <Users className="size-4.5" />
-                  <span>Our Team</span>
-                </div>
-                <span
-                  className={`px-2 py-0.5 text-[11px] font-bold rounded-full ${
-                    activeTab === 'team' ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-300'
-                  }`}
-                >
-                  {team.length}
-                </span>
-              </button>
-
-              <button
-                onClick={() => {
-                  setActiveTab('clients');
-                  setMobileMenuOpen(false);
-                }}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
-                  activeTab === 'clients'
-                    ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
-                    : 'text-slate-300 hover:bg-[#111a2e] hover:text-white'
-                }`}
-              >
-                <div className="flex items-center gap-2.5">
-                  <Building2 className="size-4.5" />
-                  <span>Clients & Partners</span>
-                </div>
-                <span
-                  className={`px-2 py-0.5 text-[11px] font-bold rounded-full ${
-                    activeTab === 'clients' ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-300'
-                  }`}
-                >
-                  {clients.length}
-                </span>
-              </button>
-
-              <button
-                onClick={() => {
-                  setActiveTab('careers');
-                  setMobileMenuOpen(false);
-                }}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
-                  activeTab === 'careers'
-                    ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
-                    : 'text-slate-300 hover:bg-[#111a2e] hover:text-white'
-                }`}
-              >
-                <div className="flex items-center gap-2.5">
-                  <Briefcase className="size-4.5" />
-                  <span>Careers / Jobs</span>
-                </div>
-                <span
-                  className={`px-2 py-0.5 text-[11px] font-bold rounded-full ${
-                    activeTab === 'careers' ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-300'
-                  }`}
-                >
-                  {careers.length}
-                </span>
-              </button>
-            </nav>
+        {/* Navigation Menu (Clean, No Scrollbar) */}
+        <div className="flex-1 px-3 py-4 no-scrollbar overflow-y-auto">
+          <div className="px-3 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2.5">
+            Main Management
           </div>
+          <nav className="space-y-1.5">
+            <button
+              onClick={() => {
+                setActiveTab('overview');
+                setMobileMenuOpen(false);
+              }}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+                activeTab === 'overview'
+                  ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
+                  : 'text-slate-300 hover:bg-[#111a2e] hover:text-white'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <LayoutDashboard className="size-4.5" />
+                <span>Overview</span>
+              </div>
+            </button>
 
-          {/* Quick Insert Actions Section */}
-          <div className="pt-2 border-t border-slate-800/80">
-            <div className="px-3 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2">
-              Quick Actions
-            </div>
-            <div className="space-y-1">
-              <button
-                onClick={() => {
-                  openModal('team');
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-[#111a2e] hover:text-red-400 transition cursor-pointer group"
+            <button
+              onClick={() => {
+                setActiveTab('team');
+                setMobileMenuOpen(false);
+              }}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+                activeTab === 'team'
+                  ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
+                  : 'text-slate-300 hover:bg-[#111a2e] hover:text-white'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <Users className="size-4.5" />
+                <span>Our Team</span>
+              </div>
+              <span
+                className={`px-2 py-0.5 text-[11px] font-bold rounded-full ${
+                  activeTab === 'team' ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-300'
+                }`}
               >
-                <span className="flex items-center gap-2">
-                  <Plus className="size-3.5 text-[#d7192a]" /> Add Team Leader
-                </span>
-              </button>
-              <button
-                onClick={() => {
-                  openModal('client');
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-[#111a2e] hover:text-blue-400 transition cursor-pointer group"
+                {team.length}
+              </span>
+            </button>
+
+            <button
+              onClick={() => {
+                setActiveTab('clients');
+                setMobileMenuOpen(false);
+              }}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+                activeTab === 'clients'
+                  ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
+                  : 'text-slate-300 hover:bg-[#111a2e] hover:text-white'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <Building2 className="size-4.5" />
+                <span>Clients & Partners</span>
+              </div>
+              <span
+                className={`px-2 py-0.5 text-[11px] font-bold rounded-full ${
+                  activeTab === 'clients' ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-300'
+                }`}
               >
-                <span className="flex items-center gap-2">
-                  <Plus className="size-3.5 text-blue-400" /> Add Client Partner
-                </span>
-              </button>
-              <button
-                onClick={() => {
-                  openModal('career');
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-[#111a2e] hover:text-emerald-400 transition cursor-pointer group"
+                {clients.length}
+              </span>
+            </button>
+
+            <button
+              onClick={() => {
+                setActiveTab('careers');
+                setMobileMenuOpen(false);
+              }}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+                activeTab === 'careers'
+                  ? 'bg-[#d7192a] text-white shadow-lg shadow-red-900/40'
+                  : 'text-slate-300 hover:bg-[#111a2e] hover:text-white'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <Briefcase className="size-4.5" />
+                <span>Careers / Jobs</span>
+              </div>
+              <span
+                className={`px-2 py-0.5 text-[11px] font-bold rounded-full ${
+                  activeTab === 'careers' ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-300'
+                }`}
               >
-                <span className="flex items-center gap-2">
-                  <Plus className="size-3.5 text-emerald-400" /> Post Job Opening
-                </span>
-              </button>
-            </div>
-          </div>
+                {careers.length}
+              </span>
+            </button>
+          </nav>
         </div>
 
         {/* Admin User Profile & Logout at Bottom of Sidebar */}

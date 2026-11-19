@@ -619,3 +619,14 @@ section[id] {
   outline: none !important;
   box-shadow: 0 0 0 2px rgba(215, 25, 42, 0.3) !important;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0px !important;
+  height: 0px !important;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
