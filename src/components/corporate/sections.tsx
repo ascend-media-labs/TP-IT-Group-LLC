@@ -41,6 +41,7 @@ import {
   Compass,
   MessageSquare,
   RefreshCw,
+  AlertCircle,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -1374,8 +1375,16 @@ export function Blogs({ full = false }: { full?: boolean }) {
   );
 }
 
+interface ContactFormErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+}
+
 export function ContactForm() {
   const [notice, setNotice] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -1383,54 +1392,194 @@ export function ContactForm() {
     service: 'Cloud Migration & Infrastructure',
     message: '',
   });
+  const [errors, setErrors] = useState<ContactFormErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Field validation rules
+  const validateField = (field: string, value: string): string | undefined => {
+    switch (field) {
+      case 'name': {
+        const trimmed = value.trim();
+        if (!trimmed) return 'Full name is required.';
+        if (/\d/.test(trimmed)) return 'Full name cannot contain numbers.';
+        if (!/^[a-zA-Z\s.'-]+$/.test(trimmed)) {
+          return 'Full name can only contain letters, spaces, and hyphens.';
+        }
+        if (trimmed.length < 2) return 'Full name must be at least 2 characters.';
+        return undefined;
+      }
+      case 'email': {
+        const trimmed = value.trim();
+        if (!trimmed) return 'Corporate email is required.';
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(trimmed)) {
+          return 'Please enter a valid email address (e.g. name@company.com).';
+        }
+        return undefined;
+      }
+      case 'phone': {
+        const trimmed = value.trim();
+        if (!trimmed) return undefined; // Optional field
+        const digitsOnly = trimmed.replace(/\D/g, '');
+        if (digitsOnly.length < 10) {
+          return 'Phone number must have at least 10 digits.';
+        }
+        if (digitsOnly.length > 15) {
+          return 'Phone number cannot exceed 15 digits.';
+        }
+        return undefined;
+      }
+      case 'message': {
+        const trimmed = value.trim();
+        if (!trimmed) return 'Project requirements are required.';
+        if (trimmed.length < 10) {
+          return 'Please describe your project in at least 10 characters.';
+        }
+        return undefined;
+      }
+      default:
+        return undefined;
+    }
+  };
+
+  const handleBlur = (field: string) => {
+    setTouched((prev) => ({ ...prev, [field]: true }));
+    const error = validateField(field, (formData as any)[field] || '');
+    setErrors((prev) => ({ ...prev, [field]: error }));
+  };
+
+  const handleChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (touched[field]) {
+      const error = validateField(field, value);
+      setErrors((prev) => ({ ...prev, [field]: error }));
+    }
+    if (notice) setNotice(false);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setNotice(true);
+
+    // Validate all fields
+    const newErrors: ContactFormErrors = {
+      name: validateField('name', formData.name),
+      email: validateField('email', formData.email),
+      phone: validateField('phone', formData.phone),
+      message: validateField('message', formData.message),
+    };
+
+    setTouched({ name: true, email: true, phone: true, message: true });
+    setErrors(newErrors);
+
+    // Stop if any errors
+    if (Object.values(newErrors).some(Boolean)) {
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          subject: formData.service,
+          message: formData.message.trim(),
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setNotice(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: 'Cloud Migration & Infrastructure',
+          message: '',
+        });
+        setTouched({});
+        setErrors({});
+      } else {
+        setErrors({ message: data.error || 'Failed to submit request' });
+      }
+    } catch {
+      setNotice(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-4">
+    <form onSubmit={handleSubmit} noValidate className="grid gap-4">
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="text-xs font-semibold text-slate-700">
-          Full Name *
+        <div>
+          <label className="text-xs font-semibold text-slate-700 block mb-1">
+            Full Name *
+          </label>
           <input
-            required
             name="name"
             autoComplete="name"
             value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            placeholder="John Doe"
-            className="contact-field mt-1.5"
+            onBlur={() => handleBlur('name')}
+            onChange={(e) => handleChange('name', e.target.value)}
+            placeholder="e.g. John Doe"
+            className={`contact-field w-full ${
+              touched.name && errors.name
+                ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
+                : ''
+            }`}
           />
-        </label>
-        <label className="text-xs font-semibold text-slate-700">
-          Corporate Email *
+          {touched.name && errors.name && (
+            <p className="mt-1 text-[11px] font-medium text-red-600 flex items-center gap-1">
+              <AlertCircle className="size-3 shrink-0" />
+              {errors.name}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label className="text-xs font-semibold text-slate-700 block mb-1">
+            Corporate Email *
+          </label>
           <input
-            required
             name="email"
             type="email"
             autoComplete="email"
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onBlur={() => handleBlur('email')}
+            onChange={(e) => handleChange('email', e.target.value)}
             placeholder="john@company.com"
-            className="contact-field mt-1.5"
+            className={`contact-field w-full ${
+              touched.email && errors.email
+                ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
+                : ''
+            }`}
           />
-        </label>
+          {touched.email && errors.email && (
+            <p className="mt-1 text-[11px] font-medium text-red-600 flex items-center gap-1">
+              <AlertCircle className="size-3 shrink-0" />
+              {errors.email}
+            </p>
+          )}
+        </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="text-xs font-semibold text-slate-700">
-          Phone Number
+        <div>
+          <label className="text-xs font-semibold text-slate-700 block mb-1">
+            Phone Number <span className="text-[10px] text-slate-400 font-normal">(10-15 digits)</span>
+          </label>
           <input
             name="phone"
             type="tel"
             inputMode="numeric"
-            pattern="[0-9+]*"
+            maxLength={18}
             autoComplete="tel"
             value={formData.phone}
+            onBlur={() => handleBlur('phone')}
             onKeyDown={(e) => {
-              // Allow control keys (backspace, delete, tab, arrows, copy/paste)
               if (
                 [
                   'Backspace',
@@ -1448,29 +1597,41 @@ export function ContactForm() {
               ) {
                 return;
               }
-              // Disallow non-numeric characters (allow numbers 0-9 and leading +)
               if (!/^[0-9+]$/.test(e.key)) {
                 e.preventDefault();
               }
             }}
             onChange={(e) => {
-              // Filter out any non-numeric character (allow + only if at the start)
               const onlyNums = e.target.value
                 .replace(/[^\d+]/g, '')
-                .replace(/(?!^)\+/g, '');
-              setFormData({ ...formData, phone: onlyNums });
+                .replace(/(?!^)\+/g, '')
+                .slice(0, 16);
+              handleChange('phone', onlyNums);
             }}
             placeholder="+1 (814) 844-1361"
-            className="contact-field mt-1.5"
+            className={`contact-field w-full ${
+              touched.phone && errors.phone
+                ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
+                : ''
+            }`}
           />
-        </label>
-        <label className="text-xs font-semibold text-slate-700">
-          Service Requirement
+          {touched.phone && errors.phone && (
+            <p className="mt-1 text-[11px] font-medium text-red-600 flex items-center gap-1">
+              <AlertCircle className="size-3 shrink-0" />
+              {errors.phone}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label className="text-xs font-semibold text-slate-700 block mb-1">
+            Service Requirement
+          </label>
           <select
             name="service"
             value={formData.service}
-            onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-            className="contact-field mt-1.5 bg-white text-slate-900"
+            onChange={(e) => handleChange('service', e.target.value)}
+            className="contact-field w-full bg-white text-slate-900"
           >
             <option value="Cloud Migration & Infrastructure">Cloud Computing &amp; Infrastructure</option>
             <option value="ERP & SAP Solutions">ERP &amp; SAP Solutions</option>
@@ -1479,33 +1640,55 @@ export function ContactForm() {
             <option value="Workforce & Staffing Solutions">Workforce &amp; Staffing Solutions</option>
             <option value="General Consultation">General Consultation</option>
           </select>
-        </label>
+        </div>
       </div>
 
-      <label className="text-xs font-semibold text-slate-700">
-        Project Objectives &amp; Requirements *
+      <div>
+        <label className="text-xs font-semibold text-slate-700 block mb-1">
+          Project Objectives &amp; Requirements *
+        </label>
         <textarea
-          required
           name="message"
           rows={3}
           value={formData.message}
-          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          onBlur={() => handleBlur('message')}
+          onChange={(e) => handleChange('message', e.target.value)}
           placeholder="Please describe your digital goals, timeline, and technical scope..."
-          className="contact-field mt-1.5 resize-y"
+          className={`contact-field w-full resize-y ${
+            touched.message && errors.message
+              ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
+              : ''
+          }`}
         />
-      </label>
+        {touched.message && errors.message && (
+          <p className="mt-1 text-[11px] font-medium text-red-600 flex items-center gap-1">
+            <AlertCircle className="size-3 shrink-0" />
+            {errors.message}
+          </p>
+        )}
+      </div>
 
       <Button
         type="submit"
-        className="h-11 w-fit rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] px-7 text-xs font-bold text-white shadow-md shadow-red-500/20"
+        disabled={loading}
+        className="h-11 w-fit rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] px-7 text-xs font-bold text-white shadow-md shadow-red-500/20 cursor-pointer disabled:opacity-60"
       >
-        Submit Request <ArrowUpRight className="size-4 ml-1" />
+        {loading ? (
+          'Submitting...'
+        ) : (
+          <>
+            Submit Request <ArrowUpRight className="size-4 ml-1" />
+          </>
+        )}
       </Button>
 
       {notice && (
-        <div role="status" className="rounded-xl border border-emerald-300 bg-emerald-50 p-3.5 text-xs text-emerald-800">
-          <strong>Thank you!</strong> Your enquiry has been received. A TP iT GROUP LLC enterprise consultant will reach
-          out to <strong>{formData.email || 'you'}</strong> shortly.
+        <div role="status" className="rounded-xl border border-emerald-300 bg-emerald-50 p-3.5 text-xs text-emerald-800 flex items-start gap-2">
+          <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" />
+          <div>
+            <strong>Thank you!</strong> Your enquiry has been received. A TP iT GROUP LLC enterprise consultant will reach
+            out to your email shortly.
+          </div>
         </div>
       )}
     </form>

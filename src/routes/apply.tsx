@@ -101,8 +101,30 @@ export function ApplyPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitting(true);
     setErrorMsg('');
+
+    // Name validation
+    const trimmedName = fullName.trim();
+    if (!trimmedName || /\d/.test(trimmedName) || !/^[a-zA-Z\s.'-]+$/.test(trimmedName)) {
+      setErrorMsg('Please enter a valid full name (letters only, no numbers).');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email.trim())) {
+      setErrorMsg('Please enter a valid email address.');
+      return;
+    }
+
+    // Phone validation
+    const digitsOnly = phone.replace(/\D/g, '');
+    if (digitsOnly.length < 10 || digitsOnly.length > 15) {
+      setErrorMsg('Please enter a valid phone number (between 10 and 15 digits).');
+      return;
+    }
+
+    setSubmitting(true);
 
     try {
       const payload = {
