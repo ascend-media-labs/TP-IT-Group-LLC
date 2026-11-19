@@ -411,38 +411,38 @@ export function StatsSection() {
 
 export function ConnectedCapabilitiesSection() {
   const capIcons = [
-    <Cpu key="cpu" className="size-6 text-[#d7192a]" />,
-    <Compass key="compass" className="size-6 text-[#d7192a]" />,
-    <Briefcase key="briefcase" className="size-6 text-[#d7192a]" />,
+    <Cpu key="cpu" className="size-5 text-[#d7192a]" />,
+    <Compass key="compass" className="size-5 text-[#d7192a]" />,
+    <Briefcase key="briefcase" className="size-5 text-[#d7192a]" />,
   ];
 
   return (
-    <section id="consulting" className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
+    <section id="consulting" className="py-8 sm:py-12 relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
       <div className="site-container relative z-10">
-        <div className="mb-8 text-left">
+        <div className="mb-5 sm:mb-6 text-left">
           <p className="eyebrow text-[#d7192a]">ONE PARTNER. CONNECTED CAPABILITIES.</p>
-          <h2 className="section-title mt-2">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1.5">
             Technology. Consulting. Talent. <span className="text-[#d7192a]">Built around your business.</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-4xl">
+          <p className="mt-1 text-xs sm:text-sm text-slate-600 max-w-4xl">
             From defining the challenge to delivering the solution, bring your technology and people priorities together.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
           {connectedCapabilities.map((cap, i) => (
             <motion.div
               key={cap.number}
-              initial={{ opacity: 0, y: 25, scale: 0.97 }}
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: false, amount: 0.15 }}
-              transition={{ delay: i * 0.1, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="group card-diagonal overflow-hidden flex flex-col justify-between p-5 sm:p-6 bg-white/95 border border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
+              transition={{ delay: i * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="group card-diagonal overflow-hidden flex flex-col justify-between p-4 sm:p-5 bg-white/95 border border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
             >
               <div>
                 <Link
                   to={cap.href}
-                  className="block relative aspect-[16/10] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-5"
+                  className="block relative aspect-[16/8.5] w-full overflow-hidden img-diagonal bg-slate-100 border border-slate-100 shadow-inner mb-3.5"
                 >
                   <img
                     src={cap.image}
@@ -451,22 +451,24 @@ export function ConnectedCapabilitiesSection() {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" />
-                  <div className="absolute top-2.5 left-2.5 flex size-10 items-center justify-center icon-diagonal bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10">
+                  <div className="absolute top-2 left-2 flex size-8 sm:size-9 items-center justify-center icon-diagonal bg-white/95 backdrop-blur-md text-[#d7192a] shadow-sm border border-white/80 z-10">
                     {capIcons[i % capIcons.length]}
                   </div>
-                  <span className="absolute top-2.5 right-2.5 rounded-lg bg-black/40 backdrop-blur-md px-2 py-0.5 font-mono text-[11px] font-bold text-white z-10">
+                  <span className="absolute top-2 right-2 rounded-lg bg-black/40 backdrop-blur-md px-2 py-0.5 font-mono text-[10px] font-bold text-white z-10">
                     {cap.number}
                   </span>
                 </Link>
 
                 <Link to={cap.href} className="block group/title">
-                  <h3 className="text-xl font-bold text-slate-900 group-hover/title:text-[#d7192a] group-hover:text-[#d7192a] transition-colors">{cap.title}</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover/title:text-[#d7192a] group-hover:text-[#d7192a] transition-colors leading-snug">
+                    {cap.title}
+                  </h3>
                 </Link>
-                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">{cap.desc}</p>
+                <p className="mt-1 text-xs leading-relaxed text-slate-600 line-clamp-2">{cap.desc}</p>
 
-                <ul className="mt-4 space-y-2 border-t border-slate-100 pt-3">
+                <ul className="mt-2.5 space-y-1.5 border-t border-slate-100 pt-2.5">
                   {cap.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
+                    <li key={item} className="flex items-start gap-1.5 text-[11px] sm:text-xs text-slate-700 font-medium">
                       <Check className="size-3.5 mt-0.5 shrink-0 text-[#d7192a]" />
                       <span>{item}</span>
                     </li>
@@ -474,19 +476,19 @@ export function ConnectedCapabilitiesSection() {
                 </ul>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div className="mt-3.5 pt-2.5 border-t border-slate-100 flex items-center justify-between">
                 <Link
                   to={cap.href}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
+                  className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
                 >
                   {cap.linkText}
                 </Link>
                 <Link
                   to={cap.href}
-                  className="flex size-8 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-600 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] transition-all shadow-2xs"
+                  className="flex size-7 sm:size-7.5 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-600 group-hover:bg-[#d7192a] group-hover:text-white group-hover:border-[#d7192a] transition-all shadow-2xs"
                   aria-label={cap.linkText}
                 >
-                  <ArrowUpRight className="size-4" />
+                  <ArrowUpRight className="size-3.5" />
                 </Link>
               </div>
             </motion.div>
