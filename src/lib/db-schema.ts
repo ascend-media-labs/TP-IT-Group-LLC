@@ -239,6 +239,27 @@ export const TABLE_SCHEMAS: Record<string, TableSchema> = {
       { name: 'updated_at', definition: 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP' },
     ],
   },
+
+  job_applications: {
+    name: 'job_applications',
+    columns: [
+      { name: 'id', definition: 'INT AUTO_INCREMENT PRIMARY KEY', isPrimary: true },
+      { name: 'role_title', definition: 'VARCHAR(200) NOT NULL' },
+      { name: 'dept', definition: 'VARCHAR(100) NULL' },
+      { name: 'location', definition: 'VARCHAR(150) NULL' },
+      { name: 'applicant_name', definition: 'VARCHAR(150) NOT NULL' },
+      { name: 'email', definition: 'VARCHAR(191) NOT NULL' },
+      { name: 'phone', definition: 'VARCHAR(50) NOT NULL' },
+      { name: 'experience_years', definition: 'VARCHAR(50) NULL' },
+      { name: 'current_company', definition: 'VARCHAR(150) NULL' },
+      { name: 'linkedin_url', definition: 'VARCHAR(255) NULL' },
+      { name: 'portfolio_url', definition: 'VARCHAR(255) NULL' },
+      { name: 'resume_link', definition: 'VARCHAR(255) NULL' },
+      { name: 'cover_note', definition: 'TEXT NULL' },
+      { name: 'status', definition: "VARCHAR(50) NOT NULL DEFAULT 'Submitted'" },
+      { name: 'created_at', definition: 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP' },
+    ],
+  },
 };
 
 // ======================================================================

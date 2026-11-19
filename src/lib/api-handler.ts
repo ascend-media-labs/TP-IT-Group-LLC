@@ -408,7 +408,73 @@ export async function handleApiRoute(
     }
 
     // =================================================================
-    // 8. GENERIC / UNIVERSAL CRUD ENGINE FOR ANY TABLE
+    // 8. JOB APPLICATIONS (SUBMISSION & MANAGEMENT)
+    // =================================================================
+    if (pathname === '/api/applications') {
+      if (method === 'GET') {
+        const rows = await query('SELECT * FROM job_applications ORDER BY id DESC');
+        return { status: 200, data: { success: true, applications: rows } };
+      }
+      if (method === 'POST') {
+        const {
+          role_title,
+          dept,
+          location,
+          applicant_name,
+          email,
+          phone,
+          experience_years,
+          current_company,
+          linkedin_url,
+          portfolio_url,
+          resume_link,
+          cover_note,
+        } = body || {};
+
+        if (!role_title || !applicant_name || !email || !phone) {
+          return {
+            status: 400,
+            data: { success: false, error: 'Role title, full name, email, and phone number are required' },
+          };
+        }
+
+        const res: any = await query(
+          `INSERT INTO job_applications (
+            role_title, dept, location, applicant_name, email, phone,
+            experience_years, current_company, linkedin_url, portfolio_url,
+            resume_link, cover_note, status
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            role_title.trim(),
+            dept?.trim() || 'General',
+            location?.trim() || 'Remote / Hybrid',
+            applicant_name.trim(),
+            email.trim().toLowerCase(),
+            phone.trim(),
+            experience_years?.trim() || '3-5 years',
+            current_company?.trim() || '',
+            linkedin_url?.trim() || '',
+            portfolio_url?.trim() || '',
+            resume_link?.trim() || '',
+            cover_note?.trim() || '',
+            'Submitted',
+          ]
+        );
+
+        return {
+          status: 201,
+          data: {
+            success: true,
+            id: res.insertId,
+            applicationId: `TPIT-${new Date().getFullYear()}-${String(res.insertId).padStart(4, '0')}`,
+            message: 'Application submitted successfully to TP IT Group LLC',
+          },
+        };
+      }
+    }
+
+    // =================================================================
+    // 9. GENERIC / UNIVERSAL CRUD ENGINE FOR ANY TABLE
     // Path: /api/data/:table (e.g. /api/data/blogs, /api/data/custom_table)
     // Allows instant CRUD & Filtering on any table created now or future!
     // =================================================================

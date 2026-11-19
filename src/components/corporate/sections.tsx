@@ -1221,11 +1221,16 @@ export function Careers({ full = false }: { full?: boolean }) {
                       size="sm"
                       className="rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs shadow-md shadow-red-500/20"
                     >
-                      <a
-                        href={`mailto:${companyInfo.email}?subject=Application for ${encodeURIComponent(job.title)} (${encodeURIComponent(job.location)})`}
+                      <Link
+                        to="/apply"
+                        search={{
+                          role: job.title,
+                          dept: job.dept,
+                          location: job.location,
+                        }}
                       >
                         Apply Now <ArrowUpRight className="size-3.5 ml-1" />
-                      </a>
+                      </Link>
                     </Button>
                     <span className="text-[11px] text-slate-500 font-medium">Immediate Opening</span>
                   </div>
@@ -1243,9 +1248,16 @@ export function Careers({ full = false }: { full?: boolean }) {
                 asChild
                 className="mt-5 h-11 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 shadow-md"
               >
-                <a href={`mailto:${companyInfo.email}?subject=General%20Application%20-%20TP%20IT%20Group%20LLC`}>
+                <Link
+                  to="/apply"
+                  search={{
+                    role: 'General Application',
+                    dept: 'General',
+                    location: 'Global',
+                  }}
+                >
                   Send General Application <Mail className="size-4 ml-2" />
-                </a>
+                </Link>
               </Button>
             </div>
           </div>
