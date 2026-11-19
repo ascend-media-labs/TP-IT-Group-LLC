@@ -218,26 +218,26 @@ export const services = [
 ];
 
 export const clientLogos = [
-  { name: 'CVS Health', src: '/logos/cvs.jpg' },
-  { name: 'CALVI ELECTRIC', src: '/logos/calvi.jpg' },
-  { name: 'Albertsons', src: '/logos/albertsons_v2.jpg' },
-  { name: 'CHASE', src: '/logos/chase_new.jpg' },
-  { name: 'State Farm', src: '/logos/statefarm.jpg' },
+  { name: 'USAA', src: '/logos/usaa.jpg' },
+  { name: 'Progressive', src: '/logos/progressive.jpg' },
+  { name: 'Liberty Mutual', src: '/logos/liberty_mutual.jpg' },
+  { name: 'United IT Solutions', src: '/logos/united_it.jpg' },
+  { name: 'Navy Federal', src: '/logos/navy_federal.jpg' },
+  { name: 'Miles IT', src: '/logos/miles_it.jpg' },
+  { name: 'CVS Health', src: '/logos/cvs_health.jpg' },
+  { name: 'CALVI ELECTRIC', src: '/logos/calvi_electric.jpg' },
+  { name: 'Albertsons', src: '/logos/albertsons.jpg' },
+  { name: 'CHASE', src: '/logos/chase.svg' },
+  { name: 'State Farm', src: '/logos/state_farm.jpg' },
   { name: 'GEICO', src: '/logos/geico.jpg' },
   { name: 'AAA', src: '/logos/aaa.jpg' },
   { name: 'PENFED', src: '/logos/penfed.jpg' },
-  { name: 'Capital One', src: '/logos/extra2.jpg' },
+  { name: 'Capital One', src: '/logos/capital_one.jpg' },
   { name: 'Mizuho', src: '/logos/mizuho.jpg' },
   { name: 'Synechron', src: '/logos/synechron.jpg' },
-  { name: 'Progressive', src: '/logos/progressive_v2.jpg' },
   { name: 'Persistent', src: '/logos/persistent.jpg' },
-  { name: 'Liberty Mutual', src: '/logos/liberty_mutual.jpg' },
   { name: 'Pennymac', src: '/logos/pennymac.jpg' },
-  { name: 'Navy Federal', src: '/logos/navy_federal.jpg' },
   { name: 'Signify Health', src: '/logos/signify_health.jpg' },
-  { name: 'USAA', src: '/logos/usaa.jpg' },
-  { name: 'United IT', src: '/logos/united_it.jpg' },
-  { name: 'Miles IT', src: '/logos/miles_new.jpg' },
 ];
 
 export const clientPillars = [

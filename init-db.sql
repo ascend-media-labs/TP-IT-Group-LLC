@@ -67,26 +67,26 @@ ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
 
 -- Seed Clients
 INSERT INTO `clients` (`name`, `src`, `category`, `display_order`) VALUES
-('USAA', '/logos/usaa.png', 'Fortune 500', 1),
-('Progressive', '/logos/progressive.png', 'Fortune 500', 2),
-('Liberty Mutual', '/logos/libertymutual.png', 'Fortune 500', 3),
-('United IT Solutions', '/logos/uniteditsolutions.png', 'Enterprise Partner', 4),
-('Navy Federal', '/logos/navyfederal.png', 'Financial Services', 5),
-('Miles IT', '/logos/milesit.png', 'Technology Partner', 6),
-('CVS Health', '/logos/cvshealth.png', 'Healthcare & Retail', 7),
-('Calvi Electric', '/logos/calvielectric.png', 'Engineering & Industrial', 8),
-('Albertsons', '/logos/albertsons.png', 'Retail & Supply Chain', 9),
-('Chase', '/logos/chase.png', 'Banking & Finance', 10),
-('State Farm', '/logos/statefarm.png', 'Insurance & Financial', 11),
-('GEICO', '/logos/geico.png', 'Insurance Services', 12),
-('AAA', '/logos/aaa.png', 'Automotive & Travel', 13),
-('PenFed', '/logos/penfed.png', 'Credit Union & Finance', 14),
-('Capital One', '/logos/capitalone.png', 'Financial Technology', 15),
-('Mizuho', '/logos/mizuho.png', 'Global Investment Banking', 16),
-('Synechron', '/logos/synechron.png', 'Digital Transformation', 17),
-('Persistent', '/logos/persistent.png', 'Digital Engineering', 18),
-('Pennymac', '/logos/pennymac.png', 'Mortgage & Lending', 19),
-('Signify Health', '/logos/signifyhealth.png', 'Healthcare Solutions', 20)
+('USAA', '/logos/usaa.jpg', 'Fortune 500', 1),
+('Progressive', '/logos/progressive.jpg', 'Fortune 500', 2),
+('Liberty Mutual', '/logos/liberty_mutual.jpg', 'Fortune 500', 3),
+('United IT Solutions', '/logos/united_it.jpg', 'Enterprise Partner', 4),
+('Navy Federal', '/logos/navy_federal.jpg', 'Financial Services', 5),
+('Miles IT', '/logos/miles_it.jpg', 'Technology Partner', 6),
+('CVS Health', '/logos/cvs_health.jpg', 'Healthcare & Retail', 7),
+('Calvi Electric', '/logos/calvi_electric.jpg', 'Engineering & Industrial', 8),
+('Albertsons', '/logos/albertsons.jpg', 'Retail & Supply Chain', 9),
+('Chase', '/logos/chase.svg', 'Banking & Finance', 10),
+('State Farm', '/logos/state_farm.jpg', 'Insurance & Financial', 11),
+('GEICO', '/logos/geico.jpg', 'Insurance Services', 12),
+('AAA', '/logos/aaa.jpg', 'Automotive & Travel', 13),
+('PenFed', '/logos/penfed.jpg', 'Credit Union & Finance', 14),
+('Capital One', '/logos/capital_one.jpg', 'Financial Technology', 15),
+('Mizuho', '/logos/mizuho.jpg', 'Global Investment Banking', 16),
+('Synechron', '/logos/synechron.jpg', 'Digital Transformation', 17),
+('Persistent', '/logos/persistent.jpg', 'Digital Engineering', 18),
+('Pennymac', '/logos/pennymac.jpg', 'Mortgage & Lending', 19),
+('Signify Health', '/logos/signify_health.jpg', 'Healthcare Solutions', 20)
 ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
 
 -- Seed Careers Openings
