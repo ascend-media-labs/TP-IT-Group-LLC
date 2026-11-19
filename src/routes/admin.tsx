@@ -22,6 +22,10 @@ import {
   ShieldCheck,
   X,
   Menu,
+  Upload,
+  Image as ImageIcon,
+  Camera,
+  Loader2,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -102,6 +106,8 @@ export function AdminPage() {
 
   const [careerSearch, setCareerSearch] = useState('');
   const [careerStatusFilter, setCareerStatusFilter] = useState('all');
+
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   // Modals state
   const [modalType, setModalType] = useState<'team' | 'client' | 'career' | null>(null);
@@ -291,6 +297,55 @@ export function AdminPage() {
     setModalType(null);
     setEditingItem(null);
     setFormData({});
+    setUploadingImage(false);
+  };
+
+  // Upload image from user's machine to server
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, folder: 'team' | 'logos' = 'team') => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      showNotice('error', 'Image size exceeds 5MB limit. Please upload a smaller photo.');
+      return;
+    }
+
+    setUploadingImage(true);
+    try {
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const base64Data = reader.result as string;
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            filename: file.name,
+            data: base64Data,
+            folder,
+          }),
+        });
+        const data = await res.json();
+        if (data.success && data.url) {
+          if (folder === 'team') {
+            setFormData((prev: any) => ({ ...prev, image: data.url }));
+          } else {
+            setFormData((prev: any) => ({ ...prev, src: data.url }));
+          }
+          showNotice('success', 'Photo uploaded and preview updated!');
+        } else {
+          showNotice('error', data.error || 'Failed to upload photo');
+        }
+        setUploadingImage(false);
+      };
+      reader.onerror = () => {
+        showNotice('error', 'Failed to read file from local disk');
+        setUploadingImage(false);
+      };
+      reader.readAsDataURL(file);
+    } catch (err: any) {
+      showNotice('error', 'Upload error: ' + err.message);
+      setUploadingImage(false);
+    }
   };
 
   // Save Modal
@@ -1158,8 +1213,8 @@ export function AdminPage() {
       {/* -------------------------------------------------------- */}
       {modalType && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
-          <div className="admin-card relative w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl text-slate-900">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-200">
+          <div className="admin-card relative w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl text-slate-900 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-200 sticky top-0 bg-white z-10">
               <h3 className="text-lg font-bold text-slate-900">
                 {editingItem ? 'Edit' : 'Add'}{' '}
                 {modalType === 'team' ? 'Team Member' : modalType === 'client' ? 'Client Partner' : 'Job Opening'}
@@ -1195,6 +1250,105 @@ export function AdminPage() {
                       placeholder="e.g. CEO & Founder"
                     />
                   </div>
+
+                  {/* PROFILE PHOTO UPLOAD / SELECTION SECTION */}
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50/90 p-3.5 space-y-3">
+                    <label className="block font-bold text-slate-800 text-xs flex items-center justify-between">
+                      <span className="flex items-center gap-1.5">
+                        <Camera className="size-3.5 text-[#d7192a]" /> Profile Photo / Avatar
+                      </span>
+                      <span className="text-[11px] font-normal text-slate-500">
+                        PNG, JPG, WebP up to 5MB
+                      </span>
+                    </label>
+
+                    {/* Preview + File Upload Input */}
+                    <div className="flex items-center gap-3.5">
+                      <div className="relative size-16 shrink-0 rounded-2xl overflow-hidden border-2 border-slate-200 bg-white shadow-xs">
+                        <img
+                          src={formData.image || '/team/karthik.jpg'}
+                          alt="Profile Preview"
+                          className="h-full w-full object-cover"
+                          onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).src = '/team/karthik.jpg';
+                          }}
+                        />
+                        {uploadingImage && (
+                          <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                            <Loader2 className="size-5 text-white animate-spin" />
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="flex-1 space-y-1.5">
+                        <label className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs cursor-pointer shadow-xs transition active:scale-98">
+                          {uploadingImage ? (
+                            <>
+                              <Loader2 className="size-3.5 animate-spin" />
+                              <span>Uploading...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Upload className="size-3.5" />
+                              <span>Upload Photo from Device</span>
+                            </>
+                          )}
+                          <input
+                            type="file"
+                            accept="image/*"
+                            disabled={uploadingImage}
+                            onChange={(e) => handleFileUpload(e, 'team')}
+                            className="hidden"
+                          />
+                        </label>
+                        <p className="text-[11px] text-slate-500">
+                          Upload image directly, or choose from presets below
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Quick Avatar Presets */}
+                    <div>
+                      <span className="text-[11px] font-semibold text-slate-600 block mb-1.5">
+                        Or select standard avatar:
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {[
+                          { name: 'Karthik', src: '/team/karthik.jpg' },
+                          { name: 'Gayathri', src: '/team/gayathri.jpg' },
+                          { name: 'Lakshmi', src: '/team/lakshmi.jpg' },
+                          { name: 'Sai Deepa', src: '/team/sai-deepa.jpg' },
+                          { name: 'Vijayan', src: '/team/vijayan.jpg' },
+                        ].map((av) => (
+                          <button
+                            key={av.src}
+                            type="button"
+                            onClick={() => setFormData({ ...formData, image: av.src })}
+                            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-xl border text-[11px] font-medium transition cursor-pointer ${
+                              formData.image === av.src
+                                ? 'border-[#d7192a] bg-red-50 text-[#d7192a] font-bold ring-1 ring-[#d7192a]'
+                                : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
+                            }`}
+                          >
+                            <img src={av.src} alt={av.name} className="size-4 rounded-full object-cover" />
+                            <span>{av.name}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Image URL text fallback */}
+                    <div>
+                      <input
+                        type="text"
+                        value={formData.image || ''}
+                        onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                        className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3 py-1.5 text-[11px] text-slate-700 font-mono placeholder:text-slate-400"
+                        placeholder="Image URL or path (e.g. /team/myphoto.jpg)"
+                      />
+                    </div>
+                  </div>
+
                   <div>
                     <label className="block font-bold text-slate-700 mb-1">Department</label>
                     <input
@@ -1251,15 +1405,69 @@ export function AdminPage() {
                       placeholder="e.g. USAA, Progressive, Chase"
                     />
                   </div>
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">Logo Image Path / URL</label>
+
+                  {/* CLIENT LOGO UPLOAD SECTION */}
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50/90 p-3.5 space-y-3">
+                    <label className="block font-bold text-slate-800 text-xs flex items-center justify-between">
+                      <span className="flex items-center gap-1.5">
+                        <ImageIcon className="size-3.5 text-[#d7192a]" /> Partner Company Logo
+                      </span>
+                      <span className="text-[11px] font-normal text-slate-500">
+                        PNG, JPG, SVG, WebP up to 5MB
+                      </span>
+                    </label>
+
+                    <div className="flex items-center gap-3.5">
+                      <div className="relative h-14 w-24 shrink-0 rounded-xl border border-slate-200 bg-white p-2 shadow-xs flex items-center justify-center">
+                        <img
+                          src={formData.src || '/logos/usaa.jpg'}
+                          alt="Logo Preview"
+                          className="max-h-10 max-w-full object-contain"
+                          onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).src = '/logos/usaa.jpg';
+                          }}
+                        />
+                        {uploadingImage && (
+                          <div className="absolute inset-0 bg-black/60 rounded-xl flex items-center justify-center">
+                            <Loader2 className="size-4 text-white animate-spin" />
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="flex-1 space-y-1.5">
+                        <label className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs cursor-pointer shadow-xs transition active:scale-98">
+                          {uploadingImage ? (
+                            <>
+                              <Loader2 className="size-3.5 animate-spin" />
+                              <span>Uploading...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Upload className="size-3.5" />
+                              <span>Upload Logo from Device</span>
+                            </>
+                          )}
+                          <input
+                            type="file"
+                            accept="image/*"
+                            disabled={uploadingImage}
+                            onChange={(e) => handleFileUpload(e, 'logos')}
+                            className="hidden"
+                          />
+                        </label>
+                        <p className="text-[11px] text-slate-500">
+                          Upload logo file directly, or enter path below
+                        </p>
+                      </div>
+                    </div>
+
                     <input
                       required
                       type="text"
                       value={formData.src || ''}
                       onChange={(e) => setFormData({ ...formData, src: e.target.value })}
-                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 placeholder:text-slate-400 font-medium"
-                      placeholder="/logos/usaa.png"
+                      className="admin-input w-full rounded-xl border border-slate-300 bg-white px-3 py-1.5 text-[11px] text-slate-700 font-mono placeholder:text-slate-400"
+                      placeholder="Logo path (e.g. /logos/mycompany.png)"
                     />
                   </div>
                   <div>

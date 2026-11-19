@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { query, checkDbHealth } from './db.ts';
 import { ensureDatabaseAndSchema, createDynamicTable, TABLE_SCHEMAS } from './db-schema.ts';
 
@@ -141,6 +143,63 @@ export async function handleApiRoute(
         status: result.success ? 201 : 400,
         data: result,
       };
+    }
+
+    // =================================================================
+    // 3.5. FILE & PROFILE PHOTO UPLOAD (Team & Clients)
+    // =================================================================
+    if (pathname === '/api/upload' && method === 'POST') {
+      const { filename, data: rawData, folder = 'team' } = body || {};
+      if (!rawData) {
+        return { status: 400, data: { success: false, error: 'No image data provided for upload' } };
+      }
+
+      try {
+        const matches = String(rawData).match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+        const base64Str = matches ? matches[2] : String(rawData);
+        const buffer = Buffer.from(base64Str, 'base64');
+
+        let ext = '.jpg';
+        if (matches && matches[1]) {
+          const mime = matches[1].toLowerCase();
+          if (mime.includes('png')) ext = '.png';
+          else if (mime.includes('webp')) ext = '.webp';
+          else if (mime.includes('svg')) ext = '.svg';
+          else if (mime.includes('gif')) ext = '.gif';
+        } else if (filename && path.extname(filename)) {
+          ext = path.extname(filename).toLowerCase();
+        }
+
+        const safeFolder = folder === 'logos' ? 'logos' : 'team';
+        const cleanName = (filename ? path.basename(filename, path.extname(filename)) : 'profile')
+          .replace(/[^a-zA-Z0-9_-]/g, '_')
+          .slice(0, 30);
+        const uniqueFilename = `${cleanName}_${Date.now()}${ext}`;
+
+        const targetDir = path.resolve(process.cwd(), 'public', safeFolder);
+        if (!fs.existsSync(targetDir)) {
+          fs.mkdirSync(targetDir, { recursive: true });
+        }
+
+        const fullPath = path.join(targetDir, uniqueFilename);
+        fs.writeFileSync(fullPath, buffer);
+
+        const publicUrl = `/${safeFolder}/${uniqueFilename}`;
+        return {
+          status: 200,
+          data: {
+            success: true,
+            url: publicUrl,
+            filename: uniqueFilename,
+          },
+        };
+      } catch (uploadErr: any) {
+        console.error('File upload error:', uploadErr);
+        return {
+          status: 500,
+          data: { success: false, error: uploadErr.message || 'Failed to save image file' },
+        };
+      }
     }
 
     // =================================================================
