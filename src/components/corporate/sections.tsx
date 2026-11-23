@@ -110,23 +110,23 @@ export function Navbar() {
     <>
       <ScrollProgress />
       <header className="site-header bg-white/80 backdrop-blur-xl">
-        <div className="w-full h-full px-4 sm:px-6 lg:px-8 xl:px-12 grid grid-cols-2 lg:grid-cols-[1fr_auto_1fr] items-center">
+        <div className="relative w-full h-full px-4 sm:px-6 lg:px-6 xl:px-10 flex items-center justify-between">
           {/* Left: Brand Logo */}
-          <div className="flex items-center justify-start min-w-0">
+          <div className="flex items-center justify-start shrink-0 z-10">
             <Link
               to="/"
               className="brand-name flex items-center transition-opacity hover:opacity-90 shrink-0"
               onClick={() => setOpen(false)}
               aria-label="TP iT GROUP LLC Home"
             >
-              <TPITLogo className="h-6 sm:h-7 md:h-8 max-w-[180px] sm:max-w-[220px] md:max-w-[260px] w-auto shrink-0" />
+              <TPITLogo className="h-6 sm:h-6.5 xl:h-7.5 max-w-[190px] xl:max-w-[230px] w-auto shrink-0" />
             </Link>
           </div>
 
-          {/* Center: Navigation Links centered in cohesive capsule pill */}
+          {/* Center: True Centered Navigation Links Capsule */}
           <nav
             aria-label="Main navigation"
-            className="hidden lg:flex items-center justify-center p-1 rounded-full bg-slate-100/80 border border-slate-200/80 shadow-[inset_0_1px_2px_rgba(0,0,0,0.03)] backdrop-blur-md gap-0.5 xl:gap-1.5"
+            className="hidden lg:flex items-center justify-center p-1 rounded-full bg-slate-100/80 border border-slate-200/80 shadow-[inset_0_1px_2px_rgba(0,0,0,0.03)] backdrop-blur-md gap-0.5 xl:gap-1.5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto"
           >
             {nav.map((item) => (
               <Link
@@ -142,7 +142,7 @@ export function Navbar() {
           </nav>
 
           {/* Right: Action Button & Mobile Toggle */}
-          <div className="flex items-center justify-end shrink-0 gap-2">
+          <div className="flex items-center justify-end shrink-0 gap-2 z-10">
             <Button
               asChild
               className="hidden lg:inline-flex h-9 xl:h-10 rounded-full bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] px-4 xl:px-5 text-xs xl:text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 items-center gap-1.5 shrink-0 whitespace-nowrap"
