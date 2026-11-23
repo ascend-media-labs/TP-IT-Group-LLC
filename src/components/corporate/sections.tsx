@@ -1488,21 +1488,6 @@ export function Careers({ full = false }: { full?: boolean }) {
             </div>
           </div>
 
-          {/* Department Filter */}
-          <div id="open-roles" className="flex flex-wrap gap-1.5">
-            {departments.map((dept) => (
-              <button
-                key={dept}
-                onClick={() => setSelectedDept(dept)}
-                className={`rounded-xl px-3.5 py-1.5 text-xs font-semibold transition ${selectedDept === dept
-                  ? 'border border-[#d7192a] bg-[#d7192a] text-white shadow-xs'
-                  : 'border border-slate-200/90 bg-white text-slate-600 hover:border-red-200 hover:text-[#d7192a]'
-                  }`}
-              >
-                {dept}
-              </button>
-            ))}
-          </div>
 
           {/* Job Openings Grid - 3 Column Layout matching Image 2 */}
           {filteredJobs.length === 0 ? (
