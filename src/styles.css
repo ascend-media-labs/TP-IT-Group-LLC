@@ -148,7 +148,7 @@ html {
   font-size: 12px;
   font-weight: 500;
   position: relative;
-  padding: 5px 9.5px;
+  padding: 5px 10.5px;
   color: #475569;
   background: transparent;
   border-radius: 9999px;
@@ -164,7 +164,7 @@ html {
 @media (min-width: 1280px) {
   .nav-link {
     font-size: 13px;
-    padding: 6px 12px;
+    padding: 6px 13px;
   }
 }
 

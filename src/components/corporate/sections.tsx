@@ -112,9 +112,9 @@ export function Navbar() {
     <>
       <ScrollProgress />
       <header className="site-header bg-white/80 backdrop-blur-xl">
-        <div className="relative w-full h-full px-4 sm:px-6 lg:px-6 xl:px-10 flex items-center justify-between">
-          {/* Left: Brand Logo */}
-          <div className="flex items-center justify-start shrink-0 z-10">
+        <div className="w-full h-full px-4 sm:px-6 lg:px-6 xl:px-10 flex items-center justify-between">
+          {/* Left: Brand Logo - Equalized symmetric width */}
+          <div className="flex items-center justify-start shrink-0 min-w-[180px] lg:min-w-[210px] xl:min-w-[250px] z-10">
             <Link
               to="/"
               className="brand-name flex items-center transition-opacity hover:opacity-90 shrink-0"
@@ -125,7 +125,7 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Center: Centered Navigation Links Capsule - Perfectly balanced between Logo & Action button */}
+          {/* Center: Perfectly Centered & Justified Navigation Capsule */}
           <div className="hidden lg:flex flex-1 items-center justify-center px-2 xl:px-4 z-20">
             <nav
               aria-label="Main navigation"
@@ -145,8 +145,8 @@ export function Navbar() {
             </nav>
           </div>
 
-          {/* Right: Action Button & Mobile Toggle */}
-          <div className="flex items-center justify-end shrink-0 gap-2 z-10">
+          {/* Right: Action Button & Mobile Toggle - Equalized symmetric width matching Left */}
+          <div className="flex items-center justify-end shrink-0 min-w-[180px] lg:min-w-[210px] xl:min-w-[250px] gap-2 z-10">
             <Button
               asChild
               className="hidden lg:inline-flex h-9 xl:h-10 rounded-full bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] px-4 xl:px-5 text-xs xl:text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 items-center gap-1.5 shrink-0 whitespace-nowrap"
