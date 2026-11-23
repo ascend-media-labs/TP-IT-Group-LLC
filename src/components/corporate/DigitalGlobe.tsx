@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { MapPin, Globe, Activity, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Activity, ArrowRight } from 'lucide-react';
 
 interface LocationNode {
   id: string;
   name: string;
   country: string;
+  countryCode: string;
   flag: string;
   city: string;
   role: string;
@@ -21,40 +22,43 @@ const LOCATIONS: LocationNode[] = [
     id: 'usa',
     name: 'TP IT GROUP LLC',
     country: 'USA',
+    countryCode: 'US',
     flag: '🇺🇸',
     city: 'Wilmington, Delaware',
     role: 'Global Headquarters',
     address: '1000 N. West Street, Suite 1200, Wilmington, DE 19801, USA',
     contact: 'HQ Management & Delivery',
     color: '#d7192a', // Brand red
-    x: 0.18,
-    y: 0.68,
+    x: 0.22,
+    y: 0.74,
   },
   {
     id: 'canada',
     name: 'TP IT Group',
     country: 'Canada',
+    countryCode: 'CA',
     flag: '🇨🇦',
     city: 'Ontario, Canada',
     role: 'Delivery & Operations Hub',
     address: 'Ontario, Canada',
     contact: '+1 (814) 844-1362',
     color: '#dc2626',
-    x: 0.36,
-    y: 0.22,
+    x: 0.38,
+    y: 0.25,
   },
   {
     id: 'india',
     name: 'TP IT GROUP PVT LTD',
     country: 'India',
+    countryCode: 'IN',
     flag: '🇮🇳',
     city: 'Hyderabad, Telangana',
     role: 'Corporate & Tech Center',
     address: '13th Floor, Manjeera Trinity Corporate, KPHB Phase 3, Kukatpally, Hyderabad 500072',
     contact: 'Core Engineering & 24/7 Operations',
     color: '#0284c7', // Cyan/Blue accent
-    x: 0.82,
-    y: 0.54,
+    x: 0.76,
+    y: 0.52,
   },
 ];
 
@@ -68,7 +72,6 @@ const LOOP_EDGES: [number, number][] = [
 export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[370px] lg:h-[390px]' }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [activeNode, setActiveNode] = useState<LocationNode | null>(null);
   const [activeSegment, setActiveSegment] = useState<number>(0);
 
   useEffect(() => {
@@ -98,20 +101,18 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
 
     // Compute curve points between two nodes
     const getCurve = (p1: { x: number; y: number }, p2: { x: number; y: number }, index: number) => {
-      // Create geodesic-like gentle bezier curvature
       let ctrlX = (p1.x + p2.x) / 2;
       let ctrlY = (p1.y + p2.y) / 2;
 
       if (index === 0) {
-        // USA -> Canada (Northward slope)
-        ctrlX -= 18;
-        ctrlY -= 15;
+        // USA -> Canada (Northward slope, slight curve to west)
+        ctrlX -= 16;
       } else if (index === 1) {
         // Canada -> India (Transcontinental arch over Eurasia)
-        ctrlY -= height * 0.16;
+        ctrlY -= height * 0.12;
       } else if (index === 2) {
-        // India -> USA (Return southern loop across Indian/Atlantic oceans)
-        ctrlY += height * 0.15;
+        // India -> USA (Return loop across oceans)
+        ctrlY += height * 0.14;
       }
 
       return { p1, p2, ctrl: { x: ctrlX, y: ctrlY } };
@@ -146,9 +147,9 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
 
       // Calculate curves for each edge
       const curves = LOOP_EDGES.map(([startIdx, endIdx], i) => {
-        const start = { x: nodes[startIdx].px, y: nodes[endIdx === 0 ? 0 : startIdx].py };
+        const start = { x: nodes[startIdx].px, y: nodes[startIdx].py };
         const end = { x: nodes[endIdx].px, y: nodes[endIdx].py };
-        return getCurve({ x: nodes[startIdx].px, y: nodes[startIdx].py }, end, i);
+        return getCurve(start, end, i);
       });
 
       // 1. Draw subtle ambient radar grid & concentric circles centered in the triangle
@@ -157,8 +158,8 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
 
       // Ambient radial gradient behind triangle
       const ambientGlow = ctx.createRadialGradient(triCenterX, triCenterY, 20, triCenterX, triCenterY, Math.min(width, height) * 0.55);
-      ambientGlow.addColorStop(0, 'rgba(215, 25, 42, 0.08)');
-      ambientGlow.addColorStop(0.5, 'rgba(2, 132, 199, 0.04)');
+      ambientGlow.addColorStop(0, 'rgba(215, 25, 42, 0.07)');
+      ambientGlow.addColorStop(0.5, 'rgba(2, 132, 199, 0.03)');
       ambientGlow.addColorStop(1, 'rgba(255, 255, 255, 0)');
       ctx.fillStyle = ambientGlow;
       ctx.beginPath();
@@ -166,7 +167,7 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
       ctx.fill();
 
       // Subtle radar circles
-      [0.2, 0.35, 0.5].forEach((radiusFactor) => {
+      [0.25, 0.42, 0.55].forEach((radiusFactor) => {
         ctx.strokeStyle = 'rgba(215, 25, 42, 0.08)';
         ctx.lineWidth = 1;
         ctx.setLineDash([4, 6]);
@@ -183,23 +184,23 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
       ctx.quadraticCurveTo(curves[1].ctrl.x, curves[1].ctrl.y, nodes[2].px, nodes[2].py);
       ctx.quadraticCurveTo(curves[2].ctrl.x, curves[2].ctrl.y, nodes[0].px, nodes[0].py);
       ctx.closePath();
-      const areaGlow = ctx.createRadialGradient(triCenterX, triCenterY, 10, triCenterX, triCenterY, 200);
-      areaGlow.addColorStop(0, 'rgba(215, 25, 42, 0.04)');
+      const areaGlow = ctx.createRadialGradient(triCenterX, triCenterY, 10, triCenterX, triCenterY, 180);
+      areaGlow.addColorStop(0, 'rgba(215, 25, 42, 0.03)');
       areaGlow.addColorStop(1, 'rgba(2, 132, 199, 0.01)');
       ctx.fillStyle = areaGlow;
       ctx.fill();
 
-      // 2. Draw Triangle Base Path (Subtle glowing static track)
+      // 2. Draw Triangle Base Path (Connecting line track)
       curves.forEach((c) => {
         // Outer soft glow
-        ctx.strokeStyle = 'rgba(215, 25, 42, 0.15)';
+        ctx.strokeStyle = 'rgba(215, 25, 42, 0.12)';
         ctx.lineWidth = 4;
         ctx.beginPath();
         ctx.moveTo(c.p1.x, c.p1.y);
         ctx.quadraticCurveTo(c.ctrl.x, c.ctrl.y, c.p2.x, c.p2.y);
         ctx.stroke();
 
-        // Inner precise line
+        // Inner dashed line
         ctx.strokeStyle = 'rgba(215, 25, 42, 0.45)';
         ctx.lineWidth = 1.5;
         ctx.setLineDash([6, 5]);
@@ -211,8 +212,7 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
       });
 
       // 3. Draw Moving Loop Packets (US -> CANADA -> INDIA -> US in continuous loop)
-      // Total loop consists of 3 segments. Continuous parameter loopProgress in [0, 3)
-      const numPackets = 6; // Multiple packets along the continuous loop
+      const numPackets = 6;
       for (let p = 0; p < numPackets; p++) {
         const offset = (p / numPackets) * 3;
         const totalProgress = (time * 1.2 + offset) % 3;
@@ -225,7 +225,7 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
         // Current packet head position
         const head = getBezierPoint(currentCurve.p1, currentCurve.ctrl, currentCurve.p2, t);
 
-        // Compute tail positions for motion blur / laser streak
+        // Motion trail streak
         const tailSegments = 8;
         ctx.beginPath();
         ctx.moveTo(head.x, head.y);
@@ -238,10 +238,9 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
           }
         }
 
-        // Streak styling
         const isHeadHq = segmentIndex === 0;
         const streakColor = isHeadHq ? 'rgba(215, 25, 42, ' : 'rgba(2, 132, 199, ';
-        ctx.strokeStyle = streakColor + '0.7)';
+        ctx.strokeStyle = streakColor + '0.75)';
         ctx.lineWidth = 2.5;
         ctx.stroke();
 
@@ -265,44 +264,22 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
       const activeSeg = Math.floor((time * 1.2) % 3);
       setActiveSegment(activeSeg);
 
-      // 4. Draw Node Sonar Waves & Glowing Rings on Canvas
+      // 4. Draw Node Sonar Radar Rings behind each card
       nodes.forEach((node, idx) => {
-        const pulsePhase = (time * 2.5 + idx * 1.2) % (Math.PI * 2);
-        const waveProgress = (Math.sin(pulsePhase) + 1) / 2;
+        const pulsePhase = (time * 2.2 + idx * 1.2) % (Math.PI * 2);
 
-        // Expanding radar rings
-        [0.8, 1.6, 2.4].forEach((factor) => {
-          const ringRadius = 10 + ((pulsePhase * 7 * factor) % 24);
-          const ringAlpha = Math.max(0, 1 - ringRadius / 32);
+        // Expanding radar rings radiating outward from the card position
+        [1, 1.8].forEach((factor) => {
+          const ringRadius = 24 + ((pulsePhase * 9 * factor) % 36);
+          const ringAlpha = Math.max(0, 1 - ringRadius / 50);
           ctx.strokeStyle = node.color === '#d7192a'
-            ? `rgba(215, 25, 42, ${ringAlpha * 0.45})`
-            : `rgba(2, 132, 199, ${ringAlpha * 0.45})`;
+            ? `rgba(215, 25, 42, ${ringAlpha * 0.35})`
+            : `rgba(2, 132, 199, ${ringAlpha * 0.35})`;
           ctx.lineWidth = 1.2;
           ctx.beginPath();
           ctx.arc(node.px, node.py, ringRadius, 0, Math.PI * 2);
           ctx.stroke();
         });
-
-        // Outer glow circle
-        ctx.fillStyle = node.color === '#d7192a' ? 'rgba(215, 25, 42, 0.16)' : 'rgba(2, 132, 199, 0.16)';
-        ctx.beginPath();
-        ctx.arc(node.px, node.py, 12 + waveProgress * 2, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Solid inner pin
-        ctx.fillStyle = node.color;
-        ctx.shadowColor = node.color;
-        ctx.shadowBlur = 12;
-        ctx.beginPath();
-        ctx.arc(node.px, node.py, 5.5, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-
-        // Center white beacon
-        ctx.fillStyle = '#ffffff';
-        ctx.beginPath();
-        ctx.arc(node.px, node.py, 2.2, 0, Math.PI * 2);
-        ctx.fill();
       });
 
       animId = requestAnimationFrame(render);
@@ -325,7 +302,7 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full block pointer-events-none z-0" />
 
       {/* Top HUD: Real-time Route Loop Indicator */}
-      <div className="absolute top-2 left-3 sm:left-4 z-20 flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/90 px-3 py-1 shadow-sm backdrop-blur-md">
+      <div className="absolute top-2 left-3 sm:left-4 z-20 flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 shadow-sm backdrop-blur-md pointer-events-none">
         <span className="relative flex h-2 w-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
           <span className="relative inline-flex rounded-full h-2 w-2 bg-[#d7192a]" />
@@ -337,19 +314,18 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
           <ArrowRight className="size-3 text-red-500 animate-pulse" />
           <span className={activeSegment === 2 ? 'text-[#d7192a] font-extrabold underline' : 'text-slate-600'}>INDIA</span>
           <ArrowRight className="size-3 text-red-500 animate-pulse" />
-          <span className="text-slate-400 text-[9px] uppercase font-semibold">Loop</span>
+          <span className="text-slate-400 text-[9px] uppercase font-semibold">LOOP</span>
         </span>
       </div>
 
       {/* Tri-Regional Delivery Stats Pill (Top Right) */}
-      <div className="absolute top-2 right-3 sm:right-4 z-20 hidden xs:flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-50/90 px-2.5 py-1 text-[10px] font-semibold text-emerald-700 shadow-sm backdrop-blur-md">
+      <div className="absolute top-2 right-3 sm:right-4 z-20 hidden xs:flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-50/95 px-2.5 py-1 text-[10px] font-semibold text-emerald-700 shadow-sm backdrop-blur-md pointer-events-none">
         <Activity className="size-3 text-emerald-600 animate-pulse" />
         <span>Live 24/7 Delivery Sync</span>
       </div>
 
-      {/* HTML Interactive Node Pins & Glass Badges */}
+      {/* Location Cards placed directly at their triangle points (NO zoom, NO mouseover jump) */}
       {LOCATIONS.map((loc) => {
-        const isHovered = activeNode?.id === loc.id;
         return (
           <div
             key={loc.id}
@@ -357,66 +333,31 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
               left: `${loc.x * 100}%`,
               top: `${loc.y * 100}%`,
             }}
-            className="absolute z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
-            onMouseEnter={() => setActiveNode(loc)}
-            onMouseLeave={() => setActiveNode(null)}
-            onClick={() => setActiveNode(activeNode?.id === loc.id ? null : loc)}
+            className="absolute z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
           >
-            {/* Clickable Radar Anchor Target */}
-            <button
-              type="button"
-              className="relative group p-2 cursor-pointer focus:outline-none"
-              aria-label={`${loc.country} - ${loc.city}`}
-            >
-              <span className="sr-only">{loc.country}</span>
-              {/* Tooltip Badge */}
-              <div
-                className={`transition-all duration-300 ease-out whitespace-nowrap rounded-xl border shadow-lg backdrop-blur-md p-2 text-left ${
-                  loc.id === 'usa'
-                    ? 'origin-bottom-left translate-y-3 sm:translate-y-4 -translate-x-4'
-                    : loc.id === 'canada'
-                    ? 'origin-top translate-y-4 -translate-x-1/2'
-                    : 'origin-bottom-right -translate-y-14 sm:-translate-y-16 -translate-x-32 sm:-translate-x-28'
-                } ${
-                  isHovered
-                    ? 'scale-105 ring-2 ring-red-500/40 bg-white/95 border-red-300 z-30'
-                    : 'bg-white/85 border-slate-200/90 hover:bg-white/95 hover:border-slate-300'
-                }`}
-              >
-                <div className="flex items-center gap-1.5">
-                  <span className="text-sm select-none">{loc.flag}</span>
-                  <span className="text-[11px] sm:text-xs font-bold text-slate-900 tracking-tight flex items-center gap-1">
-                    {loc.country}
-                    <span className="inline-block size-1.5 rounded-full bg-emerald-500" />
-                  </span>
-                </div>
-                <div className="text-[10px] font-semibold text-slate-700 leading-tight mt-0.5">
-                  {loc.city}
-                </div>
-                <div className="text-[9px] font-medium text-slate-500 leading-tight">
-                  {loc.role}
-                </div>
-
-                {/* Expanded details on hover / active */}
-                {isHovered && (
-                  <div className="mt-1.5 pt-1.5 border-t border-slate-100 text-[9px] text-slate-600 max-w-[200px] leading-snug">
-                    <div className="font-semibold text-red-600">{loc.name}</div>
-                    <div className="text-slate-500 text-[8.5px] truncate">{loc.address}</div>
-                    {loc.contact && (
-                      <div className="text-slate-700 font-medium text-[8.5px] mt-0.5 flex items-center gap-1">
-                        <CheckCircle2 className="size-2.5 text-emerald-600" />
-                        {loc.contact}
-                      </div>
-                    )}
-                  </div>
-                )}
+            <div className="rounded-xl border border-slate-200/90 bg-white/95 px-3 py-2 shadow-md backdrop-blur-md text-left min-w-[130px] sm:min-w-[145px]">
+              <div className="flex items-center gap-1.5">
+                <span className="inline-flex items-center justify-center px-1.5 py-0.5 rounded text-[9.5px] font-black tracking-wide bg-slate-900 text-white font-mono">
+                  {loc.countryCode}
+                </span>
+                <span className="text-[11px] sm:text-xs font-bold text-slate-900 tracking-tight">
+                  {loc.country}
+                </span>
+                <span className="relative flex h-2 w-2 ml-auto">
+                  <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${loc.id === 'india' ? 'bg-sky-400' : 'bg-red-400'}`} />
+                  <span className={`relative inline-flex rounded-full h-2 w-2 ${loc.id === 'india' ? 'bg-[#0284c7]' : 'bg-[#d7192a]'}`} />
+                </span>
               </div>
-            </button>
+              <div className="text-[10px] font-semibold text-slate-700 leading-tight mt-0.5 whitespace-nowrap">
+                {loc.city}
+              </div>
+              <div className="text-[9px] font-medium text-slate-500 leading-tight whitespace-nowrap">
+                {loc.role}
+              </div>
+            </div>
           </div>
         );
       })}
-
-
     </div>
   );
 }
