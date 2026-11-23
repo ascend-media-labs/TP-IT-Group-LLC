@@ -30,9 +30,9 @@ export function HeroVideoBanner({ className = '' }: { className?: string }) {
         <div className="relative w-full rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-gradient-to-br from-white via-slate-50/50 to-red-50/25 p-4 sm:p-6 lg:p-8 shadow-[0_4px_30px_rgba(0,0,0,0.04)]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-center">
             
-            {/* Left Column: Prominent Vertical Video with Sleek Border & Controls */}
+            {/* Left Column: Vertical Video locked to exact 9:16 original aspect ratio */}
             <div className="lg:col-span-5 xl:col-span-4 flex justify-center">
-              <div className="relative w-full max-w-[280px] xs:max-w-[310px] sm:max-w-[340px] lg:max-w-[340px] xl:max-w-[370px] aspect-[9/16] max-h-[min(640px,78vh)] rounded-2xl overflow-hidden border-2 border-slate-300 shadow-xl bg-black group shrink-0">
+              <div className="relative w-[260px] xs:w-[285px] sm:w-[310px] lg:w-[320px] xl:w-[340px] aspect-[9/16] rounded-2xl overflow-hidden border-2 border-slate-300 shadow-xl bg-black group shrink-0">
                 <video
                   ref={videoRef}
                   src="/videos/TP_IT_video.mp4"
@@ -41,7 +41,7 @@ export function HeroVideoBanner({ className = '' }: { className?: string }) {
                   muted={isMuted}
                   playsInline
                   controls
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
 
                 {/* Top-Left Live Badge */}
