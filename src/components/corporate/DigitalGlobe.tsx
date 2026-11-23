@@ -1,344 +1,426 @@
 import { useEffect, useRef, useState } from 'react';
+import { MapPin, Globe, Activity, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
-interface Hub {
+interface LocationNode {
+  id: string;
   name: string;
-  lat: number;
-  lon: number;
-  type: 'headquarters' | 'hub';
+  country: string;
+  flag: string;
+  city: string;
+  role: string;
+  address: string;
+  contact?: string;
+  color: string;
+  // Normalized coordinates (0..1)
+  x: number;
+  y: number;
 }
 
-const HUBS: Hub[] = [
-  { name: 'USA Head Office (Wilmington)', lat: 39.74, lon: -75.54, type: 'headquarters' },
-  { name: 'New York Operations', lat: 40.71, lon: -74.0, type: 'hub' },
-  { name: 'London UK Hub', lat: 51.5, lon: -0.12, type: 'hub' },
-  { name: 'India Tech Center (Pune)', lat: 18.52, lon: 73.85, type: 'hub' },
-  { name: 'Australia APAC (Sydney)', lat: -33.86, lon: 151.2, type: 'hub' },
-  { name: 'Canada Delivery (Toronto)', lat: 43.65, lon: -79.38, type: 'hub' },
+const LOCATIONS: LocationNode[] = [
+  {
+    id: 'usa',
+    name: 'TP IT GROUP LLC',
+    country: 'USA',
+    flag: '🇺🇸',
+    city: 'Wilmington, Delaware',
+    role: 'Global Headquarters',
+    address: '1000 N. West Street, Suite 1200, Wilmington, DE 19801, USA',
+    contact: 'HQ Management & Delivery',
+    color: '#d7192a', // Brand red
+    x: 0.18,
+    y: 0.68,
+  },
+  {
+    id: 'canada',
+    name: 'TP IT Group',
+    country: 'Canada',
+    flag: '🇨🇦',
+    city: 'Ontario, Canada',
+    role: 'Delivery & Operations Hub',
+    address: 'Ontario, Canada',
+    contact: '+1 (814) 844-1362',
+    color: '#dc2626',
+    x: 0.36,
+    y: 0.22,
+  },
+  {
+    id: 'india',
+    name: 'TP IT GROUP PVT LTD',
+    country: 'India',
+    flag: '🇮🇳',
+    city: 'Hyderabad, Telangana',
+    role: 'Corporate & Tech Center',
+    address: '13th Floor, Manjeera Trinity Corporate, KPHB Phase 3, Kukatpally, Hyderabad 500072',
+    contact: 'Core Engineering & 24/7 Operations',
+    color: '#0284c7', // Cyan/Blue accent
+    x: 0.82,
+    y: 0.54,
+  },
 ];
 
-const CONNECTIONS: [number, number][] = [
-  [0, 1], // Wilmington -> NY
-  [0, 2], // Wilmington -> London
-  [0, 3], // Wilmington -> Pune
-  [0, 5], // Wilmington -> Toronto
-  [2, 3], // London -> Pune
-  [3, 4], // Pune -> Sydney
+// Loop sequence: USA (0) -> Canada (1) -> India (2) -> USA (0)
+const LOOP_EDGES: [number, number][] = [
+  [0, 1], // USA -> Canada
+  [1, 2], // Canada -> India
+  [2, 0], // India -> USA
 ];
 
-export function DigitalGlobe({ className = 'w-full h-[380px] sm:h-[450px] md:h-[500px]' }: { className?: string }) {
+export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[370px] lg:h-[390px]' }: { className?: string }) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [activeHub, setActiveHub] = useState<string | null>(null);
+  const [activeNode, setActiveNode] = useState<LocationNode | null>(null);
+  const [activeSegment, setActiveSegment] = useState<number>(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     let animId: number;
-    let width = (canvas.width = canvas.parentElement?.clientWidth || 600);
-    let height = (canvas.height = canvas.parentElement?.clientHeight || 600);
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    ctx.scale(dpr, dpr);
+    let width = 0;
+    let height = 0;
 
-    let rotationY = 0.5;
-    let rotationX = 0.25;
-    let targetRotationY = 0.5;
-    let targetRotationX = 0.25;
-    let isDragging = false;
-    let startX = 0;
-    let startY = 0;
-
-    // Generate points on sphere
-    const points: { x: number; y: number; z: number; isLand?: boolean }[] = [];
-    const count = 480;
-    const radius = Math.min(width, height) * 0.36;
-
-    for (let i = 0; i < count; i++) {
-      const phi = Math.acos(-1 + (2 * i) / count);
-      const theta = Math.sqrt(count * Math.PI) * phi;
-      points.push({
-        x: radius * Math.cos(theta) * Math.sin(phi),
-        y: radius * Math.cos(phi),
-        z: radius * Math.sin(theta) * Math.sin(phi),
-      });
-    }
-
-    function latLonToXYZ(lat: number, lon: number, r: number) {
-      const phi = (90 - lat) * (Math.PI / 180);
-      const theta = (lon + 180) * (Math.PI / 180);
-      return {
-        x: -(r * Math.sin(phi) * Math.cos(theta)),
-        y: r * Math.cos(phi),
-        z: r * Math.sin(phi) * Math.sin(theta),
-      };
-    }
-
-    // Resize handler
-    const handleResize = () => {
-      if (!canvas || !canvas.parentElement) return;
-      width = canvas.width = canvas.parentElement.clientWidth;
-      height = canvas.height = canvas.parentElement.clientHeight;
+    const resize = () => {
+      const rect = container.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = width * dpr;
       canvas.height = height * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     };
-    window.addEventListener('resize', handleResize);
 
-    // Mouse / Touch interaction
-    const onMouseDown = (e: MouseEvent) => {
-      isDragging = true;
-      startX = e.clientX;
-      startY = e.clientY;
-    };
-    const onMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
-      targetRotationY += dx * 0.005;
-      targetRotationX += dy * 0.005;
-      startX = e.clientX;
-      startY = e.clientY;
-    };
-    const onMouseUp = () => {
-      isDragging = false;
-    };
+    resize();
+    window.addEventListener('resize', resize);
 
-    const onTouchStart = (e: TouchEvent) => {
-      if (e.touches.length === 1) {
-        isDragging = true;
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
+    // Compute curve points between two nodes
+    const getCurve = (p1: { x: number; y: number }, p2: { x: number; y: number }, index: number) => {
+      // Create geodesic-like gentle bezier curvature
+      let ctrlX = (p1.x + p2.x) / 2;
+      let ctrlY = (p1.y + p2.y) / 2;
+
+      if (index === 0) {
+        // USA -> Canada (Northward slope)
+        ctrlX -= 18;
+        ctrlY -= 15;
+      } else if (index === 1) {
+        // Canada -> India (Transcontinental arch over Eurasia)
+        ctrlY -= height * 0.16;
+      } else if (index === 2) {
+        // India -> USA (Return southern loop across Indian/Atlantic oceans)
+        ctrlY += height * 0.15;
       }
-    };
-    const onTouchMove = (e: TouchEvent) => {
-      if (!isDragging || e.touches.length !== 1) return;
-      const dx = e.touches[0].clientX - startX;
-      const dy = e.touches[0].clientY - startY;
-      targetRotationY += dx * 0.007;
-      targetRotationX += dy * 0.007;
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-    };
-    const onTouchEnd = () => {
-      isDragging = false;
+
+      return { p1, p2, ctrl: { x: ctrlX, y: ctrlY } };
     };
 
-    canvas.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup', onMouseUp);
-    canvas.addEventListener('touchstart', onTouchStart, { passive: true });
-    window.addEventListener('touchmove', onTouchMove, { passive: true });
-    window.addEventListener('touchend', onTouchEnd);
+    // Quadratic bezier point evaluation
+    const getBezierPoint = (p0: { x: number; y: number }, p1: { x: number; y: number }, p2: { x: number; y: number }, t: number) => {
+      const oneMinusT = 1 - t;
+      return {
+        x: oneMinusT * oneMinusT * p0.x + 2 * oneMinusT * t * p1.x + t * t * p2.x,
+        y: oneMinusT * oneMinusT * p0.y + 2 * oneMinusT * t * p1.y + t * t * p2.y,
+      };
+    };
 
-    let pulseTime = 0;
+    let time = 0;
 
-    function render() {
-      if (!ctx) return;
+    const render = () => {
+      if (!ctx || width === 0 || height === 0) {
+        animId = requestAnimationFrame(render);
+        return;
+      }
+
+      time += 0.007; // Loop speed
       ctx.clearRect(0, 0, width, height);
 
-      // Auto rotation
-      if (!isDragging) {
-        targetRotationY += 0.003;
-      }
-      rotationY += (targetRotationY - rotationY) * 0.08;
-      rotationX += (targetRotationX - rotationX) * 0.08;
-      // Clamp vertical tilt
-      rotationX = Math.max(-0.6, Math.min(0.6, rotationX));
+      // Node absolute pixel coordinates
+      const nodes = LOCATIONS.map((loc) => ({
+        ...loc,
+        px: loc.x * width,
+        py: loc.y * height,
+      }));
 
-      pulseTime += 0.02;
+      // Calculate curves for each edge
+      const curves = LOOP_EDGES.map(([startIdx, endIdx], i) => {
+        const start = { x: nodes[startIdx].px, y: nodes[endIdx === 0 ? 0 : startIdx].py };
+        const end = { x: nodes[endIdx].px, y: nodes[endIdx].py };
+        return getCurve({ x: nodes[startIdx].px, y: nodes[startIdx].py }, end, i);
+      });
 
-      const cx = width / 2;
-      const cy = height / 2;
-      const currentRadius = Math.min(width, height) * 0.36;
+      // 1. Draw subtle ambient radar grid & concentric circles centered in the triangle
+      const triCenterX = (nodes[0].px + nodes[1].px + nodes[2].px) / 3;
+      const triCenterY = (nodes[0].py + nodes[1].py + nodes[2].py) / 3;
 
-      // Draw Atmospheric Glow
-      const glowGrad = ctx.createRadialGradient(cx, cy, currentRadius * 0.7, cx, cy, currentRadius * 1.35);
-      glowGrad.addColorStop(0, 'rgba(2, 132, 199, 0.12)');
-      glowGrad.addColorStop(0.5, 'rgba(14, 165, 233, 0.05)');
-      glowGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-      ctx.fillStyle = glowGrad;
+      // Ambient radial gradient behind triangle
+      const ambientGlow = ctx.createRadialGradient(triCenterX, triCenterY, 20, triCenterX, triCenterY, Math.min(width, height) * 0.55);
+      ambientGlow.addColorStop(0, 'rgba(215, 25, 42, 0.08)');
+      ambientGlow.addColorStop(0.5, 'rgba(2, 132, 199, 0.04)');
+      ambientGlow.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = ambientGlow;
       ctx.beginPath();
-      ctx.arc(cx, cy, currentRadius * 1.35, 0, Math.PI * 2);
+      ctx.arc(triCenterX, triCenterY, Math.min(width, height) * 0.55, 0, Math.PI * 2);
       ctx.fill();
 
-      // Outer Ring
-      ctx.strokeStyle = 'rgba(2, 132, 199, 0.22)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.arc(cx, cy, currentRadius, 0, Math.PI * 2);
-      ctx.stroke();
-
-      // Transform function
-      function project(p: { x: number; y: number; z: number }) {
-        // Rotate around X
-        const cosX = Math.cos(rotationX);
-        const sinX = Math.sin(rotationX);
-        const y1 = p.y * cosX - p.z * sinX;
-        const z1 = p.y * sinX + p.z * cosX;
-
-        // Rotate around Y
-        const cosY = Math.cos(rotationY);
-        const sinY = Math.sin(rotationY);
-        const x2 = p.x * cosY + z1 * sinY;
-        const z2 = -p.x * sinY + z1 * cosY;
-
-        // Perspective
-        const fov = 700;
-        const scale = fov / (fov + z2);
-        return {
-          px: cx + x2 * scale,
-          py: cy + y1 * scale,
-          scale,
-          z: z2,
-        };
-      }
-
-      // Draw Lat/Lon Guide Rings
-      ctx.strokeStyle = 'rgba(2, 132, 199, 0.08)';
-      ctx.lineWidth = 0.8;
-      for (let lat = -60; lat <= 60; lat += 30) {
+      // Subtle radar circles
+      [0.2, 0.35, 0.5].forEach((radiusFactor) => {
+        ctx.strokeStyle = 'rgba(215, 25, 42, 0.08)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 6]);
         ctx.beginPath();
-        let first = true;
-        for (let lon = 0; lon <= 360; lon += 10) {
-          const pt = latLonToXYZ(lat, lon, currentRadius);
-          const pr = project(pt);
-          if (pr.z < 0) {
-            first = true;
-            continue;
-          }
-          if (first) {
-            ctx.moveTo(pr.px, pr.py);
-            first = false;
-          } else {
-            ctx.lineTo(pr.px, pr.py);
+        ctx.arc(triCenterX, triCenterY, Math.min(width, height) * radiusFactor, 0, Math.PI * 2);
+        ctx.stroke();
+      });
+      ctx.setLineDash([]);
+
+      // Subtle filled polygon for the triangle zone
+      ctx.beginPath();
+      ctx.moveTo(nodes[0].px, nodes[0].py);
+      ctx.quadraticCurveTo(curves[0].ctrl.x, curves[0].ctrl.y, nodes[1].px, nodes[1].py);
+      ctx.quadraticCurveTo(curves[1].ctrl.x, curves[1].ctrl.y, nodes[2].px, nodes[2].py);
+      ctx.quadraticCurveTo(curves[2].ctrl.x, curves[2].ctrl.y, nodes[0].px, nodes[0].py);
+      ctx.closePath();
+      const areaGlow = ctx.createRadialGradient(triCenterX, triCenterY, 10, triCenterX, triCenterY, 200);
+      areaGlow.addColorStop(0, 'rgba(215, 25, 42, 0.04)');
+      areaGlow.addColorStop(1, 'rgba(2, 132, 199, 0.01)');
+      ctx.fillStyle = areaGlow;
+      ctx.fill();
+
+      // 2. Draw Triangle Base Path (Subtle glowing static track)
+      curves.forEach((c) => {
+        // Outer soft glow
+        ctx.strokeStyle = 'rgba(215, 25, 42, 0.15)';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(c.p1.x, c.p1.y);
+        ctx.quadraticCurveTo(c.ctrl.x, c.ctrl.y, c.p2.x, c.p2.y);
+        ctx.stroke();
+
+        // Inner precise line
+        ctx.strokeStyle = 'rgba(215, 25, 42, 0.45)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([6, 5]);
+        ctx.beginPath();
+        ctx.moveTo(c.p1.x, c.p1.y);
+        ctx.quadraticCurveTo(c.ctrl.x, c.ctrl.y, c.p2.x, c.p2.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      });
+
+      // 3. Draw Moving Loop Packets (US -> CANADA -> INDIA -> US in continuous loop)
+      // Total loop consists of 3 segments. Continuous parameter loopProgress in [0, 3)
+      const numPackets = 6; // Multiple packets along the continuous loop
+      for (let p = 0; p < numPackets; p++) {
+        const offset = (p / numPackets) * 3;
+        const totalProgress = (time * 1.2 + offset) % 3;
+        const segmentIndex = Math.floor(totalProgress);
+        const t = totalProgress - segmentIndex;
+
+        const currentCurve = curves[segmentIndex];
+        if (!currentCurve) continue;
+
+        // Current packet head position
+        const head = getBezierPoint(currentCurve.p1, currentCurve.ctrl, currentCurve.p2, t);
+
+        // Compute tail positions for motion blur / laser streak
+        const tailSegments = 8;
+        ctx.beginPath();
+        ctx.moveTo(head.x, head.y);
+
+        for (let s = 1; s <= tailSegments; s++) {
+          const tailT = t - s * 0.012;
+          if (tailT >= 0) {
+            const tailPt = getBezierPoint(currentCurve.p1, currentCurve.ctrl, currentCurve.p2, tailT);
+            ctx.lineTo(tailPt.x, tailPt.y);
           }
         }
+
+        // Streak styling
+        const isHeadHq = segmentIndex === 0;
+        const streakColor = isHeadHq ? 'rgba(215, 25, 42, ' : 'rgba(2, 132, 199, ';
+        ctx.strokeStyle = streakColor + '0.7)';
+        ctx.lineWidth = 2.5;
         ctx.stroke();
+
+        // Photon glow head
+        ctx.shadowColor = isHeadHq ? 'rgba(215, 25, 42, 0.9)' : 'rgba(2, 132, 199, 0.9)';
+        ctx.shadowBlur = 10;
+        ctx.fillStyle = isHeadHq ? '#d7192a' : '#38bdf8';
+        ctx.beginPath();
+        ctx.arc(head.x, head.y, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // White core highlight
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(head.x, head.y, 1.6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
       }
 
-      // Render Dots
-      points.forEach((pt) => {
-        const pr = project({
-          x: (pt.x / radius) * currentRadius,
-          y: (pt.y / radius) * currentRadius,
-          z: (pt.z / radius) * currentRadius,
+      // Track active segment for HUD
+      const activeSeg = Math.floor((time * 1.2) % 3);
+      setActiveSegment(activeSeg);
+
+      // 4. Draw Node Sonar Waves & Glowing Rings on Canvas
+      nodes.forEach((node, idx) => {
+        const pulsePhase = (time * 2.5 + idx * 1.2) % (Math.PI * 2);
+        const waveProgress = (Math.sin(pulsePhase) + 1) / 2;
+
+        // Expanding radar rings
+        [0.8, 1.6, 2.4].forEach((factor) => {
+          const ringRadius = 10 + ((pulsePhase * 7 * factor) % 24);
+          const ringAlpha = Math.max(0, 1 - ringRadius / 32);
+          ctx.strokeStyle = node.color === '#d7192a'
+            ? `rgba(215, 25, 42, ${ringAlpha * 0.45})`
+            : `rgba(2, 132, 199, ${ringAlpha * 0.45})`;
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.arc(node.px, node.py, ringRadius, 0, Math.PI * 2);
+          ctx.stroke();
         });
 
-        // Depth cue
-        const alpha = Math.max(0.06, (pr.z + currentRadius) / (currentRadius * 2));
-        if (pr.z > 0) {
-          ctx.fillStyle = `rgba(2, 132, 199, ${alpha * 0.95})`;
-          ctx.beginPath();
-          ctx.arc(pr.px, pr.py, 1.4 * pr.scale, 0, Math.PI * 2);
-          ctx.fill();
-        } else {
-          ctx.fillStyle = `rgba(148, 163, 184, ${alpha * 0.35})`;
-          ctx.beginPath();
-          ctx.arc(pr.px, pr.py, 0.9 * pr.scale, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      });
+        // Outer glow circle
+        ctx.fillStyle = node.color === '#d7192a' ? 'rgba(215, 25, 42, 0.16)' : 'rgba(2, 132, 199, 0.16)';
+        ctx.beginPath();
+        ctx.arc(node.px, node.py, 12 + waveProgress * 2, 0, Math.PI * 2);
+        ctx.fill();
 
-      // Project Hubs
-      const projectedHubs = HUBS.map((hub) => {
-        const coords = latLonToXYZ(hub.lat, hub.lon, currentRadius);
-        const pr = project(coords);
-        return { ...hub, ...pr };
-      });
+        // Solid inner pin
+        ctx.fillStyle = node.color;
+        ctx.shadowColor = node.color;
+        ctx.shadowBlur = 12;
+        ctx.beginPath();
+        ctx.arc(node.px, node.py, 5.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
 
-      // Draw Arcs & Photons
-      CONNECTIONS.forEach(([i1, i2]) => {
-        const h1 = projectedHubs[i1];
-        const h2 = projectedHubs[i2];
-        if (!h1 || !h2) return;
-
-        // Draw only if at least partially visible
-        if (h1.z > -currentRadius * 0.4 || h2.z > -currentRadius * 0.4) {
-          const midX = (h1.px + h2.px) / 2;
-          const midY = (h1.py + h2.py) / 2 - currentRadius * 0.18;
-
-          ctx.strokeStyle = 'rgba(2, 132, 199, 0.5)';
-          ctx.lineWidth = 1.3;
-          ctx.beginPath();
-          ctx.moveTo(h1.px, h1.py);
-          ctx.quadraticCurveTo(midX, midY, h2.px, h2.py);
-          ctx.stroke();
-
-          // Traveling photon packet
-          const t = (pulseTime * 0.6 + i1 * 0.25) % 1;
-          const px = (1 - t) * (1 - t) * h1.px + 2 * (1 - t) * t * midX + t * t * h2.px;
-          const py = (1 - t) * (1 - t) * h1.py + 2 * (1 - t) * t * midY + t * t * h2.py;
-
-          ctx.fillStyle = '#d7192a';
-          ctx.shadowColor = 'rgba(215, 25, 42, 0.8)';
-          ctx.shadowBlur = 8;
-          ctx.beginPath();
-          ctx.arc(px, py, 2.5, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.shadowBlur = 0;
-        }
-      });
-
-      // Draw Hubs & Labels
-      projectedHubs.forEach((hub) => {
-        if (hub.z > -currentRadius * 0.2) {
-          const isHq = hub.type === 'headquarters';
-          const size = (isHq ? 5 : 3.5) * hub.scale;
-
-          // Pulse ring
-          const ringSize = size + (Math.sin(pulseTime * 3) + 1) * 3;
-          ctx.strokeStyle = isHq ? 'rgba(215, 25, 42, 0.9)' : 'rgba(215, 25, 42, 0.5)';
-          ctx.lineWidth = 1.5;
-          ctx.beginPath();
-          ctx.arc(hub.px, hub.py, ringSize, 0, Math.PI * 2);
-          ctx.stroke();
-
-          // Hub dot
-          ctx.fillStyle = isHq ? '#d7192a' : '#ef4444';
-          ctx.shadowColor = isHq ? '#d7192a' : '#ef4444';
-          ctx.shadowBlur = 10;
-          ctx.beginPath();
-          ctx.arc(hub.px, hub.py, size, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.shadowBlur = 0;
-
-          // Label
-          if (hub.z > currentRadius * 0.1) {
-            ctx.font = '700 10.5px Inter, sans-serif';
-            ctx.fillStyle = isHq ? '#b91c1c' : '#0f172a';
-            ctx.fillText(hub.name, hub.px + size + 6, hub.py + 3);
-          }
-        }
+        // Center white beacon
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(node.px, node.py, 2.2, 0, Math.PI * 2);
+        ctx.fill();
       });
 
       animId = requestAnimationFrame(render);
-    }
+    };
 
     render();
 
     return () => {
       cancelAnimationFrame(animId);
-      window.removeEventListener('resize', handleResize);
-      canvas.removeEventListener('mousedown', onMouseDown);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup', onMouseUp);
-      canvas.removeEventListener('touchstart', onTouchStart);
-      window.removeEventListener('touchmove', onTouchMove);
-      window.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('resize', resize);
     };
   }, []);
 
   return (
-    <div className={`relative flex items-center justify-center select-none ${className}`}>
-      <canvas ref={canvasRef} className="cursor-grab active:cursor-grabbing w-full h-full block" />
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full border border-red-500/30 bg-[#0b0c10]/80 px-3.5 py-1 text-[10px] font-semibold text-red-200 backdrop-blur-md shadow-lg pointer-events-none">
-        <span className="size-1.5 rounded-full bg-red-400 animate-pulse" />
-        Interactive 3D Network • Drag to Rotate
+    <div
+      ref={containerRef}
+      className={`relative flex items-center justify-center select-none overflow-visible rounded-2xl ${className}`}
+    >
+      {/* Background Interactive Canvas */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full block pointer-events-none z-0" />
+
+      {/* Top HUD: Real-time Route Loop Indicator */}
+      <div className="absolute top-2 left-3 sm:left-4 z-20 flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/90 px-3 py-1 shadow-sm backdrop-blur-md">
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#d7192a]" />
+        </span>
+        <span className="text-[10px] sm:text-[11px] font-bold text-slate-800 tracking-wide flex items-center gap-1.5">
+          <span className={activeSegment === 0 ? 'text-[#d7192a] font-extrabold underline' : 'text-slate-600'}>USA</span>
+          <ArrowRight className="size-3 text-red-500 animate-pulse" />
+          <span className={activeSegment === 1 ? 'text-[#d7192a] font-extrabold underline' : 'text-slate-600'}>CANADA</span>
+          <ArrowRight className="size-3 text-red-500 animate-pulse" />
+          <span className={activeSegment === 2 ? 'text-[#d7192a] font-extrabold underline' : 'text-slate-600'}>INDIA</span>
+          <ArrowRight className="size-3 text-red-500 animate-pulse" />
+          <span className="text-slate-400 text-[9px] uppercase font-semibold">Loop</span>
+        </span>
+      </div>
+
+      {/* Tri-Regional Delivery Stats Pill (Top Right) */}
+      <div className="absolute top-2 right-3 sm:right-4 z-20 hidden xs:flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-50/90 px-2.5 py-1 text-[10px] font-semibold text-emerald-700 shadow-sm backdrop-blur-md">
+        <Activity className="size-3 text-emerald-600 animate-pulse" />
+        <span>Live 24/7 Delivery Sync</span>
+      </div>
+
+      {/* HTML Interactive Node Pins & Glass Badges */}
+      {LOCATIONS.map((loc) => {
+        const isHovered = activeNode?.id === loc.id;
+        return (
+          <div
+            key={loc.id}
+            style={{
+              left: `${loc.x * 100}%`,
+              top: `${loc.y * 100}%`,
+            }}
+            className="absolute z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
+            onMouseEnter={() => setActiveNode(loc)}
+            onMouseLeave={() => setActiveNode(null)}
+            onClick={() => setActiveNode(activeNode?.id === loc.id ? null : loc)}
+          >
+            {/* Clickable Radar Anchor Target */}
+            <button
+              type="button"
+              className="relative group p-2 cursor-pointer focus:outline-none"
+              aria-label={`${loc.country} - ${loc.city}`}
+            >
+              <span className="sr-only">{loc.country}</span>
+              {/* Tooltip Badge */}
+              <div
+                className={`transition-all duration-300 ease-out whitespace-nowrap rounded-xl border shadow-lg backdrop-blur-md p-2 text-left ${
+                  loc.id === 'usa'
+                    ? 'origin-bottom-left translate-y-3 sm:translate-y-4 -translate-x-4'
+                    : loc.id === 'canada'
+                    ? 'origin-top translate-y-4 -translate-x-1/2'
+                    : 'origin-bottom-right -translate-y-14 sm:-translate-y-16 -translate-x-32 sm:-translate-x-28'
+                } ${
+                  isHovered
+                    ? 'scale-105 ring-2 ring-red-500/40 bg-white/95 border-red-300 z-30'
+                    : 'bg-white/85 border-slate-200/90 hover:bg-white/95 hover:border-slate-300'
+                }`}
+              >
+                <div className="flex items-center gap-1.5">
+                  <span className="text-sm select-none">{loc.flag}</span>
+                  <span className="text-[11px] sm:text-xs font-bold text-slate-900 tracking-tight flex items-center gap-1">
+                    {loc.country}
+                    <span className="inline-block size-1.5 rounded-full bg-emerald-500" />
+                  </span>
+                </div>
+                <div className="text-[10px] font-semibold text-slate-700 leading-tight mt-0.5">
+                  {loc.city}
+                </div>
+                <div className="text-[9px] font-medium text-slate-500 leading-tight">
+                  {loc.role}
+                </div>
+
+                {/* Expanded details on hover / active */}
+                {isHovered && (
+                  <div className="mt-1.5 pt-1.5 border-t border-slate-100 text-[9px] text-slate-600 max-w-[200px] leading-snug">
+                    <div className="font-semibold text-red-600">{loc.name}</div>
+                    <div className="text-slate-500 text-[8.5px] truncate">{loc.address}</div>
+                    {loc.contact && (
+                      <div className="text-slate-700 font-medium text-[8.5px] mt-0.5 flex items-center gap-1">
+                        <CheckCircle2 className="size-2.5 text-emerald-600" />
+                        {loc.contact}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </button>
+          </div>
+        );
+      })}
+
+      {/* Bottom Center Capsule */}
+      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 rounded-full border border-slate-300/80 bg-white/90 px-3.5 py-1 text-[10px] sm:text-[11px] font-semibold text-slate-700 shadow-md backdrop-blur-md pointer-events-none">
+        <span className="size-2 rounded-full bg-red-600 animate-pulse" />
+        <span>Global Delivery Network • US ⇄ Canada ⇄ India Connected Loop</span>
       </div>
     </div>
   );
 }
-

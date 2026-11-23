@@ -1107,7 +1107,7 @@ export function Clients({ full = false }: { full?: boolean }) {
           setClientList(data.clients);
         }
       })
-      .catch(() => {});
+      .catch(() => { });
 
     return () => {
       isMounted = false;
@@ -1193,7 +1193,7 @@ export function Careers({ full = false }: { full?: boolean }) {
           );
         }
       })
-      .catch(() => {});
+      .catch(() => { });
 
     return () => {
       isMounted = false;
@@ -1227,78 +1227,78 @@ export function Careers({ full = false }: { full?: boolean }) {
             </p>
           </div>
 
-            {/* Department Filter */}
-            <div className="flex flex-wrap gap-2">
-              {departments.map((dept) => (
-                <button
-                  key={dept}
-                  onClick={() => setSelectedDept(dept)}
-                  className={`rounded-xl px-4 py-2 text-xs font-semibold transition ${selectedDept === dept
-                    ? 'border border-[#d7192a] bg-[#d7192a] text-white shadow-sm'
-                    : 'border border-slate-200/90 bg-white text-slate-600 hover:border-red-200 hover:text-[#d7192a]'
-                    }`}
-                >
-                  {dept}
-                </button>
-              ))}
-            </div>
+          {/* Department Filter */}
+          <div className="flex flex-wrap gap-2">
+            {departments.map((dept) => (
+              <button
+                key={dept}
+                onClick={() => setSelectedDept(dept)}
+                className={`rounded-xl px-4 py-2 text-xs font-semibold transition ${selectedDept === dept
+                  ? 'border border-[#d7192a] bg-[#d7192a] text-white shadow-sm'
+                  : 'border border-slate-200/90 bg-white text-slate-600 hover:border-red-200 hover:text-[#d7192a]'
+                  }`}
+              >
+                {dept}
+              </button>
+            ))}
+          </div>
 
-            {/* Job Openings Grid */}
-            <div className="grid gap-5 md:grid-cols-2">
-              {filteredJobs.map((job) => (
-                <article
-                  key={job.title}
-                  className="glass-card flex flex-col justify-between p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl transition-all"
-                >
-                  <div>
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span className="rounded-md border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] font-bold text-[#d7192a]">
-                        {job.dept}
-                      </span>
-                      <span className="text-xs font-medium text-slate-500">{job.type}</span>
-                    </div>
-                    <h4 className="mt-3 text-lg font-bold text-slate-900">{job.title}</h4>
-                    <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
-                      <MapPin className="size-3.5 text-[#d7192a]" /> {job.location}
-                    </p>
-                    <p className="mt-2.5 text-xs leading-relaxed text-slate-600">{job.desc}</p>
+          {/* Job Openings Grid */}
+          <div className="grid gap-5 md:grid-cols-2">
+            {filteredJobs.map((job) => (
+              <article
+                key={job.title}
+                className="glass-card flex flex-col justify-between p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl transition-all"
+              >
+                <div>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="rounded-md border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] font-bold text-[#d7192a]">
+                      {job.dept}
+                    </span>
+                    <span className="text-xs font-medium text-slate-500">{job.type}</span>
                   </div>
-                  <div className="mt-5 pt-3.5 border-t border-slate-200/90 flex items-center justify-between">
-                    <Button
-                      asChild
-                      size="sm"
-                      className="rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs shadow-md shadow-red-500/20"
+                  <h4 className="mt-3 text-lg font-bold text-slate-900">{job.title}</h4>
+                  <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
+                    <MapPin className="size-3.5 text-[#d7192a]" /> {job.location}
+                  </p>
+                  <p className="mt-2.5 text-xs leading-relaxed text-slate-600">{job.desc}</p>
+                </div>
+                <div className="mt-5 pt-3.5 border-t border-slate-200/90 flex items-center justify-between">
+                  <Button
+                    asChild
+                    size="sm"
+                    className="rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs shadow-md shadow-red-500/20"
+                  >
+                    <a
+                      href={`mailto:${companyInfo.email}?subject=Application for ${encodeURIComponent(job.title)} (${encodeURIComponent(job.location)})`}
                     >
-                      <a
-                        href={`mailto:${companyInfo.email}?subject=Application for ${encodeURIComponent(job.title)} (${encodeURIComponent(job.location)})`}
-                      >
-                        Apply Now <ArrowUpRight className="size-3.5 ml-1" />
-                      </a>
-                    </Button>
-                    <span className="text-[11px] text-slate-500 font-medium">Immediate Opening</span>
-                  </div>
+                      Apply Now <ArrowUpRight className="size-3.5 ml-1" />
+                    </a>
+                  </Button>
+                <span className="text-[11px] text-slate-500 font-medium">Immediate Opening</span>
+              </div>
                 </article>
               ))}
-            </div>
+        </div>
 
-            {/* General Application Banner */}
-            <div className="glass-card p-6 sm:p-10 text-center border-slate-200/90 bg-gradient-to-b from-red-50/30 to-white shadow-lg">
-              <h4 className="text-2xl font-bold text-slate-900">Don’t see the right fit?</h4>
-              <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm text-slate-600">
-                Send us your resume anyway and we will keep you in mind for future roles across our global teams.
-              </p>
-              <Button
-                asChild
-                className="mt-5 h-11 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 shadow-md"
-              >
-                <a href={`mailto:${companyInfo.email}?subject=General%20Application%20-%20TP%20IT%20Group%20LLC`}>
-                  Send General Application <Mail className="size-4 ml-2" />
-                </a>
-              </Button>
-            </div>
-          </div>
+        {/* General Application Banner */}
+        <div className="glass-card p-6 sm:p-10 text-center border-slate-200/90 bg-gradient-to-b from-red-50/30 to-white shadow-lg">
+          <h4 className="text-2xl font-bold text-slate-900">Don’t see the right fit?</h4>
+          <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm text-slate-600">
+            Send us your resume anyway and we will keep you in mind for future roles across our global teams.
+          </p>
+          <Button
+            asChild
+            className="mt-5 h-11 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 shadow-md"
+          >
+            <a href={`mailto:${companyInfo.email}?subject=General%20Application%20-%20TP%20IT%20Group%20LLC`}>
+              Send General Application <Mail className="size-4 ml-2" />
+            </a>
+          </Button>
       </div>
-    </section>
+    </div>
+      </div >
+    </section >
   );
 }
 
@@ -1513,11 +1513,10 @@ export function ContactForm() {
             onBlur={() => handleBlur('name')}
             onChange={(e) => handleChange('name', e.target.value)}
             placeholder="e.g. John Doe"
-            className={`contact-field w-full ${
-              touched.name && errors.name
+            className={`contact-field w-full ${touched.name && errors.name
                 ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
                 : ''
-            }`}
+              }`}
           />
           {touched.name && errors.name && (
             <p className="mt-1 text-[11px] font-medium text-red-600 flex items-center gap-1">
@@ -1539,11 +1538,10 @@ export function ContactForm() {
             onBlur={() => handleBlur('email')}
             onChange={(e) => handleChange('email', e.target.value)}
             placeholder="john@company.com"
-            className={`contact-field w-full ${
-              touched.email && errors.email
+            className={`contact-field w-full ${touched.email && errors.email
                 ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
                 : ''
-            }`}
+              }`}
           />
           {touched.email && errors.email && (
             <p className="mt-1 text-[11px] font-medium text-red-600 flex items-center gap-1">
@@ -1597,11 +1595,10 @@ export function ContactForm() {
               handleChange('phone', onlyNums);
             }}
             placeholder="+1 (814) 844-1361"
-            className={`contact-field w-full ${
-              touched.phone && errors.phone
+            className={`contact-field w-full ${touched.phone && errors.phone
                 ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
                 : ''
-            }`}
+              }`}
           />
           {touched.phone && errors.phone && (
             <p className="mt-1 text-[11px] font-medium text-red-600 flex items-center gap-1">
@@ -1642,11 +1639,10 @@ export function ContactForm() {
           onBlur={() => handleBlur('message')}
           onChange={(e) => handleChange('message', e.target.value)}
           placeholder="Please describe your digital goals, timeline, and technical scope..."
-          className={`contact-field w-full resize-y ${
-            touched.message && errors.message
+          className={`contact-field w-full resize-y ${touched.message && errors.message
               ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
               : ''
-          }`}
+            }`}
         />
         {touched.message && errors.message && (
           <p className="mt-1 text-[11px] font-medium text-red-600 flex items-center gap-1">
