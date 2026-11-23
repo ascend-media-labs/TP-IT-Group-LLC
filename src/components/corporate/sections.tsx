@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { useState, useRef, useEffect, type ReactNode } from 'react';
+import { useState, useRef, useEffect, useMemo, type ReactNode } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring, useInView } from 'motion/react';
 import {
   ArrowRight,
@@ -1223,36 +1223,82 @@ export function Careers({ full = false }: { full?: boolean }) {
     'Service & Business Operations',
   ];
 
-  const filteredJobs = jobsList.filter((job: any) => {
-    // 1. Search query filter
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      const match =
-        job.title.toLowerCase().includes(q) ||
-        (job.location || '').toLowerCase().includes(q) ||
-        (job.dept || '').toLowerCase().includes(q) ||
-        (job.desc || job.description || '').toLowerCase().includes(q);
-      if (!match) return false;
+  const filteredJobs = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+
+    const results = jobsList.filter((job: any) => {
+      // 1. Search query filter (matches role title, department, location, code, or distinct skill keywords)
+      if (q) {
+        const title = (job.title || '').toLowerCase();
+        const dept = (job.dept || '').toLowerCase();
+        const location = (job.location || '').toLowerCase();
+        const code = (job.code || '').toLowerCase();
+        const country = (job.country || '').toLowerCase();
+
+        // High-precision matches: Job Title, Department, Location, Job Code, Country
+        const isDirectMatch =
+          title.includes(q) ||
+          dept.includes(q) ||
+          location.includes(q) ||
+          code.includes(q) ||
+          country.includes(q);
+
+        if (isDirectMatch) return true;
+
+        // Skill keywords in description: only match words starting with or exact matching query
+        const descWords = (job.desc || job.description || '')
+          .toLowerCase()
+          .split(/[^a-z0-9+#.-]+/i);
+
+        const isWordMatch =
+          q.length <= 3
+            ? descWords.some((w: string) => w.startsWith(q))
+            : descWords.some((w: string) => w.includes(q));
+
+        if (!isWordMatch) return false;
+      }
+
+      // 2. Country filter
+      if (selectedCountry !== 'all') {
+        const c = (job.countryCode || '').toLowerCase();
+        if (c && c !== selectedCountry.toLowerCase()) return false;
+      }
+
+      // 3. Department / Discipline filter
+      if (selectedDept !== 'All') {
+        if (job.dept !== selectedDept) return false;
+      }
+
+      // 4. Job type filter
+      if (selectedJobType !== 'All') {
+        if ((job.type || '').toLowerCase() !== selectedJobType.toLowerCase()) return false;
+      }
+
+      return true;
+    });
+
+    // When searching, prioritize direct Title & Role matches first
+    if (q) {
+      return results.sort((a: any, b: any) => {
+        const aTitle = (a.title || '').toLowerCase();
+        const bTitle = (b.title || '').toLowerCase();
+
+        const aTitleStarts = aTitle.startsWith(q) || aTitle.split(' ').some((w: string) => w.startsWith(q));
+        const bTitleStarts = bTitle.startsWith(q) || bTitle.split(' ').some((w: string) => w.startsWith(q));
+        if (aTitleStarts && !bTitleStarts) return -1;
+        if (!aTitleStarts && bTitleStarts) return 1;
+
+        const aTitleHas = aTitle.includes(q);
+        const bTitleHas = bTitle.includes(q);
+        if (aTitleHas && !bTitleHas) return -1;
+        if (!aTitleHas && bTitleHas) return 1;
+
+        return 0;
+      });
     }
 
-    // 2. Country filter
-    if (selectedCountry !== 'all') {
-      const c = (job.countryCode || '').toLowerCase();
-      if (c && c !== selectedCountry.toLowerCase()) return false;
-    }
-
-    // 3. Department / Discipline filter
-    if (selectedDept !== 'All') {
-      if (job.dept !== selectedDept) return false;
-    }
-
-    // 4. Job type filter
-    if (selectedJobType !== 'All') {
-      if ((job.type || '').toLowerCase() !== selectedJobType.toLowerCase()) return false;
-    }
-
-    return true;
-  });
+    return results;
+  }, [jobsList, searchQuery, selectedCountry, selectedDept, selectedJobType]);
 
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
@@ -1334,7 +1380,7 @@ export function Careers({ full = false }: { full?: boolean }) {
                 </h3>
               </div>
               <div className="text-xs text-slate-500 font-medium">
-                1020 sample roles · 12 disciplines
+                {jobsList.length} sample roles · {departments.length - 1} disciplines
               </div>
             </div>
 
@@ -1413,14 +1459,16 @@ export function Careers({ full = false }: { full?: boolean }) {
             {/* Filter Summary & Reset Bar */}
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 pt-0.5">
               <span>
-                Showing 1–{filteredJobs.length} of{' '}
-                {selectedCountry === 'us'
-                  ? '680 matching sample roles'
-                  : selectedCountry === 'ca'
-                    ? '204 matching sample roles'
-                    : selectedCountry === 'in'
-                      ? '136 matching sample roles'
-                      : '1020 matching sample roles'}
+                {filteredJobs.length === 0 ? (
+                  <span className="text-red-600 font-semibold">0 matching sample roles found</span>
+                ) : (
+                  <>
+                    Showing 1–{filteredJobs.length} of{' '}
+                    {searchQuery || selectedCountry !== 'all' || selectedDept !== 'All' || selectedJobType !== 'All'
+                      ? `${filteredJobs.length} matching sample roles`
+                      : `${jobsList.length} sample roles`}
+                  </>
+                )}
               </span>
 
               {(searchQuery || selectedCountry !== 'all' || selectedDept !== 'All' || selectedJobType !== 'All') && (
@@ -1457,82 +1505,103 @@ export function Careers({ full = false }: { full?: boolean }) {
           </div>
 
           {/* Job Openings Grid - 3 Column Layout matching Image 2 */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredJobs.map((job, idx) => {
-              const code = (job as any).code || `USA-000${idx + 1}`;
-              const countryCode = (job as any).countryCode || 'us';
-              const country = (job as any).country || 'USA';
-              const experience = (job as any).experience || '5+ years';
-              const roleType = (job as any).sampleType || 'Sample role';
+          {filteredJobs.length === 0 ? (
+            <div className="text-center py-12 px-4 rounded-2xl border border-dashed border-slate-300 bg-slate-50/70">
+              <p className="text-base font-semibold text-slate-800">No matching sample roles found</p>
+              <p className="text-xs text-slate-500 mt-1 max-w-md mx-auto">
+                No roles match &quot;{searchQuery}&quot; with the selected filters. Try searching by job title (e.g. AWS, Cybersecurity, DevOps) or reset filters.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedCountry('all');
+                  setSelectedDept('All');
+                  setSelectedJobType('All');
+                }}
+                className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-[#d7192a] text-white hover:bg-[#b01422] transition shadow-xs cursor-pointer"
+              >
+                Reset filters
+              </button>
+            </div>
+          ) : (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredJobs.map((job, idx) => {
+                const code = (job as any).code || `USA-000${idx + 1}`;
+                const countryCode = (job as any).countryCode || 'us';
+                const country = (job as any).country || 'USA';
+                const experience = (job as any).experience || '5+ years';
+                const roleType = (job as any).sampleType || 'Sample role';
 
-              return (
-                <article
-                  key={job.title + idx}
-                  className="rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-sm hover:border-red-300 hover:shadow-md transition-all flex flex-col justify-between"
-                >
-                  <div>
-                    {/* Top Row: Category in red, Sample role on right in muted */}
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-semibold text-[#d7192a] tracking-wide">
-                        {job.dept}
-                      </span>
-                      <span className="text-slate-400 font-medium">
-                        {roleType}
-                      </span>
+                return (
+                  <article
+                    key={job.title + idx}
+                    className="rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-sm hover:border-red-300 hover:shadow-md transition-all flex flex-col justify-between"
+                  >
+                    <div>
+                      {/* Top Row: Category in red, Sample role on right in muted */}
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="font-semibold text-[#d7192a] tracking-wide">
+                          {job.dept}
+                        </span>
+                        <span className="text-slate-400 font-medium">
+                          {roleType}
+                        </span>
+                      </div>
+
+                      {/* Job Title */}
+                      <h4 className="mt-2.5 text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                        {job.title}
+                      </h4>
+
+                      {/* Location Row */}
+                      <div className="mt-2 flex items-center gap-1.5 text-xs text-slate-600">
+                        <MapPin className="size-3.5 text-slate-500 shrink-0" />
+                        <span>{job.location}</span>
+                      </div>
+
+                      {/* Contract / Full-time + Experience Row */}
+                      <div className="mt-1.5 flex items-center gap-4 text-xs text-slate-600">
+                        <span className="flex items-center gap-1.5">
+                          <Briefcase className="size-3.5 text-slate-400 shrink-0" />
+                          <span>{job.type || 'Full-time'}</span>
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                          <Clock className="size-3.5 text-slate-400 shrink-0" />
+                          <span>{experience}</span>
+                        </span>
+                      </div>
+
+                      {/* Description Paragraph */}
+                      <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                        {(job as any).desc || (job as any).description}
+                      </p>
                     </div>
 
-                    {/* Job Title */}
-                    <h4 className="mt-2.5 text-base sm:text-lg font-bold text-slate-900 leading-snug">
-                      {job.title}
-                    </h4>
+                    {/* Card Footer: Country Code & Apply Now button */}
+                    <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-1 text-slate-500 font-mono text-[11px]">
+                        <span className="text-slate-400">{countryCode}</span>
+                        <span>{country} · {code}</span>
+                      </div>
 
-                    {/* Location Row */}
-                    <div className="mt-2 flex items-center gap-1.5 text-xs text-slate-600">
-                      <MapPin className="size-3.5 text-slate-500 shrink-0" />
-                      <span>{job.location}</span>
-                    </div>
-
-                    {/* Contract / Full-time + Experience Row */}
-                    <div className="mt-1.5 flex items-center gap-4 text-xs text-slate-600">
-                      <span className="flex items-center gap-1.5">
-                        <Briefcase className="size-3.5 text-slate-400 shrink-0" />
-                        <span>{job.type || 'Full-time'}</span>
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <Clock className="size-3.5 text-slate-400 shrink-0" />
-                        <span>{experience}</span>
-                      </span>
-                    </div>
-
-                    {/* Description Paragraph */}
-                    <p className="mt-3 text-xs leading-relaxed text-slate-600">
-                      {(job as any).desc || (job as any).description}
-                    </p>
-                  </div>
-
-                  {/* Card Footer: Country Code & Apply Now button */}
-                  <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-1 text-slate-500 font-mono text-[11px]">
-                      <span className="text-slate-400">{countryCode}</span>
-                      <span>{country} · {code}</span>
-                    </div>
-
-                    <Button
-                      asChild
-                      size="sm"
-                      className="rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs shadow-md shadow-red-500/20"
-                    >
-                      <a
-                        href={`mailto:${companyInfo.email}?subject=Application for ${encodeURIComponent(job.title)} (${encodeURIComponent(job.location)})`}
+                      <Button
+                        asChild
+                        size="sm"
+                        className="rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs shadow-md shadow-red-500/20"
                       >
-                        Apply Now <ArrowUpRight className="size-3.5 ml-1" />
-                      </a>
-                    </Button>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+                        <a
+                          href={`mailto:${companyInfo.email}?subject=Application for ${encodeURIComponent(job.title)} (${encodeURIComponent(job.location)})`}
+                        >
+                          Apply Now <ArrowUpRight className="size-3.5 ml-1" />
+                        </a>
+                      </Button>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          )}
 
           {/* General Application Banner */}
           <div className="glass-card p-6 sm:p-10 text-center border-slate-200/90 bg-gradient-to-b from-red-50/30 to-white shadow-lg">
