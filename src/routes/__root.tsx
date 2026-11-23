@@ -120,6 +120,16 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en" className="dark">
       <head>
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof history !== 'undefined' && 'scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+              }
+              window.scrollTo(0, 0);
+            `,
+          }}
+        />
       </head>
       <body className="bg-white text-slate-900 antialiased selection:bg-[#d7192a]/15 selection:text-[#d7192a]">
         {children}
