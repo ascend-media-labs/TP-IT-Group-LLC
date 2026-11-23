@@ -24,7 +24,7 @@ export function FloatingActions() {
         </span>
       </a>
 
-      {/* WhatsApp Floating Button */}
+      {/* WhatsApp Floating Button - Authentic Outline Icon with Concentric Ripple Halos */}
       <a
         href={companyInfo.social.whatsapp}
         target="_blank"
@@ -33,27 +33,35 @@ export function FloatingActions() {
         aria-label="Chat on WhatsApp"
         className="group relative flex size-12 sm:size-13 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_25px_rgba(37,211,102,0.45),0_0_15px_rgba(37,211,102,0.25)] transition-all duration-300 hover:scale-110 hover:bg-[#20bd5a] hover:shadow-[0_12px_35px_rgba(37,211,102,0.65),0_0_25px_rgba(37,211,102,0.45)] active:scale-95 focus:outline-none focus:ring-4 focus:ring-emerald-400/30"
       >
+        {/* Outer concentric ripple rings matching user reference image */}
+        <span className="absolute -inset-2 sm:-inset-2.5 rounded-full bg-[#25D366]/35 pointer-events-none" />
+        <span className="absolute -inset-2.5 sm:-inset-3 rounded-full bg-[#25D366]/25 animate-ping opacity-75 pointer-events-none" />
+
+        {/* WhatsApp Icon: White Outline Speech Bubble + White Telephone Handset */}
         <svg
-          className="size-7 sm:size-7.5 transition-transform duration-300 group-hover:scale-105 drop-shadow-xs"
+          className="relative z-10 size-7 sm:size-7.5 transition-transform duration-300 group-hover:scale-105 drop-shadow-xs"
           viewBox="0 0 32 32"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
         >
-          {/* Official WhatsApp Solid White Bubble */}
+          {/* White outline speech bubble */}
+          <path
+            d="M16 3C8.82 3 3 8.82 3 16c0 2.45.68 4.75 1.87 6.72L3 29l6.45-1.82C11.37 28.34 13.62 29 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3z"
+            stroke="#ffffff"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {/* Solid white phone handset inside */}
           <path
             fill="#ffffff"
-            d="M16 2.5C8.544 2.5 2.5 8.544 2.5 16c0 2.637.761 5.099 2.072 7.181L3 29.5l6.536-1.543A13.435 13.435 0 0 0 16 29.5c7.456 0 13.5-6.044 13.5-13.5S23.456 2.5 16 2.5z"
-          />
-          {/* Official WhatsApp Green Phone Handset */}
-          <path
-            fill="#25D366"
-            d="M22.25 18.966c-.255-.128-1.508-.744-1.741-.83-.233-.085-.403-.128-.572.128-.17.255-.658.83-.807.999-.148.17-.297.191-.552.064-.255-.128-1.077-.397-2.05-1.265-.758-.677-1.27-1.513-1.419-1.768-.148-.255-.016-.393.112-.52.115-.115.255-.297.382-.446.128-.149.17-.255.255-.425.085-.17.043-.319-.021-.446-.064-.128-.572-1.38-.784-1.89-.206-.497-.417-.429-.572-.437-.148-.008-.318-.009-.488-.009-.17 0-.446.064-.679.319-.233.255-.891.87-.891 2.123s.912 2.463 1.04 2.633c.127.17 1.796 2.743 4.35 3.847.608.263 1.082.42 1.453.537.61.194 1.165.166 1.604.1.488-.073 1.508-.616 1.72-1.21.212-.594.212-1.103.149-1.21-.064-.107-.234-.17-.489-.298z"
+            d="M21.5 18.5c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.49-.9-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"
           />
         </svg>
 
         {/* Tooltip on hover */}
-        <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-lg bg-slate-900/95 backdrop-blur-md border border-white/10 px-2.5 py-1 text-xs font-semibold text-white shadow-xl opacity-0 transition-opacity duration-200 group-hover:opacity-100 hidden sm:inline-block">
+        <span className="pointer-events-none absolute right-full mr-4 whitespace-nowrap rounded-lg bg-slate-900/95 backdrop-blur-md border border-white/10 px-2.5 py-1 text-xs font-semibold text-white shadow-xl opacity-0 transition-opacity duration-200 group-hover:opacity-100 hidden sm:inline-block">
           WhatsApp Us
         </span>
       </a>
