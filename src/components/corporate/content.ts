@@ -20,6 +20,17 @@ export const companyInfo = {
     mapUrl: 'https://maps.google.com/?q=1000+N+West+Street+Suite+1200+Wilmington+Delaware+19801',
     embedMapUrl: 'https://maps.google.com/maps?q=1000+N.+West+Street,+Suite+1200,+Wilmington,+Delaware,+19801&t=&z=15&ie=UTF8&iwloc=&output=embed',
   },
+  canadaOffice: {
+    name: 'TP IT Group',
+    title: 'Canada — TP IT Group',
+    address: 'Ontario, Canada',
+    cityStateZip: 'Ontario, Canada',
+    country: 'Canada',
+    fullAddress: 'Ontario, Canada',
+    phone: '+1 (814) 844-1362',
+    mapUrl: 'https://maps.google.com/?q=Ontario+Canada',
+    embedMapUrl: 'https://maps.google.com/maps?q=Ontario+Canada&t=&z=10&ie=UTF8&iwloc=&output=embed',
+  },
   indiaOffice: {
     name: 'TP IT GROUP PVT LTD',
     address: '13th Floor, Manjeera Trinity Corporate, Unit No. 12A04, next to Lulu Mall, Kukatpally Housing Board Colony, K P H B Phase 3, Kukatpally',

@@ -1680,7 +1680,7 @@ export function ContactForm() {
 }
 
 export function OfficeLocationsMapCard() {
-  const [activeOffice, setActiveOffice] = useState<'usa' | 'india' | 'both'>('usa');
+  const [activeOffice, setActiveOffice] = useState<'usa' | 'canada' | 'india' | 'all'>('usa');
 
   return (
     <div className="glass-card rounded-2xl border border-slate-200/90 bg-white/95 p-4 sm:p-5 shadow-sm hover:border-red-300 hover:shadow-md transition-all text-left">
@@ -1708,6 +1708,16 @@ export function OfficeLocationsMapCard() {
           </button>
           <button
             type="button"
+            onClick={() => setActiveOffice('canada')}
+            className={`px-2.5 py-1 rounded-lg transition-all ${activeOffice === 'canada'
+              ? 'bg-white text-slate-900 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900'
+              }`}
+          >
+            Canada
+          </button>
+          <button
+            type="button"
             onClick={() => setActiveOffice('india')}
             className={`px-2.5 py-1 rounded-lg transition-all ${activeOffice === 'india'
               ? 'bg-white text-slate-900 shadow-xs'
@@ -1718,20 +1728,20 @@ export function OfficeLocationsMapCard() {
           </button>
           <button
             type="button"
-            onClick={() => setActiveOffice('both')}
-            className={`px-2.5 py-1 rounded-lg transition-all ${activeOffice === 'both'
+            onClick={() => setActiveOffice('all')}
+            className={`px-2.5 py-1 rounded-lg transition-all ${activeOffice === 'all'
               ? 'bg-white text-slate-900 shadow-xs'
               : 'text-slate-600 hover:text-slate-900'
               }`}
           >
-            Both
+            All
           </button>
         </div>
       </div>
 
       {/* USA Office View */}
-      {(activeOffice === 'usa' || activeOffice === 'both') && (
-        <div className={activeOffice === 'both' ? 'mb-4 pb-4 border-b border-slate-100' : ''}>
+      {(activeOffice === 'usa' || activeOffice === 'all') && (
+        <div className={activeOffice === 'all' ? 'mb-4 pb-4 border-b border-slate-100' : ''}>
           <div className="flex items-center justify-between mb-1">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-900 text-white font-mono text-[10px] font-bold">
               <span className="size-1.5 rounded-full bg-red-500 animate-pulse" /> USA HEADQUARTERS
@@ -1772,8 +1782,57 @@ export function OfficeLocationsMapCard() {
         </div>
       )}
 
+      {/* Canada Office View */}
+      {(activeOffice === 'canada' || activeOffice === 'all') && (
+        <div className={activeOffice === 'all' ? 'mb-4 pb-4 border-b border-slate-100' : ''}>
+          <div className="flex items-center justify-between mb-1">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-900 text-white font-mono text-[10px] font-bold">
+              <span className="size-1.5 rounded-full bg-red-500 animate-pulse" /> CANADA DELIVERY HUB
+            </span>
+            <span className="text-[11px] font-semibold text-slate-500">Ontario, Canada</span>
+          </div>
+
+          <h4 className="text-sm font-bold text-slate-900">🇨🇦 Canada — TP IT Group</h4>
+          <div className="mt-1 flex items-start gap-1.5 text-xs text-slate-600 leading-relaxed">
+            <MapPin className="size-3.5 shrink-0 text-[#d7192a] mt-0.5" />
+            <div>
+              <span className="font-bold text-slate-800">Address: </span>
+              <span>Ontario, Canada</span>
+            </div>
+          </div>
+          <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-600">
+            <Phone className="size-3.5 shrink-0 text-[#d7192a]" />
+            <a href="tel:+18148441362" className="text-[#d7192a] font-bold hover:underline font-mono">
+              +1 (814) 844-1362
+            </a>
+          </div>
+
+          <div className="relative mt-2.5 h-[135px] sm:h-[145px] w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 shadow-inner">
+            <iframe
+              title="TP IT GROUP Canada Office Map"
+              src="https://maps.google.com/maps?q=Ontario+Canada&t=&z=10&ie=UTF8&iwloc=&output=embed"
+              className="h-full w-full border-0"
+              loading="lazy"
+              allowFullScreen
+            />
+          </div>
+
+          <div className="mt-2 flex items-center justify-between text-xs">
+            <a
+              href="https://maps.google.com/?q=Ontario+Canada"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors"
+            >
+              Open in Google Maps <ArrowUpRight className="size-3.5" />
+            </a>
+            <span className="text-[11px] text-slate-400 font-mono">Ontario, Canada</span>
+          </div>
+        </div>
+      )}
+
       {/* India Office View */}
-      {(activeOffice === 'india' || activeOffice === 'both') && (
+      {(activeOffice === 'india' || activeOffice === 'all') && (
         <div>
           <div className="flex items-center justify-between mb-1">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-900 text-white font-mono text-[10px] font-bold">
@@ -1856,7 +1915,37 @@ export function Contact() {
               </div>
             </div>
 
-            {/* 2. India Office */}
+            {/* 2. Canada Office */}
+            <div className="glass-card flex gap-4 p-4 sm:p-4.5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
+                <MapPin className="size-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">CANADA DELIVERY HUB</span>
+                </div>
+                <h3 className="text-sm font-bold text-slate-900 mt-0.5">🇨🇦 Canada — TP IT Group</h3>
+                <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                  {companyInfo.canadaOffice.fullAddress}
+                </p>
+                <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-600">
+                  <Phone className="size-3.5 shrink-0 text-[#d7192a]" />
+                  <a href={`tel:${companyInfo.canadaOffice.phone.replace(/[^0-9+]/g, '')}`} className="font-bold text-[#d7192a] hover:underline font-mono">
+                    {companyInfo.canadaOffice.phone}
+                  </a>
+                </div>
+                <a
+                  href={companyInfo.canadaOffice.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#d7192a] hover:text-[#b91c1c] transition-colors mt-1.5"
+                >
+                  View on Google Maps <ArrowUpRight className="size-3.5" />
+                </a>
+              </div>
+            </div>
+
+            {/* 3. India Office */}
             <div className="glass-card flex gap-4 p-4 sm:p-4.5 bg-white/95 border-slate-200/90 shadow-sm hover:border-red-300 hover:shadow-md transition-all">
               <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-[#d7192a]">
                 <Building2 className="size-5" />
