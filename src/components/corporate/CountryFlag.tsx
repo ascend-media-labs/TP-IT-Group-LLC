@@ -1,12 +1,14 @@
 import type { FC } from 'react';
 
 interface CountryFlagProps {
-  country: 'us' | 'ca' | 'in';
+  country: 'us' | 'ca' | 'in' | 'usa' | 'canada' | 'india' | string;
   className?: string;
 }
 
 export const CountryFlag: FC<CountryFlagProps> = ({ country, className = 'w-5 h-3.5' }) => {
-  if (country === 'us') {
+  const code = (country || '').toLowerCase().trim();
+
+  if (code === 'us' || code === 'usa') {
     return (
       <svg
         viewBox="0 0 640 480"
@@ -95,7 +97,7 @@ export const CountryFlag: FC<CountryFlagProps> = ({ country, className = 'w-5 h-
     );
   }
 
-  if (country === 'ca') {
+  if (code === 'ca' || code === 'can' || code === 'canada') {
     return (
       <svg
         viewBox="0 0 640 480"

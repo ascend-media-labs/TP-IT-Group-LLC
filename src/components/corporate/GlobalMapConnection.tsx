@@ -350,7 +350,7 @@ export function GlobalMapConnection({ className = '' }: { className?: string }) 
                         {/* Title & Subtitle */}
                         <div className="truncate">
                           <div className="flex items-center gap-1.5">
-                            <CountryFlag country={node.id as 'us' | 'ca' | 'in'} className="w-4 h-3 shadow-xs" />
+                            <CountryFlag country={node.code.toLowerCase()} className="w-4 h-3 shadow-xs" />
                             <span className={`text-sm sm:text-base font-bold truncate ${isActive ? 'text-slate-950 font-extrabold' : 'text-slate-900'}`}>
                               {node.country}
                             </span>
@@ -463,7 +463,7 @@ export function GlobalMapConnection({ className = '' }: { className?: string }) 
                     {/* Country & City Title */}
                     <div>
                       <div className="flex items-center gap-1.5">
-                        <CountryFlag country={activeNode.id as 'us' | 'ca' | 'in'} className="w-5 h-3.5 shadow-xs" />
+                        <CountryFlag country={activeNode.code.toLowerCase()} className="w-5 h-3.5 shadow-xs" />
                         <h3 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight leading-snug">
                           {activeNode.country}
                         </h3>

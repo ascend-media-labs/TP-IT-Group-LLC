@@ -345,7 +345,7 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
             <div className="rounded-xl border border-slate-200/90 bg-white/95 px-3 py-2 shadow-md backdrop-blur-md text-left min-w-[130px] sm:min-w-[145px]">
               <div className="flex items-center gap-1.5">
                 <CountryFlag
-                  country={loc.id as 'us' | 'ca' | 'in'}
+                  country={loc.countryCode.toLowerCase()}
                   className="w-5 h-3.5 shadow-xs"
                 />
                 <span className="text-[11px] sm:text-xs font-bold text-slate-900 tracking-tight">
