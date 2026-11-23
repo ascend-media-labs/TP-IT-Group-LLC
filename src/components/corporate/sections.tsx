@@ -1255,30 +1255,30 @@ export function Careers({ full = false }: { full?: boolean }) {
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(215,25,42,0.04),transparent_60%)]" />
-      <div className="site-container relative z-10 space-y-8 sm:space-y-10">
+      <div className="site-container relative z-10 space-y-5 sm:space-y-6">
         {/* Open Positions Section */}
-        <div className="space-y-7">
+        <div className="space-y-4 sm:space-y-5">
           <div>
             <p className="eyebrow text-[#d7192a]">OPEN POSITIONS</p>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2">Find Your Next Challenge</h2>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1.5">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 mt-1 sm:mt-1.5">Find Your Next Challenge</h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
               Explore current engineering, consulting, and management roles across USA, India, and Canada.
             </p>
           </div>
 
           {/* Sample Roles Statistics & Action */}
-          <div className="pt-1 pb-2">
-            <div className="grid grid-cols-3 gap-4 sm:gap-10 max-w-2xl">
+          <div>
+            <div className="grid grid-cols-3 gap-4 sm:gap-8 max-w-xl">
               <button
                 type="button"
                 onClick={() => setSelectedCountry('us')}
                 className="text-left group cursor-pointer focus:outline-none"
               >
-                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight group-hover:text-[#d7192a] transition">
+                <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight group-hover:text-[#d7192a] transition leading-none">
                   <AutoIncrementNumber end={680} />
                 </div>
-                <div className="mt-1 flex items-center gap-1.5 text-xs sm:text-sm text-slate-600">
-                  <span className="font-mono text-[11px] font-bold text-slate-500 uppercase">US</span>
+                <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-600">
+                  <span className="font-mono text-[10px] font-bold text-slate-500 uppercase">US</span>
                   <span className="group-hover:underline">Sample USA roles</span>
                 </div>
               </button>
@@ -1287,11 +1287,11 @@ export function Careers({ full = false }: { full?: boolean }) {
                 onClick={() => setSelectedCountry('ca')}
                 className="text-left group cursor-pointer focus:outline-none"
               >
-                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight group-hover:text-[#d7192a] transition">
+                <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight group-hover:text-[#d7192a] transition leading-none">
                   <AutoIncrementNumber end={204} />
                 </div>
-                <div className="mt-1 flex items-center gap-1.5 text-xs sm:text-sm text-slate-600">
-                  <span className="font-mono text-[11px] font-bold text-slate-500 uppercase">CA</span>
+                <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-600">
+                  <span className="font-mono text-[10px] font-bold text-slate-500 uppercase">CA</span>
                   <span className="group-hover:underline">Sample Canada roles</span>
                 </div>
               </button>
@@ -1300,44 +1300,44 @@ export function Careers({ full = false }: { full?: boolean }) {
                 onClick={() => setSelectedCountry('in')}
                 className="text-left group cursor-pointer focus:outline-none"
               >
-                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight group-hover:text-[#d7192a] transition">
+                <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight group-hover:text-[#d7192a] transition leading-none">
                   <AutoIncrementNumber end={136} />
                 </div>
-                <div className="mt-1 flex items-center gap-1.5 text-xs sm:text-sm text-slate-600">
-                  <span className="font-mono text-[11px] font-bold text-slate-500 uppercase">IN</span>
+                <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-600">
+                  <span className="font-mono text-[10px] font-bold text-slate-500 uppercase">IN</span>
                   <span className="group-hover:underline">Sample India roles</span>
                 </div>
               </button>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-3">
               <a
                 href="#explore-sample-roles"
-                className="inline-flex items-center gap-2 rounded-full bg-slate-950 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm px-6 py-2.5 shadow-sm transition"
+                className="inline-flex items-center gap-2 rounded-full bg-slate-950 hover:bg-slate-800 text-white font-semibold text-xs px-5 py-2 shadow-xs transition"
               >
-                Browse Sample Roles <ArrowRight className="size-4" />
+                Browse Sample Roles <ArrowRight className="size-3.5" />
               </a>
             </div>
           </div>
 
           {/* Explore Sample Roles Search & Filter Bar (Matching Image 1) */}
-          <div id="explore-sample-roles" className="pt-4 pb-2 space-y-4 border-t border-slate-100">
-            <div className="flex flex-wrap items-end justify-between gap-3">
+          <div id="explore-sample-roles" className="pt-3.5 space-y-3 border-t border-slate-200/80">
+            <div className="flex flex-wrap items-end justify-between gap-2">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">
                   FIND YOUR SPECIALTY
                 </p>
-                <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">
+                <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 mt-0.5">
                   Explore Sample Roles
                 </h3>
               </div>
-              <div className="text-xs sm:text-sm text-slate-500 font-medium">
+              <div className="text-xs text-slate-500 font-medium">
                 1020 sample roles · 12 disciplines
               </div>
             </div>
 
             {/* Filter Controls Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-2.5 items-center">
               {/* 1. Search Input */}
               <div className="relative lg:col-span-4">
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400 pointer-events-none" />
@@ -1346,7 +1346,7 @@ export function Careers({ full = false }: { full?: boolean }) {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Job title, skill or city"
-                  className="w-full h-11 pl-10 pr-8 rounded-full border border-slate-200 bg-white text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400 shadow-xs"
+                  className="w-full h-10 pl-9 pr-8 rounded-full border border-slate-200 bg-white text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400 shadow-xs"
                 />
                 {searchQuery && (
                   <button
@@ -1364,7 +1364,7 @@ export function Careers({ full = false }: { full?: boolean }) {
                 <select
                   value={selectedCountry}
                   onChange={(e) => setSelectedCountry(e.target.value)}
-                  className="w-full h-11 pl-4 pr-9 rounded-full border border-slate-200 bg-white text-xs sm:text-sm font-medium text-slate-800 appearance-none focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400 shadow-xs cursor-pointer"
+                  className="w-full h-10 pl-3.5 pr-8 rounded-full border border-slate-200 bg-white text-xs sm:text-sm font-medium text-slate-800 appearance-none focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400 shadow-xs cursor-pointer"
                 >
                   <option value="all">All countries</option>
                   <option value="us">us USA (680)</option>
@@ -1379,7 +1379,7 @@ export function Careers({ full = false }: { full?: boolean }) {
                 <select
                   value={selectedDept}
                   onChange={(e) => setSelectedDept(e.target.value)}
-                  className="w-full h-11 pl-4 pr-9 rounded-full border border-slate-200 bg-white text-xs sm:text-sm font-medium text-slate-800 appearance-none focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400 shadow-xs cursor-pointer"
+                  className="w-full h-10 pl-3.5 pr-8 rounded-full border border-slate-200 bg-white text-xs sm:text-sm font-medium text-slate-800 appearance-none focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400 shadow-xs cursor-pointer"
                 >
                   <option value="All">All disciplines</option>
                   {departments
@@ -1398,7 +1398,7 @@ export function Careers({ full = false }: { full?: boolean }) {
                 <select
                   value={selectedJobType}
                   onChange={(e) => setSelectedJobType(e.target.value)}
-                  className="w-full h-11 pl-4 pr-9 rounded-full border border-slate-200 bg-white text-xs sm:text-sm font-medium text-slate-800 appearance-none focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400 shadow-xs cursor-pointer"
+                  className="w-full h-10 pl-3.5 pr-8 rounded-full border border-slate-200 bg-white text-xs sm:text-sm font-medium text-slate-800 appearance-none focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400 shadow-xs cursor-pointer"
                 >
                   <option value="All">All job types</option>
                   <option value="Full-time">Full-time</option>
@@ -1409,16 +1409,16 @@ export function Careers({ full = false }: { full?: boolean }) {
             </div>
 
             {/* Filter Summary & Reset Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 pt-1">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 pt-0.5">
               <span>
                 Showing 1–{filteredJobs.length} of{' '}
                 {selectedCountry === 'us'
                   ? '680 matching sample roles'
                   : selectedCountry === 'ca'
-                  ? '204 matching sample roles'
-                  : selectedCountry === 'in'
-                  ? '136 matching sample roles'
-                  : '1020 matching sample roles'}
+                    ? '204 matching sample roles'
+                    : selectedCountry === 'in'
+                      ? '136 matching sample roles'
+                      : '1020 matching sample roles'}
               </span>
 
               {(searchQuery || selectedCountry !== 'all' || selectedDept !== 'All' || selectedJobType !== 'All') && (
@@ -1439,13 +1439,13 @@ export function Careers({ full = false }: { full?: boolean }) {
           </div>
 
           {/* Department Filter */}
-          <div id="open-roles" className="flex flex-wrap gap-2">
+          <div id="open-roles" className="flex flex-wrap gap-1.5">
             {departments.map((dept) => (
               <button
                 key={dept}
                 onClick={() => setSelectedDept(dept)}
-                className={`rounded-xl px-4 py-2 text-xs font-semibold transition ${selectedDept === dept
-                  ? 'border border-[#d7192a] bg-[#d7192a] text-white shadow-sm'
+                className={`rounded-xl px-3.5 py-1.5 text-xs font-semibold transition ${selectedDept === dept
+                  ? 'border border-[#d7192a] bg-[#d7192a] text-white shadow-xs'
                   : 'border border-slate-200/90 bg-white text-slate-600 hover:border-red-200 hover:text-[#d7192a]'
                   }`}
               >
@@ -1455,7 +1455,7 @@ export function Careers({ full = false }: { full?: boolean }) {
           </div>
 
           {/* Job Openings Grid - 3 Column Layout matching Image 2 */}
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filteredJobs.map((job, idx) => {
               const code = (job as any).code || `USA-000${idx + 1}`;
               const countryCode = (job as any).countryCode || 'us';
@@ -1532,22 +1532,22 @@ export function Careers({ full = false }: { full?: boolean }) {
             })}
           </div>
 
-        {/* General Application Banner */}
-        <div className="glass-card p-6 sm:p-10 text-center border-slate-200/90 bg-gradient-to-b from-red-50/30 to-white shadow-lg">
-          <h4 className="text-2xl font-bold text-slate-900">Don’t see the right fit?</h4>
-          <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm text-slate-600">
-            Send us your resume anyway and we will keep you in mind for future roles across our global teams.
-          </p>
-          <Button
-            asChild
-            className="mt-5 h-11 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 shadow-md"
-          >
-            <a href={`mailto:${companyInfo.email}?subject=General%20Application%20-%20TP%20IT%20Group%20LLC`}>
-              Send General Application <Mail className="size-4 ml-2" />
-            </a>
-          </Button>
-      </div>
-    </div>
+          {/* General Application Banner */}
+          <div className="glass-card p-6 sm:p-10 text-center border-slate-200/90 bg-gradient-to-b from-red-50/30 to-white shadow-lg">
+            <h4 className="text-2xl font-bold text-slate-900">Don’t see the right fit?</h4>
+            <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm text-slate-600">
+              Send us your resume anyway and we will keep you in mind for future roles across our global teams.
+            </p>
+            <Button
+              asChild
+              className="mt-5 h-11 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 shadow-md"
+            >
+              <a href={`mailto:${companyInfo.email}?subject=General%20Application%20-%20TP%20IT%20Group%20LLC`}>
+                Send General Application <Mail className="size-4 ml-2" />
+              </a>
+            </Button>
+          </div>
+        </div>
       </div >
     </section >
   );
@@ -1765,8 +1765,8 @@ export function ContactForm() {
             onChange={(e) => handleChange('name', e.target.value)}
             placeholder="e.g. John Doe"
             className={`contact-field w-full ${touched.name && errors.name
-                ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
-                : ''
+              ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
+              : ''
               }`}
           />
           {touched.name && errors.name && (
@@ -1790,8 +1790,8 @@ export function ContactForm() {
             onChange={(e) => handleChange('email', e.target.value)}
             placeholder="john@company.com"
             className={`contact-field w-full ${touched.email && errors.email
-                ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
-                : ''
+              ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
+              : ''
               }`}
           />
           {touched.email && errors.email && (
@@ -1847,8 +1847,8 @@ export function ContactForm() {
             }}
             placeholder="+1 (814) 844-1361"
             className={`contact-field w-full ${touched.phone && errors.phone
-                ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
-                : ''
+              ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
+              : ''
               }`}
           />
           {touched.phone && errors.phone && (
@@ -1891,8 +1891,8 @@ export function ContactForm() {
           onChange={(e) => handleChange('message', e.target.value)}
           placeholder="Please describe your digital goals, timeline, and technical scope..."
           className={`contact-field w-full resize-y ${touched.message && errors.message
-              ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
-              : ''
+            ? 'border-red-500 bg-red-50/20 focus:border-red-500 focus:ring-1 focus:ring-red-500'
+            : ''
             }`}
         />
         {touched.message && errors.message && (
