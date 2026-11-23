@@ -416,11 +416,7 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
         );
       })}
 
-      {/* Bottom Center Capsule */}
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 rounded-full border border-slate-300/80 bg-white/90 px-3.5 py-1 text-[10px] sm:text-[11px] font-semibold text-slate-700 shadow-md backdrop-blur-md pointer-events-none">
-        <span className="size-2 rounded-full bg-red-600 animate-pulse" />
-        <span>Global Delivery Network • US ⇄ Canada ⇄ India Connected Loop</span>
-      </div>
+
     </div>
   );
 }
