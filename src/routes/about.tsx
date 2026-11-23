@@ -69,7 +69,8 @@ function Page() {
             </h2>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-12 lg:gap-12 items-start">
+          {/* Top Story & Showcase Row: Balanced Height */}
+          <div className="grid gap-8 lg:grid-cols-12 lg:gap-12 items-stretch">
             {/* Left Story Column */}
             <div className="lg:col-span-7 space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed text-left">
               <p>
@@ -79,7 +80,7 @@ function Page() {
                 Our services connect technology solutions, consulting and IT and non-IT workforce needs. From AI automation, cloud and SAP to software, digital experiences and secure networks, we support the journey from business strategy to delivery and ongoing improvement.
               </p>
 
-              <h3 className="text-base sm:text-lg font-bold text-slate-900 pt-3">
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 pt-2">
                 20+ Years of Industry Experience
               </h3>
               <p>
@@ -89,7 +90,7 @@ function Page() {
                 We bring business context to technical decisions: understanding the organization's priorities, addressing integration needs and helping teams adopt new ways of working. We focus on lasting client relationships rather than treating deployment as the end of the engagement.
               </p>
 
-              <h3 className="text-base sm:text-lg font-bold text-slate-900 pt-3">
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 pt-2">
                 A Client-Focused Delivery Story
               </h3>
               <p>
@@ -97,10 +98,9 @@ function Page() {
               </p>
             </div>
 
-            {/* Right Mission & Vision Showcase (Matching User's Reference Sample) */}
-            <div className="lg:col-span-5 space-y-4">
-              {/* Boardroom Presentation Image provided by User */}
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-200/90 shadow-sm">
+            {/* Right Image Showcase: Fills height to match story text perfectly */}
+            <div className="lg:col-span-5 flex flex-col">
+              <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-full lg:min-h-[340px] w-full overflow-hidden rounded-2xl bg-slate-100 border border-slate-200/90 shadow-sm">
                 <img
                   src="/about-mission.jpg"
                   alt="TP IT Group Enterprise Collaboration and Leadership"
@@ -109,49 +109,49 @@ function Page() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent pointer-events-none" />
               </div>
+            </div>
+          </div>
 
-              {/* Twin Cards: Our Vision & Our Mission (Exact Reference Design) */}
-              <div className="space-y-3.5">
-                {/* Our Vision Card */}
-                <div className="rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/90 border-l-[5px] border-l-sky-500 shadow-sm hover:shadow-md transition-all text-left">
-                  <div className="flex items-center gap-3.5 mb-2.5">
-                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-sky-50 border border-sky-100 text-sky-600 shadow-xs">
-                      <Eye className="size-5 stroke-[2]" />
-                    </div>
-                    <div>
-                      <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-sky-600">
-                        OUR IDENTITY
-                      </span>
-                      <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-tight">
-                        Our Vision
-                      </h3>
-                    </div>
-                  </div>
-                  <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
-                    To be a trusted technology partner for businesses worldwide, delivering solutions that create lasting value, connecting enterprise strategy with cloud and digital execution.
-                  </p>
+          {/* Twin Cards: Our Vision & Our Mission Side-by-Side (Fills space evenly, no dead space) */}
+          <div className="grid gap-5 sm:grid-cols-2 mt-8 text-left">
+            {/* Our Vision Card */}
+            <div className="rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/90 border-l-[5px] border-l-sky-500 shadow-sm hover:shadow-md transition-all text-left">
+              <div className="flex items-center gap-3.5 mb-2.5">
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-sky-50 border border-sky-100 text-sky-600 shadow-xs">
+                  <Eye className="size-5 stroke-[2]" />
                 </div>
-
-                {/* Our Mission Card */}
-                <div className="rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/90 border-l-[5px] border-l-[#d7192a] shadow-sm hover:shadow-md transition-all text-left">
-                  <div className="flex items-center gap-3.5 mb-2.5">
-                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-red-50 border border-red-100 text-[#d7192a] shadow-xs">
-                      <Target className="size-5 stroke-[2]" />
-                    </div>
-                    <div>
-                      <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
-                        OUR COMMITMENT
-                      </span>
-                      <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-tight">
-                        Our Mission
-                      </h3>
-                    </div>
-                  </div>
-                  <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
-                    To empower organizations with innovative, reliable, and scalable technology solutions that improve operational efficiency and connect business goals with technology capabilities.
-                  </p>
+                <div>
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-sky-600">
+                    OUR IDENTITY
+                  </span>
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-tight">
+                    Our Vision
+                  </h3>
                 </div>
               </div>
+              <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
+                To be a trusted technology partner for businesses worldwide, delivering solutions that create lasting value, connecting enterprise strategy with cloud and digital execution.
+              </p>
+            </div>
+
+            {/* Our Mission Card */}
+            <div className="rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/90 border-l-[5px] border-l-[#d7192a] shadow-sm hover:shadow-md transition-all text-left">
+              <div className="flex items-center gap-3.5 mb-2.5">
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-red-50 border border-red-100 text-[#d7192a] shadow-xs">
+                  <Target className="size-5 stroke-[2]" />
+                </div>
+                <div>
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+                    OUR COMMITMENT
+                  </span>
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-tight">
+                    Our Mission
+                  </h3>
+                </div>
+              </div>
+              <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
+                To empower organizations with innovative, reliable, and scalable technology solutions that improve operational efficiency and connect business goals with technology capabilities.
+              </p>
             </div>
           </div>
         </div>
