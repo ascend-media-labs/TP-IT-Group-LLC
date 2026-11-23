@@ -125,23 +125,25 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Center: True Centered Navigation Links Capsule */}
-          <nav
-            aria-label="Main navigation"
-            className="hidden lg:flex items-center justify-center p-1 rounded-full bg-slate-100/80 border border-slate-200/80 shadow-[inset_0_1px_2px_rgba(0,0,0,0.03)] backdrop-blur-md gap-0.5 xl:gap-1.5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto"
-          >
-            {nav.map((item) => (
-              <Link
-                key={`${item.label}-${item.to}`}
-                to={item.to}
-                className="nav-link"
-                activeProps={{ className: 'nav-link active' }}
-                activeOptions={{ exact: true }}
-              >
-                <span className="nav-link-label">{item.label}</span>
-              </Link>
-            ))}
-          </nav>
+          {/* Center: Centered Navigation Links Capsule - Perfectly balanced between Logo & Action button */}
+          <div className="hidden lg:flex flex-1 items-center justify-center px-2 xl:px-4 z-20">
+            <nav
+              aria-label="Main navigation"
+              className="flex items-center justify-center p-1 rounded-full bg-slate-100/80 border border-slate-200/80 shadow-[inset_0_1px_2px_rgba(0,0,0,0.03)] backdrop-blur-md gap-0.5 xl:gap-1.5 pointer-events-auto"
+            >
+              {nav.map((item) => (
+                <Link
+                  key={`${item.label}-${item.to}`}
+                  to={item.to}
+                  className="nav-link"
+                  activeProps={{ className: 'nav-link active' }}
+                  activeOptions={{ exact: true }}
+                >
+                  <span className="nav-link-label">{item.label}</span>
+                </Link>
+              ))}
+            </nav>
+          </div>
 
           {/* Right: Action Button & Mobile Toggle */}
           <div className="flex items-center justify-end shrink-0 gap-2 z-10">
@@ -221,7 +223,7 @@ export function Hero() {
     <section
       id="home"
       aria-label="TP IT Group Hero"
-      className="relative overflow-hidden pt-1 pb-4 sm:pt-2 sm:pb-5 md:pt-2 md:pb-6 bg-white text-slate-900 bg-dot-pattern"
+      className="relative overflow-hidden pt-1 pb-3 sm:pt-2 sm:pb-4 min-h-[calc(100vh-4.25rem)] flex flex-col justify-between bg-white text-slate-900 bg-dot-pattern"
     >
       {/* Executive Hero Banner Background */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
@@ -317,6 +319,21 @@ export function Hero() {
           >
             <DigitalGlobe className="w-full h-[300px] sm:h-[340px] md:h-[370px] lg:h-[390px]" />
           </motion.div>
+        </div>
+
+        {/* Scroll cue to Executive Video Showcase */}
+        <div className="pt-2 sm:pt-3 pb-1 flex justify-center">
+          <a
+            href="#video-showcase"
+            className="group inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/95 px-3.5 py-1 text-xs font-semibold text-slate-700 shadow-xs hover:border-red-300 hover:text-[#d7192a] hover:shadow-sm transition-all"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#d7192a]" />
+            </span>
+            <span>Watch Executive Video Showcase</span>
+            <ChevronDown className="size-3.5 text-slate-400 group-hover:translate-y-0.5 group-hover:text-[#d7192a] transition-transform" />
+          </a>
         </div>
       </div>
     </section>
@@ -766,12 +783,12 @@ export function IndustriesSection() {
 
       {/* Auto-scrolling continuous carousel track */}
       <div className="relative w-full overflow-hidden py-3">
-        {/* Soft edge gradient masks */}
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-16 sm:w-28 bg-gradient-to-r from-white via-white/80 to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-16 sm:w-28 bg-gradient-to-l from-white via-white/80 to-transparent" />
+        {/* Soft edge gradient masks - delicate narrow fade so cards are crisp and readable */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-8 sm:w-12 bg-gradient-to-r from-white/90 to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-8 sm:w-12 bg-gradient-to-l from-white/90 to-transparent" />
 
         <div
-          className="flex w-max animate-marquee hover:[animation-play-state:paused] gap-6 items-stretch px-4"
+          className="flex w-max animate-marquee hover:[animation-play-state:paused] gap-6 items-stretch px-6"
           style={{ animationDuration: '45s' }}
         >
           {duplicatedIndustries.map((ind, idx) => (
@@ -792,10 +809,10 @@ export function IndustriesSection() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#d7192a] transition-colors">
+                <h3 className="text-lg font-bold text-slate-950 group-hover:text-[#d7192a] transition-colors">
                   {ind.name}
                 </h3>
-                <p className="mt-2 text-xs sm:text-[13px] text-slate-600 leading-relaxed">
+                <p className="mt-2 text-xs sm:text-[13px] text-slate-900 font-medium leading-relaxed">
                   Enterprise-grade digital systems and tailored technology workflows engineered for {ind.name.toLowerCase()}.
                 </p>
               </div>

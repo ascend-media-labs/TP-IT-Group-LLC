@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Volume2, VolumeX } from 'lucide-react';
+import { Volume2, VolumeX, Play } from 'lucide-react';
 
 export function HeroVideoBanner({ className = '' }: { className?: string }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -15,17 +15,32 @@ export function HeroVideoBanner({ className = '' }: { className?: string }) {
 
   return (
     <section
+      id="video-showcase"
       aria-label="TP IT Group Video Showcase"
-      className={`relative py-3 sm:py-5 bg-gradient-to-b from-white via-slate-50/60 to-white overflow-hidden ${className}`}
+      className={`relative py-6 sm:py-8 bg-gradient-to-b from-white via-slate-50/70 to-white overflow-hidden scroll-mt-16 ${className}`}
     >
       {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(215,25,42,0.035),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(215,25,42,0.04),transparent_70%)]" />
 
-      <div className="site-container relative z-10">
+      <div className="site-container relative z-10 space-y-3.5 sm:space-y-4">
+        {/* Section Header: Provides clear context so the section never looks cut off */}
+        <div className="text-center max-w-xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50/90 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#d7192a]">
+            <Play className="size-3 fill-current" />
+            Executive Showcase
+          </div>
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">
+            See TP IT Group in Action
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 mt-1">
+            Global technology delivery, enterprise consulting, and specialized IT &amp; non-IT talent across USA, Canada, and India.
+          </p>
+        </div>
+
         {/* Wide Widescreen Frame with identical border styling */}
-        <div className="relative mx-auto w-full max-w-6xl rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-slate-950 p-1.5 sm:p-2 shadow-xl shadow-slate-900/10 overflow-hidden group">
-          {/* Inner Video Container: wide container with vertical video centered inside */}
-          <div className="relative w-full h-[340px] xs:h-[380px] sm:h-[430px] md:h-[480px] lg:h-[520px] rounded-xl sm:rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center">
+        <div className="relative mx-auto w-full max-w-5xl rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-slate-950 p-1.5 sm:p-2 shadow-xl shadow-slate-900/10 overflow-hidden group">
+          {/* Inner Video Container: compact vertical height so it fits 100% on laptop & mobile screens */}
+          <div className="relative w-full h-[280px] xs:h-[320px] sm:h-[360px] md:h-[400px] lg:h-[430px] rounded-xl sm:rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center">
             {/* Ambient blurred reflection of the vertical video across the wide background */}
             <video
               src="/videos/TP_IT_video.mp4"
