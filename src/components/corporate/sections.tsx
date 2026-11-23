@@ -1202,6 +1202,7 @@ export function Careers({ full = false }: { full?: boolean }) {
 
   const departments = [
     'All',
+    'Cloud Technology',
     'Cloud Operations',
     'Engineering',
     'FinLabs',
@@ -1285,43 +1286,78 @@ export function Careers({ full = false }: { full?: boolean }) {
             ))}
           </div>
 
-          {/* Job Openings Grid */}
-          <div className="grid gap-5 md:grid-cols-2">
-            {filteredJobs.map((job) => (
-              <article
-                key={job.title}
-                className="glass-card flex flex-col justify-between p-6 bg-white/95 border-slate-200/90 hover:border-red-300 hover:shadow-xl transition-all"
-              >
-                <div>
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="rounded-md border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] font-bold text-[#d7192a]">
-                      {job.dept}
-                    </span>
-                    <span className="text-xs font-medium text-slate-500">{job.type}</span>
+          {/* Job Openings Grid - 3 Column Layout matching Image 2 */}
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredJobs.map((job, idx) => {
+              const code = (job as any).code || `USA-000${idx + 1}`;
+              const countryCode = (job as any).countryCode || 'us';
+              const country = (job as any).country || 'USA';
+              const experience = (job as any).experience || '5+ years';
+              const roleType = (job as any).sampleType || 'Sample role';
+
+              return (
+                <article
+                  key={job.title + idx}
+                  className="rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-sm hover:border-red-300 hover:shadow-md transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Top Row: Category in red, Sample role on right in muted */}
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-semibold text-[#d7192a] tracking-wide">
+                        {job.dept}
+                      </span>
+                      <span className="text-slate-400 font-medium">
+                        {roleType}
+                      </span>
+                    </div>
+
+                    {/* Job Title */}
+                    <h4 className="mt-2.5 text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                      {job.title}
+                    </h4>
+
+                    {/* Location Row */}
+                    <div className="mt-2 flex items-center gap-1.5 text-xs text-slate-600">
+                      <MapPin className="size-3.5 text-slate-500 shrink-0" />
+                      <span>{job.location}</span>
+                    </div>
+
+                    {/* Contract / Full-time + Experience Row */}
+                    <div className="mt-1.5 flex items-center gap-4 text-xs text-slate-600">
+                      <span className="flex items-center gap-1.5">
+                        <Briefcase className="size-3.5 text-slate-400 shrink-0" />
+                        <span>{job.type || 'Full-time'}</span>
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <Clock className="size-3.5 text-slate-400 shrink-0" />
+                        <span>{experience}</span>
+                      </span>
+                    </div>
+
+                    {/* Description Paragraph */}
+                    <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                      {(job as any).desc || (job as any).description}
+                    </p>
                   </div>
-                  <h4 className="mt-3 text-lg font-bold text-slate-900">{job.title}</h4>
-                  <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
-                    <MapPin className="size-3.5 text-[#d7192a]" /> {job.location}
-                  </p>
-                  <p className="mt-2.5 text-xs leading-relaxed text-slate-600">{job.desc}</p>
-                </div>
-                <div className="mt-5 pt-3.5 border-t border-slate-200/90 flex items-center justify-between">
-                  <Button
-                    asChild
-                    size="sm"
-                    className="rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs shadow-md shadow-red-500/20"
-                  >
+
+                  {/* Card Footer: Country Code & View role link */}
+                  <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-1 text-slate-500 font-mono text-[11px]">
+                      <span className="text-slate-400">{countryCode}</span>
+                      <span>{country} · {code}</span>
+                    </div>
+
                     <a
                       href={`mailto:${companyInfo.email}?subject=Application for ${encodeURIComponent(job.title)} (${encodeURIComponent(job.location)})`}
+                      className="inline-flex items-center gap-1.5 font-bold text-slate-900 hover:text-[#d7192a] transition-colors"
                     >
-                      Apply Now <ArrowUpRight className="size-3.5 ml-1" />
+                      View role <ArrowRight className="size-3.5" />
                     </a>
-                  </Button>
-                <span className="text-[11px] text-slate-500 font-medium">Immediate Opening</span>
-              </div>
+                  </div>
                 </article>
-              ))}
-        </div>
+              );
+            })}
+          </div>
 
         {/* General Application Banner */}
         <div className="glass-card p-6 sm:p-10 text-center border-slate-200/90 bg-gradient-to-b from-red-50/30 to-white shadow-lg">
