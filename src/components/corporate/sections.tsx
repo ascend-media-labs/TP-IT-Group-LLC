@@ -1503,19 +1503,24 @@ export function Careers({ full = false }: { full?: boolean }) {
                     </p>
                   </div>
 
-                  {/* Card Footer: Country Code & View role link */}
+                  {/* Card Footer: Country Code & Apply Now button */}
                   <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs">
                     <div className="flex items-center gap-1 text-slate-500 font-mono text-[11px]">
                       <span className="text-slate-400">{countryCode}</span>
                       <span>{country} · {code}</span>
                     </div>
 
-                    <a
-                      href={`mailto:${companyInfo.email}?subject=Application for ${encodeURIComponent(job.title)} (${encodeURIComponent(job.location)})`}
-                      className="inline-flex items-center gap-1.5 font-bold text-slate-900 hover:text-[#d7192a] transition-colors"
+                    <Button
+                      asChild
+                      size="sm"
+                      className="rounded-xl bg-[#d7192a] hover:bg-[#b91c1c] text-white font-bold text-xs shadow-md shadow-red-500/20"
                     >
-                      View role <ArrowRight className="size-3.5" />
-                    </a>
+                      <a
+                        href={`mailto:${companyInfo.email}?subject=Application for ${encodeURIComponent(job.title)} (${encodeURIComponent(job.location)})`}
+                      >
+                        Apply Now <ArrowUpRight className="size-3.5 ml-1" />
+                      </a>
+                    </Button>
                   </div>
                 </article>
               );
