@@ -51,7 +51,7 @@ export const companyInfo = {
     youtube: 'https://www.youtube.com/@tpitgroups',
     linkedin: 'https://www.linkedin.com/company/tp-it-group-llc',
     x: 'https://x.com/tpitgroups',
-    whatsapp: 'https://wa.me/18148441361',
+    whatsapp: 'https://wa.me/18148441362',
   },
 };
 

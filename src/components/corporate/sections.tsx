@@ -1695,6 +1695,7 @@ interface ContactFormErrors {
 export function ContactForm() {
   const [notice, setNotice] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [whatsappUrl, setWhatsappUrl] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -1787,8 +1788,27 @@ export function ContactForm() {
     }
 
     setLoading(true);
+
+    // Build WhatsApp message format with all captured details
+    const messageLines = [
+      `*New Project Inquiry - TP IT Group*`,
+      ``,
+      `*Full Name:* ${formData.name.trim()}`,
+      `*Corporate Email:* ${formData.email.trim()}`,
+      formData.phone.trim() ? `*Phone Number:* ${formData.phone.trim()}` : null,
+      `*Service Requirement:* ${formData.service}`,
+      ``,
+      `*Project Objectives & Requirements:*`,
+      `${formData.message.trim()}`,
+    ].filter(Boolean).join('\n');
+
+    // WhatsApp phone number: +1 (814) 844-1362 -> 18148441362
+    const targetWhatsappUrl = `https://wa.me/18148441362?text=${encodeURIComponent(messageLines)}`;
+    setWhatsappUrl(targetWhatsappUrl);
+
     try {
-      const res = await fetch('/api/contact', {
+      // Background attempt to persist to API if available (silent fallback if database is offline)
+      await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1798,24 +1818,31 @@ export function ContactForm() {
           subject: formData.service,
           message: formData.message.trim(),
         }),
+      }).catch(() => { });
+
+      setNotice(true);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: 'Cloud Migration & Infrastructure',
+        message: '',
       });
-      const data = await res.json();
-      if (data.success) {
-        setNotice(true);
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          service: 'Cloud Migration & Infrastructure',
-          message: '',
-        });
-        setTouched({});
-        setErrors({});
-      } else {
-        setErrors({ message: data.error || 'Failed to submit request' });
+      setTouched({});
+      setErrors({});
+
+      // Redirect / open WhatsApp directly
+      if (typeof window !== 'undefined') {
+        const opened = window.open(targetWhatsappUrl, '_blank');
+        if (!opened) {
+          window.location.href = targetWhatsappUrl;
+        }
       }
     } catch {
       setNotice(true);
+      if (typeof window !== 'undefined') {
+        window.location.href = targetWhatsappUrl;
+      }
     } finally {
       setLoading(false);
     }
@@ -1989,12 +2016,25 @@ export function ContactForm() {
       </Button>
 
       {notice && (
-        <div role="status" className="rounded-xl border border-emerald-300 bg-emerald-50 p-3.5 text-xs text-emerald-800 flex items-start gap-2">
-          <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" />
-          <div>
-            <strong>Thank you!</strong> Your enquiry has been received. A TP iT GROUP LLC enterprise consultant will reach
-            out to your email shortly.
+        <div role="status" className="rounded-xl border border-emerald-300 bg-emerald-50 p-4 text-xs text-emerald-800 space-y-2.5">
+          <div className="flex items-start gap-2">
+            <CheckCircle2 className="size-4.5 text-emerald-600 shrink-0 mt-0.5" />
+            <div>
+              <strong>Thank you!</strong> Your details have been submitted and we are redirecting you to WhatsApp (+1 814 844-1362).
+            </div>
           </div>
+          {whatsappUrl && (
+            <div className="pt-1">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs transition shadow-xs"
+              >
+                Open WhatsApp Chat <ArrowUpRight className="size-3.5" />
+              </a>
+            </div>
+          )}
         </div>
       )}
     </form>
