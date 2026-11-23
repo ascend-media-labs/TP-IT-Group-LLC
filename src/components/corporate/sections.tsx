@@ -119,7 +119,7 @@ export function Navbar() {
               onClick={() => setOpen(false)}
               aria-label="TP iT GROUP LLC Home"
             >
-              <TPITLogo className="h-5 sm:h-6 md:h-6.5 max-w-[150px] sm:max-w-[170px] w-auto shrink-0" />
+              <TPITLogo className="h-6 sm:h-7 md:h-8 max-w-[180px] sm:max-w-[220px] md:max-w-[260px] w-auto shrink-0" />
             </Link>
           </div>
 
@@ -2097,7 +2097,7 @@ export function Footer() {
           {/* Column 1: Brand & Motto */}
           <div className="lg:col-span-3">
             <Link to="/" className="brand-name inline-flex items-center" aria-label="TP iT GROUP LLC Home">
-              <TPITLogo className="h-6 sm:h-7 w-auto" />
+              <TPITLogo className="h-7 sm:h-8 md:h-9 max-w-[240px] w-auto" />
             </Link>
             <p className="mt-4 max-w-sm text-xs sm:text-[13px] leading-relaxed text-slate-600">
               One connected partner for technology, consulting and IT and non-IT talent. TP IT Group brings your business priorities, systems and people together.

@@ -8,17 +8,17 @@ interface TPITLogoProps {
 }
 
 export function TPITLogo({
-  className = "h-7 md:h-8 w-auto",
+  className = "h-7 sm:h-8 md:h-8.5 w-auto",
   inverted = false,
-  alt = "TP iT GROUP LLC",
+  alt = "TP iT GROUP LLC - Innovating Beyond Boundaries",
 }: TPITLogoProps) {
   return (
     <img
       src={inverted ? logoLight : logoDark}
       alt={alt}
       className={`${className} object-contain block`}
-      width={818}
-      height={68}
+      width={1024}
+      height={134}
       loading="eager"
     />
   );

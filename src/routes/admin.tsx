@@ -31,6 +31,7 @@ import {
   Clock,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { TPITLogo } from '@/components/corporate/logo';
 
 export const Route = createFileRoute('/admin')({
   component: AdminPage,
@@ -497,9 +498,7 @@ export function AdminPage() {
           {/* Logo & Header */}
           <div className="text-center mb-8">
             <Link to="/" className="inline-flex items-center justify-center gap-2 group">
-              <span className="font-black text-2xl tracking-tight text-slate-900 group-hover:text-[#d7192a] transition-colors">
-                TP <span className="text-[#d7192a]">iT</span> GROUP
-              </span>
+              <TPITLogo className="h-9 w-auto max-w-[240px]" />
             </Link>
             <h1 className="mt-4 text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Admin Console</h1>
             <p className="mt-2 text-xs sm:text-sm text-slate-600 font-medium">
@@ -638,12 +637,10 @@ export function AdminPage() {
         }`}
       >
         {/* Sidebar Brand & Header */}
-        <div className="h-16 px-5 border-b border-slate-200 flex items-center justify-between">
+        <div className="h-16 px-4 border-b border-slate-200 flex items-center justify-between">
           <Link to="/" className="inline-flex items-center gap-2 group">
-            <span className="font-black text-lg tracking-tight text-slate-900 group-hover:text-[#d7192a] transition-colors">
-              TP <span className="text-[#d7192a]">iT</span> GROUP
-            </span>
-            <span className="rounded-md bg-red-50 border border-red-200 px-2 py-0.5 text-[10px] font-bold text-[#d7192a] uppercase">
+            <TPITLogo className="h-6.5 w-auto max-w-[170px]" />
+            <span className="rounded-md bg-red-50 border border-red-200 px-2 py-0.5 text-[10px] font-bold text-[#d7192a] uppercase shrink-0">
               Admin
             </span>
           </Link>
