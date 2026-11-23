@@ -2243,21 +2243,12 @@ export function Contact() {
               </div>
               <div>
                 <h3 className="text-xs font-bold text-slate-900">Phone Support</h3>
-                <div className="mt-0.5 flex flex-wrap items-center gap-x-2.5 gap-y-0.5 font-mono text-xs">
-                  <a
-                    href="tel:+18148441361"
-                    className="text-slate-700 hover:text-[#d7192a] transition"
-                  >
-                    +1 (814) 844-1361
-                  </a>
-                  <span className="text-slate-300">•</span>
-                  <a
-                    href="tel:+18148441362"
-                    className="text-slate-700 hover:text-[#d7192a] transition font-semibold"
-                  >
-                    +1 (814) 844-1362
-                  </a>
-                </div>
+                <a
+                  href="tel:+18148441362"
+                  className="text-xs text-slate-700 hover:text-[#d7192a] transition mt-0.5 block font-mono"
+                >
+                  +1 (814) 844-1362
+                </a>
               </div>
             </div>
 
