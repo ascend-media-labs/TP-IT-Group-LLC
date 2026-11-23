@@ -42,6 +42,8 @@ import {
   MessageSquare,
   RefreshCw,
   AlertCircle,
+  Search,
+  ChevronDown,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -1173,6 +1175,9 @@ export function Clients({ full = false }: { full?: boolean }) {
 
 export function Careers({ full = false }: { full?: boolean }) {
   const [selectedDept, setSelectedDept] = useState('All');
+  const [selectedCountry, setSelectedCountry] = useState('all');
+  const [selectedJobType, setSelectedJobType] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
   const [jobsList, setJobsList] = useState(careersJobs);
 
   useEffect(() => {
@@ -1211,8 +1216,36 @@ export function Careers({ full = false }: { full?: boolean }) {
     'Management',
   ];
 
-  const filteredJobs =
-    selectedDept === 'All' ? jobsList : jobsList.filter((j) => j.dept === selectedDept);
+  const filteredJobs = jobsList.filter((job: any) => {
+    // 1. Search query filter
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      const match =
+        job.title.toLowerCase().includes(q) ||
+        (job.location || '').toLowerCase().includes(q) ||
+        (job.dept || '').toLowerCase().includes(q) ||
+        (job.desc || job.description || '').toLowerCase().includes(q);
+      if (!match) return false;
+    }
+
+    // 2. Country filter
+    if (selectedCountry !== 'all') {
+      const c = (job.countryCode || '').toLowerCase();
+      if (c && c !== selectedCountry.toLowerCase()) return false;
+    }
+
+    // 3. Department / Discipline filter
+    if (selectedDept !== 'All') {
+      if (job.dept !== selectedDept) return false;
+    }
+
+    // 4. Job type filter
+    if (selectedJobType !== 'All') {
+      if ((job.type || '').toLowerCase() !== selectedJobType.toLowerCase()) return false;
+    }
+
+    return true;
+  });
 
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern">
@@ -1231,42 +1264,172 @@ export function Careers({ full = false }: { full?: boolean }) {
           {/* Sample Roles Statistics & Action */}
           <div className="pt-1 pb-2">
             <div className="grid grid-cols-3 gap-4 sm:gap-10 max-w-2xl">
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              <button
+                type="button"
+                onClick={() => setSelectedCountry('us')}
+                className="text-left group cursor-pointer focus:outline-none"
+              >
+                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight group-hover:text-[#d7192a] transition">
                   <AutoIncrementNumber end={680} />
                 </div>
                 <div className="mt-1 flex items-center gap-1.5 text-xs sm:text-sm text-slate-600">
                   <span className="font-mono text-[11px] font-bold text-slate-500 uppercase">US</span>
-                  <span>Sample USA roles</span>
+                  <span className="group-hover:underline">Sample USA roles</span>
                 </div>
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedCountry('ca')}
+                className="text-left group cursor-pointer focus:outline-none"
+              >
+                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight group-hover:text-[#d7192a] transition">
                   <AutoIncrementNumber end={204} />
                 </div>
                 <div className="mt-1 flex items-center gap-1.5 text-xs sm:text-sm text-slate-600">
                   <span className="font-mono text-[11px] font-bold text-slate-500 uppercase">CA</span>
-                  <span>Sample Canada roles</span>
+                  <span className="group-hover:underline">Sample Canada roles</span>
                 </div>
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedCountry('in')}
+                className="text-left group cursor-pointer focus:outline-none"
+              >
+                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight group-hover:text-[#d7192a] transition">
                   <AutoIncrementNumber end={136} />
                 </div>
                 <div className="mt-1 flex items-center gap-1.5 text-xs sm:text-sm text-slate-600">
                   <span className="font-mono text-[11px] font-bold text-slate-500 uppercase">IN</span>
-                  <span>Sample India roles</span>
+                  <span className="group-hover:underline">Sample India roles</span>
                 </div>
-              </div>
+              </button>
             </div>
 
             <div className="mt-6">
               <a
-                href="#open-roles"
+                href="#explore-sample-roles"
                 className="inline-flex items-center gap-2 rounded-full bg-slate-950 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm px-6 py-2.5 shadow-sm transition"
               >
                 Browse Sample Roles <ArrowRight className="size-4" />
               </a>
+            </div>
+          </div>
+
+          {/* Explore Sample Roles Search & Filter Bar (Matching Image 1) */}
+          <div id="explore-sample-roles" className="pt-4 pb-2 space-y-4 border-t border-slate-100">
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#d7192a]">
+                  FIND YOUR SPECIALTY
+                </p>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">
+                  Explore Sample Roles
+                </h3>
+              </div>
+              <div className="text-xs sm:text-sm text-slate-500 font-medium">
+                1020 sample roles · 12 disciplines
+              </div>
+            </div>
+
+            {/* Filter Controls Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
+              {/* 1. Search Input */}
+              <div className="relative lg:col-span-4">
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400 pointer-events-none" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Job title, skill or city"
+                  className="w-full h-11 pl-10 pr-8 rounded-full border border-slate-200 bg-white text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400 shadow-xs"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                  >
+                    <X className="size-3.5" />
+                  </button>
+                )}
+              </div>
+
+              {/* 2. Country Select */}
+              <div className="relative lg:col-span-3">
+                <select
+                  value={selectedCountry}
+                  onChange={(e) => setSelectedCountry(e.target.value)}
+                  className="w-full h-11 pl-4 pr-9 rounded-full border border-slate-200 bg-white text-xs sm:text-sm font-medium text-slate-800 appearance-none focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400 shadow-xs cursor-pointer"
+                >
+                  <option value="all">All countries</option>
+                  <option value="us">us USA (680)</option>
+                  <option value="ca">CA Canada (204)</option>
+                  <option value="in">IN India (136)</option>
+                </select>
+                <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400 pointer-events-none" />
+              </div>
+
+              {/* 3. Disciplines Select */}
+              <div className="relative lg:col-span-3">
+                <select
+                  value={selectedDept}
+                  onChange={(e) => setSelectedDept(e.target.value)}
+                  className="w-full h-11 pl-4 pr-9 rounded-full border border-slate-200 bg-white text-xs sm:text-sm font-medium text-slate-800 appearance-none focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400 shadow-xs cursor-pointer"
+                >
+                  <option value="All">All disciplines</option>
+                  {departments
+                    .filter((d) => d !== 'All')
+                    .map((d) => (
+                      <option key={d} value={d}>
+                        {d}
+                      </option>
+                    ))}
+                </select>
+                <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400 pointer-events-none" />
+              </div>
+
+              {/* 4. Job Types Select */}
+              <div className="relative lg:col-span-2">
+                <select
+                  value={selectedJobType}
+                  onChange={(e) => setSelectedJobType(e.target.value)}
+                  className="w-full h-11 pl-4 pr-9 rounded-full border border-slate-200 bg-white text-xs sm:text-sm font-medium text-slate-800 appearance-none focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400 shadow-xs cursor-pointer"
+                >
+                  <option value="All">All job types</option>
+                  <option value="Full-time">Full-time</option>
+                  <option value="Contract">Contract</option>
+                </select>
+                <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400 pointer-events-none" />
+              </div>
+            </div>
+
+            {/* Filter Summary & Reset Bar */}
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 pt-1">
+              <span>
+                Showing 1–{filteredJobs.length} of{' '}
+                {selectedCountry === 'us'
+                  ? '680 matching sample roles'
+                  : selectedCountry === 'ca'
+                  ? '204 matching sample roles'
+                  : selectedCountry === 'in'
+                  ? '136 matching sample roles'
+                  : '1020 matching sample roles'}
+              </span>
+
+              {(searchQuery || selectedCountry !== 'all' || selectedDept !== 'All' || selectedJobType !== 'All') && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchQuery('');
+                    setSelectedCountry('all');
+                    setSelectedDept('All');
+                    setSelectedJobType('All');
+                  }}
+                  className="font-semibold text-slate-600 hover:text-[#d7192a] transition cursor-pointer"
+                >
+                  Reset filters
+                </button>
+              )}
             </div>
           </div>
 
