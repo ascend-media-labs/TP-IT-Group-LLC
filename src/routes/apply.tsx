@@ -17,10 +17,6 @@ import {
   ShieldCheck,
   AlertCircle,
   Sparkles,
-  Upload,
-  Loader2,
-  X,
-  Paperclip,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { metadata, careersJobs, companyInfo } from '@/components/corporate/content';
@@ -86,64 +82,7 @@ export function ApplyPage() {
   const [linkedinUrl, setLinkedinUrl] = useState('');
   const [portfolioUrl, setPortfolioUrl] = useState('');
   const [resumeLink, setResumeLink] = useState('');
-  const [uploadingResume, setUploadingResume] = useState(false);
-  const [uploadedFileName, setUploadedFileName] = useState('');
-  const [uploadedFileSize, setUploadedFileSize] = useState('');
   const [coverNote, setCoverNote] = useState('');
-
-  // Handle local device resume upload (PDF, DOC, DOCX up to 10MB)
-  const handleResumeUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (file.size > 10 * 1024 * 1024) {
-      setErrorMsg('Resume file size exceeds 10MB limit. Please upload a smaller PDF or Word file.');
-      return;
-    }
-
-    setUploadingResume(true);
-    setErrorMsg('');
-
-    try {
-      const reader = new FileReader();
-      reader.onload = async () => {
-        const base64Data = reader.result as string;
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            filename: file.name,
-            data: base64Data,
-            folder: 'resumes',
-          }),
-        });
-        const data = await res.json();
-        if (data.success && data.url) {
-          setResumeLink(data.url);
-          setUploadedFileName(file.name);
-          const sizeKb = Math.round(file.size / 1024);
-          setUploadedFileSize(sizeKb > 1024 ? `${(sizeKb / 1024).toFixed(1)} MB` : `${sizeKb} KB`);
-        } else {
-          setErrorMsg(data.error || 'Failed to upload resume file.');
-        }
-        setUploadingResume(false);
-      };
-      reader.onerror = () => {
-        setErrorMsg('Failed to read file from local storage.');
-        setUploadingResume(false);
-      };
-      reader.readAsDataURL(file);
-    } catch (err: any) {
-      setErrorMsg('Upload error: ' + (err.message || ''));
-      setUploadingResume(false);
-    }
-  };
-
-  const handleRemoveUploadedResume = () => {
-    setResumeLink('');
-    setUploadedFileName('');
-    setUploadedFileSize('');
-  };
 
   // Submission states
   const [submitting, setSubmitting] = useState(false);
@@ -182,12 +121,6 @@ export function ApplyPage() {
     const digitsOnly = phone.replace(/\D/g, '');
     if (digitsOnly.length < 10 || digitsOnly.length > 15) {
       setErrorMsg('Please enter a valid phone number (between 10 and 15 digits).');
-      return;
-    }
-
-    // Resume / CV validation
-    if (!resumeLink.trim()) {
-      setErrorMsg('Please upload your resume file or provide a cloud link (Google Drive, Dropbox, OneDrive).');
       return;
     }
 
@@ -555,121 +488,25 @@ export function ApplyPage() {
               <h2 className="text-sm sm:text-base font-extrabold text-slate-900">4. Resume, Links & Statement</h2>
             </div>
 
-            <div className="space-y-5 text-xs">
-              {/* DUAL RESUME SELECTION: UPLOAD FROM DEVICE OR DRIVE LINK */}
-              <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-4 sm:p-5 space-y-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <div>
-                    <label className="block font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
-                      <Paperclip className="size-4 text-[#d7192a]" />
-                      Resume / Curriculum Vitae (CV) *
-                    </label>
-                    <p className="text-[11px] text-slate-500 mt-0.5">
-                      Upload directly from your device (PDF, DOC, DOCX up to 10MB) or provide a cloud link.
-                    </p>
-                  </div>
+            <div className="space-y-4 text-xs">
+              <div>
+                <label className="block font-bold text-slate-700 mb-1.5 uppercase tracking-wider text-[11px]">
+                  Resume / CV Link (Google Drive, Dropbox, OneDrive, etc.) *
+                </label>
+                <div className="relative">
+                  <FileText className="absolute left-3.5 top-3 size-4 text-slate-400" />
+                  <input
+                    type="url"
+                    required
+                    value={resumeLink}
+                    onChange={(e) => setResumeLink(e.target.value)}
+                    placeholder="https://drive.google.com/file/d/... or Dropbox link"
+                    className="w-full rounded-xl border border-slate-300 bg-white pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-slate-900 font-medium focus:border-[#d7192a] focus:ring-1 focus:ring-[#d7192a] focus:outline-none"
+                  />
                 </div>
-
-                {/* Upload Button & Dropzone Box */}
-                <div className="rounded-xl border-2 border-dashed border-slate-300 bg-white p-4 sm:p-5 text-center transition hover:border-[#d7192a]/50">
-                  {uploadedFileName ? (
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 text-left">
-                      <div className="flex items-center gap-3 min-w-0">
-                        <div className="size-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 font-bold text-xs uppercase">
-                          <FileText className="size-5" />
-                        </div>
-                        <div className="min-w-0">
-                          <p className="font-bold text-slate-900 text-xs truncate max-w-xs sm:max-w-md">
-                            {uploadedFileName}
-                          </p>
-                          <p className="text-[11px] text-emerald-700 font-medium flex items-center gap-1.5 mt-0.5">
-                            <CheckCircle2 className="size-3" /> Ready for submission {uploadedFileSize ? `(${uploadedFileSize})` : ''}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-2 shrink-0">
-                        <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs cursor-pointer shadow-2xs transition">
-                          <Upload className="size-3.5 text-slate-500" />
-                          <span>Replace</span>
-                          <input
-                            type="file"
-                            accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                            disabled={uploadingResume}
-                            onChange={handleResumeUpload}
-                            className="hidden"
-                          />
-                        </label>
-                        <button
-                          type="button"
-                          onClick={handleRemoveUploadedResume}
-                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 text-xs font-semibold cursor-pointer transition"
-                          title="Remove uploaded resume"
-                        >
-                          <X className="size-3.5" /> Remove
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="space-y-3">
-                      <div className="size-12 rounded-2xl bg-red-50 text-[#d7192a] border border-red-100 flex items-center justify-center mx-auto">
-                        <Upload className="size-5.5" />
-                      </div>
-                      <div>
-                        <label className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs cursor-pointer shadow-md shadow-slate-900/10 transition active:scale-98">
-                          {uploadingResume ? (
-                            <>
-                              <Loader2 className="size-4 animate-spin" />
-                              <span>Uploading from device...</span>
-                            </>
-                          ) : (
-                            <>
-                              <Upload className="size-4" />
-                              <span>Upload Resume from Device</span>
-                            </>
-                          )}
-                          <input
-                            type="file"
-                            accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                            disabled={uploadingResume}
-                            onChange={handleResumeUpload}
-                            className="hidden"
-                          />
-                        </label>
-                        <p className="text-[11px] text-slate-500 mt-2 font-medium">
-                          Supports PDF, DOC, DOCX up to 10MB
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Alternative: Google Drive / Cloud Link Input */}
-                <div className="pt-2 border-t border-slate-200/80">
-                  <label className="block font-bold text-slate-700 mb-1.5 text-[11px] uppercase tracking-wider flex items-center justify-between">
-                    <span>Or Provide Cloud Drive / Dropbox Link</span>
-                    <span className="text-[10px] text-slate-400 font-normal">Google Drive, Dropbox, OneDrive, Box</span>
-                  </label>
-                  <div className="relative">
-                    <FileText className="absolute left-3.5 top-3 size-4 text-slate-400" />
-                    <input
-                      type="text"
-                      value={resumeLink}
-                      onChange={(e) => {
-                        setResumeLink(e.target.value);
-                        if (uploadedFileName) {
-                          setUploadedFileName('');
-                          setUploadedFileSize('');
-                        }
-                      }}
-                      placeholder="https://drive.google.com/file/d/... or Dropbox link"
-                      className="w-full rounded-xl border border-slate-300 bg-white pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-slate-900 font-medium focus:border-[#d7192a] focus:ring-1 focus:ring-[#d7192a] focus:outline-none"
-                    />
-                  </div>
-                  <p className="mt-1 text-[11px] text-slate-500">
-                    If providing a link, ensure sharing is set to "Anyone with the link can view".
-                  </p>
-                </div>
+                <p className="mt-1 text-[11px] text-slate-500">
+                  Please ensure the link is set to "Anyone with the link can view".
+                </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

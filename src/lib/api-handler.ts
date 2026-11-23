@@ -150,12 +150,12 @@ export async function handleApiRoute(
     }
 
     // =================================================================
-    // 3.5. FILE & PROFILE PHOTO / RESUME UPLOAD
+    // 3.5. FILE & PROFILE PHOTO UPLOAD (Team & Clients)
     // =================================================================
     if (pathname === '/api/upload' && method === 'POST') {
       const { filename, data: rawData, folder = 'team' } = body || {};
       if (!rawData) {
-        return { status: 400, data: { success: false, error: 'No file data provided for upload' } };
+        return { status: 400, data: { success: false, error: 'No image data provided for upload' } };
       }
 
       try {
@@ -163,24 +163,21 @@ export async function handleApiRoute(
         const base64Str = matches ? matches[2] : String(rawData);
         const buffer = Buffer.from(base64Str, 'base64');
 
-        let ext = '.pdf';
-        if (filename && path.extname(filename)) {
-          ext = path.extname(filename).toLowerCase();
-        } else if (matches && matches[1]) {
+        let ext = '.jpg';
+        if (matches && matches[1]) {
           const mime = matches[1].toLowerCase();
-          if (mime.includes('pdf')) ext = '.pdf';
-          else if (mime.includes('word') || mime.includes('document') || mime.includes('msword')) ext = '.docx';
-          else if (mime.includes('png')) ext = '.png';
-          else if (mime.includes('jpeg') || mime.includes('jpg')) ext = '.jpg';
+          if (mime.includes('png')) ext = '.png';
           else if (mime.includes('webp')) ext = '.webp';
           else if (mime.includes('svg')) ext = '.svg';
           else if (mime.includes('gif')) ext = '.gif';
+        } else if (filename && path.extname(filename)) {
+          ext = path.extname(filename).toLowerCase();
         }
 
-        const safeFolder = folder === 'logos' ? 'logos' : folder === 'resumes' ? 'resumes' : 'team';
-        const cleanName = (filename ? path.basename(filename, path.extname(filename)) : 'document')
+        const safeFolder = folder === 'logos' ? 'logos' : 'team';
+        const cleanName = (filename ? path.basename(filename, path.extname(filename)) : 'profile')
           .replace(/[^a-zA-Z0-9_-]/g, '_')
-          .slice(0, 40);
+          .slice(0, 30);
         const uniqueFilename = `${cleanName}_${Date.now()}${ext}`;
 
         const targetDir = path.resolve(process.cwd(), 'public', safeFolder);
@@ -204,7 +201,7 @@ export async function handleApiRoute(
         console.error('File upload error:', uploadErr);
         return {
           status: 500,
-          data: { success: false, error: uploadErr.message || 'Failed to save file' },
+          data: { success: false, error: uploadErr.message || 'Failed to save image file' },
         };
       }
     }
