@@ -22,20 +22,36 @@ export function HeroVideoBanner({ className = '' }: { className?: string }) {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(215,25,42,0.035),transparent_70%)]" />
 
       <div className="site-container relative z-10">
-        {/* Wide Widescreen Frame with Compact Height (small size vertically, wide width horizontally) */}
+        {/* Wide Widescreen Frame with identical border styling */}
         <div className="relative mx-auto w-full max-w-6xl rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-slate-950 p-1.5 sm:p-2 shadow-xl shadow-slate-900/10 overflow-hidden group">
-          {/* Inner Video Container */}
-          <div className="relative w-full h-[200px] xs:h-[240px] sm:h-[280px] md:h-[340px] lg:h-[380px] rounded-xl sm:rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center">
+          {/* Inner Video Container: wide container with vertical video centered inside */}
+          <div className="relative w-full h-[340px] xs:h-[380px] sm:h-[430px] md:h-[480px] lg:h-[520px] rounded-xl sm:rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center">
+            {/* Ambient blurred reflection of the vertical video across the wide background */}
             <video
-              ref={videoRef}
               src="/videos/TP_IT_video.mp4"
               autoPlay
               loop
-              muted={isMuted}
+              muted
               playsInline
-              controls
-              className="w-full h-full object-cover object-center"
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 h-full w-full object-cover blur-2xl opacity-30 scale-105"
             />
+            {/* Subtle dark overlay */}
+            <div className="pointer-events-none absolute inset-0 bg-slate-950/40" />
+
+            {/* Central Vertical Video Player (Aspect 9:16 portrait orientation) */}
+            <div className="relative z-10 h-full max-h-full aspect-[9/16] rounded-xl overflow-hidden shadow-2xl border border-white/15 bg-black flex items-center justify-center">
+              <video
+                ref={videoRef}
+                src="/videos/TP_IT_video.mp4"
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline
+                controls
+                className="w-full h-full object-contain"
+              />
+            </div>
 
             {/* Quick Unmute / Mute Glass Floating Pill (Top-Right) */}
             <div className="absolute top-3 right-3 z-20 flex items-center gap-2 pointer-events-auto">
