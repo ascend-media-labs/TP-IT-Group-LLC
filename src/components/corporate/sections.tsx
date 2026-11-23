@@ -2536,3 +2536,6 @@ export function Footer() {
     </footer>
   );
 }
+
+export { GlobalMapConnection } from './GlobalMapConnection';
+

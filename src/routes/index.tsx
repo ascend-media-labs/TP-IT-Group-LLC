@@ -10,6 +10,7 @@ import {
   WorkWithSection,
   ProvenApproachSection,
   Clients,
+  GlobalMapConnection,
 } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
 
@@ -44,6 +45,9 @@ function Index() {
 
       {/* 6. Clients */}
       <Clients />
+
+      {/* 7. Global Connection Map (Above Footer) */}
+      <GlobalMapConnection />
     </>
   );
 }

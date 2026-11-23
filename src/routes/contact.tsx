@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Contact } from '@/components/corporate/sections';
+import { Contact, GlobalMapConnection } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
 
 export const Route = createFileRoute('/contact')({
@@ -12,5 +12,10 @@ export const Route = createFileRoute('/contact')({
 });
 
 function Page() {
-  return <Contact />;
+  return (
+    <>
+      <Contact />
+      <GlobalMapConnection />
+    </>
+  );
 }
