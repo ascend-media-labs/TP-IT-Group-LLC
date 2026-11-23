@@ -2432,7 +2432,7 @@ export function Footer() {
             <Link to="/" className="brand-name inline-flex items-center" aria-label="TP iT GROUP LLC Home">
               <TPITLogo className="h-7 sm:h-8 md:h-9 max-w-[240px] w-auto" />
             </Link>
-            <p className="mt-4 max-w-sm text-xs sm:text-[13px] leading-relaxed text-slate-600">
+            <p className="mt-4 max-w-sm text-xs sm:text-[13px] leading-relaxed text-slate-900 font-medium">
               One connected partner for technology, consulting and IT and non-IT talent. TP IT Group brings your business priorities, systems and people together.
             </p>
             <p className="mt-4 text-xs sm:text-[13px] font-semibold text-[#d7192a]">
@@ -2445,8 +2445,8 @@ export function Footer() {
 
           {/* Column 2: Solutions */}
           <div className="lg:col-span-2">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">SOLUTIONS</h3>
-            <div className="mt-4 flex flex-col gap-2.5 text-xs sm:text-[13px] text-slate-600">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-950">SOLUTIONS</h3>
+            <div className="mt-4 flex flex-col gap-2.5 text-xs sm:text-[13px] text-slate-900 font-medium">
               <Link to="/services" className="hover:text-[#d7192a] transition-colors">AI Automation &amp; Agents</Link>
               <Link to="/services" className="hover:text-[#d7192a] transition-colors">Cloud Migration</Link>
               <Link to="/services" className="hover:text-[#d7192a] transition-colors">IT Development</Link>
@@ -2458,8 +2458,8 @@ export function Footer() {
 
           {/* Column 3: Quick Links */}
           <div className="lg:col-span-2">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">QUICK LINKS</h3>
-            <div className="mt-4 flex flex-col gap-2.5 text-xs sm:text-[13px] text-slate-600">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-950">QUICK LINKS</h3>
+            <div className="mt-4 flex flex-col gap-2.5 text-xs sm:text-[13px] text-slate-900 font-medium">
               <Link to="/about" className="hover:text-[#d7192a] transition-colors">About Us</Link>
               <Link to="/services" className="hover:text-[#d7192a] transition-colors">Our Services</Link>
               <Link to="/consulting" className="hover:text-[#d7192a] transition-colors">Consulting</Link>
@@ -2473,14 +2473,14 @@ export function Footer() {
 
           {/* Column 4: Our Offices */}
           <div className="lg:col-span-5 space-y-5">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">OUR OFFICES</h3>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-950">OUR OFFICES</h3>
 
             <div>
-              <p className="text-xs sm:text-[13px] text-slate-900 flex items-center gap-1.5">
+              <p className="text-xs sm:text-[13px] text-slate-950 flex items-center gap-1.5">
                 <CountryFlag country="us" />
                 <span className="font-bold">USA (Head Office) — TP IT Group LLC</span>
               </p>
-              <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+              <p className="mt-1 text-xs text-slate-900 leading-relaxed font-normal">
                 1000 N. West Street, Suite 1200, Wilmington, Delaware, 19801, United States of America
               </p>
               <a
@@ -2492,11 +2492,11 @@ export function Footer() {
             </div>
 
             <div>
-              <p className="text-xs sm:text-[13px] text-slate-900 flex items-center gap-1.5">
+              <p className="text-xs sm:text-[13px] text-slate-950 flex items-center gap-1.5">
                 <CountryFlag country="ca" />
                 <span className="font-bold">Canada — TP IT Group</span>
               </p>
-              <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+              <p className="mt-1 text-xs text-slate-900 leading-relaxed font-normal">
                 Ontario, Canada
               </p>
               <a
@@ -2508,11 +2508,11 @@ export function Footer() {
             </div>
 
             <div>
-              <p className="text-xs sm:text-[13px] text-slate-900 flex items-center gap-1.5">
+              <p className="text-xs sm:text-[13px] text-slate-950 flex items-center gap-1.5">
                 <CountryFlag country="in" />
                 <span className="font-bold">India — TP IT GROUP PVT LTD</span>
               </p>
-              <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+              <p className="mt-1 text-xs text-slate-900 leading-relaxed font-normal">
                 13th Floor, Manjeera Trinity Corporate, Unit No. 12A04, next to Lulu Mall, Kukatpally Housing Board Colony, K P H B Phase 3, Kukatpally, Hyderabad, Telangana 500072
               </p>
               <a
@@ -2525,7 +2525,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#d7192a]/15 pt-6 text-[11px] text-slate-500">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#d7192a]/15 pt-6 text-[11px] text-slate-800 font-medium">
           <span>© 2026 TP IT GROUP LLC. All rights reserved.</span>
           <div className="flex gap-6">
             <Link to="/privacy" className="hover:text-[#d7192a] transition">Privacy Policy</Link>
