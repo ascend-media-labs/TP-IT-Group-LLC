@@ -1208,12 +1208,17 @@ export function Careers({ full = false }: { full?: boolean }) {
   const departments = [
     'All',
     'Cloud Technology',
-    'Cloud Operations',
-    'Engineering',
-    'FinLabs',
-    'Enterprise Solutions',
-    'Digital Experience',
-    'Management',
+    'DevOps & Reliability',
+    'ERP & SAP',
+    'GenAI & AI',
+    'Data Engineering & Analytics',
+    'Software Engineering',
+    'QA & Testing',
+    'Business Analysis & Agile',
+    'Security & Networking',
+    'Healthcare & Hospital Services',
+    'Manufacturing & Production',
+    'Service & Business Operations',
   ];
 
   const filteredJobs = jobsList.filter((job: any) => {
