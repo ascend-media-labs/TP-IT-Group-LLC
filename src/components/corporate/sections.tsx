@@ -2529,4 +2529,5 @@ export function Footer() {
 }
 
 export { GlobalMapConnection } from './GlobalMapConnection';
+export { HeroVideoBanner } from './HeroVideoBanner';
 

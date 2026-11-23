@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import {
   Hero,
+  HeroVideoBanner,
   StatsSection,
   ConnectedCapabilitiesSection,
   Services,
@@ -28,6 +29,7 @@ function Index() {
     <>
       {/* 1. Home */}
       <Hero />
+      <HeroVideoBanner />
       <StatsSection />
 
       {/* 2. About */}
