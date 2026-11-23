@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Activity, ArrowRight } from 'lucide-react';
+import { CountryFlag } from './CountryFlag';
 
 interface LocationNode {
   id: string;
@@ -308,11 +309,17 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
           <span className="relative inline-flex rounded-full h-2 w-2 bg-[#d7192a]" />
         </span>
         <span className="text-[10px] sm:text-[11px] font-bold text-slate-800 tracking-wide flex items-center gap-1.5">
-          <span className={activeSegment === 0 ? 'text-[#d7192a] font-extrabold underline' : 'text-slate-600'}>USA</span>
+          <span className={`inline-flex items-center gap-1 ${activeSegment === 0 ? 'text-[#d7192a] font-extrabold underline' : 'text-slate-600'}`}>
+            <CountryFlag country="us" className="w-3.5 h-2.5 inline-block -mt-0.5" /> USA
+          </span>
           <ArrowRight className="size-3 text-red-500 animate-pulse" />
-          <span className={activeSegment === 1 ? 'text-[#d7192a] font-extrabold underline' : 'text-slate-600'}>CANADA</span>
+          <span className={`inline-flex items-center gap-1 ${activeSegment === 1 ? 'text-[#d7192a] font-extrabold underline' : 'text-slate-600'}`}>
+            <CountryFlag country="ca" className="w-3.5 h-2.5 inline-block -mt-0.5" /> CANADA
+          </span>
           <ArrowRight className="size-3 text-red-500 animate-pulse" />
-          <span className={activeSegment === 2 ? 'text-[#d7192a] font-extrabold underline' : 'text-slate-600'}>INDIA</span>
+          <span className={`inline-flex items-center gap-1 ${activeSegment === 2 ? 'text-[#d7192a] font-extrabold underline' : 'text-slate-600'}`}>
+            <CountryFlag country="in" className="w-3.5 h-2.5 inline-block -mt-0.5" /> INDIA
+          </span>
           <ArrowRight className="size-3 text-red-500 animate-pulse" />
           <span className="text-slate-400 text-[9px] uppercase font-semibold">LOOP</span>
         </span>
@@ -337,9 +344,10 @@ export function DigitalGlobe({ className = 'w-full h-[300px] sm:h-[340px] md:h-[
           >
             <div className="rounded-xl border border-slate-200/90 bg-white/95 px-3 py-2 shadow-md backdrop-blur-md text-left min-w-[130px] sm:min-w-[145px]">
               <div className="flex items-center gap-1.5">
-                <span className="inline-flex items-center justify-center px-1.5 py-0.5 rounded text-[9.5px] font-black tracking-wide bg-slate-900 text-white font-mono">
-                  {loc.countryCode}
-                </span>
+                <CountryFlag
+                  country={loc.id as 'us' | 'ca' | 'in'}
+                  className="w-5 h-3.5 shadow-xs"
+                />
                 <span className="text-[11px] sm:text-xs font-bold text-slate-900 tracking-tight">
                   {loc.country}
                 </span>

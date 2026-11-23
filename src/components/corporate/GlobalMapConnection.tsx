@@ -1,6 +1,7 @@
 import { useState, useId } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, Phone, Building2, ArrowRight, ShieldCheck, Sparkles, ExternalLink, Globe2 } from 'lucide-react';
+import { CountryFlag } from './CountryFlag';
 import { companyInfo } from './content';
 import { REAL_MAP_PATHS } from './mapPaths';
 
@@ -349,6 +350,7 @@ export function GlobalMapConnection({ className = '' }: { className?: string }) 
                         {/* Title & Subtitle */}
                         <div className="truncate">
                           <div className="flex items-center gap-1.5">
+                            <CountryFlag country={node.id as 'us' | 'ca' | 'in'} className="w-4 h-3 shadow-xs" />
                             <span className={`text-sm sm:text-base font-bold truncate ${isActive ? 'text-slate-950 font-extrabold' : 'text-slate-900'}`}>
                               {node.country}
                             </span>
@@ -460,9 +462,12 @@ export function GlobalMapConnection({ className = '' }: { className?: string }) 
 
                     {/* Country & City Title */}
                     <div>
-                      <h3 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight leading-snug">
-                        {activeNode.country}
-                      </h3>
+                      <div className="flex items-center gap-1.5">
+                        <CountryFlag country={activeNode.id as 'us' | 'ca' | 'in'} className="w-5 h-3.5 shadow-xs" />
+                        <h3 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight leading-snug">
+                          {activeNode.country}
+                        </h3>
+                      </div>
                       <p className={`text-xs font-semibold ${activeNode.id === 'canada' ? 'text-red-600' : 'text-blue-600'}`}>
                         {activeNode.city}
                       </p>
