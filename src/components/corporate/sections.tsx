@@ -1227,8 +1227,50 @@ export function Careers({ full = false }: { full?: boolean }) {
             </p>
           </div>
 
+          {/* Sample Roles Statistics & Action */}
+          <div className="pt-1 pb-2">
+            <div className="grid grid-cols-3 gap-4 sm:gap-10 max-w-2xl">
+              <div>
+                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                  <AutoIncrementNumber end={680} />
+                </div>
+                <div className="mt-1 flex items-center gap-1.5 text-xs sm:text-sm text-slate-600">
+                  <span className="font-mono text-[11px] font-bold text-slate-500 uppercase">US</span>
+                  <span>Sample USA roles</span>
+                </div>
+              </div>
+              <div>
+                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                  <AutoIncrementNumber end={204} />
+                </div>
+                <div className="mt-1 flex items-center gap-1.5 text-xs sm:text-sm text-slate-600">
+                  <span className="font-mono text-[11px] font-bold text-slate-500 uppercase">CA</span>
+                  <span>Sample Canada roles</span>
+                </div>
+              </div>
+              <div>
+                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                  <AutoIncrementNumber end={136} />
+                </div>
+                <div className="mt-1 flex items-center gap-1.5 text-xs sm:text-sm text-slate-600">
+                  <span className="font-mono text-[11px] font-bold text-slate-500 uppercase">IN</span>
+                  <span>Sample India roles</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <a
+                href="#open-roles"
+                className="inline-flex items-center gap-2 rounded-full bg-slate-950 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm px-6 py-2.5 shadow-sm transition"
+              >
+                Browse Sample Roles <ArrowRight className="size-4" />
+              </a>
+            </div>
+          </div>
+
           {/* Department Filter */}
-          <div className="flex flex-wrap gap-2">
+          <div id="open-roles" className="flex flex-wrap gap-2">
             {departments.map((dept) => (
               <button
                 key={dept}
@@ -1992,12 +2034,21 @@ export function Contact() {
               </div>
               <div>
                 <h3 className="text-xs font-bold text-slate-900">Phone Support</h3>
-                <a
-                  href={`tel:${companyInfo.phone.replace(/[^0-9+]/g, '')}`}
-                  className="text-xs text-slate-700 hover:text-[#d7192a] transition mt-0.5 block font-mono"
-                >
-                  {companyInfo.phone}
-                </a>
+                <div className="mt-0.5 flex flex-wrap items-center gap-x-2.5 gap-y-0.5 font-mono text-xs">
+                  <a
+                    href="tel:+18148441361"
+                    className="text-slate-700 hover:text-[#d7192a] transition"
+                  >
+                    +1 (814) 844-1361
+                  </a>
+                  <span className="text-slate-300">•</span>
+                  <a
+                    href="tel:+18148441362"
+                    className="text-slate-700 hover:text-[#d7192a] transition font-semibold"
+                  >
+                    +1 (814) 844-1362
+                  </a>
+                </div>
               </div>
             </div>
 

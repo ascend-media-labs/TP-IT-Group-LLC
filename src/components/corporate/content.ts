@@ -42,6 +42,7 @@ export const companyInfo = {
   },
   branchOffices: 'USA • India • Canada • UK • Australia',
   phone: '+1 (814) 844-1361',
+  phoneAlt: '+1 (814) 844-1362',
   email: 'info@tpitgroups.com',
   workingHours: '24/7 Global Support & Operations',
   social: {
