@@ -302,6 +302,11 @@ export const industries = [
     desc: 'TECHNICAL WORKFORCE SUPPORT',
     image: '/industries/engineering-field-services.jpg',
   },
+  {
+    name: 'Infrastructure',
+    desc: 'CLOUD, NETWORKING & ENTERPRISE INFRASTRUCTURE',
+    image: '/industries/infrastructure.jpg',
+  },
 ];
 
 export const provenApproach = [

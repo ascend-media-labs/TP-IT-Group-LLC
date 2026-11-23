@@ -14,6 +14,7 @@ import {
   Factory,
   Rocket,
   HardHat,
+  Server,
   ArrowRight,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -152,6 +153,12 @@ const industries = [
     desc: 'TECHNICAL WORKFORCE SUPPORT',
     icon: <HardHat className="size-6 text-white stroke-[2.2]" />,
     image: '/industries/engineering-field-services.jpg',
+  },
+  {
+    name: 'Infrastructure',
+    desc: 'CLOUD, NETWORKING & ENTERPRISE INFRASTRUCTURE',
+    icon: <Server className="size-6 text-white stroke-[2.2]" />,
+    image: '/industries/infrastructure.jpg',
   },
 ];
 
