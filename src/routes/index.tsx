@@ -29,8 +29,8 @@ function Index() {
     <>
       {/* 1. Home */}
       <Hero />
-      <HeroVideoBanner />
       <StatsSection />
+      <HeroVideoBanner />
 
       {/* 2. About */}
       <About />

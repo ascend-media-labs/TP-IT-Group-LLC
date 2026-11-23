@@ -223,7 +223,7 @@ export function Hero() {
     <section
       id="home"
       aria-label="TP IT Group Hero"
-      className="relative overflow-hidden pt-1 pb-3 sm:pt-2 sm:pb-4 min-h-[calc(100vh-4.25rem)] flex flex-col justify-between bg-white text-slate-900 bg-dot-pattern"
+      className="relative overflow-hidden pt-1 pb-4 sm:pt-2 sm:pb-6 bg-white text-slate-900 bg-dot-pattern"
     >
       {/* Executive Hero Banner Background */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
@@ -319,21 +319,6 @@ export function Hero() {
           >
             <DigitalGlobe className="w-full h-[300px] sm:h-[340px] md:h-[370px] lg:h-[390px]" />
           </motion.div>
-        </div>
-
-        {/* Scroll cue to Executive Video Showcase */}
-        <div className="pt-2 sm:pt-3 pb-1 flex justify-center">
-          <a
-            href="#video-showcase"
-            className="group inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/95 px-3.5 py-1 text-xs font-semibold text-slate-700 shadow-xs hover:border-red-300 hover:text-[#d7192a] hover:shadow-sm transition-all"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#d7192a]" />
-            </span>
-            <span>Watch Executive Video Showcase</span>
-            <ChevronDown className="size-3.5 text-slate-400 group-hover:translate-y-0.5 group-hover:text-[#d7192a] transition-transform" />
-          </a>
         </div>
       </div>
     </section>
