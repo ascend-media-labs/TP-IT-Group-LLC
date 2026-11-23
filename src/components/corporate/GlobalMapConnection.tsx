@@ -428,7 +428,13 @@ export function GlobalMapConnection({ className = '' }: { className?: string }) 
                           cy={REAL_MAP_PATHS.mini[activeNode.miniMapType].pin.y}
                           r="3.5"
                           fill="#ffffff"
-                          stroke={activeNode.id === 'canada' ? '#b91c1c' : '#1d4ed8'}
+                          stroke={
+                            activeNode.id === 'canada'
+                              ? '#b91c1c'
+                              : activeNode.id === 'india'
+                                ? '#0284c7'
+                                : '#1d4ed8'
+                          }
                           strokeWidth="2"
                         />
                         <circle
@@ -436,7 +442,13 @@ export function GlobalMapConnection({ className = '' }: { className?: string }) 
                           cy={REAL_MAP_PATHS.mini[activeNode.miniMapType].pin.y}
                           r="7"
                           fill="none"
-                          stroke={activeNode.id === 'canada' ? '#dc2626' : '#2563eb'}
+                          stroke={
+                            activeNode.id === 'canada'
+                              ? '#dc2626'
+                              : activeNode.id === 'india'
+                                ? '#0ea5e9'
+                                : '#2563eb'
+                          }
                           strokeWidth="1"
                           className="animate-ping"
                         />
