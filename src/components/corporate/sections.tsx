@@ -2136,11 +2136,11 @@ export function OfficeLocationsMapCard() {
               <span>Ontario, Canada</span>
             </div>
           </div>
-          <div className="mt-1.5 flex items-center gap-1.5 text-slate-600">
-            <Phone className="size-4 shrink-0 text-[#d7192a]" />
+          <div className="mt-2 flex items-center gap-2 text-slate-600">
+            <Phone className="size-5 shrink-0 text-[#d7192a]" />
             <a
               href="tel:+18148441362"
-              className="text-[#d7192a] font-extrabold hover:underline font-mono text-sm sm:text-base tracking-wide"
+              className="text-[#d7192a] font-extrabold hover:underline font-mono text-base sm:text-lg tracking-wide"
             >
               +1 (814) 844-1362
             </a>
@@ -2267,11 +2267,11 @@ export function Contact() {
                 <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                   {companyInfo.canadaOffice.fullAddress}
                 </p>
-                <div className="mt-1.5 flex items-center gap-1.5 text-slate-600">
-                  <Phone className="size-4 shrink-0 text-[#d7192a]" />
+                <div className="mt-2 flex items-center gap-2 text-slate-600">
+                  <Phone className="size-5 shrink-0 text-[#d7192a]" />
                   <a
                     href={`tel:${companyInfo.canadaOffice.phone.replace(/[^0-9+]/g, '')}`}
-                    className="font-extrabold text-sm sm:text-base text-[#d7192a] hover:underline font-mono tracking-wide"
+                    className="font-extrabold text-base sm:text-lg text-[#d7192a] hover:underline font-mono tracking-wide"
                   >
                     {companyInfo.canadaOffice.phone}
                   </a>
@@ -2336,7 +2336,7 @@ export function Contact() {
                 <h3 className="text-xs font-bold text-slate-900">Phone Support</h3>
                 <a
                   href="tel:+18148441362"
-                  className="text-sm font-extrabold text-[#d7192a] hover:underline transition mt-0.5 block font-mono tracking-wide"
+                  className="text-base font-extrabold text-[#d7192a] hover:underline transition mt-0.5 block font-mono tracking-wide"
                 >
                   +1 (814) 844-1362
                 </a>
