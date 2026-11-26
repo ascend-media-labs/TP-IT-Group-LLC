@@ -1314,7 +1314,7 @@ export function Careers({ full = false }: { full?: boolean }) {
             </p>
           </div>
 
-          {/* Sample Roles Statistics & Action */}
+          {/* Roles Statistics */}
           <div>
             <div className="grid grid-cols-3 gap-4 sm:gap-8 max-w-xl">
               <button
@@ -1327,7 +1327,7 @@ export function Careers({ full = false }: { full?: boolean }) {
                 </div>
                 <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-600">
                   <span className="font-mono text-[10px] font-bold text-slate-500 uppercase">US</span>
-                  <span className="group-hover:underline">Sample USA roles</span>
+                  <span className="group-hover:underline">USA roles</span>
                 </div>
               </button>
               <button
@@ -1340,7 +1340,7 @@ export function Careers({ full = false }: { full?: boolean }) {
                 </div>
                 <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-600">
                   <span className="font-mono text-[10px] font-bold text-slate-500 uppercase">CA</span>
-                  <span className="group-hover:underline">Sample Canada roles</span>
+                  <span className="group-hover:underline">Canada roles</span>
                 </div>
               </button>
               <button
@@ -1353,34 +1353,25 @@ export function Careers({ full = false }: { full?: boolean }) {
                 </div>
                 <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-600">
                   <span className="font-mono text-[10px] font-bold text-slate-500 uppercase">IN</span>
-                  <span className="group-hover:underline">Sample India roles</span>
+                  <span className="group-hover:underline">India roles</span>
                 </div>
               </button>
             </div>
-
-            <div className="mt-3">
-              <a
-                href="#explore-sample-roles"
-                className="inline-flex items-center gap-2 rounded-full bg-slate-950 hover:bg-slate-800 text-white font-semibold text-xs px-5 py-2 shadow-xs transition"
-              >
-                Browse Sample Roles <ArrowRight className="size-3.5" />
-              </a>
-            </div>
           </div>
 
-          {/* Explore Sample Roles Search & Filter Bar (Matching Image 1) */}
-          <div id="explore-sample-roles" className="pt-3.5 space-y-3 border-t border-slate-200/80">
+          {/* Explore Open Roles Search & Filter Bar */}
+          <div id="explore-roles" className="pt-3.5 space-y-3 border-t border-slate-200/80">
             <div className="flex flex-wrap items-end justify-between gap-2">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">
                   FIND YOUR SPECIALTY
                 </p>
                 <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 mt-0.5">
-                  Explore Sample Roles
+                  Explore Open Roles
                 </h3>
               </div>
               <div className="text-xs text-slate-500 font-medium">
-                {jobsList.length} sample roles · {departments.length - 1} disciplines
+                {jobsList.length} open roles · {departments.length - 1} disciplines
               </div>
             </div>
 
@@ -1460,13 +1451,13 @@ export function Careers({ full = false }: { full?: boolean }) {
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 pt-0.5">
               <span>
                 {filteredJobs.length === 0 ? (
-                  <span className="text-red-600 font-semibold">0 matching sample roles found</span>
+                  <span className="text-red-600 font-semibold">0 matching roles found</span>
                 ) : (
                   <>
                     Showing 1–{filteredJobs.length} of{' '}
                     {searchQuery || selectedCountry !== 'all' || selectedDept !== 'All' || selectedJobType !== 'All'
-                      ? `${filteredJobs.length} matching sample roles`
-                      : `${jobsList.length} sample roles`}
+                      ? `${filteredJobs.length} matching roles`
+                      : `${jobsList.length} open roles`}
                   </>
                 )}
               </span>
@@ -1492,7 +1483,7 @@ export function Careers({ full = false }: { full?: boolean }) {
           {/* Job Openings Grid - 3 Column Layout matching Image 2 */}
           {filteredJobs.length === 0 ? (
             <div className="text-center py-12 px-4 rounded-2xl border border-dashed border-slate-300 bg-slate-50/70">
-              <p className="text-base font-semibold text-slate-800">No matching sample roles found</p>
+              <p className="text-base font-semibold text-slate-800">No matching roles found</p>
               <p className="text-xs text-slate-500 mt-1 max-w-md mx-auto">
                 No roles match &quot;{searchQuery}&quot; with the selected filters. Try searching by job title (e.g. AWS, Cybersecurity, DevOps) or reset filters.
               </p>
@@ -1516,7 +1507,7 @@ export function Careers({ full = false }: { full?: boolean }) {
                 const countryCode = (job as any).countryCode || 'us';
                 const country = (job as any).country || 'USA';
                 const experience = (job as any).experience || '5+ years';
-                const roleType = (job as any).sampleType || 'Sample role';
+                const roleType = (job as any).sampleType || 'Open role';
 
                 return (
                   <article
@@ -1524,7 +1515,7 @@ export function Careers({ full = false }: { full?: boolean }) {
                     className="rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-sm hover:border-red-300 hover:shadow-md transition-all flex flex-col justify-between"
                   >
                     <div>
-                      {/* Top Row: Category in red, Sample role on right in muted */}
+                      {/* Top Row: Category in red, Open role on right in muted */}
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-semibold text-[#d7192a] tracking-wide">
                           {job.dept}

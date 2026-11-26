@@ -407,7 +407,7 @@ export const careersJobs = [
     code: 'USA-0001',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example AWS cloud engineer role focused on AWS architecture, Terraform, IAM, multi-region failover, and secure enterprise migrations.',
   },
   {
@@ -419,7 +419,7 @@ export const careersJobs = [
     code: 'USA-0002',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example Azure cloud architect role focused on enterprise landing zones, Azure Kubernetes Service, hybrid cloud governance, and cost optimization.',
   },
   {
@@ -431,7 +431,7 @@ export const careersJobs = [
     code: 'USA-0003',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example GCP specialist role focused on Google Cloud infrastructure, Anthos, BigQuery automation, and cloud security policies.',
   },
   {
@@ -443,7 +443,7 @@ export const careersJobs = [
     code: 'USA-0004',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example DevOps and site reliability engineer role focused on CI/CD pipelines, Kubernetes, automation, and high-availability infrastructure governance.',
   },
   {
@@ -455,7 +455,7 @@ export const careersJobs = [
     code: 'USA-0005',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example SAP S/4HANA consultant role focused on module configuration, workflow optimization, and ERP integration across corporate divisions.',
   },
   {
@@ -467,7 +467,7 @@ export const careersJobs = [
     code: 'USA-0006',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example generative AI and machine learning engineering role focused on LLMs, agentic automation, predictive analytics, and enterprise data models.',
   },
   {
@@ -479,7 +479,7 @@ export const careersJobs = [
     code: 'USA-0007',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example data engineer role focused on Snowflake, Databricks, Apache Spark, and real-time streaming data pipelines.',
   },
   {
@@ -491,7 +491,7 @@ export const careersJobs = [
     code: 'USA-0008',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example principal software engineer role focused on scalable distributed systems, microservices architecture, and modern full-stack development.',
   },
   {
@@ -503,7 +503,7 @@ export const careersJobs = [
     code: 'USA-0009',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example QA automation lead role focused on Playwright, Selenium, performance testing frameworks, and continuous regression suites.',
   },
   {
@@ -515,7 +515,7 @@ export const careersJobs = [
     code: 'USA-0010',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example agile business analyst role focused on stakeholder workshops, user stories, cross-functional sprints, and business process mapping.',
   },
   {
@@ -527,7 +527,7 @@ export const careersJobs = [
     code: 'USA-0011',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example cybersecurity specialist role focused on zero-trust architectures, SOC monitoring, penetration testing, and cloud security compliance.',
   },
   {
@@ -539,7 +539,7 @@ export const careersJobs = [
     code: 'USA-0012',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example cloud security analyst role focused on incident response, SIEM telemetry, vulnerability assessments, and threat mitigation.',
   },
   {
@@ -551,7 +551,7 @@ export const careersJobs = [
     code: 'CAN-0002',
     country: 'Canada',
     countryCode: 'ca',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example cyber defense lead role focused on enterprise risk frameworks, endpoint security, ISO 27001 compliance, and global defense monitoring.',
   },
   {
@@ -563,7 +563,7 @@ export const careersJobs = [
     code: 'IND-0002',
     country: 'India',
     countryCode: 'in',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example SOC engineer role focused on 24/7 security operations, network intrusion detection, firewall audits, and security telemetry.',
   },
   {
@@ -575,7 +575,7 @@ export const careersJobs = [
     code: 'USA-0013',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example healthcare IT role focused on EHR/EMR integrations, HIPAA compliance, HL7/FHIR protocols, and clinical workflow modernization.',
   },
   {
@@ -587,7 +587,7 @@ export const careersJobs = [
     code: 'USA-0014',
     country: 'USA',
     countryCode: 'us',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example manufacturing IT role focused on MES systems, SCADA/PLC telemetry, shop floor automation, and Industry 4.0 data capture.',
   },
   {
@@ -599,7 +599,7 @@ export const careersJobs = [
     code: 'CAN-0001',
     country: 'Canada',
     countryCode: 'ca',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example project lead role focused on agile delivery, cross-border development teams, and sprint governance across global hubs.',
   },
   {
@@ -611,7 +611,7 @@ export const careersJobs = [
     code: 'IND-0001',
     country: 'India',
     countryCode: 'in',
-    sampleType: 'Sample role',
+    sampleType: 'Open role',
     desc: 'Example delivery management role focused on SLA governance, 24/7 delivery execution, and client stakeholder management across global operations.',
   },
 ];
