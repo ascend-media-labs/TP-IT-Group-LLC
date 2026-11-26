@@ -587,7 +587,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: false, amount: 0.15 }}
                 transition={{ delay: i * 0.1, duration: 0.45 }}
-                className="group relative overflow-hidden rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05),0_1px_3px_rgba(15,23,42,0.02)] hover:shadow-[0_20px_40px_-10px_rgba(215,25,42,0.12),0_4px_12px_rgba(15,23,42,0.04)] hover:border-red-200 hover:-translate-y-1 transition-all duration-300 text-left flex flex-col justify-between"
+                className="group relative overflow-hidden rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05),0_1px_3px_rgba(15,23,42,0.02)] hover:shadow-[0_20px_40px_-10px_rgba(215,25,42,0.12),0_4px_12px_rgba(15,23,42,0.04)] hover:border-red-200 transition-all duration-300 text-left flex flex-col justify-between"
               >
                 {/* Top highlight bar on hover */}
                 <div className="pointer-events-none absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#d7192a] via-rose-500 to-red-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -779,7 +779,7 @@ export function IndustriesSection() {
           {duplicatedIndustries.map((ind, idx) => (
             <div
               key={`${ind.name}-${idx}`}
-              className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-2xl hover:shadow-red-500/10 hover:-translate-y-1.5 transition-all duration-300 text-left w-[290px] sm:w-[340px] md:w-[370px] shrink-0 rounded-2xl"
+              className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-2xl hover:shadow-red-500/10 transition-all duration-300 text-left w-[290px] sm:w-[340px] md:w-[370px] shrink-0 rounded-2xl"
             >
               <div>
                 {/* Card Image */}
@@ -1035,7 +1035,7 @@ export function ProvenApproachSection() {
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: false, amount: 0.15 }}
                   transition={{ delay: i * 0.1, duration: 0.45 }}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-red-400/80 hover:shadow-[0_20px_40px_-15px_rgba(215,25,42,0.15)]"
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] backdrop-blur-xl transition-all duration-300 hover:border-red-400/80 hover:shadow-[0_20px_40px_-15px_rgba(215,25,42,0.15)]"
                 >
                   {/* Luxury Top Accent Line that highlights on hover */}
                   <div className="absolute inset-x-0 top-0 h-[2.5px] bg-gradient-to-r from-transparent via-[#d7192a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -1157,7 +1157,7 @@ export function Clients({ full = false }: { full?: boolean }) {
               {clientList.map((client) => (
                 <div
                   key={client.name}
-                  className="group flex h-24 sm:h-28 items-center justify-center rounded-2xl border border-slate-200/90 bg-white p-4 shadow-xs transition-all duration-300 hover:border-red-300 hover:shadow-md hover:-translate-y-1"
+                  className="group flex h-24 sm:h-28 items-center justify-center rounded-2xl border border-slate-200/90 bg-white p-4 shadow-xs transition-all duration-300 hover:border-red-300 hover:shadow-md"
                 >
                   <img
                     src={client.src}

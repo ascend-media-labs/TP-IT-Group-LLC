@@ -265,10 +265,10 @@ p,
   border-color: rgba(215, 25, 42, 0.38) !important;
   background: rgba(255, 255, 255, 0.95);
   box-shadow:
-    0 20px 42px -10px rgba(215, 25, 42, 0.16),
-    0 0 25px -2px rgba(215, 25, 42, 0.12),
+    0 16px 36px -10px rgba(215, 25, 42, 0.16),
+    0 0 20px -2px rgba(215, 25, 42, 0.12),
     inset 0 1px 2px 0 rgba(255, 255, 255, 1);
-  transform: translateY(-5px);
+  transform: none !important;
 }
 
 /* 3. Signature 4-Sides Edge Curve Cards (General Cards across public website) */
@@ -346,12 +346,12 @@ p,
 :not(.admin-root) .card-diagonal:hover:not(.no-hover-glow),
 :not(.admin-root):not(#video-showcase):not(.no-hover-glow) .rounded-3xl.border:hover:not(.admin-card):not(.no-hover-glow),
 :not(.admin-root):not(#video-showcase):not(.no-hover-glow) .rounded-2xl.border:hover:not(.admin-card):not(.no-hover-glow) {
-  transform: translateY(-4px);
+  transform: none !important;
   border-color: rgba(215, 25, 42, 0.35) !important;
   background-color: rgba(255, 255, 255, 0.96);
   box-shadow:
-    0 20px 40px -10px rgba(215, 25, 42, 0.15),
-    0 0 24px -2px rgba(215, 25, 42, 0.10),
+    0 16px 36px -10px rgba(215, 25, 42, 0.15),
+    0 0 20px -2px rgba(215, 25, 42, 0.10),
     inset 0 1px 2px 0 #ffffff;
 }
 
