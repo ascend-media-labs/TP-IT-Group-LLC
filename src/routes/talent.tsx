@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 import { metadata } from '@/components/corporate/content';
 import { Button } from '@/components/ui/button';
 import { Check, ArrowRight, Compass, Layers, Users, RefreshCw, CheckCircle2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export const Route = createFileRoute('/talent')({
   head: () =>

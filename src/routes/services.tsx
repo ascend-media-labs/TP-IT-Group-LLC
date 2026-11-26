@@ -17,7 +17,7 @@ import {
   Server,
   ArrowRight,
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export const Route = createFileRoute('/services')({
   head: () =>

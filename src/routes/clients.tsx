@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Clients } from '@/components/corporate/sections';
 import { metadata } from '@/components/corporate/content';
 import { Trophy, ShieldCheck, Zap, Clock, BarChart3 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export const Route = createFileRoute('/clients')({
   head: () =>

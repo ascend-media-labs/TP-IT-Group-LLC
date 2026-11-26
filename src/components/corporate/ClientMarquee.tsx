@@ -45,7 +45,8 @@ export function ClientMarquee() {
               src={client.src}
               alt={client.name}
               className="max-h-11 max-w-[85%] object-contain contrast-125 transition-all duration-300 group-hover:scale-105"
-              loading="lazy"
+              loading="eager"
+              decoding="async"
             />
           </div>
         ))}

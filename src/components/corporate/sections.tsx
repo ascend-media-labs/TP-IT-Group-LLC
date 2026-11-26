@@ -748,7 +748,7 @@ export function Services({ full = false }: { full?: boolean }) {
 }
 
 export function IndustriesSection() {
-  const duplicatedIndustries = [...industries, ...industries, ...industries];
+  const duplicatedIndustries = [...industries, ...industries, ...industries, ...industries];
 
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern pt-2 sm:pt-3 pb-6 sm:pb-8">
@@ -772,10 +772,7 @@ export function IndustriesSection() {
         <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-8 sm:w-12 bg-gradient-to-r from-white/90 to-transparent" />
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-8 sm:w-12 bg-gradient-to-l from-white/90 to-transparent" />
 
-        <div
-          className="flex w-max animate-marquee gap-6 items-stretch px-6"
-          style={{ animationDuration: '45s' }}
-        >
+        <div className="flex w-max animate-marquee-slow gap-6 items-stretch px-6">
           {duplicatedIndustries.map((ind, idx) => (
             <div
               key={`${ind.name}-${idx}`}
@@ -788,7 +785,8 @@ export function IndustriesSection() {
                     src={ind.image}
                     alt={ind.name}
                     className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                    loading="lazy"
+                    loading="eager"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300" />
                 </div>
