@@ -2138,9 +2138,12 @@ export function OfficeLocationsMapCard() {
               <span>Ontario, Canada</span>
             </div>
           </div>
-          <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-600">
-            <Phone className="size-3.5 shrink-0 text-[#d7192a]" />
-            <a href="tel:+18148441362" className="text-[#d7192a] font-bold hover:underline font-mono">
+          <div className="mt-1.5 flex items-center gap-1.5 text-slate-600">
+            <Phone className="size-4 shrink-0 text-[#d7192a]" />
+            <a
+              href="tel:+18148441362"
+              className="text-[#d7192a] font-extrabold hover:underline font-mono text-sm sm:text-base tracking-wide"
+            >
               +1 (814) 844-1362
             </a>
           </div>
@@ -2266,9 +2269,12 @@ export function Contact() {
                 <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                   {companyInfo.canadaOffice.fullAddress}
                 </p>
-                <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-600">
-                  <Phone className="size-3.5 shrink-0 text-[#d7192a]" />
-                  <a href={`tel:${companyInfo.canadaOffice.phone.replace(/[^0-9+]/g, '')}`} className="font-bold text-[#d7192a] hover:underline font-mono">
+                <div className="mt-1.5 flex items-center gap-1.5 text-slate-600">
+                  <Phone className="size-4 shrink-0 text-[#d7192a]" />
+                  <a
+                    href={`tel:${companyInfo.canadaOffice.phone.replace(/[^0-9+]/g, '')}`}
+                    className="font-extrabold text-sm sm:text-base text-[#d7192a] hover:underline font-mono tracking-wide"
+                  >
                     {companyInfo.canadaOffice.phone}
                   </a>
                 </div>
@@ -2332,7 +2338,7 @@ export function Contact() {
                 <h3 className="text-xs font-bold text-slate-900">Phone Support</h3>
                 <a
                   href="tel:+18148441362"
-                  className="text-xs text-slate-700 hover:text-[#d7192a] transition mt-0.5 block font-mono"
+                  className="text-sm font-extrabold text-[#d7192a] hover:underline transition mt-0.5 block font-mono tracking-wide"
                 >
                   +1 (814) 844-1362
                 </a>
