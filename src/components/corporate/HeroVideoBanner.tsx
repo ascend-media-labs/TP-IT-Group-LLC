@@ -23,8 +23,8 @@ export function HeroVideoBanner({ className = '' }: { className?: string }) {
       <div className="pointer-events-none absolute inset-0 bg-dot-pattern opacity-50" />
 
       <div className="site-container relative z-10">
-        {/* Showcase Card - Streamlined length & compact padding */}
-        <div className="relative w-full rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-gradient-to-br from-white via-slate-50/50 to-red-50/25 p-3.5 sm:p-5 lg:p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+        {/* Showcase Card - Clean solid white without hover glow */}
+        <div className="no-hover-glow relative w-full rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white p-3.5 sm:p-5 lg:p-6 shadow-sm">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 xl:gap-8 items-center">
             
             {/* Left Column: Vertical Video locked to exact 9:16 original aspect ratio */}
@@ -93,7 +93,7 @@ export function HeroVideoBanner({ className = '' }: { className?: string }) {
 
               {/* Feature Highlights Grid - 2x2 tiles */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-0.5">
-                <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs hover:border-red-200 transition">
+                <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs hover:border-slate-300 transition">
                   <div className="p-2 rounded-lg bg-red-50 text-[#d7192a] shrink-0 mt-0.5">
                     <Server className="size-4" />
                   </div>
@@ -103,7 +103,7 @@ export function HeroVideoBanner({ className = '' }: { className?: string }) {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs hover:border-red-200 transition">
+                <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs hover:border-slate-300 transition">
                   <div className="p-2 rounded-lg bg-red-50 text-[#d7192a] shrink-0 mt-0.5">
                     <Code2 className="size-4" />
                   </div>
@@ -113,7 +113,7 @@ export function HeroVideoBanner({ className = '' }: { className?: string }) {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs hover:border-red-200 transition">
+                <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs hover:border-slate-300 transition">
                   <div className="p-2 rounded-lg bg-red-50 text-[#d7192a] shrink-0 mt-0.5">
                     <Globe2 className="size-4" />
                   </div>
@@ -123,7 +123,7 @@ export function HeroVideoBanner({ className = '' }: { className?: string }) {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs hover:border-red-200 transition">
+                <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs hover:border-slate-300 transition">
                   <div className="p-2 rounded-lg bg-red-50 text-[#d7192a] shrink-0 mt-0.5">
                     <ShieldCheck className="size-4" />
                   </div>

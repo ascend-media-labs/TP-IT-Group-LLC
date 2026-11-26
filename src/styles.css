@@ -343,9 +343,9 @@ p,
   position: relative;
 }
 
-:not(.admin-root) .card-diagonal:hover,
-:not(.admin-root) .rounded-3xl.border:hover:not(.admin-card),
-:not(.admin-root) .rounded-2xl.border:hover:not(.admin-card) {
+:not(.admin-root) .card-diagonal:hover:not(.no-hover-glow),
+:not(.admin-root):not(#video-showcase):not(.no-hover-glow) .rounded-3xl.border:hover:not(.admin-card):not(.no-hover-glow),
+:not(.admin-root):not(#video-showcase):not(.no-hover-glow) .rounded-2xl.border:hover:not(.admin-card):not(.no-hover-glow) {
   transform: translateY(-4px);
   border-color: rgba(215, 25, 42, 0.35) !important;
   background-color: rgba(255, 255, 255, 0.96);
@@ -356,13 +356,41 @@ p,
 }
 
 /* 4. Interactive Icon Glow & Tilt Inside Cards */
-.rounded-3xl.border:hover .bg-red-50,
-.rounded-2xl.border:hover .bg-red-50,
-.glass-card:hover .bg-red-50 {
+:not(#video-showcase) .rounded-3xl.border:hover .bg-red-50,
+:not(#video-showcase) .rounded-2xl.border:hover .bg-red-50,
+:not(#video-showcase) .glass-card:hover .bg-red-50 {
   background-color: rgba(254, 226, 226, 0.85) !important;
   border-color: rgba(215, 25, 42, 0.3) !important;
   box-shadow: 0 0 18px rgba(215, 25, 42, 0.22);
   transform: scale(1.08) rotate(3deg);
+}
+
+/* Explicit clean normal styling for Video Showcase card on hover (no BG glow) */
+#video-showcase .no-hover-glow,
+#video-showcase .rounded-2xl.border,
+#video-showcase .rounded-3xl.border {
+  transform: none !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+  background-color: #ffffff !important;
+}
+
+#video-showcase .no-hover-glow:hover,
+#video-showcase .rounded-2xl.border:hover,
+#video-showcase .rounded-3xl.border:hover {
+  transform: none !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+  background-color: #ffffff !important;
+}
+
+#video-showcase .bg-red-50,
+#video-showcase:hover .bg-red-50,
+#video-showcase *:hover .bg-red-50 {
+  background-color: rgb(254, 242, 242) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
 }
 
 .bg-red-50 {
