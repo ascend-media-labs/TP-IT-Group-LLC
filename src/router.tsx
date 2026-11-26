@@ -10,7 +10,8 @@ export const getRouter = () => {
     routeTree,
     context: { queryClient },
     scrollRestoration: true,
-    // Lets Query own freshness; set caching defaults on the QueryClient, not the router.
+    // Disable aggressive mouseover preloading to prevent network congestion on hover
+    defaultPreload: false,
     defaultPreloadStaleTime: 0,
   });
 

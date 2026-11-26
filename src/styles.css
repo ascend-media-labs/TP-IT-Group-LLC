@@ -429,7 +429,7 @@ button.bg-\[\#d7192a\]:hover,
 a.bg-\[\#d7192a\]:hover,
 .btn-glow:hover {
   box-shadow: 0 8px 30px -4px rgba(215, 25, 42, 0.55), 0 0 20px rgba(215, 25, 42, 0.32), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
-  transform: translateY(-2px) scale(1.02);
+  transform: none !important;
 }
 
 button.bg-\[\#d7192a\]:active,
@@ -454,7 +454,7 @@ button.variant-outline:hover,
 .btn-glass:hover {
   border-color: rgba(215, 25, 42, 0.35);
   box-shadow: 0 6px 22px -4px rgba(215, 25, 42, 0.16), 0 0 14px rgba(215, 25, 42, 0.1);
-  transform: translateY(-2px);
+  transform: none !important;
 }
 
 /* 8. Ambient Glow Orbs for Sections */

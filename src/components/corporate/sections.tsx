@@ -2493,7 +2493,7 @@ export function OfficialSocialChannels({ className = '' }: { className?: string 
             rel="noopener noreferrer"
             title={item.name}
             aria-label={item.name}
-            className={`size-10 rounded-full flex items-center justify-center text-white shadow-md transition-all duration-300 hover:scale-110 active:scale-95 ${item.bg} ${item.shadow}`}
+            className={`size-10 rounded-full flex items-center justify-center text-white shadow-md transition-all duration-300 hover:brightness-110 active:scale-95 ${item.bg} ${item.shadow}`}
           >
             {item.icon}
           </a>
