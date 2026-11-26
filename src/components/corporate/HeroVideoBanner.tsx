@@ -29,7 +29,7 @@ export function HeroVideoBanner({ className = '' }: { className?: string }) {
             
             {/* Left Column: Vertical Video locked to exact 9:16 original aspect ratio */}
             <div className="lg:col-span-5 xl:col-span-4 flex justify-center">
-              <div className="relative w-[210px] xs:w-[225px] sm:w-[240px] lg:w-[250px] xl:w-[260px] aspect-[9/16] rounded-2xl overflow-hidden border-2 border-slate-300 shadow-xl bg-black group shrink-0">
+              <div className="relative h-[340px] xs:h-[355px] sm:h-[370px] lg:h-[385px] xl:h-[395px] w-auto aspect-[9/16] rounded-2xl overflow-hidden border-2 border-slate-300 shadow-xl bg-black group shrink-0">
                 <video
                   ref={videoRef}
                   src="/videos/TP_IT_video.mp4"
