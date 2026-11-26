@@ -1,8 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link } from '@tanstack/react-router';
-import { Volume2, VolumeX, Play, ArrowUpRight, ShieldCheck, Server, Code2, Globe2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { CountryFlag } from './CountryFlag';
+import { Volume2, VolumeX, Play, ShieldCheck, Server, Code2, Globe2 } from 'lucide-react';
 
 export function HeroVideoBanner({ className = '' }: { className?: string }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -134,37 +131,6 @@ export function HeroVideoBanner({ className = '' }: { className?: string }) {
                     <h4 className="text-xs sm:text-[13px] font-bold text-slate-900">Specialized Talent Delivery</h4>
                     <p className="text-[11px] sm:text-xs text-slate-600 mt-0.5 leading-snug">Contract &amp; full-time technical workforce for enterprises and startups.</p>
                   </div>
-                </div>
-              </div>
-
-              {/* Direct Connect & Country Support Info */}
-              <div className="pt-1 flex flex-wrap items-center gap-2.5">
-                <Button
-                  asChild
-                  className="h-8.5 sm:h-9 rounded-full bg-gradient-to-r from-[#d7192a] via-[#e11d48] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] text-white px-4.5 text-xs font-bold shadow-sm shadow-red-500/20 gap-1.5 transition hover:scale-105"
-                >
-                  <Link to="/contact">
-                    Let’s Solve Your Next Challenge <ArrowUpRight className="size-3.5" />
-                  </Link>
-                </Button>
-
-                {/* Country Flags & Numbers */}
-                <div className="flex flex-wrap items-center gap-2">
-                  <a
-                    href="tel:+18148441362"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-800 shadow-xs hover:border-red-300 transition"
-                  >
-                    <CountryFlag country="usa" size="sm" />
-                    <CountryFlag country="canada" size="sm" />
-                    <span>+1 (814) 844-1362</span>
-                  </a>
-                  <a
-                    href="tel:+919963435256"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-800 shadow-xs hover:border-red-300 transition"
-                  >
-                    <CountryFlag country="india" size="sm" />
-                    <span>+91-9963435256</span>
-                  </a>
                 </div>
               </div>
             </div>
