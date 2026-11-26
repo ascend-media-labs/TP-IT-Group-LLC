@@ -328,7 +328,7 @@ export function Hero() {
 function AutoIncrementNumber({ end, suffix = '' }: { end: number; suffix?: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement | null>(null);
-  const isInView = useInView(ref, { once: false, margin: '-20px' });
+  const isInView = useInView(ref, { once: true, margin: '-20px' });
 
   useEffect(() => {
     if (!isInView) {
@@ -440,7 +440,7 @@ export function ConnectedCapabilitiesSection() {
               key={cap.number}
               initial={{ opacity: 0, y: 20, scale: 0.98 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: false, amount: 0.15 }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{ delay: i * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               className="group card-diagonal overflow-hidden flex flex-col justify-between p-4 sm:p-5 bg-white/95 border border-slate-200/90 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
             >
@@ -537,7 +537,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
           >
             <span className="inline-flex items-center gap-1.5 rounded-full bg-red-50 border border-red-200/90 px-3.5 py-1 text-xs font-bold text-[#d7192a] shadow-2xs">
@@ -585,7 +585,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
                 key={card.title}
                 initial={{ opacity: 0, y: 25, scale: 0.97 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: false, amount: 0.15 }}
+                viewport={{ once: true, amount: 0.15 }}
                 transition={{ delay: i * 0.1, duration: 0.45 }}
                 className="group relative overflow-hidden rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05),0_1px_3px_rgba(15,23,42,0.02)] hover:shadow-[0_20px_40px_-10px_rgba(215,25,42,0.12),0_4px_12px_rgba(15,23,42,0.04)] hover:border-red-200 transition-all duration-300 text-left flex flex-col justify-between"
               >
@@ -651,7 +651,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
                     key={val.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.15 }}
+                    viewport={{ once: true, amount: 0.15 }}
                     transition={{ delay: i * 0.1 }}
                     className="glass-card p-6"
                   >
@@ -680,7 +680,7 @@ export function About({ detailed = false }: { detailed?: boolean }) {
                     key={m.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.15 }}
+                    viewport={{ once: true, amount: 0.15 }}
                     transition={{ delay: i * 0.1 }}
                     className="glass-card p-6"
                   >
@@ -748,7 +748,7 @@ export function Services({ full = false }: { full?: boolean }) {
 }
 
 export function IndustriesSection() {
-  const duplicatedIndustries = [...industries, ...industries];
+  const duplicatedIndustries = [...industries, ...industries, ...industries];
 
   return (
     <section className="section relative overflow-hidden bg-white text-slate-900 bg-dot-pattern pt-2 sm:pt-3 pb-6 sm:pb-8">
@@ -773,7 +773,7 @@ export function IndustriesSection() {
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-8 sm:w-12 bg-gradient-to-l from-white/90 to-transparent" />
 
         <div
-          className="flex w-max animate-marquee hover:[animation-play-state:paused] gap-6 items-stretch px-6"
+          className="flex w-max animate-marquee gap-6 items-stretch px-6"
           style={{ animationDuration: '45s' }}
         >
           {duplicatedIndustries.map((ind, idx) => (
@@ -816,7 +816,7 @@ export function WhyChooseUsSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5 }}
           className="mb-5 sm:mb-6 text-left"
         >
@@ -836,7 +836,7 @@ export function WhyChooseUsSection() {
           <motion.div
             initial={{ opacity: 0, x: -70 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             className="group lg:col-span-6 rounded-2xl border border-red-100/90 bg-white p-5 sm:p-6 lg:p-7 shadow-[0_4px_24px_rgba(215,25,42,0.03)] hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 flex flex-col justify-between h-full transition-all duration-300 text-left"
           >
@@ -864,7 +864,7 @@ export function WhyChooseUsSection() {
                 key={item.title}
                 initial={{ opacity: 0, x: 70 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false, amount: 0.2 }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.55, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="flex gap-4 items-start"
               >
@@ -941,7 +941,7 @@ export function WorkWithSection() {
                 key={item.number}
                 initial={{ opacity: 0, y: 25, scale: 0.97 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: false, amount: 0.15 }}
+                viewport={{ once: true, amount: 0.15 }}
                 transition={{ delay: i * 0.08, duration: 0.45 }}
                 className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-6 shadow-sm hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
               >
@@ -1033,7 +1033,7 @@ export function ProvenApproachSection() {
                   key={step.number}
                   initial={{ opacity: 0, y: 25, scale: 0.97 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: false, amount: 0.15 }}
+                  viewport={{ once: true, amount: 0.15 }}
                   transition={{ delay: i * 0.1, duration: 0.45 }}
                   className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] backdrop-blur-xl transition-all duration-300 hover:border-red-400/80 hover:shadow-[0_20px_40px_-15px_rgba(215,25,42,0.15)]"
                 >

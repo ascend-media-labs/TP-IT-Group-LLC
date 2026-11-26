@@ -9,7 +9,7 @@ interface AnimatedCounterProps {
 
 export function AnimatedCounter({ value, label }: AnimatedCounterProps) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(ref, { once: false, margin: '-30px' });
+  const isInView = useInView(ref, { once: true, margin: '-30px' });
   const [displayValue, setDisplayValue] = useState('0');
 
   useEffect(() => {

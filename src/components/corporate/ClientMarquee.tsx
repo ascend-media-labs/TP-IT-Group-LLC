@@ -10,7 +10,13 @@ export function ClientMarquee() {
       .then((r) => r.json())
       .then((data) => {
         if (isMounted && data.success && Array.isArray(data.clients) && data.clients.length > 0) {
-          setLogosList(data.clients);
+          // Prevent unnecessary state update if list length matches initial list
+          setLogosList((prev) => {
+            if (prev.length === data.clients.length && prev[0]?.name === data.clients[0]?.name) {
+              return prev;
+            }
+            return data.clients;
+          });
         }
       })
       .catch(() => {});
@@ -20,8 +26,8 @@ export function ClientMarquee() {
     };
   }, []);
 
-  // Duplicate for seamless infinite marquee loop
-  const logos = [...logosList, ...logosList];
+  // Quadruple for perfectly seamless infinite marquee loop on all screen sizes up to 4K
+  const logos = [...logosList, ...logosList, ...logosList, ...logosList];
 
   return (
     <div className="relative w-full overflow-hidden py-3 sm:py-4">
@@ -29,7 +35,7 @@ export function ClientMarquee() {
       <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent sm:w-40" />
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent sm:w-40" />
 
-      <div className="flex w-max animate-marquee hover:[animation-play-state:paused] gap-5 items-center">
+      <div className="flex w-max animate-marquee gap-5 items-center">
         {logos.map((client, idx) => (
           <div
             key={`${client.name}-${idx}`}

@@ -111,7 +111,7 @@ function TeamLeaderCard({ leader, index }: TeamLeaderCardProps) {
     <motion.div
       initial={{ opacity: 0, y: 35, scale: 0.96 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: false, amount: 0.15 }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
       className="perspective-1000 h-full"
       style={{ perspective: 1000 }}
@@ -264,7 +264,7 @@ function Page() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-6 pb-3 border-b border-slate-100"
           >

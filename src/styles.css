@@ -581,19 +581,33 @@ section[id] {
   perspective: 1000px;
 }
 
-/* Marquee Animation */
+/* Marquee Animation with GPU 3D Acceleration to eliminate stutter and tearing */
 @keyframes marquee {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
 
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 .animate-marquee {
+  display: flex;
+  width: max-content;
   animation: marquee 35s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* Only pause marquee on hover if the device has a fine pointer/mouse (prevents sticky pause on touchscreens) */
+@media (hover: hover) and (pointer: fine) {
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -611,6 +625,7 @@ section[id] {
 
   .animate-marquee {
     animation: none !important;
+    transform: none !important;
   }
 }
 

@@ -321,7 +321,7 @@ function Page() {
                 key={ind.name}
                 initial={{ opacity: 0, y: 25, scale: 0.97 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: false, amount: 0.15 }}
+                viewport={{ once: true, amount: 0.15 }}
                 transition={{ delay: i * 0.07, duration: 0.45 }}
                 className="group relative flex flex-col justify-between overflow-hidden card-diagonal bg-white p-5 sm:p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 text-left"
               >
