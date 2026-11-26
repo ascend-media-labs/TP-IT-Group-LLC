@@ -46,7 +46,7 @@ export const companyInfo = {
   email: 'info@tpitgroups.com',
   workingHours: '24/7 Global Support & Operations',
   social: {
-    facebook: 'https://www.facebook.com/tpitgroups',
+    facebook: 'https://www.facebook.com/share/1Diy4b1bkX/?mibextid=wwXIfr',
     instagram: 'https://www.instagram.com/tpitgroups?jplx=MXdwZG1sYnVrbHk3Ng==',
     youtube: 'https://www.youtube.com/@tpitgroups',
     linkedin: 'https://www.linkedin.com/company/tp-it-group-llc',
