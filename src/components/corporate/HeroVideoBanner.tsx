@@ -17,19 +17,19 @@ export function HeroVideoBanner({ className = '' }: { className?: string }) {
     <section
       id="video-showcase"
       aria-label="TP IT Group Video Showcase"
-      className={`relative py-3 sm:py-5 bg-white overflow-hidden scroll-mt-16 ${className}`}
+      className={`relative py-2 sm:py-3.5 bg-white overflow-hidden scroll-mt-16 ${className}`}
     >
       {/* Background ambient subtle pattern */}
       <div className="pointer-events-none absolute inset-0 bg-dot-pattern opacity-50" />
 
       <div className="site-container relative z-10">
-        {/* Showcase Card - Clean solid white without hover glow */}
-        <div className="no-hover-glow relative w-full rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white p-3.5 sm:p-5 lg:p-6 shadow-sm">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 xl:gap-8 items-center">
+        {/* Showcase Card - Compact & balanced size */}
+        <div className="no-hover-glow relative w-full rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white p-3 sm:p-4 lg:p-4.5 shadow-sm">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 xl:gap-7 items-center">
             
             {/* Left Column: Vertical Video locked to exact 9:16 original aspect ratio */}
             <div className="lg:col-span-5 xl:col-span-4 flex justify-center">
-              <div className="relative w-[240px] xs:w-[260px] sm:w-[280px] lg:w-[290px] xl:w-[310px] aspect-[9/16] rounded-2xl overflow-hidden border-2 border-slate-300 shadow-xl bg-black group shrink-0">
+              <div className="relative w-[210px] xs:w-[225px] sm:w-[240px] lg:w-[250px] xl:w-[260px] aspect-[9/16] rounded-2xl overflow-hidden border-2 border-slate-300 shadow-xl bg-black group shrink-0">
                 <video
                   ref={videoRef}
                   src="/videos/TP_IT_video.mp4"
