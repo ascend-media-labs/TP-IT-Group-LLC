@@ -21,8 +21,8 @@ export const companyInfo = {
     embedMapUrl: 'https://maps.google.com/maps?q=1000+N.+West+Street,+Suite+1200,+Wilmington,+Delaware,+19801&t=&z=15&ie=UTF8&iwloc=&output=embed',
   },
   canadaOffice: {
-    name: 'TP IT Group',
-    title: 'Canada — TP IT Group',
+    name: 'TP IT GROUP LTD',
+    title: 'TP IT GROUP LTD',
     address: 'Ontario, Canada',
     cityStateZip: 'Ontario, Canada',
     country: 'Canada',

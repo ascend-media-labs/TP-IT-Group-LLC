@@ -2128,7 +2128,7 @@ export function OfficeLocationsMapCard() {
             <span className="text-[11px] font-semibold text-slate-500">Ontario, Canada</span>
           </div>
 
-          <h4 className="text-sm font-bold text-slate-900">🇨🇦 Canada — TP IT Group</h4>
+          <h4 className="text-sm font-bold text-slate-900">TP IT GROUP LTD</h4>
           <div className="mt-1 flex items-start gap-1.5 text-xs text-slate-600 leading-relaxed">
             <MapPin className="size-3.5 shrink-0 text-[#d7192a] mt-0.5" />
             <div>
@@ -2263,7 +2263,7 @@ export function Contact() {
                 <div className="flex items-center gap-2">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#d7192a]">CANADA DELIVERY HUB</span>
                 </div>
-                <h3 className="text-sm font-bold text-slate-900 mt-0.5">🇨🇦 Canada — TP IT Group</h3>
+                <h3 className="text-sm font-bold text-slate-900 mt-0.5">TP IT GROUP LTD</h3>
                 <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                   {companyInfo.canadaOffice.fullAddress}
                 </p>
@@ -2575,8 +2575,7 @@ export function Footer() {
 
             <div>
               <p className="text-xs sm:text-[13px] text-slate-950 flex items-center gap-1.5">
-                <CountryFlag country="ca" />
-                <span className="font-bold">Canada — TP IT Group</span>
+                <span className="font-bold">TP IT GROUP LTD</span>
               </p>
               <p className="mt-1 text-xs text-slate-900 leading-relaxed font-normal">
                 Ontario, Canada
