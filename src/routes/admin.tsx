@@ -27,13 +27,16 @@ import {
   Camera,
   Loader2,
   MessageSquare,
+  FileText,
   Phone,
   Clock,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TPITLogo } from '@/components/corporate/logo';
+import { ApplicationsPanel, type JobApplication } from '@/components/admin/ApplicationsPanel';
 
 export const Route = createFileRoute('/admin')({
+  head: () => ({ meta: [{ name: 'robots', content: 'noindex, nofollow' }] }),
   component: AdminPage,
 });
 
@@ -86,21 +89,18 @@ interface Stats {
   activeCareerCount: number;
   contactCount?: number;
   unreadContactCount?: number;
-  dbStatus: string;
-  dbName: string;
-  tables?: string[];
-  tableCounts?: Record<string, number>;
 }
 
 export function AdminPage() {
-  const [token, setToken] = useState<string | null>(null);
+  // The session lives in an HttpOnly cookie; the server decides who is signed in.
   const [user, setUser] = useState<{ email: string; name: string } | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'team' | 'clients' | 'careers' | 'enquiries'>('overview');
+  const [checkingSession, setCheckingSession] = useState(true);
+  const [activeTab, setActiveTab] = useState<'overview' | 'team' | 'clients' | 'careers' | 'enquiries' | 'applications'>('overview');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Login form state
-  const [loginEmail, setLoginEmail] = useState('admin@tpitgroup.com');
-  const [loginPassword, setLoginPassword] = useState('admin123');
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState('');
@@ -111,8 +111,8 @@ export function AdminPage() {
   const [clients, setClients] = useState<ClientPartner[]>([]);
   const [careers, setCareers] = useState<CareerOpening[]>([]);
   const [messages, setMessages] = useState<ContactMessage[]>([]);
+  const [applications, setApplications] = useState<JobApplication[]>([]);
   const [loadingData, setLoadingData] = useState(false);
-  const [syncingSchema, setSyncingSchema] = useState(false);
   const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   // Live Search & Filtering states
@@ -136,37 +136,58 @@ export function AdminPage() {
   const [editingItem, setEditingItem] = useState<any | null>(null);
   const [formData, setFormData] = useState<any>({});
 
-  // Check stored session
+  const clearSession = () => {
+    setUser(null);
+    setMessages([]);
+    setApplications([]);
+    setViewingMessage(null);
+    setModalType(null);
+  };
+
+  // Calls the API and returns to the login screen when the session has ended.
+  const adminFetch = async (input: string, init?: RequestInit) => {
+    const res = await fetch(input, init);
+    if (res.status === 401) clearSession();
+    return res;
+  };
+
+  // Restore an existing session
   useEffect(() => {
-    const savedToken = localStorage.getItem('tpit_admin_token');
-    const savedUser = localStorage.getItem('tpit_admin_user');
-    if (savedToken && savedUser) {
-      setToken(savedToken);
-      try {
-        setUser(JSON.parse(savedUser));
-      } catch {
-        setUser({ email: 'admin@tpitgroup.com', name: 'Administrator' });
-      }
-    }
+    // Remove tokens stored by the previous version of this page.
+    localStorage.removeItem('tpit_admin_token');
+    localStorage.removeItem('tpit_admin_user');
+    fetch('/api/auth/session')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.success) setUser(data.user);
+      })
+      .catch(() => {})
+      .finally(() => setCheckingSession(false));
   }, []);
 
   // Fetch data on login or tab change
   const fetchAllData = async () => {
     setLoadingData(true);
     try {
-      const [sRes, tRes, cRes, jRes, mRes] = await Promise.all([
-        fetch('/api/stats').then((r) => r.json()),
-        fetch('/api/team').then((r) => r.json()),
-        fetch('/api/clients').then((r) => r.json()),
-        fetch('/api/careers').then((r) => r.json()),
-        fetch('/api/contact').then((r) => r.json()),
-      ]);
+      const [sRes, tRes, cRes, jRes, mRes, aRes] = await Promise.all(
+        [
+          '/api/stats',
+          '/api/team',
+          '/api/clients',
+          '/api/careers',
+          '/api/contact',
+          '/api/applications',
+        ].map((url) => adminFetch(url).then((r) => r.json())),
+      );
 
       if (sRes.success) setStats(sRes);
       if (tRes.success) setTeam(tRes.team || []);
       if (cRes.success) setClients(cRes.clients || []);
       if (jRes.success) setCareers(jRes.careers || []);
       if (mRes.success) setMessages(mRes.messages || []);
+      if (aRes.success) setApplications(aRes.applications || []);
+      const failed = [sRes, tRes, cRes, jRes, mRes, aRes].find((r) => !r.success);
+      if (failed) showNotice('error', failed.error || 'Failed to load some data');
     } catch (err) {
       console.error('Failed to fetch dashboard data', err);
     } finally {
@@ -175,33 +196,14 @@ export function AdminPage() {
   };
 
   useEffect(() => {
-    if (token) {
+    if (user) {
       fetchAllData();
     }
-  }, [token]);
+  }, [user]);
 
   const showNotice = (type: 'success' | 'error', message: string) => {
     setNotification({ type, message });
     setTimeout(() => setNotification(null), 4000);
-  };
-
-  // Auto-Sync Database Schema (Tables & Columns)
-  const handleSyncSchema = async () => {
-    setSyncingSchema(true);
-    try {
-      const res = await fetch('/api/schema/sync', { method: 'POST' });
-      const data = await res.json();
-      if (data.success) {
-        showNotice('success', 'Laragon MySQL tables & columns verified and synchronized!');
-        fetchAllData();
-      } else {
-        showNotice('error', data.error || 'Failed to synchronize schema');
-      }
-    } catch {
-      showNotice('error', 'Network error during schema sync');
-    } finally {
-      setSyncingSchema(false);
-    }
   };
 
   // Filtered Team Members
@@ -262,7 +264,7 @@ export function AdminPage() {
   const handleToggleRead = async (msg: ContactMessage) => {
     const newRead = !msg.is_read;
     try {
-      const res = await fetch('/api/contact', {
+      const res = await adminFetch('/api/contact', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: msg.id, is_read: newRead }),
@@ -285,7 +287,7 @@ export function AdminPage() {
   const handleDeleteMessage = async (id: number, name: string) => {
     if (!window.confirm(`Delete enquiry from "${name}"?`)) return;
     try {
-      const res = await fetch('/api/contact', {
+      const res = await adminFetch('/api/contact', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id }),
@@ -298,6 +300,41 @@ export function AdminPage() {
       }
     } catch {
       showNotice('error', 'Failed to delete message');
+    }
+  };
+
+  const handleApplicationStatus = async (application: JobApplication, status: string) => {
+    try {
+      const res = await adminFetch('/api/applications', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: application.id, status }),
+      });
+      const data = await res.json();
+      if (!data.success) return showNotice('error', data.error || 'Failed to update status');
+      setApplications((prev) =>
+        prev.map((a) => (a.id === application.id ? { ...a, status } : a)),
+      );
+      showNotice('success', 'Application status updated');
+    } catch {
+      showNotice('error', 'Failed to update status');
+    }
+  };
+
+  const handleDeleteApplication = async (application: JobApplication) => {
+    if (!window.confirm(`Delete the application from "${application.applicant_name}"?`)) return;
+    try {
+      const res = await adminFetch('/api/applications', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: application.id }),
+      });
+      const data = await res.json();
+      if (!data.success) return showNotice('error', data.error || 'Failed to delete');
+      setApplications((prev) => prev.filter((a) => a.id !== application.id));
+      showNotice('success', 'Application deleted');
+    } catch {
+      showNotice('error', 'Failed to delete application');
     }
   };
 
@@ -315,10 +352,8 @@ export function AdminPage() {
       });
       const data = await res.json();
 
-      if (data.success && data.token) {
-        localStorage.setItem('tpit_admin_token', data.token);
-        localStorage.setItem('tpit_admin_user', JSON.stringify(data.user));
-        setToken(data.token);
+      if (data.success) {
+        setLoginPassword('');
         setUser(data.user);
         showNotice('success', `Welcome back, ${data.user.name || 'Admin'}! Connected to Laragon MySQL.`);
       } else {
@@ -332,11 +367,18 @@ export function AdminPage() {
   };
 
   // Handle Logout
-  const handleLogout = () => {
-    localStorage.removeItem('tpit_admin_token');
-    localStorage.removeItem('tpit_admin_user');
-    setToken(null);
-    setUser(null);
+  const handleLogout = async () => {
+    try {
+      const res = await fetch('/api/auth/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!res.ok) throw new Error('Logout failed');
+      clearSession();
+    } catch {
+      // Staying signed in on screen is honest: the server session may still be active.
+      showNotice('error', 'Could not sign out. Check your connection and try again.');
+    }
   };
 
   // Open Modal Helper
@@ -399,7 +441,7 @@ export function AdminPage() {
       const reader = new FileReader();
       reader.onload = async () => {
         const base64Data = reader.result as string;
-        const res = await fetch('/api/upload', {
+        const res = await adminFetch('/api/upload', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -426,6 +468,8 @@ export function AdminPage() {
         setUploadingImage(false);
       };
       reader.readAsDataURL(file);
+      // Allow choosing the same file again after an error.
+      e.target.value = '';
     } catch (err: any) {
       showNotice('error', 'Upload error: ' + err.message);
       setUploadingImage(false);
@@ -446,7 +490,7 @@ export function AdminPage() {
     const method = editingItem ? 'PUT' : 'POST';
 
     try {
-      const res = await fetch(endpoint, {
+      const res = await adminFetch(endpoint, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -469,7 +513,7 @@ export function AdminPage() {
     if (!confirm(`Are you sure you want to delete "${label}" from MySQL?`)) return;
 
     try {
-      const res = await fetch(`/api/${type}`, {
+      const res = await adminFetch(`/api/${type}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id }),
@@ -489,7 +533,15 @@ export function AdminPage() {
   // -------------------------------------------------------------
   // 1. LOGIN SCREEN (If not authenticated)
   // -------------------------------------------------------------
-  if (!token) {
+  if (checkingSession) {
+    return (
+      <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center">
+        <Loader2 className="size-6 animate-spin text-[#d7192a]" aria-label="Loading" />
+      </div>
+    );
+  }
+
+  if (!user) {
     return (
       <div className="admin-root min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col justify-center items-center px-4 relative overflow-hidden bg-dot-pattern selection:bg-[#d7192a]/20">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(215,25,42,0.08),transparent_70%)]" />
@@ -525,7 +577,8 @@ export function AdminPage() {
                     required
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
-                    placeholder="admin@tpitgroup.com"
+                    placeholder="you@company.com"
+                    autoComplete="username"
                     className="admin-input w-full rounded-xl border border-slate-300 bg-white pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:border-[#d7192a] focus:ring-1 focus:ring-[#d7192a] focus:outline-hidden transition font-medium"
                   />
                 </div>
@@ -541,6 +594,7 @@ export function AdminPage() {
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="••••••••"
+                    autoComplete="current-password"
                     className="admin-input w-full rounded-xl border border-slate-300 bg-white pl-10 pr-10 py-2.5 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:border-[#d7192a] focus:ring-1 focus:ring-[#d7192a] focus:outline-hidden transition font-medium"
                   />
                   <button
@@ -553,15 +607,6 @@ export function AdminPage() {
                 </div>
               </div>
 
-              {/* Database indicator pill */}
-              <div className="pt-1 flex items-center justify-between text-[11px] text-slate-600">
-                <span className="flex items-center gap-1.5 font-medium">
-                  <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-                  Laragon MySQL: <code className="text-emerald-700 font-mono font-bold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">tpitgroup_db</code>
-                </span>
-                <span className="text-slate-500 font-mono">Port 3306</span>
-              </div>
-
               <Button
                 type="submit"
                 disabled={loginLoading}
@@ -571,20 +616,6 @@ export function AdminPage() {
               </Button>
             </form>
 
-            {/* Quick Demo Credentials Pill */}
-            <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-600">
-              <span className="font-semibold text-slate-500">Demo Login:</span>
-              <button
-                type="button"
-                onClick={() => {
-                  setLoginEmail('admin@tpitgroup.com');
-                  setLoginPassword('admin123');
-                }}
-                className="font-mono text-[#d7192a] font-bold hover:underline cursor-pointer"
-              >
-                admin@tpitgroup.com / admin123
-              </button>
-            </div>
           </div>
 
           <div className="mt-6 text-center">
@@ -789,6 +820,30 @@ export function AdminPage() {
                 {messages.length}
               </span>
             </button>
+
+            <button
+              onClick={() => {
+                setActiveTab('applications');
+                setMobileMenuOpen(false);
+              }}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+                activeTab === 'applications'
+                  ? 'bg-[#d7192a] text-white shadow-md shadow-red-500/20'
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <FileText className="size-4.5" />
+                <span>Job Applications</span>
+              </div>
+              <span
+                className={`px-2 py-0.5 text-[11px] font-bold rounded-full ${
+                  activeTab === 'applications' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'
+                }`}
+              >
+                {applications.length}
+              </span>
+            </button>
           </nav>
         </div>
 
@@ -799,8 +854,8 @@ export function AdminPage() {
               <ShieldCheck className="size-4.5" />
             </div>
             <div className="truncate">
-              <div className="text-xs font-bold text-slate-900 truncate">{user?.name || 'TP IT Admin'}</div>
-              <div className="text-[11px] text-slate-500 truncate">{user?.email || 'admin@tpitgroup.com'}</div>
+              <div className="text-xs font-bold text-slate-900 truncate">{user.name || 'Admin'}</div>
+              <div className="text-[11px] text-slate-500 truncate">{user.email}</div>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -847,6 +902,7 @@ export function AdminPage() {
                 {activeTab === 'clients' && 'Clients & Enterprise Partners'}
                 {activeTab === 'careers' && 'Career Openings & Jobs'}
                 {activeTab === 'enquiries' && 'Client Enquiries & Consultation Leads'}
+                {activeTab === 'applications' && 'Job Applications'}
               </h1>
               <p className="text-[11px] text-slate-500 hidden sm:block">
                 {activeTab === 'overview' && 'Real-time database metrics and system activity'}
@@ -854,23 +910,12 @@ export function AdminPage() {
                 {activeTab === 'clients' && 'Manage partner logos and affiliations displayed on /clients'}
                 {activeTab === 'careers' && 'Manage live job postings displayed on /careers'}
                 {activeTab === 'enquiries' && 'Direct consultation enquiries submitted through the /contact page, stored in Laragon MySQL'}
+                {activeTab === 'applications' && 'Applications submitted through the /apply page'}
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2.5">
-            <Button
-              onClick={handleSyncSchema}
-              disabled={syncingSchema}
-              variant="outline"
-              size="sm"
-              className="admin-card-inner h-9 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 text-xs gap-1.5 font-bold cursor-pointer shadow-xs"
-              title="Automatically verify and sync all Laragon MySQL tables and columns"
-            >
-              <Database className={`size-3.5 ${syncingSchema ? 'animate-spin text-emerald-600' : 'text-emerald-700'}`} />
-              <span className="hidden sm:inline">{syncingSchema ? 'Syncing...' : 'Sync Schema'}</span>
-            </Button>
-
             <Button
               onClick={fetchAllData}
               disabled={loadingData}
@@ -998,7 +1043,7 @@ export function AdminPage() {
                 <div className="mt-1 flex items-center justify-between text-xs">
                   <span className="text-emerald-800 font-mono font-bold">DB: tpitgroup_db</span>
                   <span className="text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded-full text-[10px]">
-                    {stats?.tables?.length || 7} Tables Synced
+                    {stats ? 'Connected' : 'Not loaded'}
                   </span>
                 </div>
               </div>
@@ -1466,6 +1511,13 @@ export function AdminPage() {
             </div>
           </div>
         )}
+        {activeTab === 'applications' && (
+          <ApplicationsPanel
+            applications={applications}
+            onStatusChange={handleApplicationStatus}
+            onDelete={handleDeleteApplication}
+          />
+        )}
         </main>
       </div>
 
@@ -1572,7 +1624,7 @@ export function AdminPage() {
                             )}
                             <input
                               type="file"
-                              accept="image/*"
+                              accept="image/png,image/jpeg,image/webp"
                               disabled={uploadingImage}
                               onChange={(e) => handleFileUpload(e, 'team')}
                               className="hidden"
@@ -1722,7 +1774,7 @@ export function AdminPage() {
                           <ImageIcon className="size-3.5 text-[#d7192a]" /> Partner Company Logo
                         </span>
                         <span className="text-[11px] font-normal text-slate-500">
-                          PNG, JPG, SVG, WebP up to 5MB
+                          PNG, JPG, WebP up to 5MB
                         </span>
                       </label>
 
@@ -1758,7 +1810,7 @@ export function AdminPage() {
                             )}
                             <input
                               type="file"
-                              accept="image/*"
+                              accept="image/png,image/jpeg,image/webp"
                               disabled={uploadingImage}
                               onChange={(e) => handleFileUpload(e, 'logos')}
                               className="hidden"

@@ -1,18 +1,34 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ContactForm } from '@/components/corporate/sections';
+import { fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { ContactForm } from "@/components/corporate/sections";
 
 afterEach(() => vi.restoreAllMocks());
-describe('Static contact form', () => {
-  it('does not transmit or store a submitted message', () => {
-    const network = vi.spyOn(globalThis, 'fetch');
-    const storage = vi.spyOn(Storage.prototype, 'setItem');
-    render(<ContactForm />);
-    fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Preview Tester' } });
-    fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'tester@example.com' } });
-    fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Business enquiry' } });
-    fireEvent.submit(screen.getByRole('button', { name: 'Submit' }).closest('form') as HTMLFormElement);
-    expect(network).toHaveBeenCalledTimes(0);
-    expect(storage).toHaveBeenCalledTimes(0);
+
+function submit() {
+  render(<ContactForm />);
+  const fill = (placeholder: RegExp, value: string) =>
+    fireEvent.change(screen.getByPlaceholderText(placeholder), { target: { value } });
+  fill(/John Doe/, "Preview Tester");
+  fill(/john@company\.com/, "tester@example.com");
+  fill(/digital goals/, "A business enquiry");
+  fireEvent.click(screen.getByRole("button", { name: /Submit Request/ }));
+}
+
+describe("Contact form", () => {
+  it("thanks the visitor when the enquiry is saved", async () => {
+    vi.spyOn(window, "open").mockReturnValue(window);
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response("{}", { status: 201 }));
+    submit();
+    expect(await screen.findByText("Thank you!")).toBeInTheDocument();
+  });
+
+  it("says so, and keeps the text, when saving fails", async () => {
+    vi.spyOn(window, "open").mockReturnValue(window);
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ error: "Too many requests." }), { status: 429 }),
+    );
+    submit();
+    expect(await screen.findByText("We could not save your request.")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/John Doe/)).toHaveValue("Preview Tester");
   });
 });

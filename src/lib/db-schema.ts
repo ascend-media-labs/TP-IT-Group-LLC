@@ -1,4 +1,5 @@
 import mysql from 'mysql2/promise';
+import { getDbConfig } from './db.ts';
 
 export interface ColumnDefinition {
   name: string;
@@ -15,8 +16,8 @@ export interface TableSchema {
 
 // ======================================================================
 // DECLARATIVE TABLE SCHEMAS REGISTRY
-// Any table defined here will be automatically created in Laragon MySQL.
-// If new columns are added, they are automatically migrated via ALTER TABLE.
+// Any table defined here is created by `npm run db:setup`.
+// Columns added here are migrated with ALTER TABLE by the same command.
 // ======================================================================
 export const TABLE_SCHEMAS: Record<string, TableSchema> = {
   admin_users: {
@@ -30,8 +31,16 @@ export const TABLE_SCHEMAS: Record<string, TableSchema> = {
       { name: 'role', definition: "VARCHAR(50) NOT NULL DEFAULT 'Super Admin'" },
       { name: 'created_at', definition: 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP' },
     ],
-    seedData: [
-      { email: 'admin@tpitgroup.com', password: 'admin123', name: 'TP IT Admin', role: 'Super Admin' },
+  },
+
+  admin_sessions: {
+    name: 'admin_sessions',
+    columns: [
+      { name: 'id', definition: 'INT AUTO_INCREMENT PRIMARY KEY', isPrimary: true },
+      { name: 'token_hash', definition: 'CHAR(64) NOT NULL UNIQUE' },
+      { name: 'user_id', definition: 'INT NOT NULL' },
+      { name: 'expires_at', definition: 'BIGINT NOT NULL' },
+      { name: 'created_at', definition: 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP' },
     ],
   },
 
@@ -250,7 +259,10 @@ export const TABLE_SCHEMAS: Record<string, TableSchema> = {
       { name: 'applicant_name', definition: 'VARCHAR(150) NOT NULL' },
       { name: 'email', definition: 'VARCHAR(191) NOT NULL' },
       { name: 'phone', definition: 'VARCHAR(50) NOT NULL' },
+      { name: 'current_city', definition: 'VARCHAR(150) NULL' },
       { name: 'experience_years', definition: 'VARCHAR(50) NULL' },
+      { name: 'work_authorization', definition: 'VARCHAR(150) NULL' },
+      { name: 'notice_period', definition: 'VARCHAR(100) NULL' },
       { name: 'current_company', definition: 'VARCHAR(150) NULL' },
       { name: 'linkedin_url', definition: 'VARCHAR(255) NULL' },
       { name: 'portfolio_url', definition: 'VARCHAR(255) NULL' },
@@ -263,43 +275,26 @@ export const TABLE_SCHEMAS: Record<string, TableSchema> = {
 };
 
 // ======================================================================
-// AUTOMATIC DATABASE & TABLE/COLUMN AUTO-MIGRATOR
+// DATABASE SETUP & MIGRATION
+// Run from the command line only (npm run db:setup). It is never exposed over HTTP.
 // ======================================================================
-let migrationInProgress = false;
-let migrationCompleted = false;
-
-export async function ensureDatabaseAndSchema(force: boolean = false): Promise<{ success: boolean; log: string[] }> {
-  if (migrationCompleted && !force) {
-    return { success: true, log: ['Schema already synchronized'] };
-  }
-  if (migrationInProgress) {
-    return { success: true, log: ['Migration already in progress'] };
-  }
-
-  migrationInProgress = true;
+export async function ensureDatabaseAndSchema(): Promise<string[]> {
   const logs: string[] = [];
+  const { host, port, user, password, database } = getDbConfig();
+  if (!/^[A-Za-z0-9_]+$/.test(database)) {
+    throw new Error('DB_NAME may contain only letters, numbers and underscores');
+  }
 
-  const host = process.env.DB_HOST || '127.0.0.1';
-  const port = Number(process.env.DB_PORT) || 3306;
-  const user = process.env.DB_USER || 'root';
-  const password = process.env.DB_PASSWORD || '';
-  const database = process.env.DB_NAME || 'tpitgroup_db';
-
-  let initialConn: mysql.Connection | null = null;
-  let dbConn: mysql.Connection | null = null;
-
+  const dbConn = await mysql.createConnection({ host, port, user, password });
   try {
     // 1. Ensure database exists
-    initialConn = await mysql.createConnection({ host, port, user, password });
-    await initialConn.query(
+    await dbConn.query(
       `CREATE DATABASE IF NOT EXISTS \`${database}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
     );
-    logs.push(`[Database] Ensured database '${database}' exists in Laragon MySQL`);
-    await initialConn.end();
-    initialConn = null;
+    logs.push(`[Database] Ensured database '${database}' exists`);
 
-    // 2. Connect to the database
-    dbConn = await mysql.createConnection({ host, port, user, password, database });
+    // 2. Select the database
+    await dbConn.changeUser({ database });
 
     // 3. Inspect and migrate each table in schema
     for (const [key, schema] of Object.entries(TABLE_SCHEMAS)) {
@@ -360,47 +355,8 @@ export async function ensureDatabaseAndSchema(force: boolean = false): Promise<{
       }
     }
 
-    migrationCompleted = true;
-    console.log('[MySQL Auto-Migration] Schema synchronization successful.');
-    return { success: true, log: logs };
-  } catch (err: any) {
-    console.error('[MySQL Auto-Migration Error]', err);
-    logs.push(`[Error] ${err.message}`);
-    return { success: false, log: logs };
+    return logs;
   } finally {
-    migrationInProgress = false;
-    if (initialConn) {
-      try { await initialConn.end(); } catch {}
-    }
-    if (dbConn) {
-      try { await dbConn.end(); } catch {}
-    }
-  }
-}
-
-// Helper to create any dynamic table in the future
-export async function createDynamicTable(
-  tableName: string,
-  columns: { name: string; type: string; nullable?: boolean; defaultValue?: string }[]
-): Promise<{ success: boolean; message: string }> {
-  try {
-    await ensureDatabaseAndSchema();
-    const colsSql = columns
-      .map((c) => `\`${c.name}\` ${c.type} ${c.nullable ? 'NULL' : 'NOT NULL'} ${c.defaultValue ? `DEFAULT ${c.defaultValue}` : ''}`)
-      .join(', ');
-
-    const sql = `
-      CREATE TABLE IF NOT EXISTS \`${tableName}\` (
-        \`id\` INT AUTO_INCREMENT PRIMARY KEY,
-        ${colsSql},
-        \`created_at\` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        \`updated_at\` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-    `;
-    const pool = (await import('./db.ts')).getDbPool();
-    await pool.query(sql);
-    return { success: true, message: `Table '${tableName}' created successfully` };
-  } catch (err: any) {
-    return { success: false, message: err.message };
+    await dbConn.end();
   }
 }

@@ -1670,6 +1670,7 @@ export function ContactForm() {
   const [notice, setNotice] = useState(false);
   const [loading, setLoading] = useState(false);
   const [whatsappUrl, setWhatsappUrl] = useState('');
+  const [saveError, setSaveError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -1781,8 +1782,8 @@ export function ContactForm() {
     setWhatsappUrl(targetWhatsappUrl);
 
     try {
-      // Background attempt to persist to API if available (silent fallback if database is offline)
-      await fetch('/api/contact', {
+      // Save the enquiry; WhatsApp still opens if this fails, and the visitor is told.
+      const saved = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1792,18 +1793,24 @@ export function ContactForm() {
           subject: formData.service,
           message: formData.message.trim(),
         }),
-      }).catch(() => { });
+      })
+        .then(async (res) => (res.ok ? '' : ((await res.json()).error as string)))
+        .catch(() => 'The server could not be reached.');
+      setSaveError(saved);
 
       setNotice(true);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: 'Cloud Migration & Infrastructure',
-        message: '',
-      });
-      setTouched({});
-      setErrors({});
+      // Keep what the visitor typed if it was not saved.
+      if (!saved) {
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: 'Cloud Migration & Infrastructure',
+          message: '',
+        });
+        setTouched({});
+        setErrors({});
+      }
 
       // Redirect / open WhatsApp directly
       if (typeof window !== 'undefined') {
@@ -1990,11 +1997,29 @@ export function ContactForm() {
       </Button>
 
       {notice && (
-        <div role="status" className="rounded-xl border border-emerald-300 bg-emerald-50 p-4 text-xs text-emerald-800 space-y-2.5">
+        <div
+          role="status"
+          className={`rounded-xl border p-4 text-xs space-y-2.5 ${saveError
+            ? 'border-amber-300 bg-amber-50 text-amber-900'
+            : 'border-emerald-300 bg-emerald-50 text-emerald-800'
+            }`}
+        >
           <div className="flex items-start gap-2">
-            <CheckCircle2 className="size-4.5 text-emerald-600 shrink-0 mt-0.5" />
+            {saveError ? (
+              <AlertCircle className="size-4.5 text-amber-600 shrink-0 mt-0.5" />
+            ) : (
+              <CheckCircle2 className="size-4.5 text-emerald-600 shrink-0 mt-0.5" />
+            )}
             <div>
-              <strong>Thank you!</strong> Your details have been submitted and we are redirecting you to WhatsApp (+1 814 844-1362).
+              {saveError ? (
+                <>
+                  <strong>We could not save your request.</strong> {saveError} Please send it on WhatsApp (+1 814 844-1362) so it reaches us.
+                </>
+              ) : (
+                <>
+                  <strong>Thank you!</strong> Your details have been submitted and we are redirecting you to WhatsApp (+1 814 844-1362).
+                </>
+              )}
             </div>
           </div>
           {whatsappUrl && (

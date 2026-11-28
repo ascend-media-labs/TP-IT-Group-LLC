@@ -2,6 +2,11 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
+import { getClientIp } from "./lib/security/client-ip";
+import { withSecurityHeaders } from "./lib/security/headers";
+
+const secure = (request: Request, response: Response) =>
+  withSecurityHeaders(request, response, { contentSecurityPolicy: import.meta.env.PROD });
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -51,32 +56,23 @@ export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const url = new URL(request.url);
-      if (url.pathname.startsWith('/api/')) {
-        let body: any = null;
-        if (request.method === 'POST' || request.method === 'PUT' || request.method === 'DELETE') {
-          try {
-            body = await request.json();
-          } catch {
-            body = {};
-          }
-        }
-        const { handleApiRoute } = await import('./lib/api-handler');
-        const result = await handleApiRoute(url.pathname, request.method, body);
-        return new Response(JSON.stringify(result.data), {
-          status: result.status,
-          headers: { 'content-type': 'application/json' },
-        });
+      if (url.pathname.startsWith("/api/")) {
+        const { handleApiRequest } = await import("./lib/api-handler");
+        return secure(request, await handleApiRequest(request, getClientIp(request)));
       }
 
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return await normalizeCatastrophicSsrResponse(response);
+      return secure(request, await normalizeCatastrophicSsrResponse(response));
     } catch (error) {
       console.error(error);
-      return new Response(renderErrorPage(), {
-        status: 500,
-        headers: { "content-type": "text/html; charset=utf-8" },
-      });
+      return secure(
+        request,
+        new Response(renderErrorPage(), {
+          status: 500,
+          headers: { "content-type": "text/html; charset=utf-8" },
+        }),
+      );
     }
   },
 };

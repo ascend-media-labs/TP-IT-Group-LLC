@@ -1,4 +1,5 @@
 -- TP IT Group Database Initialization Script for Laragon MySQL
+-- Prefer `npm run db:setup`, which creates every table the application needs.
 CREATE DATABASE IF NOT EXISTS `tpitgroup_db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE `tpitgroup_db`;
@@ -51,10 +52,8 @@ CREATE TABLE IF NOT EXISTS `careers` (
   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Seed Default Admin User
-INSERT INTO `admin_users` (`email`, `password`, `name`, `role`)
-VALUES ('admin@tpitgroup.com', 'admin123', 'TP IT Admin', 'Super Admin')
-ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
+-- No admin account is seeded here. Run `npm run db:setup`, then create one with:
+--   npm run admin:create -- you@example.com
 
 -- Seed Team Members
 INSERT INTO `team_members` (`name`, `role`, `sub_role`, `bio`, `image`, `department`, `display_order`) VALUES
